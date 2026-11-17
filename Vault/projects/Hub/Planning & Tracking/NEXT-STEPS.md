@@ -2,29 +2,25 @@
 
 ## Immediate Priority Tasks
 
-### Task #2 Follow-up: Extract Physical Queue/Topic Names
+### Task #2 Follow-up: Extract Physical Queue/Topic Names — SOURCE CONFIG COMPLETED
 **Owner:** DevOps / Operations team
 
-**What's needed:**
+**Completed from checked-in configuration:**
 
-1. Collect all 11 Service Bus topic physical names from Azure subscription
-1. Map each topic to its subscriptions and consumer modules
-1. Document retry count, visibility timeout, and dead-letter policy for each topic
-1. Identify all Azure Storage queue names from deployment configuration
-1. Document poison-message handling policy for each queue
+- Extracted configured queue names from `Web.config` and `App.config`
+- Extracted local/development Service Bus topic names and configured subscription names
+- Documented the topic-to-consumer inventory and queue message types
 
-**Where to look:**
+**Still needed for production:**
 
-- Azure portal → Service Bus namespace → Topics and subscriptions
-- Environment configuration templates (ARM, Bicep, Terraform)
-- Deployment parameter files (Dev, Test, Prod)
-- Application configuration (app.config, appSettings.json)
+- Confirm deployed production overrides and physical entity names
+- Map each production topic to its subscriptions and consumer modules
+- Document production retry count, visibility timeout, and dead-letter policy
+- Document poison-message handling policy for each queue
 
-**Expected output:**
+**Delivered:**
 
-- Updated [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) with physical names
-- Topic-to-consumer mapping table
-- Retry and dead-letter configuration per entity
+- Updated [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) with source-configured physical names
 
 ---
 
@@ -236,7 +232,7 @@ Document which handlers are idempotent and which are not:
 
 ### Phase 2 (2-3 days) — High-Value
 
-1. → Collect physical queue/topic names from DevOps (Task #2)
+1. → Confirm production queue/topic/subscription overrides and policies (Task #2)
 1. → Add activity/requirement state transition rules (Task #5c)
 1. → Document error-handling flows for top-5 handlers
 
@@ -251,7 +247,7 @@ Document which handlers are idempotent and which are not:
 ## Checklist for Completeness
 
 - [ ] All 27 WebJob modules have documented handlers
-- [ ] All 11 Service Bus topics have physical names and subscriptions mapped
+- [ ] Production Service Bus topics have physical names and subscriptions mapped
 - [ ] All major processes have Mermaid flow diagrams
 - [ ] All major business rules have Gherkin BDD scenarios
 - [ ] Error handling and retry policies documented for each handler

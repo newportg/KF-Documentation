@@ -15,12 +15,14 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
 - Identified that configuration keys read from `Api.Settings.ServiceBus.*` app settings
 - Noted which topics have session-enabled flags (Tenancy) vs. standard topics
 - Catalogued all Service Bus queue message types (Thirdfort, email, notifications, etc.)
+- Extracted configured local/development queue names from `Web.config` and `App.config`
+- Extracted configured local/development topic and subscription names
+- Recorded the configured queue, topic, and subscription values in the transport inventory
 
-### Still Required
+### Still Required for Production
 
-- Extract actual physical topic/queue names from production environment configuration (not found in source)
-- Collect Azure Storage queue names from environment deployment parameters
-- Map each topic to its subscriptions and consumer modules
+- Confirm production topic, subscription, and queue overrides
+- Map production topics to their subscriptions and consumer modules
 - Document retry counts, visibility timeout, dead-letter handling, and idempotency guarantees
 
 ### Deliverables Created
@@ -154,7 +156,7 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 
 | Task | Metric | Status |
 |---|---|---|
-| #2 Queue/topic names | Configuration keys catalogued; physical names needed | ✓ PARTIAL |
+| #2 Queue/topic names | Local/development names catalogued; production overrides needed | ✓ PARTIAL |
 | #3 WebJob handlers | 60+ handlers documented in table | ✓ SUBSTANTIALLY COMPLETE |
 | #4 Process flows | 8 Mermaid diagrams created; 5 key processes remain | ✓ SUBSTANTIALLY COMPLETE |
 | #5 Business rules | 22 Gherkin scenarios; 8+ rules areas identified for extraction | ✓ SUBSTANTIALLY COMPLETE |

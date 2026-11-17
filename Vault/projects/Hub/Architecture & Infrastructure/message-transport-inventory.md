@@ -2,23 +2,100 @@
 
 ## Service Bus topic configuration keys
 
-`src/Hub.Contracts/HubServiceBus/HubServiceBusTriggerConstants.cs` defines the following application-setting keys:
+`src/Hub.Contracts/HubServiceBus/HubServiceBusTriggerConstants.cs` defines the following application-setting keys. The values below are from the checked-in `Web.config` and `App.config` files and represent local/development configuration, not confirmed production values.
 
 | Key | Likely message area | Physical entity name |
 |---|---|---|
-| `ActivityServiceBusTriggerTopicName` | Activity events | To be resolved from environment configuration |
-| `CompanyServiceBusTriggerTopicName` | Company events | To be resolved from environment configuration |
-| `ContactServiceBusTriggerTopicName` | Contact events | To be resolved from environment configuration |
-| `FixfloWebhookServiceBusTriggerTopicName` | Fixflo webhook events | To be resolved from environment configuration |
-| `PropertyServiceBusTriggerTopicName` | Property events | To be resolved from environment configuration |
-| `PropertyManagementServiceBusTriggerTopicName` | Property management events | To be resolved from environment configuration |
-| `TenancyServiceBusTriggerTopicName` | Tenancy events | To be resolved from environment configuration |
-| `UserServiceBusTriggerTopicName` | User events | To be resolved from environment configuration |
-| `TealRequestServiceBusTriggerTopicName` | Teal requests | To be resolved from environment configuration |
-| `FrontifyServiceBusTriggerTopicName` | Frontify events | To be resolved from environment configuration |
-| `NorthStarContactServiceBusTriggerTopicName` | NorthStar contact events | To be resolved from environment configuration |
+| `ActivityServiceBusTriggerTopicName` | Activity events | `sbt-activity-local-ee` |
+| `CompanyServiceBusTriggerTopicName` | Company events | `sbt-company-local-ee` |
+| `ContactServiceBusTriggerTopicName` | Contact events | `sbt-contact-local-ee` |
+| `FixfloWebhookServiceBusTriggerTopicName` | Fixflo webhook events | `sbt-fixflowebhook-local-ee` |
+| `PropertyServiceBusTriggerTopicName` | Property events | `sbt-property-local-ee` |
+| `PropertyManagementServiceBusTriggerTopicName` | Property management events | Not present in inspected configs |
+| `TenancyServiceBusTriggerTopicName` | Tenancy events | `sbt-tenancy-local-ee` |
+| `UserServiceBusTriggerTopicName` | User events | `sbt-user-local-ee` |
+| `TealRequestServiceBusTriggerTopicName` | Teal requests | `sbt-tealrequest-dev-ne` |
+| `FrontifyServiceBusTriggerTopicName` | Frontify requests | `sbt-frontifyrequest-dev-ne` |
+| `NorthStarContactServiceBusTriggerTopicName` | NorthStar contact events | `sbt-northstar-dev-ne` |
 
-These are configuration keys, not confirmed Azure entity names.
+Source: `src/KnightFrank.Antares.Api/Web.config` and `src/WebJobs/KnightFrank.Antares.WebJobs/App.config`.
+
+The `local-ee` and `dev-ne` suffixes identify the checked-in environment configuration. Production values still require the deployed environment configuration.
+
+## Additional Service Bus topics and subscriptions
+
+| Configuration key | Physical entity name |
+|---|---|
+| `FrontifyResponseServiceBusTriggerTopicName` | `sbt-frontifyresponse-dev-ne` |
+| `FixfloFailedMessageServiceBusTriggerTopicName` | `sbt-fixflo-api-failed-message-local-ee` |
+| `EmailMessageServiceBusTriggerTopicName` | `sbt-email-api-message-local-ee` |
+| `AzureBusTopicName` | `sbt-docmgmt-scan-result-dev-ne` |
+| `TealResponseServiceBusTriggerTopicName` | `sbt-tealresponse-dev-ne` |
+
+| Configuration key | Subscription name |
+|---|---|
+| `FrontifyBespokeBrochureResponseSubscriptionName` | `sbts-kfl-md-generatebrochure-dev-ne` |
+| `HubApiFixfloFailedMessageServiceBusSubscriptionName` | `sbts-hub-antares-api-local-ee` |
+| `HubApiEmailMessageServiceBusSubscriptionName` | `sbts-hub-antares-api-local-ee` |
+| `AzureBusSubscriptionName` | `sbts-docmgmt-scan-result-dev-ne` |
+| `TealSendInvitationsResponseServiceBusSubscriptionName` | `sbts-tealresponse-sendinvitations-dev-ne` |
+| `TealMaterialInformationResponseServiceBusSubscriptionName` | `sbts-tealresponse-materialinformation-dev-ne` |
+| `TealTitleDeedResponseServiceBusSubscriptionName` | `sbts-tealresponse-titledeeds-dev-ne` |
+
+## Configured Azure Storage queues
+
+The checked-in API and WebJob configuration defines these queue names:
+
+| Configuration key | Physical queue name |
+|---|---|
+| `Queue.AzureResource` | `command-queue-azure-resource` |
+| `Queue.PrepareNotifications` | `command-queue-prepare-notifications` |
+| `Queue.ElasticSearch` | `command-queue-elastic-search` |
+| `Queue.FeedCentre` | `command-queue-feed-centre` |
+| `Queue.ExternalPortalsFeed` | `command-queue-external-portals-feed` |
+| `Queue.Email` | `command-queue-email` |
+| `Queue.SlmTenancy` | `command-queue-slm-tenancy` |
+| `Queue.BatchEmail` | `command-queue-batch-email` |
+| `Queue.TextMessage` | `command-queue-text-message` |
+| `Queue.WordToPdfConversion` | `command-queue-word-to-pdf` |
+| `Queue.UploadedContact` | `command-queue-uploaded-contact` |
+| `Queue.Sap` | `command-queue-sap` |
+| `Queue.Qube` | `command-queue-qube` |
+| `Queue.ReassignUser` | `command-queue-reassign-user` |
+| `Queue.ResyncPropertiesToFixflo` | `command-queue-resync-properties-to-fixflo` |
+| `Queue.QubeFailures` | `command-queue-qube-failure` |
+| `Queue.BroadcastNotifications` | `command-queue-broadcast` |
+| `Queue.BroadcastMobileNotifications` | `command-queue-broadcast-mob` |
+| `Queue.SearchToFile` | `command-queue-search-to-file` |
+| `Queue.ContactNegotiatorNotification` | `command-queue-contact-negotiator` |
+| `Queue.ExportMarketingListToDotmailer` | `command-queue-dotmailer-export` |
+| `Queue.TemplateGeneration` | `command-queue-template-generation` |
+| `Queue.PrimaryAddressNotification` | `command-queue-primary-address` |
+| `Queue.CddValidityRetriggerStates` | `command-queue-cdd-validity-retrigger` |
+| `Queue.ActivityCddUpdate` | `command-queue-activity-cdd-update` |
+| `Queue.ActivityCounterpartyCddUpdate` | `command-queue-activity-cnt-cdd-upd` |
+| `Queue.MergeMarketingLists` | `command-queue-merge-marketing-lists` |
+| `Queue.RequirementCddUpdate` | `command-queue-requirement-cdd-update` |
+| `Queue.BulkMarketingReport` | `command-queue-bulk-marketing-report` |
+| `Queue.BulkMatchEmail` | `command-queue-bulk-match-email` |
+| `Queue.ThirdfortRequest` | `command-queue-thirdfort-request` |
+| `Queue.ThirdfortResponse` | `command-queue-thirdfort-response` |
+| `Queue.SoftOptIn` | `command-queue-soft-optin` |
+| `Queue.ContactCustomerJourneys` | `command-queue-contact-journey` |
+| `Queue.ActivityAssetWebLinks` | `command-queue-web-links` |
+| `Queue.BatchEwsOperations` | `command-queue-batch-ews-operations` |
+| `Queue.TenancyChurnRiskStatus` | `command-queue-tenancy-churn-risk` |
+| `Queue.UpdatePortalVisibilityExistingDocs` | `command-queue-update-portal-visibility` |
+| `Queue.RefreshRelatedActivityNotes` | `command-queue-related-notes` |
+| `Queue.FixfloTenancy` | `command-queue-fixflo-tenancy` |
+| `Queue.CompleteBrochures` | `command-queue-complete-brochures` |
+| `Queue.GenerateBrochure` | `command-queue-generate-brochure` |
+| `Queue.HomePplRequests` | `command-queue-homeppl-request` |
+| `Queue.HomePplCallback` | `command-queue-homeppl-callback` |
+| `Queue.TDSSend` | `command-queue-tds-outbound` |
+| `Queue.TDSRetrieve` | `command-queue-tds-inbound` |
+| `Queue.NorthStar` | `command-queue-northstar` |
+| `Queue.DepartmentRequirementAutoMatch` | `command-queue-auto-match` |
 
 ## Message contract
 
@@ -32,15 +109,7 @@ These are configuration keys, not confirmed Azure entity names.
 
 `HubServiceBusPublisherSubject` represents an entity type and publish event type using string-enum JSON conversion.
 
-## Storage queues
-
-The common Azure storage layer exposes queue clients and wrappers, and feature handlers use queue message types such as:
-
-- `ThirdfortRequestQueueMessage`
-- `ThirdfortResponseQueueMessage`
-- email, text message, notification, document, and integration queue messages
-
-The physical queue names and poison-message handling policy require environment-level configuration review.
+The common Azure storage layer exposes queue clients and wrappers. The queue names above are the configured local/development values; poison-message handling, retry counts, visibility timeouts, and production overrides still require environment-level review.
 
 ## WebJob handlers and message consumers
 

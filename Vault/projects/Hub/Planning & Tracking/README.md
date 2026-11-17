@@ -62,9 +62,9 @@ The following tasks are identified during the documentation build process and mu
 
 1. ~~Map every runtime project to its production hosting target and deployment package.~~ **COMPLETED**
    * Source inventory and architecture blueprint identify all runtime projects and their observed roles; local provisioning evidence shows IIS/Windows/Elasticsearch hosting; deployment mapping awaits production configuration review.
-1. Resolve actual queue/topic/subscription names from environment configuration. **PARTIAL** 
-   * Observed queue/topic/subscription names in development and staging environments are documented; production names require confirmation from environment templates.
-1. Service Bus topic configuration keys and message contracts are catalogued; physical entity names still require extraction from environment templates and deployment parameters.
+1. Resolve actual queue/topic/subscription names from environment configuration. **PARTIAL**
+   * Checked-in `Web.config` and `App.config` values for local/development queues, topics, and subscriptions are documented; production values and runtime overrides require confirmation from deployed configuration.
+1. Service Bus topic configuration keys, physical local/development names, and message contracts are catalogued; the property-management topic key is not present in the inspected configs.
 1. ~~Catalogue all WebJob handlers and associate them with business processes.~~ **SUBSTANTIALLY COMPLETED** 
    * Comprehensive handler catalog table created with 60+ handler classes organized by feature area (email, notifications, integrations, documents, etc.); each handler is mapped to its message type/trigger and primary role. Thirdfort handlers are detailed with flows and rules; most other handlers now have documented responsibilities.
 1. ~~Add process flows for the highest-value property, contact, tenancy, document, notification, and integration journeys.~~ **SUBSTANTIALLY COMPLETED**
