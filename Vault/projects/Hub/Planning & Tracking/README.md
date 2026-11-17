@@ -9,11 +9,13 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 ## Contents
 
 **Core Business Domain Documentation:**
+
 - [Core domain model](../Core Business Domain/CORE-DOMAIN.md) — Contact, Property, Activity, Requirement, Tenancy entities and relationships
 - [API workflows](../Core Business Domain/API-WORKFLOWS.md) — Six major user journeys (lettings, sales, chain transactions, renewals, multi-let, compliance)
 - [State machines & validators](../Core Business Domain/STATE-MACHINES-VALIDATORS.md) — Entity state machines, validation rules, and business logic as Gherkin scenarios
 
 **Architecture & Infrastructure:**
+
 - [Architecture blueprint](../Architecture & Infrastructure/architecture-blueprint.md)
 - [Source inventory](../Architecture & Infrastructure/source-inventory.md)
 - [Message and transport inventory](../Architecture & Infrastructure/message-transport-inventory.md)
@@ -23,6 +25,7 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 ## Completed in this pass
 
 **Checkpoint 1: Infrastructure & Integration Documentation**
+
 - Documented the system context, containers, asynchronous processing pattern, and ArchiMate-inspired layers.
 - Identified the Angular client, ASP.NET Web API, shared domain/DAL libraries, SQL Server database project, WebJobs, Azure Storage, Service Bus contracts, Elasticsearch, external adapters, reporting, and operational tools.
 - Recorded IIS/Windows hosting evidence from the local provisioning script.
@@ -31,12 +34,14 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 - Captured source-linked Gherkin scenarios for Thirdfort validation, persistence, error handling, report storage, and acknowledgement.
 
 **Checkpoint 2: WebJob Handler & Process Documentation**
+
 - Catalogued all 27 WebJob modules with 60+ handler classes organized by feature area.
 - Documented handler responsibilities, message types, and primary roles.
 - Created 8 Mermaid flowchart diagrams for key process flows (Thirdfort, notifications, CDD, opt-in, documents, conversions).
 - Captured 22 Gherkin BDD scenarios for integration business rules.
 
 **Checkpoint 3: Core Business Domain Documentation** ✅ **NEW**
+
 - Created comprehensive CORE-DOMAIN.md documenting Contact, Property, Activity, Requirement, and Tenancy entities with full relationships and state machines.
 - Documented 5 major business processes: Contact management, Property/Ownership, Activity lifecycle, Requirement/matching, Tenancy/property management.
 - Defined 3 primary user journeys: Tenant seeking office, property owner selling, agent managing portfolio.
@@ -44,6 +49,7 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 - Documented data persistence strategy (SQL Server, Elasticsearch, Azure Storage, Message queues).
 
 **Checkpoint 4: API Workflows & State Machines** ✅ **NEW**
+
 - Created API-WORKFLOWS.md with 6 complete end-to-end workflows (Lettings, Sales/Chain, Requirement auto-matching, Tenancy renewal, Multi-let portfolio, CDD/Right-to-rent compliance).
 - Each workflow shows complete API sequence from activity creation through completion.
 - Documented key API patterns (entity creation, status transitions, matching/linking, compliance gates, event cascades).
