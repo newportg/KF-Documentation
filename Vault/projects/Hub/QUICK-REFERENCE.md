@@ -30,8 +30,6 @@
 | Document | Purpose | Key Content |
 |----------|---------|-----------|
 | **[README.md](./Planning & Tracking/README.md)** | Project overview and task status | Contents, completed work, outstanding tasks |
-| **[CHECKPOINT-4-SUMMARY.md](./Planning & Tracking/CHECKPOINT-4-SUMMARY.md)** | Executive summary of this checkpoint | Deliverables, coverage, next steps |
-| **[SESSION-COMPLETION-SUMMARY.md](./Planning & Tracking/SESSION-COMPLETION-SUMMARY.md)** | Complete session handoff summary | Accomplishments, metrics, outstanding work |
 | **[NEXT-STEPS.md](./Planning & Tracking/NEXT-STEPS.md)** | Future work priorities | Blocking tasks, recommendations |
 | **[TASK-COMPLETION-SUMMARY.md](./Planning & Tracking/TASK-COMPLETION-SUMMARY.md)** | Prior checkpoint summary | Tasks 2-5 completion status |
 
