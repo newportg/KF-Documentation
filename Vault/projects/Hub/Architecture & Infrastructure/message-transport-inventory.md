@@ -2,7 +2,7 @@
 
 ## Service Bus topic configuration keys
 
-`src/Hub.Contracts/HubServiceBus/HubServiceBusTriggerConstants.cs` defines the following application-setting keys. The values below are from the checked-in `Web.config` and `App.config` files and represent local/development configuration, not confirmed production values.
+`src/Hub.Contracts/HubServiceBus/HubServiceBusTriggerConstants.cs` defines the following application-setting keys. The values below are from the checked-in `Web.config` and `App.config` files and are the repository's dev/local configuration. Production values are injected at deployment and are not expected to be present in the repository source configuration.
 
 | Key | Likely message area | Physical entity name |
 |---|---|---|
@@ -20,7 +20,20 @@
 
 Source: `src/KnightFrank.Antares.Api/Web.config` and `src/WebJobs/KnightFrank.Antares.WebJobs/App.config`.
 
-The `local-ee` and `dev-ne` suffixes identify the checked-in environment configuration. Production values still require the deployed environment configuration.
+The `local-ee` and `dev-ne` suffixes identify the checked-in dev/local environment configuration. Production values are supplied by deployment configuration and are therefore intentionally absent from these files.
+
+## Production naming convention
+
+The physical Azure entity names follow the Microsoft Cloud Adoption Framework (CAF) naming convention. This establishes the expected production naming standard; it does not replace confirmation that deployment configuration injects the intended values.
+
+Production validation should therefore confirm:
+
+- the CAF components used for workload, environment, region, and instance;
+- the deployment parameters or environment settings that inject the production queue, topic, and subscription names;
+- that the injected names match the infrastructure definitions and CAF naming convention; and
+- whether any service-specific abbreviations or legacy exceptions are approved.
+
+The checked-in `local-ee` and `dev-ne` values above are dev/local names only and must not be presented as production names.
 
 ## Additional Service Bus topics and subscriptions
 
@@ -109,7 +122,7 @@ The checked-in API and WebJob configuration defines these queue names:
 
 `HubServiceBusPublisherSubject` represents an entity type and publish event type using string-enum JSON conversion.
 
-The common Azure storage layer exposes queue clients and wrappers. The queue names above are the configured local/development values; poison-message handling, retry counts, visibility timeouts, and production overrides still require environment-level review.
+The common Azure storage layer exposes queue clients and wrappers. The queue names above are the configured dev/local values. Production entity names are injected at deployment and are expected to follow the Microsoft CAF naming convention. Poison-message handling, retry counts, visibility timeouts, and deployment settings still require environment-level review.
 
 ## WebJob handlers and message consumers
 

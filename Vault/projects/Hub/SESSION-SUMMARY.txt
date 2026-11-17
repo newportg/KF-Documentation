@@ -41,7 +41,7 @@ COMPLETED OR SUBSTANTIALLY COMPLETED:
 
 OPEN:
 
-  [ ] Confirm production queue, topic, and subscription overrides
+  [ ] Confirm deployment injection of CAF-compliant production queue, topic, and subscription names
   [ ] Confirm retry, timeout, dead-letter, poison-message, and idempotency
       policies
   [ ] Complete SME review and approval
