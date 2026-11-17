@@ -36,9 +36,9 @@ These are configuration keys, not confirmed Azure entity names.
 
 The common Azure storage layer exposes queue clients and wrappers, and feature handlers use queue message types such as:
 
-- `ThirdfortRequestQueueMessage`;
-- `ThirdfortResponseQueueMessage`;
-- email, text message, notification, document, and integration queue messages.
+- `ThirdfortRequestQueueMessage`
+- `ThirdfortResponseQueueMessage`
+- email, text message, notification, document, and integration queue messages
 
 The physical queue names and poison-message handling policy require environment-level configuration review.
 
@@ -129,12 +129,12 @@ The following table catalogs all WebJob handler classes and their primary messag
 
 ## Processing pattern
 
-1. A controller, domain service, timer, webhook, or integration publishes a message.
-2. Azure Storage Queue or Service Bus delivers the message to the WebJobs host.
-3. A feature module resolves a handler through the dependency-injection container.
-4. The handler validates and processes the message.
-5. The handler writes to SQL, Blob Storage, Elasticsearch, or an external service.
-6. Failures are logged and rethrown in the inspected Thirdfort handlers, allowing the host's configured retry behaviour to apply.
+1. A controller, domain service, timer, webhook, or integration publishes a message
+2. Azure Storage Queue or Service Bus delivers the message to the WebJobs host
+3. A feature module resolves a handler through the dependency-injection container
+4. The handler validates and processes the message
+5. The handler writes to SQL, Blob Storage, Elasticsearch, or an external service
+6. Failures are logged and rethrown in the inspected Thirdfort handlers, allowing the host's configured retry behaviour to apply
 
 ## Required follow-up
 

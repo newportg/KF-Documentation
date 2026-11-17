@@ -42,11 +42,11 @@ The initial documentation scope is Hub only. Azure service-specific documentatio
 
 Hub is best treated as a **modular business platform with synchronous and asynchronous execution paths**, rather than as a single application:
 
-1. Users and external clients call the Web API through the Angular application or other API consumers.
-2. The API resolves application services through Autofac and uses domain logic, the DAL, SQL Server, search, storage, and external-service adapters.
-3. API operations publish work to queues or Service Bus when processing is asynchronous or integration-driven.
-4. Azure WebJobs consume queue, Service Bus, and timer-triggered work. They perform notifications, documents, feeds, compliance-related updates, search indexing, messaging, and external integrations.
-5. Shared contracts define message subjects and trigger constants so publishers and consumers can interoperate.
+1. Users and external clients call the Web API through the Angular application or other API consumers
+2. The API resolves application services through Autofac and uses domain logic, the DAL, SQL Server, search, storage, and external-service adapters
+3. API operations publish work to queues or Service Bus when processing is asynchronous or integration-driven
+4. Azure WebJobs consume queue, Service Bus, and timer-triggered work. They perform notifications, documents, feeds, compliance-related updates, search indexing, messaging, and external integrations
+5. Shared contracts define message subjects and trigger constants so publishers and consumers can interoperate
 
 ## C4 system context
 
