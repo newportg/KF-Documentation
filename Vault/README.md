@@ -1,4 +1,4 @@
-# POC-Thirdfort
+# KF-Documentation
 
 I dump raw stuff into `/raw`. AI turns it into clean notes in `/wiki`. That's it.
 
