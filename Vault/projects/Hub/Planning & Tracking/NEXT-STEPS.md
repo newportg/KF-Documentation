@@ -30,7 +30,7 @@
 
 ## High-Value Remaining Process Flows
 
-### Task #4a: Tenancy Lifecycle Flow
+### Task #4a: Tenancy Lifecycle Flow — COMPLETED
 **Components involved:**
 
 - SLM Tenancy sync (SlmTenancyQueueMessageHandler)
@@ -38,7 +38,7 @@
 - Tenancy churn-risk calculation (UpdateTenancyChurnRiskStatusQueueMessageHandler)
 - Out-of-hours archival (RemoveExpiredTenanciesFromOutOfHoursCommandHandler)
 
-**Mermaid diagram needed:**
+**Delivered:** Tenancy SLM, Fixflo start/end, churn-risk, and out-of-hours archival flow added to [process-flows.md](../Architecture & Infrastructure/process-flows.md).
 
 Trigger → Load tenancy → Sync to SLM → Publish Fixflo events → Calculate churn-risk → Update Elasticsearch → Archive if needed
 
@@ -50,7 +50,7 @@ Trigger → Load tenancy → Sync to SLM → Publish Fixflo events → Calculate
 
 ---
 
-### Task #4b: Brochure Generation Flow
+### Task #4b: Brochure Generation Flow — COMPLETED
 **Components involved:**
 
 - Brochure request queuing
@@ -58,7 +58,7 @@ Trigger → Load tenancy → Sync to SLM → Publish Fixflo events → Calculate
 - Completion handling (CompleteBrochuresQueueMessageHandler)
 - Document storage and delivery
 
-**Mermaid diagram needed:**
+**Delivered:** Frontify request and completion flow added to [process-flows.md](../Architecture & Infrastructure/process-flows.md). The documentation explicitly notes that PDF storage and delivery are not performed by the inspected handlers.
 
 API request → Queue message → Frontify request → Frontify processes → Response queued → PDF stored → Delivery notification
 
@@ -69,14 +69,14 @@ API request → Queue message → Frontify request → Frontify processes → Re
 
 ---
 
-### Task #4c: Integration Result Handlers
+### Task #4c: Integration Result Handlers — COMPLETED
 **Components involved:**
 
 - HomePpl compliance results (HomePplResultQueueMessageHandler)
 - TDS certificate results (TDSResultQueueMessageHandler)
 - Qube synchronization (QubeSynchronizationQueueMessageHandler)
 
-**Mermaid diagram needed:**
+**Delivered:** HomePpl, TDS, and Qube result flows added to [process-flows.md](../Architecture & Infrastructure/process-flows.md).
 
 External system response → Message received → Data validation → SQL persistence → Attachment creation → Elasticsearch update → Notification
 
@@ -90,7 +90,7 @@ External system response → Message received → Data validation → SQL persis
 
 ## High-Value Remaining Business Rules
 
-### Task #5a: Email Consent and Suppression Rules
+### Task #5a: Email Consent and Suppression Rules — COMPLETED
 **Rules to extract:**
 
 - When is a contact suppressed from receiving email?
@@ -105,13 +105,11 @@ External system response → Message received → Data validation → SQL persis
 - `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/SendEmailQueueMessageHandler.cs`
 - `src/WebJobs/KnightFrank.Antares.WebJobs.Dotmailer/`
 
-**Output format:**
-
-Gherkin scenarios for consent validation, suppression checking, and retry behavior
+**Delivered:** Email consent, Dotmailer suppression/resubscription, whitelist filtering, and retry rules added to [business-rules.md](../Architecture & Infrastructure/business-rules.md), with an end-to-end flow in [process-flows.md](../Architecture & Infrastructure/process-flows.md).
 
 ---
 
-### Task #5b: Tenancy State Transitions
+### Task #5b: Tenancy State Transitions — COMPLETED
 **Rules to extract:**
 
 - What triggers a tenancy state change? (started, ended, archived, churn-risk)
@@ -126,9 +124,7 @@ Gherkin scenarios for consent validation, suppression checking, and retry behavi
 - `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/UpdateTenancyChurnRiskStatusQueueMessageHandler.cs`
 - `src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/RemoveExpiredTenanciesFromOutOfHoursCommandHandler.cs`
 
-**Output format:**
-
-Gherkin scenarios for each state transition
+**Delivered:** Source-derived tenancy lifecycle integration rules added to [business-rules.md](../Architecture & Infrastructure/business-rules.md).
 
 ---
 
@@ -234,14 +230,14 @@ Document which handlers are idempotent and which are not:
 ### Phase 1 (1-2 days) — Immediate
 
 1. ✓ DONE: Handler catalog + process flows + business rules (Thirdfort, opt-in, CDD, notifications)
-1. → NEXT: Extract email consent and tenancy rules (Task #5a, #5b)
-1. → NEXT: Create tenancy lifecycle and brochure generation flows (Task #4a, #4b)
+1. ✓ DONE: Extract email consent and suppression rules (Task #5a)
+1. ✓ DONE: Extract tenancy lifecycle rules (Task #5b)
+1. ✓ DONE: Create tenancy lifecycle, brochure generation, and integration result flows (Tasks #4a, #4b, #4c)
 
 ### Phase 2 (2-3 days) — High-Value
 
 1. → Collect physical queue/topic names from DevOps (Task #2)
 1. → Add activity/requirement state transition rules (Task #5c)
-1. → Create integration result handler flows (Task #4c)
 1. → Document error-handling flows for top-5 handlers
 
 ### Phase 3 (Blocking) — External Review

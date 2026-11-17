@@ -161,15 +161,170 @@ flowchart TD
 
 Source: `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/WordToPdfConversionQueueMessageHandler.cs`.
 
+## Tenancy lifecycle integrations
+
+```mermaid
+flowchart TD
+    tenancy["Tenancy lifecycle trigger"] --> slm["Queue SlmTenancyQueueMessage"]
+    slm --> slmHandler["Load tenant and landlord parties without Qube person IDs"]
+    slmHandler --> slmLookup["Look up people in SLM using TenancySlmRef"]
+    slmLookup -->|API failure| slmError["Record TenancyQubeException"]
+    slmLookup -->|People returned| slmMatch["Match people by name and company"]
+    slmMatch -->|Matched| saveQube["Save QubePersonId"]
+    slmMatch -->|Not matched| matchError["Record QubePersonRecordNotMatched exception"]
+    saveQube --> slmComplete["Save tenancy parties"]
+    matchError --> slmComplete
+
+    startTimer["Daily Fixflo start command"] --> startFilter["Select managed UK residential tenancies<br/>starting today or already started and not expired"]
+    startFilter --> startParties["Load unsent landlord, tenant, and permitted-occupier parties"]
+    startParties -->|Eligible| publishStart["Publish FixfloTenancyStarted event"]
+    publishStart --> markSent["Mark published parties as sent to Fixflo"]
+    startParties -->|No eligible parties or non-UK property| startSkip["Log and skip"]
+
+    endTimer["Daily Fixflo end command"] --> endFilter["Select UK residential tenancies<br/>whose configured expiry offset has elapsed"]
+    endFilter --> endParties["Load parties previously sent to Fixflo"]
+    endParties -->|Eligible| publishEnd["Publish FixfloTenancyEnded event"]
+    publishEnd --> resetSent["Reset IsSentToFixflo flags"]
+    endParties -->|No eligible parties or non-UK property| endSkip["Log and skip"]
+
+    churnTimer["Churn-risk update message"] --> churnLoad["Load tenancy"]
+    churnLoad --> churnChanged{"Churn-risk changed?"}
+    churnChanged -->|no| churnDone["No persistence"]
+    churnChanged -->|yes| churnSave["Save tenancy and audit state change"]
+    churnSave --> churnNote["Create tenancy note"]
+    churnNote --> churnSearch["Refresh tenancy search fields"]
+
+    archiveTimer["Out-of-hours archival command"] --> archiveFilter["Select eligible managed ILM tenancies<br/>expired more than six months with no current replacement"]
+    archiveFilter --> archiveUpdate["Set Adiuvo removal and auto-removal flags"]
+    archiveUpdate --> archiveSave["Save changes and audit"]
+```
+
+Sources:
+
+- `src/WebJobs/KnightFrank.Antares.WebJobs.SlmTenancy/Services/SlmTenancyService.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/Tenancy/Started/Fixflo/PublishFixfloTenancyStartedEventWithStartingDateCommandHandler.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/Tenancy/Ended/Fixflo/PublishFixfloTenancyEndedEventWithEndingDateCommandHandler.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/UpdateTenancyChurnRiskStatusQueueMessageHandler.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/RemoveExpiredTenanciesFromOutOfHoursCommandHandler.cs`
+
+## Brochure generation and completion
+
+```mermaid
+flowchart TD
+    request["GenerateBrochureQueueMessage"] --> build["Build brochure data for activity and selected images"]
+    build --> template{"Template name supplied?"}
+    template -->|no| allItems["Build all brochure items as custom brochure"]
+    template -->|yes| lookup["Request matching template from Frontify"]
+    lookup -->|not found| templateError["Raise template-not-found error"]
+    lookup -->|found| templateItems["Build items for the selected template"]
+    allItems --> audit["Build audit metadata and Frontify request"]
+    templateItems --> audit
+    audit --> publish["Publish GenerateBrochure event to Frontify topic"]
+    publish -->|publish failure| publishError["Raise publish failure"]
+    publish -->|published| frontify["Frontify processes brochure"]
+    frontify --> completeMsg["CompleteBrochuresQueueMessage"]
+    completeMsg --> activity["Validate activity exists and read service line"]
+    activity --> residential{"Residential sales or lettings?"}
+    residential -->|no| completeSkip["No Frontify completion call"]
+    residential -->|yes| complete["Call Frontify CompleteBrochure"]
+    complete -->|API error| completeLog["Log Frontify API error"]
+```
+
+Sources:
+
+- `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/GenerateBrochureQueueMessageHandler.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/CompleteBrochuresQueueMessageHandler.cs`
+
+The inspected handlers publish the request and invoke Frontify completion. PDF storage and delivery notification are not implemented in these two handlers and require tracing elsewhere.
+
+## Integration result handlers
+
+```mermaid
+flowchart TD
+    response["External integration response"] --> type{"Result type"}
+
+    type -->|HomePpl reference check| homeLoad["Load tenancy, party, and risk-report blob"]
+    homeLoad --> homeStore["Store risk report in Blob Storage"]
+    homeStore --> homeAttach["Attach report to permitted occupier, tenant, or guarantor"]
+    homeAttach --> homeSave["Save progression state and publish status event"]
+    homeSave --> homeSearch["Refresh tenancy progression search index"]
+    type -->|HomePpl validation IDs| homeIds["Update validation IDs for tenant or permitted occupier"]
+    homeIds --> homeIdsSave["Save tenancy progression records"]
+    type -->|HomePpl error| homeError["Store reference-check error and reset party statuses"]
+
+    type -->|TDS success| tdsAccepted["Set deposit status registered<br/>store certificate URL and API reference"]
+    type -->|TDS failure| tdsFailed["Set deposit status not registered"]
+    tdsAccepted --> tdsDownload{"Certificate URL available and download succeeds?"}
+    tdsDownload -->|yes| tdsAttach["Store certificate blob and attach current document"]
+    tdsDownload -->|no| tdsNoAttach["Log download failure or skip attachment"]
+    tdsFailed --> tdsSave["Save progression state and errors"]
+    tdsAttach --> tdsSave
+    tdsNoAttach --> tdsSave
+    tdsSave --> tdsNotify["Publish deposit registration result"]
+    tdsAttach --> qubeQueue["Queue Qube tenancy and attachment synchronization"]
+
+    type -->|Qube synchronization| qubeValidate["Validate ID and supported entity type"]
+    qubeValidate --> qubeFresh{"No newer successful sync exists?"}
+    qubeFresh -->|no| qubeSkip["Log and skip stale message"]
+    qubeFresh -->|yes| qubeLoad["Load entity view model"]
+    qubeLoad --> qubeSend["Send entity or tenancy attachments to Qube"]
+```
+
+Sources:
+
+- `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/HomePplResultQueueMessageHandler.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/TDSResultQueueMessageHandler.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/QubeSynchronizationQueueMessageHandler.cs`
+
+## Email consent, suppression, and delivery
+
+```mermaid
+flowchart TD
+    dotmailerTimer["Dotmailer suppression timer"] --> enabled{"Suppression job enabled?"}
+    enabled -->|no| disabled["Log disabled and stop"]
+    enabled -->|yes| runLog["Initialize Dotmailer run log"]
+    runLog --> unsub["Import suppressed contacts since last run"]
+    unsub -->|initial run| clear["Clear existing suppression records first"]
+    unsub -->|new suppression| saveSuppressions["Save per-business suppression records"]
+    saveSuppressions --> notifySuppressed["Queue local suppression command for incremental imports"]
+    unsub --> resub["Import modified contacts since last run"]
+    resub --> removeSuppressions["Remove matching per-business suppression records"]
+    notifySuppressed --> runSuccess["Log suppression run success"]
+    removeSuppressions --> runSuccess
+
+    queued["Dotmailer email queued"] --> markStarted["Mark queue item started"]
+    markStarted --> contact{"Contact and email still exist?"}
+    contact -->|no| skipDeleted["Skip deleted contact"]
+    contact -->|yes| consent["Resolve business-specific consent"]
+    consent --> integrity{"Email-type consent still valid?"}
+    integrity -->|no| skipConsent["Do not send"]
+    integrity -->|yes| sendDotmailer["Send through Dotmailer"]
+
+    emailQueue["SendEmailQueueMessage"] --> loadEmail["Load email and validate size"]
+    loadEmail --> status{"Status is Outbox or Error?"}
+    status -->|no| skipStatus["Log and skip"]
+    status -->|yes| whitelist["Filter recipients by allowed-address whitelist"]
+    whitelist -->|none remain| treatSuccess["Treat as handled without sending"]
+    whitelist -->|recipients remain| strategy["Select email server strategy and send"]
+    strategy -->|success| sent["Mark Sent and mark recipients sent"]
+    strategy -->|failure| retry["Increment retry count and save error"]
+    retry -->|fewer than five retries| requeue["Allow host-level retry"]
+    retry -->|five or more retries| error["Mark email Error"]
+```
+
+Sources:
+
+- `src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Suppressions/DotmailerSuppressionsManager.cs`
+- `src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Suppressions/Steps/Unsubscribes/UnsubscribesStepRunner.cs`
+- `src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Suppressions/Steps/Resubscribes/ResubscribesStepRunner.cs`
+- `src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Emails/Handlers/BaseEmailHandler.cs`
+- `src/WebJobs/KnightFrank.Antares.WebJobs.Email/MessageHandlers/SendEmailQueueMessageHandler.cs`
+
 ## Process documentation gaps
 
 - Entry points for the main property contact-change and churn-risk journeys.
 - Requirement auto-match and scheduled notification flow.
-- Tenancy lifecycle flow (SLM sync, Fixflo tenancy-started/ended, churn-risk updates, out-of-hours archival).
-- Brochure generation flow (request → Frontify → completion → delivery).
-- Integration result handlers (HomePpl, TDS, Qube synchronization).
 - User reassignment flow (task transfer, tenancy role updates).
-- Email delivery flow (queuing, batch Exchange operations, consent/suppression checks).
 - Search indexing and projection consistency flow.
 - User-visible outcomes and SLAs for each process.
 - Retry, poison-message, and dead-letter paths for each process.

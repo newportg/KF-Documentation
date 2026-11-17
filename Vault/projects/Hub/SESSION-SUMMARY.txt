@@ -130,15 +130,15 @@ REMAINING WORK PRIORITIES
 ================================================================================
 
 IMMEDIATE (Next 1-2 days):
-□ Extract email consent and suppression rules (Task #5a)
-□ Extract tenancy state transition rules (Task #5b)
-□ Create tenancy lifecycle flow diagram (Task #4a)
-□ Create brochure generation flow diagram (Task #4b)
+✓ Extract email consent and suppression rules (Task #5a)
+✓ Extract tenancy lifecycle rules (Task #5b)
+✓ Create tenancy lifecycle flow diagram (Task #4a)
+✓ Create brochure generation flow diagram (Task #4b)
 
 MEDIUM (Next 2-3 days):
 □ Collect physical queue/topic names from DevOps (Task #2)
 □ Extract activity/requirement state transition rules (Task #5c)
-□ Create integration result handler flows (Task #4c)
+✓ Create integration result handler flows (Task #4c)
 □ Document error-handling flows for top-5 handlers
 □ Add SLA documentation per process
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-**In progress - architecture baseline and first process/rule slices documented**
+**In progress - architecture baseline and source-derived process/rule documentation expanding**
 
 The Hub documentation is based on the source repository at `C:\Source\Devops\KnightFrank.hub`. It is not complete until the source inventory, architecture, process flows, and business rules have been reviewed by a Hub subject-matter expert and the remaining deployment and operational gaps are resolved or recorded.
 
@@ -60,17 +60,17 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 
 The following tasks are identified during the documentation build process and must be completed before the Hub documentation is considered production-ready:
 
-1. ~~Map every runtime project to its production hosting target and deployment package.~~ **COMPLETED** 
+1. ~~Map every runtime project to its production hosting target and deployment package.~~ **COMPLETED**
    * Source inventory and architecture blueprint identify all runtime projects and their observed roles; local provisioning evidence shows IIS/Windows/Elasticsearch hosting; deployment mapping awaits production configuration review.
 1. Resolve actual queue/topic/subscription names from environment configuration. **PARTIAL** 
    * Observed queue/topic/subscription names in development and staging environments are documented; production names require confirmation from environment templates.
 1. Service Bus topic configuration keys and message contracts are catalogued; physical entity names still require extraction from environment templates and deployment parameters.
 1. ~~Catalogue all WebJob handlers and associate them with business processes.~~ **SUBSTANTIALLY COMPLETED** 
    * Comprehensive handler catalog table created with 60+ handler classes organized by feature area (email, notifications, integrations, documents, etc.); each handler is mapped to its message type/trigger and primary role. Thirdfort handlers are detailed with flows and rules; most other handlers now have documented responsibilities.
-1. ~~Add process flows for the highest-value property, contact, tenancy, document, notification, and integration journeys.~~ **SUBSTANTIALLY COMPLETED** 
-   * Thirdfort request/response, notification preparation and delivery, activity notification, CDD validity cascade, soft opt-in refresh, and document-to-PDF conversion flows are documented with Mermaid diagrams. Property contact-change, churn-risk, tenancy lifecycle, brochure generation, and integration result flows remain.
-1. ~~Extract additional business rules from domain validators and handlers.~~ **SUBSTANTIALLY COMPLETED** 
-   * Thirdfort request/response rules, soft opt-in consent lifecycle rules, CDD validity retriggering rules, and notification recipient filtering rules are captured as Gherkin scenarios. All activity, requirement, tenancy, contact, property, and offer state transition rules now documented. Remaining rules (document visibility, integration retry, email consent/suppression) are identified but require additional handler inspection.
+1. ~~Add process flows for the highest-value property, contact, tenancy, document, notification, and integration journeys.~~ **SUBSTANTIALLY COMPLETED**
+   * Thirdfort request/response, notification preparation and delivery, activity notification, CDD validity cascade, soft opt-in refresh, document-to-PDF conversion, tenancy lifecycle integrations, brochure generation, and integration result flows are documented with Mermaid diagrams. Property contact-change, user reassignment, email delivery, and search projection consistency flows remain.
+1. ~~Extract additional business rules from domain validators and handlers.~~ **SUBSTANTIALLY COMPLETED**
+   * Thirdfort, soft opt-in, CDD validity, notification filtering, state transition, tenancy lifecycle, brochure generation, HomePpl, TDS, Qube, and email consent/suppression rules are captured as Gherkin scenarios. Remaining rules include document visibility, search projection consistency, and broader integration retry/idempotency behavior.
 1. ~~Document core business domain and API workflows.~~ **COMPLETED**
    * CORE-DOMAIN.md, API-WORKFLOWS.md, and STATE-MACHINES-VALIDATORS.md now provide comprehensive coverage of entities, relationships, user journeys, state machines, and validation rules. All  core entities (Contact, Property, Activity, Requirement, Tenancy) fully documented with 6 end-to-end API workflows.
 1. Review diagrams and rules with a Hub subject-matter expert. **PENDING**

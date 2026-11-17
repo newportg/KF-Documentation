@@ -72,7 +72,7 @@ Each handler now has:
 **Status: SUBSTANTIALLY COMPLETED** ✓ Significantly Advanced
 
 ### Completed
-Created 8 detailed Mermaid flowchart diagrams in [process-flows.md](../Architecture & Infrastructure/process-flows.md):
+Created 12 detailed Mermaid flowchart diagrams in [process-flows.md](../Architecture & Infrastructure/process-flows.md):
 
 1. **Generic asynchronous processing** — High-level pattern showing trigger → validation → processing → persistence
 2. **Thirdfort request** — Validation and transaction submission flow
@@ -82,16 +82,23 @@ Created 8 detailed Mermaid flowchart diagrams in [process-flows.md](../Architect
 6. **CDD validity retriggering cascade** — Entity validation → related entity discovery → event publishing for requirements/instructions/activities
 7. **Soft opt-in consent refresh cycle** — Contact validation → org-unit iteration → consent creation/expiry management → notifications
 8. **Document-to-PDF conversion** — Request → validation → conversion → blob storage → completion
+9. **Tenancy lifecycle integrations** — SLM, Fixflo start/end, churn-risk, and out-of-hours archival
+10. **Brochure generation and completion** — Activity data → Frontify request → completion
+11. **Integration result handlers** — HomePpl, TDS, and Qube result processing
+12. **Email consent, suppression, and delivery** — Consent revalidation, Dotmailer suppression, whitelist filtering, and retries
 
-### Still Required
+### Remaining
 
 - Property contact-change and churn-risk journeys
-- Tenancy lifecycle flow (SLM sync → Fixflo tenancy-started/ended → churn-risk → out-of-hours archival)
-- Brochure generation flow (Frontify API → completion → delivery)
-- Integration result handlers (HomePpl, TDS, Qube synchronization)
 - User reassignment flow
-- Email delivery flow with consent/suppression checking
 - Search indexing and projection consistency flow
+
+Added since this summary was created:
+
+- Tenancy lifecycle integrations: SLM, Fixflo start/end, churn-risk, and out-of-hours archival
+- Brochure generation and Frontify completion
+- HomePpl, TDS, and Qube result handlers
+- Email consent, Dotmailer suppression/resubscription, whitelist filtering, and retry behavior
 
 ---
 
@@ -133,15 +140,12 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 - Secure notification type recipient filtering (access control)
 - Notification preparation and queue routing
 
-### Still Required
+### Remaining
 
-- Activity and requirement state transitions (beyond CDD/opt-in)
 - Property state rules (Fixflo archival, latest-view retention, churn-risk flagging)
-- Tenancy state transitions (SLM, started/ended events, out-of-hours archival)
 - Document visibility and version management rules
 - Notification scheduling and blacklist-trigger rules
-- Email consent and suppression rules (Dotmailer, exchange)
-- Integration retry and reconciliation rules
+- Broader integration retry, reconciliation, and idempotency rules
 - Search indexing consistency rules
 
 ---

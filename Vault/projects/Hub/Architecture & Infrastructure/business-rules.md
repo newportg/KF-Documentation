@@ -193,14 +193,166 @@ Feature: Notification recipient filtering and delivery
     And a suitable notification title is generated based on the notification type
 ```
 
+## Tenancy lifecycle integration rules
+
+Source: tenancy SLM, Fixflo, churn-risk, and out-of-hours handlers.
+
+```gherkin
+Feature: Tenancy lifecycle integrations
+
+  Scenario: SLM sync only processes parties without a Qube person ID
+    Given a tenancy SLM message is received
+    When the tenancy has tenant or landlord parties without a Qube person ID
+    Then the system retrieves people from SLM using the tenancy SLM reference
+    And matching party records receive their Qube person IDs
+    And unmatched parties create Qube person-record exceptions
+
+  Scenario: SLM API failure is recorded as a tenancy exception
+    Given a tenancy SLM message is received
+    When the SLM response is unsuccessful
+    Then a tenancy Qube API exception is stored
+    And the party records are not updated from the failed response
+
+  Scenario: Fixflo start events only include eligible tenancies
+    Given the Fixflo tenancy-start job runs
+    When a tenancy is managed, residential, located in the UK, and has started without expiring
+    And it has an allowed party that has not been sent to Fixflo
+    Then a Fixflo tenancy-started event is published
+    And successfully published parties are marked as sent to Fixflo
+
+  Scenario: Churn-risk updates create an audit trail
+    Given a tenancy churn-risk update is received
+    When the new churn-risk differs from the stored value
+    Then the tenancy is saved
+    And the change is audited
+    And a tenancy note is created
+    And the tenancy search projection is refreshed
+
+  Scenario: Out-of-hours archival requires an old expired tenancy with no replacement
+    Given the out-of-hours archival job runs
+    When a managed ILM tenancy expired more than six months ago
+    And it is not fallen through, already removed, or excluded by department
+    And its activity has no current managed replacement tenancy
+    Then the tenancy is marked as automatically removed from the out-of-hours list
+    And the change is audited
+```
+
+## Brochure generation rules
+
+Source: `src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/GenerateBrochureQueueMessageHandler.cs` and `CompleteBrochuresQueueMessageHandler.cs`.
+
+```gherkin
+Feature: Brochure generation
+
+  Scenario: A brochure without a template uses all available brochure items
+    Given a brochure request has no template name
+    When brochure data is built for the activity
+    Then all available brochure items are included
+    And the request is marked as custom
+    And no template ID is sent
+
+  Scenario: A named brochure template must exist in Frontify
+    Given a brochure request has a template name
+    When Frontify returns no matching template
+    Then brochure generation fails with a template-not-found error
+    And no Frontify generation event is published
+
+  Scenario: Brochure completion is only sent for residential sales or lettings
+    Given a brochure completion message is received for an existing activity
+    When the activity service line is residential sales or residential lettings
+    Then a Frontify completion request is sent using the activity ID
+    Otherwise no Frontify completion request is sent
+```
+
+## Integration result rules
+
+Source: `HomePplResultQueueMessageHandler.cs`, `TDSResultQueueMessageHandler.cs`, and `QubeSynchronizationQueueMessageHandler.cs`.
+
+```gherkin
+Feature: Integration result processing
+
+  Scenario: HomePpl reference reports are attached to the relevant party
+    Given a HomePpl reference-check result contains a risk-report blob
+    When the tenancy and party exist
+    Then the report is stored in Blob Storage
+    And the report is attached to the permitted occupier, tenant, or guarantor
+    And the reference-check status is set to received
+    And a tenancy progression update event is published
+
+  Scenario: TDS success stores and synchronizes a certificate
+    Given a successful TDS result contains a certificate URL
+    When the certificate download succeeds
+    Then the deposit status is set to registered
+    And the certificate metadata and attachment are saved
+    And Qube synchronization is queued for the tenancy and its attachments
+
+  Scenario: TDS failure stores returned errors
+    Given a TDS result is unsuccessful
+    When the result contains errors
+    Then the deposit status is set to not registered
+    And the serialized errors are stored
+    And a deposit-registration-failed event is published
+
+  Scenario: Stale Qube synchronization messages are skipped
+    Given a Qube synchronization message is received
+    When a newer successful synchronization already exists
+    Then the message is logged as stale
+    And no entity is sent to Qube
+
+  Scenario: Unsupported Qube entity types are rejected
+    Given a Qube synchronization message has an unsupported entity type
+    When the handler validates the message
+    Then processing fails with an out-of-range error
+    And the failure is logged and rethrown
+```
+
+## Email consent and suppression rules
+
+Source: Dotmailer email handlers, suppression runners, and `SendEmailQueueMessageHandler`.
+
+```gherkin
+Feature: Email consent and suppression
+
+  Scenario: Consent-specific Dotmailer email is revalidated before sending
+    Given a Dotmailer email is queued for a contact and business
+    When the contact email and contact still exist
+    Then the handler resolves the business-specific consent
+    And the email is sent only if the email type's consent condition is still true
+
+  Scenario: Email for a deleted contact is skipped
+    Given a Dotmailer email is queued for a contact
+    When the contact no longer exists
+    Then the email is not sent
+
+  Scenario: Incremental Dotmailer suppression import creates local records
+    Given the Dotmailer suppression job is enabled
+    When a suppressed contact is returned since the last run
+    Then a suppression record is stored for that email and business
+    And a local suppression command is sent for the new suppression
+
+  Scenario: Dotmailer resubscription removes local suppression
+    Given a contact has a local Dotmailer suppression for a business
+    When Dotmailer reports the contact as modified during a later run
+    Then the matching suppression record is removed for that business
+
+  Scenario: Email with no allowed recipients is handled without sending
+    Given an outbox email has recipients
+    When the allowed-address whitelist removes every recipient
+    Then the email is treated as successfully handled
+    And no message is sent
+
+  Scenario: Email send failures retry up to the configured handler limit
+    Given an outbox or error email is being sent
+    When the email strategy throws an exception
+    Then the send retry count is incremented
+    And the error details are stored
+    And the email is marked Error after five or more retries
+```
+
 ## Rules requiring further extraction
 
-- Contact, property, activity, tenancy, and requirement state transitions (beyond CDD and soft opt-in).
 - Document visibility and current-version rules.
 - Notification scheduling, blacklist-trigger, and recipient assignment rules (beyond access control).
 - CDD update and completion rules for different entity types.
 - Search indexing and projection consistency rules.
-- Integration retry, reconciliation, and idempotency rules (Fixflo, SAP, NorthStar, Qube).
-- Tenancy lifecycle events (SLM sync rules, Fixflo tenancy-started/ended events, churn-risk calculation).
-- Email consent and suppression rules (Dotmailer, exchange, delivery).
 
