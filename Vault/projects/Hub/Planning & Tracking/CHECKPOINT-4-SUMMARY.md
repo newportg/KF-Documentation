@@ -43,6 +43,7 @@ This represents a **major shift from infrastructure-only documentation** to **bu
    - Activity/tenancy CDD verification → Thirdfort integration → Right-to-rent checks → Verification results → Completion/commencement gates
 
 **Key Sections:**
+
 - Complete API sequence for each workflow (POST/PUT endpoints, request payloads, expected responses)
 - Preconditions and outcomes for each step
 - State transitions during workflow execution
@@ -111,6 +112,7 @@ This represents a **major shift from infrastructure-only documentation** to **bu
 ## Content Coverage Summary
 
 ### Core Entities (All Documented ✅)
+
 | Entity | Relationships | State Machine | Validation Rules | API Endpoints | User Journeys |
 |--------|---------------|---------------|------------------|---------------|---------------|
 | Contact | Negotiator, Addresses, Requirements | N/A (reference) | ✅ 6 scenarios | CRUD | 6 workflows |
@@ -186,6 +188,7 @@ Contact/Property/Activity/Requirement/Tenancy Entities
 
 ### Task #7: Operations & Monitoring Documentation
 **Not Yet Started**
+
 - Production configuration (SLA, retry policies, dead-letter procedures)
 - Monitoring dashboards and alerting strategy
 - Security configuration (identity, authorization, encryption)
@@ -196,6 +199,7 @@ Contact/Property/Activity/Requirement/Tenancy Entities
 
 ### Task #8: Subject-Matter Expert Review
 **Pending**
+
 - Accuracy review of state machine transitions
 - Validation of business rule scenarios
 - Confirmation of user journeys match real Hub workflows
@@ -247,27 +251,27 @@ Hub Documentation Root
 ### For Business Analysts
 
 1. Review CORE-DOMAIN.md to understand entity relationships
-2. Follow API-WORKFLOWS.md for 6 real-world user journeys
-3. Use STATE-MACHINES-VALIDATORS.md as reference for business rules
+1. Follow API-WORKFLOWS.md for 6 real-world user journeys
+1. Use STATE-MACHINES-VALIDATORS.md as reference for business rules
 
 ### For Developers
 
 1. Review API-WORKFLOWS.md for expected API behavior
-2. Use STATE-MACHINES-VALIDATORS.md as specification for validation logic
-3. Reference CORE-DOMAIN.md for entity relationships and business context
-4. Cross-check Gherkin scenarios in STATE-MACHINES-VALIDATORS.md with existing code
+1. Use STATE-MACHINES-VALIDATORS.md as specification for validation logic
+1. Reference CORE-DOMAIN.md for entity relationships and business context
+1. Cross-check Gherkin scenarios in STATE-MACHINES-VALIDATORS.md with existing code
 
 ### For Operations/Deployment
 
 1. Awaiting Task #7 (Operations documentation) for production setup
-2. Use message-transport-inventory.md to understand async message handling
-3. Use process-flows.md to track system events end-to-end
+1. Use message-transport-inventory.md to understand async message handling
+1. Use process-flows.md to track system events end-to-end
 
 ### For Compliance/Review
 
 1. Submit STATE-MACHINES-VALIDATORS.md and API-WORKFLOWS.md to subject-matter expert for validation
-2. Flag any mismatches with actual Hub behavior
-3. Provide feedback on missing workflows or state transitions
+1. Flag any mismatches with actual Hub behavior
+1. Provide feedback on missing workflows or state transitions
 
 ---
 
@@ -279,7 +283,7 @@ All files created/updated in this session:
    - [API-WORKFLOWS.md](../Core Business Domain/API-WORKFLOWS.md) — 6 end-to-end workflows
    - [STATE-MACHINES-VALIDATORS.md](../Core Business Domain/STATE-MACHINES-VALIDATORS.md) — State machines & validation rules
 
-2. **Updated Files:**
+1. **Updated Files:**
    - [README.md](./README.md) — Task status and content index
    - [CORE-DOMAIN.md](../Core Business Domain/CORE-DOMAIN.md) — (from prior session, now linked here)
 
