@@ -36,18 +36,18 @@ nav:
       - Welcome & Getting Started: projects/Hub/00-WELCOME.md
       - Quick Reference: projects/Hub/QUICK-REFERENCE.md
       - Core Business Domain:
-          - Overview: projects/Hub/CORE-DOMAIN.md
-          - API Workflows: projects/Hub/API-WORKFLOWS.md
-          - State Machines & Validators: projects/Hub/STATE-MACHINES-VALIDATORS.md
+          - Overview: projects/Hub/Core Business Domain/CORE-DOMAIN.md
+          - API Workflows: projects/Hub/Core Business Domain/API-WORKFLOWS.md
+          - State Machines & Validators: projects/Hub/Core Business Domain/STATE-MACHINES-VALIDATORS.md
       - Architecture & Infrastructure:
-          - Architecture blueprint: projects/Hub/architecture-blueprint.md
-          - Source inventory: projects/Hub/source-inventory.md
-          - Message and transport inventory: projects/Hub/message-transport-inventory.md
-          - Process flows: projects/Hub/process-flows.md
-          - Business rules: projects/Hub/business-rules.md
+          - Architecture blueprint: projects/Hub/Architecture & Infrastructure/architecture-blueprint.md
+          - Source inventory: projects/Hub/Architecture & Infrastructure/source-inventory.md
+          - Message and transport inventory: projects/Hub/Architecture & Infrastructure/message-transport-inventory.md
+          - Process flows: projects/Hub/Architecture & Infrastructure/process-flows.md
+          - Business rules: projects/Hub/Architecture & Infrastructure/business-rules.md
       - Planning & Tracking:
-          - Project Overview: projects/Hub/README.md
-          - Checkpoint 4 Summary: projects/Hub/CHECKPOINT-4-SUMMARY.md
-          - Session Completion: projects/Hub/SESSION-COMPLETION-SUMMARY.md
-          - Next Steps: projects/Hub/NEXT-STEPS.md
-          - Task Completion: projects/Hub/TASK-COMPLETION-SUMMARY.md
+          - Project Overview: projects/Hub/Planning & Tracking/README.md
+          - Checkpoint 4 Summary: projects/Hub/Planning & Tracking/CHECKPOINT-4-SUMMARY.md
+          - Session Completion: projects/Hub/Planning & Tracking/SESSION-COMPLETION-SUMMARY.md
+          - Next Steps: projects/Hub/Planning & Tracking/NEXT-STEPS.md
+          - Task Completion: projects/Hub/Planning & Tracking/TASK-COMPLETION-SUMMARY.md
