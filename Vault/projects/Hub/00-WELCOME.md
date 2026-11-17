@@ -13,19 +13,19 @@
 
 ### Core Business Domain Documentation (NEW THIS SESSION)
 
-**[API-WORKFLOWS.md](./API-WORKFLOWS.md)** (21.8 KB)
+**[API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md)** (21.8 KB)
 - 6 end-to-end user workflows through the Hub API
 - Complete POST/PUT endpoints with payloads for each workflow
 - Preconditions, outcomes, and state changes documented
 - Workflows: Lettings, Sales/Chain, Auto-matching, Renewal, Multi-let, Compliance
 
-**[STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md)** (27.8 KB)
+**[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** (27.8 KB)
 - 8 entity state machines with all valid transitions
 - 51 Gherkin scenarios testing business rules
 - State transition validation matrices
 - Implementation guidance for validation logic
 
-**[CORE-DOMAIN.md](./CORE-DOMAIN.md)** (from prior session, 22 KB)
+**[CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md)** (from prior session, 22 KB)
 - 5 core entities (Contact, Property, Activity, Requirement, Tenancy)
 - Complete entity relationships and interactions
 - 5 major business processes
@@ -39,55 +39,55 @@
 - Role-based recommended reading paths
 - State machine quick diagrams
 
-**[SESSION-COMPLETION-SUMMARY.md](./SESSION-COMPLETION-SUMMARY.md)** (14.6 KB)
+**[SESSION-COMPLETION-SUMMARY.md](./Planning & Tracking/SESSION-COMPLETION-SUMMARY.md)** (14.6 KB)
 - Complete session handoff summary
 - Accomplishments and deliverables
 - Metrics and coverage summary
 - Outstanding work and next phase planning
 
-**[CHECKPOINT-4-SUMMARY.md](./CHECKPOINT-4-SUMMARY.md)** (13 KB)
+**[CHECKPOINT-4-SUMMARY.md](./Planning & Tracking/CHECKPOINT-4-SUMMARY.md)** (13 KB)
 - Executive summary of this checkpoint
 - Architecture visibility improvements
 - Questions resolved from prior feedback
 
 ### Infrastructure & Integration Documentation (ENHANCED PRIOR SESSIONS)
 
-**[message-transport-inventory.md](./message-transport-inventory.md)** (14.9 KB)
+**[message-transport-inventory.md](./Architecture & Infrastructure/message-transport-inventory.md)** (14.9 KB)
 - Catalogues 60+ WebJob handlers
 - Message types, feature areas, and responsibilities
 - Integration points and processing flows
 
-**[process-flows.md](./process-flows.md)** (9.3 KB)
+**[process-flows.md](./Architecture & Infrastructure/process-flows.md)** (9.3 KB)
 - 8 Mermaid diagrams for key processes
 - Thirdfort, notifications, CDD, opt-in, documents, conversions
 - End-to-end event flow visualization
 
-**[business-rules.md](./business-rules.md)** (9.8 KB)
+**[business-rules.md](./Architecture & Infrastructure/business-rules.md)** (9.8 KB)
 - 22+ Gherkin scenarios for integration business rules
 - Thirdfort validation, CDD retriggering, notification filtering
 
-**[architecture-blueprint.md](./architecture-blueprint.md)** (9.2 KB)
+**[architecture-blueprint.md](./Architecture & Infrastructure/architecture-blueprint.md)** (9.2 KB)
 - System context and components
 - ArchiMate-inspired layers
 - Component interactions
 
-**[source-inventory.md](./source-inventory.md)** (4.5 KB)
+**[source-inventory.md](./Architecture & Infrastructure/source-inventory.md)** (4.5 KB)
 - All runtime .NET projects
 - Project purposes and dependencies
 
 ### Project Coordination & Planning
 
-**[README.md](./README.md)** (7.8 KB)
+**[README.md](./Planning & Tracking/README.md)** (7.8 KB)
 - Project overview and status
 - Task completion tracking
 - Outstanding questions
 
-**[NEXT-STEPS.md](./NEXT-STEPS.md)** (10.2 KB)
+**[NEXT-STEPS.md](./Planning & Tracking/NEXT-STEPS.md)** (10.2 KB)
 - Future work priorities
 - Blocking tasks and dependencies
 - Recommended next actions
 
-**[TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md)** (8.6 KB)
+**[TASK-COMPLETION-SUMMARY.md](./Planning & Tracking/TASK-COMPLETION-SUMMARY.md)** (8.6 KB)
 - Prior checkpoint completion status
 - Task #2-5 detailed completion notes
 
@@ -143,22 +143,22 @@
 ## 👥 Who Should Read What
 
 ### 👨‍💼 Business/Product Teams
-**Start:** [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) (2 min) → [CORE-DOMAIN.md](./CORE-DOMAIN.md) (20 min) → [API-WORKFLOWS.md](./API-WORKFLOWS.md) (pick your workflow, 15-30 min)
+**Start:** [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) (2 min) → [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) (20 min) → [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) (pick your workflow, 15-30 min)
 
 ### 👨‍💻 Developers
-**Start:** [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) (2 min) → [API-WORKFLOWS.md](./API-WORKFLOWS.md) (30 min) → [STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md) (45 min reference)
+**Start:** [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) (2 min) → [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) (30 min) → [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) (45 min reference)
 
 ### 🏗️ Architects
-**Start:** [architecture-blueprint.md](./architecture-blueprint.md) (15 min) → [CORE-DOMAIN.md](./CORE-DOMAIN.md) (20 min) → [source-inventory.md](./source-inventory.md) (10 min)
+**Start:** [architecture-blueprint.md](./Architecture & Infrastructure/architecture-blueprint.md) (15 min) → [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) (20 min) → [source-inventory.md](./Architecture & Infrastructure/source-inventory.md) (10 min)
 
 ### 🧪 QA/Test Engineers
-**Start:** [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) (2 min) → [API-WORKFLOWS.md](./API-WORKFLOWS.md) (30 min test cases) → [STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md) (45 min Gherkin scenarios)
+**Start:** [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) (2 min) → [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) (30 min test cases) → [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) (45 min Gherkin scenarios)
 
 ### 🛠️ Operations/DevOps
-**Start:** [message-transport-inventory.md](./message-transport-inventory.md) (20 min) → [process-flows.md](./process-flows.md) (15 min) → [NEXT-STEPS.md](./NEXT-STEPS.md) (Task #7 info)
+**Start:** [message-transport-inventory.md](./Architecture & Infrastructure/message-transport-inventory.md) (20 min) → [process-flows.md](./Architecture & Infrastructure/process-flows.md) (15 min) → [NEXT-STEPS.md](./Planning & Tracking/NEXT-STEPS.md) (Task #7 info)
 
 ### 👁️ Subject-Matter Experts (For Review)
-**Start:** [STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md) (validate all transitions) → [API-WORKFLOWS.md](./API-WORKFLOWS.md) (confirm workflows) → [CORE-DOMAIN.md](./CORE-DOMAIN.md) (verify entity details)
+**Start:** [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) (validate all transitions) → [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) (confirm workflows) → [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) (verify entity details)
 
 ---
 
@@ -180,7 +180,7 @@
 | Task #7: Operations & Monitoring Docs | ⏳ Not started | DevOps/Operations | Production access |
 | Task #8: Subject-Matter Expert Review | ⏳ Pending | Validation/Approval | SME availability |
 
-**See [NEXT-STEPS.md](./NEXT-STEPS.md) for detailed roadmap**
+**See [NEXT-STEPS.md](./Planning & Tracking/NEXT-STEPS.md) for detailed roadmap**
 
 ---
 
@@ -246,23 +246,23 @@ Vault\projects\Hub\
 
 ### For New Backend Developer
 1. [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) — Orientation (2 min)
-2. [CORE-DOMAIN.md](./CORE-DOMAIN.md) — Entity overview (20 min)
-3. [API-WORKFLOWS.md](./API-WORKFLOWS.md) — Feature workflow (30 min)
-4. [STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md) — State machine deep-dive (45 min)
+2. [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) — Entity overview (20 min)
+3. [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) — Feature workflow (30 min)
+4. [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) — State machine deep-dive (45 min)
 5. Code walkthrough with existing developer
 
 ### For New QA Engineer
 1. [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) — Orientation (2 min)
-2. [API-WORKFLOWS.md](./API-WORKFLOWS.md) — Feature workflows (30 min)
-3. [STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md) — Gherkin scenarios (45 min)
-4. [business-rules.md](./business-rules.md) — Integration rules (15 min)
+2. [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) — Feature workflows (30 min)
+3. [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) — Gherkin scenarios (45 min)
+4. [business-rules.md](./Architecture & Infrastructure/business-rules.md) — Integration rules (15 min)
 5. Test case creation and automation
 
 ### For New Product Manager
 1. [QUICK-REFERENCE.md](./QUICK-REFERENCE.md) — Orientation (2 min)
-2. [CORE-DOMAIN.md](./CORE-DOMAIN.md) — Entity overview (20 min)
-3. [API-WORKFLOWS.md](./API-WORKFLOWS.md) — Full workflow journey (30 min)
-4. [architecture-blueprint.md](./architecture-blueprint.md) — System context (15 min)
+2. [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) — Entity overview (20 min)
+3. [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) — Full workflow journey (30 min)
+4. [architecture-blueprint.md](./Architecture & Infrastructure/architecture-blueprint.md) — System context (15 min)
 5. Strategy/roadmap discussions with leadership
 
 ---
@@ -304,7 +304,7 @@ Vault\projects\Hub\
 - [ ] Send feedback if anything is unclear
 
 ### Short-Term (Next 1-2 Weeks)
-- [ ] Subject-matter experts review [STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md) for accuracy
+- [ ] Subject-matter experts review [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) for accuracy
 - [ ] Development teams use documentation for feature implementation
 - [ ] QA teams extract test cases from Gherkin scenarios
 - [ ] Architects review overall design and integration points

@@ -9,16 +9,16 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 ## Contents
 
 **Core Business Domain Documentation:**
-- [Core domain model](./CORE-DOMAIN.md) — Contact, Property, Activity, Requirement, Tenancy entities and relationships
-- [API workflows](./API-WORKFLOWS.md) — Six major user journeys (lettings, sales, chain transactions, renewals, multi-let, compliance)
-- [State machines & validators](./STATE-MACHINES-VALIDATORS.md) — Entity state machines, validation rules, and business logic as Gherkin scenarios
+- [Core domain model](../Core Business Domain/CORE-DOMAIN.md) — Contact, Property, Activity, Requirement, Tenancy entities and relationships
+- [API workflows](../Core Business Domain/API-WORKFLOWS.md) — Six major user journeys (lettings, sales, chain transactions, renewals, multi-let, compliance)
+- [State machines & validators](../Core Business Domain/STATE-MACHINES-VALIDATORS.md) — Entity state machines, validation rules, and business logic as Gherkin scenarios
 
 **Architecture & Infrastructure:**
-- [Architecture blueprint](./architecture-blueprint.md)
-- [Source inventory](./source-inventory.md)
-- [Message and transport inventory](./message-transport-inventory.md)
-- [Process flows](./process-flows.md)
-- [Business rules](./business-rules.md)
+- [Architecture blueprint](../Architecture & Infrastructure/architecture-blueprint.md)
+- [Source inventory](../Architecture & Infrastructure/source-inventory.md)
+- [Message and transport inventory](../Architecture & Infrastructure/message-transport-inventory.md)
+- [Process flows](../Architecture & Infrastructure/process-flows.md)
+- [Business rules](../Architecture & Infrastructure/business-rules.md)
 
 ## Completed in this pass
 

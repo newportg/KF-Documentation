@@ -22,7 +22,7 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
 - Document retry counts, visibility timeout, dead-letter handling, and idempotency guarantees
 
 ### Deliverables Created
-- Comprehensive topic mapping in [message-transport-inventory.md](./message-transport-inventory.md)
+- Comprehensive topic mapping in [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md)
 
 ---
 
@@ -32,7 +32,7 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
 ### Completed
 - Identified all **27 WebJob modules** in the source repository
 - Catalogued **60+ handler classes** across all modules
-- Created comprehensive handler catalog table in [message-transport-inventory.md](./message-transport-inventory.md) with columns:
+- Created comprehensive handler catalog table in [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) with columns:
   - WebJob Module
   - Handler Class name
   - Message Type / Trigger (Azure Storage queue, Service Bus, timer trigger)
@@ -65,7 +65,7 @@ Each handler now has:
 **Status: SUBSTANTIALLY COMPLETED** ✓ Significantly Advanced
 
 ### Completed
-Created 8 detailed Mermaid flowchart diagrams in [process-flows.md](./process-flows.md):
+Created 8 detailed Mermaid flowchart diagrams in [process-flows.md](../Architecture & Infrastructure/process-flows.md):
 
 1. **Generic asynchronous processing** — High-level pattern showing trigger → validation → processing → persistence
 2. **Thirdfort request** — Validation and transaction submission flow
@@ -91,7 +91,7 @@ Created 8 detailed Mermaid flowchart diagrams in [process-flows.md](./process-fl
 **Status: SUBSTANTIALLY COMPLETED** ✓ Significantly Advanced
 
 ### Completed
-Created 22+ Gherkin scenario specifications in [business-rules.md](./business-rules.md) across 5 feature areas:
+Created 22+ Gherkin scenario specifications in [business-rules.md](../Architecture & Infrastructure/business-rules.md) across 5 feature areas:
 
 #### 1. Thirdfort Request Validation (4 scenarios)
 - Required-check validation failure
@@ -152,9 +152,9 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](./business-ru
 
 ### Files Modified
 1. [README.md](./README.md) — Updated task status to reflect completion progress
-2. [message-transport-inventory.md](./message-transport-inventory.md) — Added 60+ row handler catalog table
-3. [process-flows.md](./process-flows.md) — Added 8 Mermaid flowchart diagrams
-4. [business-rules.md](./business-rules.md) — Added 22 Gherkin scenarios across 5 feature areas
+2. [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) — Added 60+ row handler catalog table
+3. [process-flows.md](../Architecture & Infrastructure/process-flows.md) — Added 8 Mermaid flowchart diagrams
+4. [business-rules.md](../Architecture & Infrastructure/business-rules.md) — Added 22 Gherkin scenarios across 5 feature areas
 
 ### New Files Created
 1. `TASK-COMPLETION-SUMMARY.md` (this file) — Overview of all work completed

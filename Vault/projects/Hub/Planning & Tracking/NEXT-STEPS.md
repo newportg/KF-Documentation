@@ -19,7 +19,7 @@
 - Application configuration (app.config, appSettings.json)
 
 **Expected output:**
-- Updated [message-transport-inventory.md](./message-transport-inventory.md) with physical names
+- Updated [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) with physical names
 - Topic-to-consumer mapping table
 - Retry and dead-letter configuration per entity
 

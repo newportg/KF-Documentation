@@ -269,12 +269,12 @@ Hub Documentation Root
 All files created/updated in this session:
 
 1. **New Files:**
-   - [API-WORKFLOWS.md](./API-WORKFLOWS.md) — 6 end-to-end workflows
-   - [STATE-MACHINES-VALIDATORS.md](./STATE-MACHINES-VALIDATORS.md) — State machines & validation rules
+   - [API-WORKFLOWS.md](../Core Business Domain/API-WORKFLOWS.md) — 6 end-to-end workflows
+   - [STATE-MACHINES-VALIDATORS.md](../Core Business Domain/STATE-MACHINES-VALIDATORS.md) — State machines & validation rules
 
 2. **Updated Files:**
    - [README.md](./README.md) — Task status and content index
-   - [CORE-DOMAIN.md](./CORE-DOMAIN.md) — (from prior session, now linked here)
+   - [CORE-DOMAIN.md](../Core Business Domain/CORE-DOMAIN.md) — (from prior session, now linked here)
 
 ---
 
