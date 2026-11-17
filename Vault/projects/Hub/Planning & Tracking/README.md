@@ -15,7 +15,7 @@ This directory contains the current status and backlog for the Hub documentation
 | API workflows | Complete for source review | Six end-to-end workflows are documented. |
 | Process flows | Substantially complete | 12 Mermaid process-flow diagrams are documented. |
 | Business rules | Substantially complete | 41 integration-rule scenarios plus 33 state-machine scenarios are documented. |
-| Queue/topic configuration | Partial | Dev/local names are in repository configuration; production names are deployment-injected and transport policies remain unverified. |
+| Queue/topic configuration | Partial | Dev/local names are in repository configuration; deployment changes the environment token to `prd`, while transport policies remain unverified. |
 | SME review | Not started | Business and technical validation is still required. |
 | Operations handoff | Not started | Production monitoring, retry, security, SLA, and runbook information is still required. |
 
@@ -35,7 +35,7 @@ This directory contains the current status and backlog for the Hub documentation
 
 | Priority | Work item | Owner/input needed | Output |
 |---|---|---|---|
-| High | Confirm deployment injection of CAF-compliant production queue, topic, and subscription names | DevOps / Operations | Production transport map |
+| High | Verify deployment replaces only the `local`/`dev` environment token with `prd` | DevOps / Operations | Production transport verification |
 | High | Confirm retry, visibility timeout, dead-letter, poison-message, and idempotency policies | DevOps / Operations | Operational transport rules |
 | High | Review core entities, workflows, state transitions, and business rules | Hub SME / Product | Corrections and approval |
 | High | Document monitoring, alerting, security, ownership, SLAs, deployment, rollback, and incident response | Operations / Security / DevOps | Operations handoff |
@@ -49,7 +49,7 @@ This directory contains the current status and backlog for the Hub documentation
 1. What production resources host each API and WebJob project?
 2. Which SQL Server database and schemas are authoritative for Hub?
 3. Which transports are Azure Storage queues versus Service Bus entities?
-4. Which deployment parameters or environment settings inject the CAF-compliant production topics and subscriptions, and what are their retry policies and dead-letter procedures?
+4. Do deployment parameters replace only the `local`/`dev` environment token with `prd`, and what are the retry policies and dead-letter procedures?
 5. Is Elasticsearch authoritative or a derived search projection?
 6. What identity, authorization, and secret-management model protects the API and jobs?
 7. Which integrations are synchronous, asynchronous, scheduled, or webhook-driven?

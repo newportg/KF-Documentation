@@ -6,7 +6,7 @@ This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-S
 
 **Status:** Blocked on DevOps / Operations input
 
-- Confirm which deployment parameters or environment settings inject the CAF-compliant production queue, topic, and subscription names.
+- Verify that deployment parameters or environment settings replace only the `local`/`dev` environment token with `prd`, preserving the remaining CAF name components.
 - Map production topics to subscriptions and consumer modules.
 - Record retry counts, visibility timeouts, dead-letter handling, and poison-message policy.
 - Record idempotency and duplicate-message guarantees.

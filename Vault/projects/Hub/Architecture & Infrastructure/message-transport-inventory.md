@@ -24,12 +24,12 @@ The `local-ee` and `dev-ne` suffixes identify the checked-in dev/local environme
 
 ## Production naming convention
 
-The physical Azure entity names follow the Microsoft Cloud Adoption Framework (CAF) naming convention. This establishes the expected production naming standard; it does not replace confirmation that deployment configuration injects the intended values.
+The physical Azure entity names follow the Microsoft Cloud Adoption Framework (CAF) naming convention. In practice, the production form retains the entity, workload, region, and instance components and changes only the environment component from `local` or `dev` to `prd` where that component is present. For example, a `sbt-activity-local-ee` value would become `sbt-activity-prd-ee`, subject to the deployment template's exact token placement.
 
 Production validation should therefore confirm:
 
-- the CAF components used for workload, environment, region, and instance;
-- the deployment parameters or environment settings that inject the production queue, topic, and subscription names;
+- the deployment parameters or environment settings that replace the `local`/`dev` environment token with `prd`;
+- that the entity, workload, region, and instance components remain unchanged;
 - that the injected names match the infrastructure definitions and CAF naming convention; and
 - whether any service-specific abbreviations or legacy exceptions are approved.
 

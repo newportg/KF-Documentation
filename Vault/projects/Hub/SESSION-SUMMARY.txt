@@ -41,7 +41,7 @@ COMPLETED OR SUBSTANTIALLY COMPLETED:
 
 OPEN:
 
-  [ ] Confirm deployment injection of CAF-compliant production queue, topic, and subscription names
+  [ ] Verify deployment changes only the `local`/`dev` environment token to `prd`
   [ ] Confirm retry, timeout, dead-letter, poison-message, and idempotency
       policies
   [ ] Complete SME review and approval
