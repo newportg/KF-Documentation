@@ -1,4 +1,6 @@
-# Session Completion Summary - Hub Documentation Checkpoint 4
+# Session Completion Summary - Hub Documentation Checkpoint 4 (Historical)
+
+> **Historical record.** This summary preserves the checkpoint narrative. For current status and remaining work, use [README.md](./README.md) and [NEXT-STEPS.md](./NEXT-STEPS.md).
 
 **Session Date:** 2026-11-17  
 **Location:** C:\Source\Obsidian\Projects\KF-Documentation\Vault\projects\Hub\  

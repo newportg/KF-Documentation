@@ -1,167 +1,92 @@
 ================================================================================
-HUB DOCUMENTATION - PARTIAL TASKS COMPLETION (Session: Nov 17, 2026)
+HUB DOCUMENTATION - CURRENT STATUS
 ================================================================================
 
-FILES TO REVIEW (in this folder):
-─────────────────────────────────────────────────────────────────────────
+Last updated: 2026-11-17
 
-📋 TASK-COMPLETION-SUMMARY.md
-   Overview of all work completed in this session
-   • Task #2 (Partial): Queue/topic configuration cataloguing
-   • Task #3 (Substantially Complete): 60+ WebJob handlers documented
-   • Task #4 (Substantially Complete): 12 Mermaid process flow diagrams
-   • Task #5 (Substantially Complete): 41 integration-rule scenarios plus state-machine rules
+The active planning documents are:
 
-📋 NEXT-STEPS.md
-   Detailed action items and remaining work prioritized by value
-   • Immediate: Confirm production queue/topic overrides and policies
-   • Medium: Handler error-handling, SLA documentation
-   • Blocking: Subject-matter expert review, ops handoff
+  Planning & Tracking\README.md
+      Authoritative current status, completed work, open work, and questions.
 
-📋 Documentation Files Enhanced:
-   • README.md — Task statuses updated
-   • message-transport-inventory.md — 60+ row WebJob handler table added
-   • process-flows.md — 12 Mermaid flowchart diagrams
-   • business-rules.md — 41 integration-rule scenarios
+  Planning & Tracking\NEXT-STEPS.md
+      Actionable backlog ordered by priority.
+
+  Planning & Tracking\TASK-COMPLETION-SUMMARY.md
+      Register of completed deliverables and current totals.
+
+The checkpoint and session completion summaries in Planning & Tracking are
+historical records and should not be used for current counts or task status.
 
 ================================================================================
-QUICK SUMMARY
+CURRENT POSITION
 ================================================================================
 
-COMPLETION STATUS:
-✅ Task #1: Map runtime projects — COMPLETED
-✅ Task #3: Catalogue WebJob handlers — SUBSTANTIALLY COMPLETED (60+ documented)
-✅ Task #4: Add process flows — SUBSTANTIALLY COMPLETED (12 diagrams)
-✅ Task #5: Extract business rules — SUBSTANTIALLY COMPLETED (41 integration scenarios plus state-machine rules)
-🟡 Task #2: Queue/topic configuration — PARTIAL (local/development names catalogued; production overrides needed)
-⏳ Task #6: SME review — PENDING
-⏳ Task #7: Ops handoff — PENDING
+Source-derived documentation is substantially complete. Production validation,
+SME review, and operations handoff remain open.
 
-KEY STATISTICS:
-• WebJob Modules: 27
-• Handler Classes Documented: 60+
-• Process Flows (Mermaid): 12
-• Business Rules (Gherkin): 41 integration scenarios plus 33 state-machine scenarios
-• Documentation Growth: +250% average across files
+COMPLETED OR SUBSTANTIALLY COMPLETED:
 
-WORK APPROACH:
-✓ Comprehensive source code exploration
-✓ Handler discovery and validation logic extraction
-✓ Incremental documentation (handlers → flows → rules)
-✓ All deliverables source-cited for traceability
+  [x] Runtime and architecture inventory
+  [x] 27 WebJob modules and 60+ handler classes catalogued
+  [x] 12 Mermaid process-flow diagrams
+  [x] 41 integration-rule Gherkin scenarios
+  [x] 33 state-machine and validation Gherkin scenarios
+  [x] Core domain documentation for Contact, Property, Activity, Requirement,
+      Tenancy, and Offer
+  [x] Six end-to-end API workflows
+  [x] State machines, validators, and transition matrices
+  [x] Local/development queue, topic, and subscription values extracted from
+      checked-in Web.config and App.config files
 
-================================================================================
-WHAT WAS ADDED TO EACH FILE
-================================================================================
+OPEN:
 
-README.md
-└─ Updated all 7 outstanding task statuses with detailed completion notes
-
-message-transport-inventory.md (+70 KB)
-├─ Service Bus topic configuration keys (11 topics)
-├─ ✨ NEW: WebJob handlers and message consumers table (60+ rows)
-│  └─ Columns: Module | Handler Class | Message Type/Trigger | Primary Role
-├─ Message contract details
-├─ Processing pattern
-└─ Required follow-up items
-
-process-flows.md
-├─ Generic asynchronous processing pattern
-├─ 12 Mermaid flowchart diagrams:
-│  1. Thirdfort request validation
-│  2. Thirdfort response processing
-│  3. Notification preparation and delivery
-│  4. Activity notifications (KYC example)
-│  5. CDD validity retriggering cascade
-│  6. Soft opt-in consent refresh cycle
-│  7. Document-to-PDF conversion
-│  8. Tenancy lifecycle integrations
-│  9. Brochure generation and completion
-│ 10. Integration result handlers
-│ 11. Email consent, suppression, and delivery
-│ 12. Generic asynchronous processing pattern
-│  (property contact-change, reassignment, and search consistency remain)
-└─ Process documentation gaps explicitly listed
-
-business-rules.md
-├─ Thirdfort request validation (4 Gherkin scenarios)
-├─ Thirdfort response processing (3 Gherkin scenarios)
-├─ ✨ NEW: Soft opt-in consent lifecycle (5 Gherkin scenarios)
-├─ ✨ NEW: CDD validity retriggering (6 Gherkin scenarios)
-├─ ✨ NEW: Notification recipient filtering (4 Gherkin scenarios)
-└─ Rules requiring further extraction (document visibility, search consistency, and broader retry/idempotency)
+  [ ] Confirm production queue, topic, and subscription overrides
+  [ ] Confirm retry, timeout, dead-letter, poison-message, and idempotency
+      policies
+  [ ] Complete SME review and approval
+  [ ] Document monitoring, security, SLAs, ownership, deployment, rollback,
+      incident response, and operational runbooks
+  [ ] Add optional handler-level error/retry/reconciliation coverage
+  [ ] Add remaining property contact-change, reassignment, search consistency,
+      and activity/requirement detail flows
 
 ================================================================================
-HOW TO USE THIS DOCUMENTATION
+CURRENT TOTALS
 ================================================================================
 
-FOR STAKEHOLDERS:
-1. Start with README.md to understand project status
-2. Review TASK-COMPLETION-SUMMARY.md to see what was accomplished
-3. Check NEXT-STEPS.md for what's needed next
-
-FOR DEVELOPERS:
-1. Read message-transport-inventory.md for handler responsibilities
-2. Review process-flows.md to understand end-to-end processes
-3. Check business-rules.md to understand validation and state rules
-4. Find source file locations in each section for detailed investigation
-
-FOR OPERATIONS/DEVOPS:
-1. Use message-transport-inventory.md to identify all handlers
-2. Review NEXT-STEPS.md task #2 for queue/topic configuration extraction
-3. Check NEXT-STEPS.md task #7 for monitoring/retry/SLA documentation needed
-
-FOR ARCHITECTS:
-1. Review architecture-blueprint.md for C4 and ArchiMate views
-2. Study process-flows.md for integration patterns
-3. Check business-rules.md for state transition rules
+  WebJob modules:                    27
+  Handler classes:                  60+
+  Mermaid process-flow diagrams:     12
+  Integration-rule scenarios:        41
+  State-machine/validation scenarios: 33
+  Gherkin scenarios overall:         74
 
 ================================================================================
-FILES MODIFIED IN THIS SESSION
+DOCUMENTATION MAP
 ================================================================================
 
-C:\Source\Obsidian\Projects\KF-Documentation\Vault\projects\Hub\
+  Architecture & Infrastructure\message-transport-inventory.md
+      Handler, queue, topic, subscription, and message inventory.
 
-✓ README.md
-✓ message-transport-inventory.md
-✓ process-flows.md
-✓ business-rules.md
-✓ TASK-COMPLETION-SUMMARY.md (NEW)
-✓ NEXT-STEPS.md (NEW)
-✓ SESSION-SUMMARY.txt (this file)
+  Architecture & Infrastructure\process-flows.md
+      Mermaid process-flow diagrams.
 
-================================================================================
-REMAINING WORK PRIORITIES
-================================================================================
+  Architecture & Infrastructure\business-rules.md
+      Integration business rules in Gherkin.
 
-IMMEDIATE (Next 1-2 days):
-✓ Extract email consent and suppression rules (Task #5a)
-✓ Extract tenancy lifecycle rules (Task #5b)
-✓ Create tenancy lifecycle flow diagram (Task #4a)
-✓ Create brochure generation flow diagram (Task #4b)
+  Core Business Domain\CORE-DOMAIN.md
+      Entities and relationships.
 
-MEDIUM (Next 2-3 days):
-✓ Extract local/development queue, topic, and subscription names from checked-in config (Task #2)
-□ Confirm production queue/topic/subscription overrides and policies (Task #2)
-□ Extract activity/requirement state transition rules (Task #5c)
-✓ Create integration result handler flows (Task #4c)
-□ Document error-handling flows for top-5 handlers
-□ Add SLA documentation per process
+  Core Business Domain\API-WORKFLOWS.md
+      Six end-to-end API journeys.
 
-BLOCKING (Requires external input):
-□ Subject-matter expert review and sign-off (Task #6)
-□ Production configuration and operations documentation (Task #7)
+  Core Business Domain\STATE-MACHINES-VALIDATORS.md
+      State machines, validators, transition tables, and scenarios.
 
 ================================================================================
-QUESTIONS?
+VALIDATION
 ================================================================================
 
-Refer to:
-• TASK-COMPLETION-SUMMARY.md for detailed task completion info
-• NEXT-STEPS.md for specific action items and working strategy
-• README.md for outstanding validation questions that need SME input
-
-For source code references, all Gherkin scenarios, Mermaid diagrams, and
-handler table entries include citations to the source file locations.
-
-================================================================================
+  git diff --check passes after the latest documentation updates.
+  Full MkDocs build remains to be run when Python/MkDocs is available.

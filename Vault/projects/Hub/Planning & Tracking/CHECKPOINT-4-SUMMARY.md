@@ -1,4 +1,6 @@
-# Hub Documentation - Checkpoint 4 Summary
+# Hub Documentation - Checkpoint 4 Summary (Historical)
+
+> **Historical record.** This checkpoint preserves the counts and status at the time it was created. For current status, use [README.md](./README.md).
 
 **Date:** 2026-11-17  
 **Status:** Core Business Domain & API Workflows Complete ✅  
