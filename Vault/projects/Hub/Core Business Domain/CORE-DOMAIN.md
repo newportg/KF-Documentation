@@ -139,6 +139,7 @@ Tenancy
 **Actors:** Property, Owner Contact/Company, Negotiator, Property Manager
 
 **Flow:**
+
 1. Property created with address, type, division, characteristics
 1. Ownership added (contact/company, percentage, management details)
 1. Property characteristics documented (floors, areas, WAULT, amenities)
@@ -147,6 +148,7 @@ Tenancy
 1. Property may be archived or deleted (soft delete with versioning)
 
 **Key Business Rules:**
+
 - Property must have address and type
 - Property may have multiple owners (fractional ownership)
 - Property manager assigned for management activities
@@ -155,12 +157,14 @@ Tenancy
 - Duplicate properties can be merged
 
 **Data Model:**
+
 - `Property` (Id, Address, PropertyType, Division, Phase, Estate)
 - `PropertyCharacteristics` (TotalArea, Floors, WAULT, Acreage)
 - `Ownership` (Property, Owner Contact/Company, Percentage, Manager)
 - `PropertyContact` (Property Manager, Maintenance Contact, etc.)
 
 **Key APIs:**
+
 - `POST /properties` — Create property
 - `PUT /properties/{id}` — Update property details
 - `POST /properties/{id}/ownerships` — Add ownership
@@ -176,6 +180,7 @@ Tenancy
 **Actors:** Property, Negotiator, Activity Parties (Vendor, Landlord, Agent, Tenant, Buyer), Requirements, Offers
 
 **Flow:**
+
 1. Activity created on property (instruction to market or manage)
 1. Activity type, sub-type, and service-line defined (sales, lettings, management, acquisition)
 1. Parties added (vendors, landlords, agents, negotiators, solicitors)
@@ -187,6 +192,7 @@ Tenancy
 1. Activity moves to completion (tenancy created) or withdrawn
 
 **Key Business Rules:**
+
 - Activity must reference a property
 - Activity type determines allowed parties and workflows
 - Activity status controls allowed operations (can't accept offer if withdrawn)
@@ -198,12 +204,14 @@ Tenancy
 - CDD/Appraisal records must be maintained for compliance
 
 **Activity Status State Machine:**
+
 - **Live** → Active marketing, accepting viewings, receiving offers
 - **Under Offer** → Accepted offer, awaiting completion
 - **Completion** → Transaction completed, tenancy or ownership transferred
 - **Withdrawn** → Marketing stopped, reason recorded
 
 **Data Model:**
+
 - `Activity` (Id, PropertyId, ActivityTypeId, ActivitySubTypeId, ActivityStatusId)
 - `ActivityParty` (Activity, PartyRole: Vendor/Landlord/Agent/Buyer/Tenant/Introducer/Solicitor)
 - `ActivityPrice` (Quoted, Agreed, Rent values)
@@ -213,6 +221,7 @@ Tenancy
 - `ActivityChainTransaction` (Linked Activity, Dependency)
 
 **Key APIs:**
+
 - `POST /activities` — Create activity (instruction)
 - `PUT /activities/{id}` — Update activity details
 - `POST /activities/{id}/parties` — Add party (vendor, agent, etc.)
@@ -232,6 +241,7 @@ Tenancy
 **Actors:** Requirement (Tenant/Buyer/Seller), Applicant Contact, Activities, Matches, Viewings, Offers
 
 **Flow:**
+
 1. Requirement created (contact looking to buy, let space, or sell property)
 1. Requirement type defined (tenant requirement, buyer requirement, seller instruction)
 1. Criteria captured (price/rent range, location, size, tenure, tenant type, features)
@@ -243,6 +253,7 @@ Tenancy
 1. Requirement progresses to completion (tenancy/sale) or withdrawn
 
 **Key Business Rules:**
+
 - Requirement must have applicant contact
 - Requirement criteria must be valid (price/rent ranges, dates, etc.)
 - Requirement status controls allowed operations
@@ -253,12 +264,14 @@ Tenancy
 - Requirement may link to current/selling property (what they currently occupy/own)
 
 **Requirement Status State Machine:**
+
 - **Active** → Seeking properties, reviewing matches, arranging viewings
 - **Matched** → Found property, offer pending or accepted
 - **Sold/Completed** → Transaction completed
 - **Withdrawn** → No longer seeking
 
 **Data Model:**
+
 - `Requirement` (Id, RequirementTypeId, RequirementStatusId, ApplicantContactId)
 - `RequirementParty` (Requirement, PartyRole, Contact)
 - `RequirementCriteria` (PropertyTypes, PriceRange, RentRange, LocationPreferences)
@@ -267,6 +280,7 @@ Tenancy
 - `RequirementViewing` (Requirement, Activity, AppointmentDate)
 
 **Key APIs:**
+
 - `POST /requirements` — Create requirement (tenant/buyer/seller looking for property)
 - `PUT /requirements/{id}` — Update requirement criteria
 - `POST /requirements/{id}/parties` — Add party (co-applicant, etc.)
@@ -284,6 +298,7 @@ Tenancy
 **Actors:** Tenancy (Landlord, Tenant, Guarantor), Property, Related Activity, Linked Requirement, Negotiator
 
 **Flow:**
+
 1. Tenancy created (from activity match or manual creation)
 1. Parties assigned (tenant, landlord, guarantor, management company)
 1. Lease terms documented (commencement, expiry, rent, fees, breaks)
@@ -298,6 +313,7 @@ Tenancy
 1. Tenancy surrendered (early or at end date) or renewed
 
 **Key Business Rules:**
+
 - Tenancy must reference property and have parties (tenant, landlord)
 - Commencement date must be after completion date
 - Expiry date must be after commencement date
@@ -312,6 +328,7 @@ Tenancy
 - Churn-risk calculated (likelihood tenant will leave)
 
 **Tenancy Lifecycle State Machine:**
+
 - **Draft** → Created but not yet active/completed
 - **Active (Live)** → Commenced, rent-paying
 - **Completed** → Transaction closed
@@ -320,6 +337,7 @@ Tenancy
 - **Renewed** → Links to next tenancy record
 
 **Data Model:**
+
 - `Tenancy` (Id, AssetId, TenancyTypeId, TenancyStatusId)
 - `TenancyParty` (Tenancy, PartyRole: Tenant/Landlord/Guarantor/Agent)
 - `TenancyTerms` (CommencementDate, ExpiryDate, SurrenderDate, RentAmount)
@@ -331,6 +349,7 @@ Tenancy
 - `TenancyLinkedRequirement` (Related Requirement that was matched)
 
 **Key APIs:**
+
 - `POST /tenancies` — Create tenancy (from activity or manual)
 - `PUT /tenancies/{id}` — Update tenancy terms
 - `POST /tenancies/{id}/parties` — Add party (tenant, landlord, guarantor)
@@ -472,21 +491,25 @@ Draft → Activated → Live → Completed → Expired/Surrendered
 ## Data Persistence
 
 **Primary Database:** SQL Server (Antares database project)
+
 - Contact, Activity, Property, Requirement, Tenancy and related tables
 - Audit tables tracking changes over time
 - Reference data (Activity Types, Statuses, Party Roles, etc.)
 
 **Search/Indexing:** Elasticsearch
+
 - Full-text search on contacts, activities, requirements, properties
 - Aggregations for dashboards and reporting
 - Projection of authoritative SQL data
 
 **Blob Storage:** Azure Storage
+
 - Attachments (documents, images, brochures)
 - PDFs, reports
 - Marketing materials
 
 **Message Queue:** Azure Storage Queue, Service Bus
+
 - Activity state change events
 - Requirement match notifications
 - Tenancy progression events
@@ -497,24 +520,30 @@ Draft → Activated → Live → Completed → Expired/Surrendered
 ## Integration with External Systems
 
 **Fixflo** — Property marketing platform
+
 - Marketing instructions synced to Fixflo
 - Viewing/enquiry data synced back to Hub
 
 **SAP** — Enterprise resource planning
+
 - Activity transactions recorded in SAP
 - Party/contact master data synced
 
 **SLM** — Tenancy management (specialist system)
+
 - Tenancy data synced to SLM for detailed management
 - Payments, checklists, compliance tracked in SLM
 
 **Qube** — Referencing platform
+
 - Tenant/guarantor verification data
 
 **Thirdfort** — CDD compliance
+
 - CDD documentation and verification
 
 **Dotmailer** — Email marketing
+
 - Contact consents and subscription lists
 - Campaign tracking
 
