@@ -3,6 +3,7 @@
 ## Overview
 
 The Hub is a **relationship and transaction management platform** for commercial real estate. It tracks:
+
 - **Contacts** — buyers, sellers, tenants, landlords, agents, professionals
 - **Properties** — office, industrial, retail assets with ownerships and tenancies
 - **Activities** — marketing instructions, transactions, negotiations on properties
