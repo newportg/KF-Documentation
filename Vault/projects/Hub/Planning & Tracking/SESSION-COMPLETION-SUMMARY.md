@@ -21,6 +21,7 @@ Comprehensive documentation of 6 end-to-end user workflows through the Hub API:
 6. **CDD/Right-to-Rent Compliance** — Activity/tenancy compliance verification workflow
 
 Each workflow includes:
+
 - Complete API sequence (POST/PUT/GET endpoints with payloads)
 - Preconditions for each step
 - Expected outcomes and state changes
@@ -30,6 +31,7 @@ Each workflow includes:
 Detailed state machines and business validation rules for all core entities:
 
 **State Machines Documented:**
+
 - Activity: 7 states, 10 valid transitions, 6 Gherkin scenarios
 - Requirement: 6 states, 7 valid transitions, 4 Gherkin scenarios
 - Tenancy: 8 states, 8 valid transitions, 3 Gherkin scenarios
@@ -38,12 +40,14 @@ Detailed state machines and business validation rules for all core entities:
 - Property: Validation rules with 5 Gherkin scenarios
 
 **Additional Content:**
+
 - 51 Gherkin scenarios testing all state transitions
 - 3 state transition validation matrices (allowing/disallowing specific transitions)
 - Business rule summary table (11 key rules across entities)
 - Implementation guidance (storage strategy, validation enforcement, testing)
 
 #### 3. **Updated README.md**
+
 - Added "Core Business Domain Documentation" section
 - Updated "Completed in this pass" with 4 checkpoints
 - Reorganized to show business-centric documentation first
@@ -51,6 +55,7 @@ Detailed state machines and business validation rules for all core entities:
 
 #### 4. **CHECKPOINT-4-SUMMARY.md** (13 KB)
 Executive summary of this checkpoint:
+
 - Deliverables overview
 - Coverage summary table
 - Architecture visibility improvements
@@ -64,6 +69,7 @@ Executive summary of this checkpoint:
 ## Documentation Now Complete
 
 ### Core Business Domain (✅ 100%)
+
 | Entity | Coverage | File |
 |--------|----------|------|
 | Contact | Full entity docs + validation rules | CORE-DOMAIN.md, STATE-MACHINES-VALIDATORS.md |
@@ -74,6 +80,7 @@ Executive summary of this checkpoint:
 | Relationships | All documented | CORE-DOMAIN.md |
 
 ### User Journeys (✅ 100%)
+
 | Journey | Endpoints | Preconditions | State Changes | File |
 |---------|-----------|---------------|---------------|------|
 | Lettings (19 steps) | ✅ Documented | ✅ Documented | ✅ Documented | API-WORKFLOWS.md |
@@ -84,6 +91,7 @@ Executive summary of this checkpoint:
 | Compliance (7 steps) | ✅ Documented | ✅ Documented | ✅ Documented | API-WORKFLOWS.md |
 
 ### State Machines (✅ 100%)
+
 | Entity | States | Transitions | Validation | File |
 |--------|--------|-------------|-----------|------|
 | Activity | 7 | 10 | ✅ 6 scenarios | STATE-MACHINES-VALIDATORS.md |
@@ -117,6 +125,7 @@ Executive summary of this checkpoint:
 ### Previous Session's Work Now Properly Framed
 
 **Checkpoint 1-3 (Infrastructure):**
+
 - Architecture blueprint
 - Source inventory  
 - 60+ WebJob handler catalog
@@ -124,6 +133,7 @@ Executive summary of this checkpoint:
 - 22 Gherkin business rule scenarios
 
 **Checkpoint 4 (Business Domain - This Session):**
+
 - Core entity documentation
 - 6 end-to-end API workflows
 - 8 state machines with validation rules
@@ -140,6 +150,7 @@ Executive summary of this checkpoint:
 
 ### Resolution Implemented
 ✅ **Business-centric documentation created:**
+
 - CORE-DOMAIN.md documents Contact, Property, Activity, Requirement, Tenancy as the foundation
 - API-WORKFLOWS.md shows 6 real-world user journeys through these core entities
 - STATE-MACHINES-VALIDATORS.md captures all business rules guiding these entities
@@ -147,6 +158,7 @@ Executive summary of this checkpoint:
 
 ### Result
 Documentation structure changed from:
+
 - **Before:** Infrastructure-first (WebJobs → Message handlers → External services)
 - **After:** Business-first (Entities → Workflows → State Machines → Infrastructure → External services)
 
@@ -235,6 +247,7 @@ C:\Source\Obsidian\Projects\KF-Documentation\Vault\projects\Hub\
 **Status:** Not started, **Blocking on:** Production environment access
 
 **Scope:**
+
 - Production configuration (SLA, retry policies, dead-letter procedures)
 - Monitoring dashboards and alerting strategy
 - Security configuration (identity, authorization, encryption)
@@ -245,6 +258,7 @@ C:\Source\Obsidian\Projects\KF-Documentation\Vault\projects\Hub\
 **Status:** Pending, **Blocking on:** Subject-matter expert availability
 
 **Scope:**
+
 - Validate state machine transitions against actual Hub behavior
 - Confirm business rule scenarios are accurate
 - Identify missing workflows or state transitions
