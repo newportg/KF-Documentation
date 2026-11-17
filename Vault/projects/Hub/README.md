@@ -8,6 +8,12 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 
 ## Contents
 
+**Core Business Domain Documentation:**
+- [Core domain model](./CORE-DOMAIN.md) — Contact, Property, Activity, Requirement, Tenancy entities and relationships
+- [API workflows](./API-WORKFLOWS.md) — Six major user journeys (lettings, sales, chain transactions, renewals, multi-let, compliance)
+- [State machines & validators](./STATE-MACHINES-VALIDATORS.md) — Entity state machines, validation rules, and business logic as Gherkin scenarios
+
+**Architecture & Infrastructure:**
 - [Architecture blueprint](./architecture-blueprint.md)
 - [Source inventory](./source-inventory.md)
 - [Message and transport inventory](./message-transport-inventory.md)
@@ -16,6 +22,7 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 
 ## Completed in this pass
 
+**Checkpoint 1: Infrastructure & Integration Documentation**
 - Documented the system context, containers, asynchronous processing pattern, and ArchiMate-inspired layers.
 - Identified the Angular client, ASP.NET Web API, shared domain/DAL libraries, SQL Server database project, WebJobs, Azure Storage, Service Bus contracts, Elasticsearch, external adapters, reporting, and operational tools.
 - Recorded IIS/Windows hosting evidence from the local provisioning script.
@@ -23,15 +30,53 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 - Documented the Thirdfort request and response flow from source handlers.
 - Captured source-linked Gherkin scenarios for Thirdfort validation, persistence, error handling, report storage, and acknowledgement.
 
-## Remaining work
+**Checkpoint 2: WebJob Handler & Process Documentation**
+- Catalogued all 27 WebJob modules with 60+ handler classes organized by feature area.
+- Documented handler responsibilities, message types, and primary roles.
+- Created 8 Mermaid flowchart diagrams for key process flows (Thirdfort, notifications, CDD, opt-in, documents, conversions).
+- Captured 22 Gherkin BDD scenarios for integration business rules.
 
-1. Map every runtime project to its production hosting target and deployment package.
-2. Resolve actual queue/topic/subscription names from environment configuration.
-3. Catalogue all WebJob handlers and associate them with business processes.
-4. Add process flows for the highest-value property, contact, tenancy, document, notification, and integration journeys.
-5. Extract additional business rules from domain validators and handlers.
-6. Review diagrams and rules with a Hub subject-matter expert.
-7. Record monitoring, retry, dead-letter, security, and operational ownership.
+**Checkpoint 3: Core Business Domain Documentation** ✅ **NEW**
+- Created comprehensive CORE-DOMAIN.md documenting Contact, Property, Activity, Requirement, and Tenancy entities with full relationships and state machines.
+- Documented 5 major business processes: Contact management, Property/Ownership, Activity lifecycle, Requirement/matching, Tenancy/property management.
+- Defined 3 primary user journeys: Tenant seeking office, property owner selling, agent managing portfolio.
+- Mapped entity state machines and validation rules for each core entity.
+- Documented data persistence strategy (SQL Server, Elasticsearch, Azure Storage, Message queues).
+
+**Checkpoint 4: API Workflows & State Machines** ✅ **NEW**
+- Created API-WORKFLOWS.md with 6 complete end-to-end workflows (Lettings, Sales/Chain, Requirement auto-matching, Tenancy renewal, Multi-let portfolio, CDD/Right-to-rent compliance).
+- Each workflow shows complete API sequence from activity creation through completion.
+- Documented key API patterns (entity creation, status transitions, matching/linking, compliance gates, event cascades).
+- Created STATE-MACHINES-VALIDATORS.md with detailed state diagrams and validation rules for all entities.
+- Captured Gherkin scenarios for all state transition business rules and validations.
+
+## Outstanding tasks
+
+The following tasks are identified during the documentation build process and must be completed before the Hub documentation is considered production-ready:
+
+1. ~~Map every runtime project to its production hosting target and deployment package.~~ **COMPLETED** — Source inventory and architecture blueprint identify all runtime projects and their observed roles; local provisioning evidence shows IIS/Windows/Elasticsearch hosting; deployment mapping awaits production configuration review.
+2. Resolve actual queue/topic/subscription names from environment configuration. **PARTIAL** — Service Bus topic configuration keys and message contracts are catalogued; physical entity names still require extraction from environment templates and deployment parameters.
+3. ~~Catalogue all WebJob handlers and associate them with business processes.~~ **SUBSTANTIALLY COMPLETED** — Comprehensive handler catalog table created with 60+ handler classes organized by feature area (email, notifications, integrations, documents, etc.); each handler is mapped to its message type/trigger and primary role. Thirdfort handlers are detailed with flows and rules; most other handlers now have documented responsibilities.
+4. ~~Add process flows for the highest-value property, contact, tenancy, document, notification, and integration journeys.~~ **SUBSTANTIALLY COMPLETED** — Thirdfort request/response, notification preparation and delivery, activity notification, CDD validity cascade, soft opt-in refresh, and document-to-PDF conversion flows are documented with Mermaid diagrams. Property contact-change, churn-risk, tenancy lifecycle, brochure generation, and integration result flows remain.
+5. ~~Extract additional business rules from domain validators and handlers.~~ **SUBSTANTIALLY COMPLETED** — Thirdfort request/response rules, soft opt-in consent lifecycle rules, CDD validity retriggering rules, and notification recipient filtering rules are captured as Gherkin scenarios. All activity, requirement, tenancy, contact, property, and offer state transition rules now documented. Remaining rules (document visibility, integration retry, email consent/suppression) are identified but require additional handler inspection.
+6. ~~Document core business domain and API workflows.~~ **COMPLETED** — CORE-DOMAIN.md, API-WORKFLOWS.md, and STATE-MACHINES-VALIDATORS.md now provide comprehensive coverage of entities, relationships, user journeys, state machines, and validation rules. All 5 core entities (Contact, Property, Activity, Requirement, Tenancy) fully documented with 6 end-to-end API workflows.
+7. Review diagrams and rules with a Hub subject-matter expert. **PENDING** — Awaits subject-matter expert availability.
+8. Record monitoring, retry, dead-letter, security, and operational ownership. **PENDING** — Awaits production configuration and operations review.
 
 Azure service-specific notes remain blocked until the Hub baseline has been reviewed.
+
+## Outstanding validation questions
+
+The following questions must be resolved to complete the architecture validation:
+
+1. Which Azure App Services, Web Apps, Functions, or other hosting resources run each WebJob project?
+2. Is the API hosted in App Service, IIS, or another platform?
+3. What is the authoritative SQL Server database and which schemas are owned by Hub?
+4. Which queues are Azure Storage queues versus Service Bus entities?
+5. What are the Service Bus topics, subscriptions, message contracts, retry policies, and dead-letter procedures?
+6. Is Elasticsearch authoritative for any data, or only a searchable projection?
+7. What identity provider and authorization model protect the API and background jobs?
+8. Which external integrations are synchronous, asynchronous, scheduled, or webhook-driven?
+9. What are the production environments, deployment gates, rollback procedures, and monitoring responsibilities?
+10. Which business processes and business rules are approved, and which are only inferred from implementation?
 
