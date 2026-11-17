@@ -1,6 +1,6 @@
 # Hub documentation next steps
 
-This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md); current status is maintained in [README.md](./README.md).
+This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md); current status is maintained in [README.md](./README.md). Record completed checks in the [verification register](./TASK-COMPLETION-SUMMARY.md#verification-register).
 
 ## 1. Production transport confirmation — high priority
 

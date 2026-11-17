@@ -32,3 +32,25 @@ The following remain open and must not be presented as complete:
 - SME approval
 - Monitoring, security, SLA, deployment, and operations handoff
 - Additional handler-level error, retry, reconciliation, and idempotency coverage
+
+## Verification register
+
+Use this register for items that require confirmation after documentation has
+been written. An item is only complete when the status is `Verified` and the
+evidence or source of confirmation is recorded.
+
+| Verification item | Status | Evidence / source | Verified by | Date |
+|---|---|---|---|---|
+| Dev/local queue names match checked-in configuration | Verified | `Web.config` and `App.config` inventory | Documentation review | 2026-11-17 |
+| Dev/local Service Bus topics and subscriptions match checked-in configuration | Verified | `Web.config` and `App.config` inventory | Documentation review | 2026-11-17 |
+| Production changes only the `local`/`dev` environment token to `prd` | Pending | Deployment parameters or environment settings required | — | — |
+| Production transport retry, timeout, dead-letter, poison-message, and idempotency policies | Pending | Operations configuration or runbook required | — | — |
+| Core domain, API workflows, state machines, and business rules reviewed by SME | Pending | SME review notes or approval | — | — |
+| Monitoring, security, SLA, ownership, deployment, and rollback documentation reviewed | Pending | Operations / Security / DevOps review | — | — |
+
+### Verification status values
+
+- `Verified` — evidence has been recorded and the named verifier confirmed it.
+- `Pending` — not yet checked or evidence is still required.
+- `Blocked` — verification cannot proceed until a named dependency or owner responds.
+- `Rejected` — the documented assumption or implementation is incorrect and needs correction.

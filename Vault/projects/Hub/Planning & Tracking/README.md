@@ -19,6 +19,8 @@ This directory contains the current status and backlog for the Hub documentation
 | SME review | Not started | Business and technical validation is still required. |
 | Operations handoff | Not started | Production monitoring, retry, security, SLA, and runbook information is still required. |
 
+Verification status is tracked in the [verification register](./TASK-COMPLETION-SUMMARY.md#verification-register). Items are not complete until evidence, verifier, and date are recorded.
+
 ## Completed
 
 - Documented the system context, runtime projects, data stores, integrations, and asynchronous processing pattern.
@@ -61,4 +63,5 @@ This directory contains the current status and backlog for the Hub documentation
 - Start here for the current status and backlog.
 - Use [NEXT-STEPS.md](./NEXT-STEPS.md) for the ordered action list.
 - Use [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md) for the completed-deliverable register.
+- Use the [verification register](./TASK-COMPLETION-SUMMARY.md#verification-register) to record confirmed items.
 
