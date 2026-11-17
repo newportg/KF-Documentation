@@ -61,4 +61,4 @@ This directory contains the current status and backlog for the Hub documentation
 - Start here for the current status and backlog.
 - Use [NEXT-STEPS.md](./NEXT-STEPS.md) for the ordered action list.
 - Use [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md) for the completed-deliverable register.
-- Treat [CHECKPOINT-4-SUMMARY.md](./CHECKPOINT-4-SUMMARY.md) and [SESSION-COMPLETION-SUMMARY.md](./SESSION-COMPLETION-SUMMARY.md) as historical records only.
+
