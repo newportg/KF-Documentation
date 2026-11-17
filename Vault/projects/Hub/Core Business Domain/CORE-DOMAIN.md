@@ -93,6 +93,7 @@ Tenancy
 **Actors:** Contact, Negotiator (assigned staff), Company, Properties, Requirements
 
 **Flow:**
+
 1. Contact record created (buyer, seller, tenant, landlord, agent, professional)
 1. Contact details added (address, phone, email, company, negotiator assignment)
 1. Contact interests captured (property types, locations, transaction types)
@@ -104,6 +105,7 @@ Tenancy
 1. Contact relationships tracked (clients they've introduced, referral chains)
 
 **Key Business Rules:**
+
 - Contact must have primary negotiator assigned
 - Contact consents must be validated (soft opt-in, CDD, marketing)
 - Prospect contacts may become active, deceased, retired, or locked
@@ -111,6 +113,7 @@ Tenancy
 - Multiple contact records may be identified as duplicates and merged
 
 **Data Model:**
+
 - `Contact` (Id, Names, Salutation, Nationality, Profession, BirthDate)
 - `ContactAddress` (Primary, Business, Correspondence, Delivery)
 - `ContactPhone`, `ContactEmail`, `ContactSocial`
@@ -119,6 +122,7 @@ Tenancy
 - `ContactType`, `ContactInterest`, `Consent`, `SoftOptin`
 
 **Key APIs:**
+
 - `POST /contacts` — Create contact
 - `PUT /contacts/{id}` — Update contact details
 - `PUT /contacts/{id}/negotiator` — Assign negotiator
@@ -135,11 +139,11 @@ Tenancy
 
 **Flow:**
 1. Property created with address, type, division, characteristics
-2. Ownership added (contact/company, percentage, management details)
-3. Property characteristics documented (floors, areas, WAULT, amenities)
-4. Property marketed through Activities
-5. Tenancies created on property
-6. Property may be archived or deleted (soft delete with versioning)
+1. Ownership added (contact/company, percentage, management details)
+1. Property characteristics documented (floors, areas, WAULT, amenities)
+1. Property marketed through Activities
+1. Tenancies created on property
+1. Property may be archived or deleted (soft delete with versioning)
 
 **Key Business Rules:**
 - Property must have address and type
@@ -172,14 +176,14 @@ Tenancy
 
 **Flow:**
 1. Activity created on property (instruction to market or manage)
-2. Activity type, sub-type, and service-line defined (sales, lettings, management, acquisition)
-3. Parties added (vendors, landlords, agents, negotiators, solicitors)
-4. Marketing started (Fixflo listing, brochures, images, advertising)
-5. Viewings/Appointments scheduled
-6. Requirements matched to activity (qualified leads)
-7. Offers received (from interested parties)
-8. Offer accepted (transaction progresses)
-9. Activity moves to completion (tenancy created) or withdrawn
+1. Activity type, sub-type, and service-line defined (sales, lettings, management, acquisition)
+1. Parties added (vendors, landlords, agents, negotiators, solicitors)
+1. Marketing started (Fixflo listing, brochures, images, advertising)
+1. Viewings/Appointments scheduled
+1. Requirements matched to activity (qualified leads)
+1. Offers received (from interested parties)
+1. Offer accepted (transaction progresses)
+1. Activity moves to completion (tenancy created) or withdrawn
 
 **Key Business Rules:**
 - Activity must reference a property
@@ -228,14 +232,14 @@ Tenancy
 
 **Flow:**
 1. Requirement created (contact looking to buy, let space, or sell property)
-2. Requirement type defined (tenant requirement, buyer requirement, seller instruction)
-3. Criteria captured (price/rent range, location, size, tenure, tenant type, features)
-4. Requirement assigned to negotiator
-5. Automated matching algorithm finds activities matching criteria
-6. Requirement matched to activities (qualified opportunities)
-7. Viewings arranged for matched activities
-8. Offers made to applicant
-9. Requirement progresses to completion (tenancy/sale) or withdrawn
+1. Requirement type defined (tenant requirement, buyer requirement, seller instruction)
+1. Criteria captured (price/rent range, location, size, tenure, tenant type, features)
+1. Requirement assigned to negotiator
+1. Automated matching algorithm finds activities matching criteria
+1. Requirement matched to activities (qualified opportunities)
+1. Viewings arranged for matched activities
+1. Offers made to applicant
+1. Requirement progresses to completion (tenancy/sale) or withdrawn
 
 **Key Business Rules:**
 - Requirement must have applicant contact
@@ -280,17 +284,17 @@ Tenancy
 
 **Flow:**
 1. Tenancy created (from activity match or manual creation)
-2. Parties assigned (tenant, landlord, guarantor, management company)
-3. Lease terms documented (commencement, expiry, rent, fees, breaks)
-4. Completion recorded
-5. Commencement date — tenancy becomes active
-6. Right-to-rent checks performed (UK compliance)
-7. Guarantor checks and verification
-8. Rent reviews and reviews occur
-9. Break clauses exercised (optional early exit)
-10. Renewal records tracked
-11. Expiry date approaches — renewal or surrender option
-12. Tenancy surrendered (early or at end date) or renewed
+1. Parties assigned (tenant, landlord, guarantor, management company)
+1. Lease terms documented (commencement, expiry, rent, fees, breaks)
+1. Completion recorded
+1. Commencement date — tenancy becomes active
+1. Right-to-rent checks performed (UK compliance)
+1. Guarantor checks and verification
+1. Rent reviews and reviews occur
+1. Break clauses exercised (optional early exit)
+1. Renewal records tracked
+1. Expiry date approaches — renewal or surrender option
+1. Tenancy surrendered (early or at end date) or renewed
 
 **Key Business Rules:**
 - Tenancy must reference property and have parties (tenant, landlord)
@@ -345,41 +349,41 @@ Tenancy
 ### Journey 1: Tenant Looking for Office Space
 
 1. **Tenant Contact** submits **Requirement** (100 sq m office, £5k/month, West London)
-2. System auto-matches Requirement to current Activities on the market
-3. Matching Activities shown to negotiator (properties meeting criteria)
-4. **Viewings** scheduled for top matches
-5. Tenant likes one property → **Offer** made
-6. Landlord accepts offer (Activity moves to "Under Offer" → "Completion")
-7. **Tenancy** created with matching terms (commencement, rent, parties)
-8. Right-to-rent check performed
-9. Tenancy becomes **live** on commencement date
-10. Rent tracked, renewal options monitored
-11. At expiry → renewal negotiated or tenancy surrenders
+1. System auto-matches Requirement to current Activities on the market
+1. Matching Activities shown to negotiator (properties meeting criteria)
+1. **Viewings** scheduled for top matches
+1. Tenant likes one property → **Offer** made
+1. Landlord accepts offer (Activity moves to "Under Offer" → "Completion")
+1. **Tenancy** created with matching terms (commencement, rent, parties)
+1. Right-to-rent check performed
+1. Tenancy becomes **live** on commencement date
+1. Rent tracked, renewal options monitored
+1. At expiry → renewal negotiated or tenancy surrenders
 
 ### Journey 2: Property Owner Selling a Building
 
 1. **Property** listed in system (address, type, ownership)
-2. Owner creates **Activity** (sales instruction)
-3. Marketing setup (brochure, Fixflo listing, images)
-4. Potential buyers create **Requirements** (what they're looking for)
-5. System matches Requirements to this Activity
-6. Viewings scheduled
-7. Buyer makes an **Offer**
-8. Activity moves to "Under Offer"
-9. If accepted → completion and Activity finalized
-10. If ownership changes → **Ownership** record updated
-11. Building may be leased → new **Tenancies** on the property
+1. Owner creates **Activity** (sales instruction)
+1. Marketing setup (brochure, Fixflo listing, images)
+1. Potential buyers create **Requirements** (what they're looking for)
+1. System matches Requirements to this Activity
+1. Viewings scheduled
+1. Buyer makes an **Offer**
+1. Activity moves to "Under Offer"
+1. If accepted → completion and Activity finalized
+1. If ownership changes → **Ownership** record updated
+1. Building may be leased → new **Tenancies** on the property
 
 ### Journey 3: Agent Managing Multiple Properties
 
 1. Agent assigned as **Negotiator** for property portfolio
-2. Agent creates/manages **Activities** (marketing instructions, tenancy management)
-3. Agent reviews incoming **Requirement** matches
-4. Agent schedules **Viewings/Appointments** with interested parties
-5. Agent negotiates **Offers**
-6. Agent manages **Tenancies** (renewals, right-to-rent, compliance checks)
-7. Agent coordinates with **Parties** (vendors, landlords, tenants, solicitors)
-8. Agent prepares brochures, marketing images, documentation
+1. Agent creates/manages **Activities** (marketing instructions, tenancy management)
+1. Agent reviews incoming **Requirement** matches
+1. Agent schedules **Viewings/Appointments** with interested parties
+1. Agent negotiates **Offers**
+1. Agent manages **Tenancies** (renewals, right-to-rent, compliance checks)
+1. Agent coordinates with **Parties** (vendors, landlords, tenants, solicitors)
+1. Agent prepares brochures, marketing images, documentation
 
 ---
 
