@@ -411,30 +411,35 @@ Tenancy
 
 ### Activity Status Flow
 
-```
-                    ┌─→ Withdrawn (reason: sold elsewhere, withdrawn by vendor, etc.)
-                    │
-Live (Marketing) → Under Offer → Completion → Completed
-                                     ↓
-                              Tenancy Created
-                              (if letting)
+```mermaid
+flowchart LR
+    live["Live (Marketing)"] --> underOffer["Under Offer"]
+    underOffer --> completion["Completion"]
+    completion --> completed["Completed"]
+    completion -->|If letting| tenancy["Tenancy Created"]
+    live -.->|Sold elsewhere or withdrawn by vendor| withdrawn["Withdrawn"]
+    underOffer -.-> withdrawn
 ```
 
 ### Requirement Status Flow
 
-```
-Active → Matched → Completed/Sold
-  ↑                     ↓
-  └─→ Withdrawn ←──────┘
-         (no suitable found)
+```mermaid
+flowchart LR
+    active["Active"] --> matched["Matched"]
+    matched --> completed["Completed / Sold"]
+    matched -.->|No suitable match| withdrawn["Withdrawn"]
+    withdrawn -.-> active
 ```
 
 ### Tenancy Status Flow
 
-```
-Draft → Activated → Live → Completed → Expired/Surrendered
-                      ↓
-                   Renewed
+```mermaid
+flowchart LR
+    draft["Draft"] --> activated["Activated"]
+    activated --> live["Live"]
+    live --> completed["Completed"]
+    completed --> ended["Expired / Surrendered"]
+    live --> renewed["Renewed"]
 ```
 
 ---

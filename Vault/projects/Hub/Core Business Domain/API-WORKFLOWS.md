@@ -673,30 +673,18 @@ Tenancy expiry approaching → Flag for renewal workflow
 
 ## State Diagram: Complete Property Lifecycle
 
-```
-                    Property Created
-                           ↓
-                  ┌─────────┴─────────┐
-                  ↓                   ↓
-            Ownership Added    Activity Created
-                  │                   │
-                  │          ┌────────┴────────┐
-                  │          ↓                 ↓
-                  │       Marketing        (Under-Offer)
-                  │          │                 │
-                  │    Requirement             │
-                  │    Matched                 │
-                  │          │                 │
-                  │    Viewing Done     Offer Accepted
-                  │          │                 │
-                  └──────────┬─────────────────┤
-                             ↓                 ↓
-                        Offer Made      Completion
-                             │                 │
-                             └────────┬────────┘
-                                      ↓
-                             Tenancy Created
-                                      ↓
-                         (Activate, Live, Renew, Expire)
+```mermaid
+flowchart TD
+    property["Property Created"] --> ownership["Ownership Added"]
+    property --> activity["Activity Created"]
+    activity --> marketing["Marketing"]
+    activity --> underOffer["Under-Offer"]
+    marketing --> matched["Requirement Matched"]
+    matched --> viewing["Viewing Done"]
+    viewing --> offer["Offer Made"]
+    underOffer -->|Offer Accepted| completion["Completion"]
+    offer --> completion
+    completion --> tenancy["Tenancy Created"]
+    tenancy --> lifecycle["Activate, Live, Renew, Expire"]
 ```
 

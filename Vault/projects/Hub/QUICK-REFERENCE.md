@@ -128,28 +128,43 @@
 ## 🚀 State Machine Quick Lookup
 
 ### Activity States
-```
-DRAFT → LIVE → UNDER_OFFER → COMPLETION → COMPLETED
-  ↓                ↓            ↓
-(any) ←────── WITHDRAWN ←─────(any)
-(any) ←────── EXPIRED (auto)
+```mermaid
+flowchart LR
+    draft["DRAFT"] --> live["LIVE"]
+    live --> underOffer["UNDER_OFFER"]
+    underOffer --> completion["COMPLETION"]
+    completion --> completed["COMPLETED"]
+    draft -.->|Authorized withdrawal| withdrawn["WITHDRAWN"]
+    live -.-> withdrawn
+    underOffer -.-> withdrawn
+    completion -.-> withdrawn
+    draft -.->|Automatic expiry| expired["EXPIRED"]
+    live -.-> expired
+    underOffer -.-> expired
 ```
 📖 [Full details](./Core Business Domain/STATE-MACHINES-VALIDATORS.md#1-activity-state-machine)
 
 ### Requirement States
-```
-ACTIVE ⇄ MATCHED → COMPLETING → COMPLETED
-  ↓               ↓
-WITHDRAWN ← (any)
-EXPIRED ← (auto)
+```mermaid
+flowchart LR
+    active["ACTIVE"] <--> matched["MATCHED"]
+    matched --> completing["COMPLETING"]
+    completing --> completed["COMPLETED"]
+    active -.->|Withdraw| withdrawn["WITHDRAWN"]
+    matched -.->|Withdraw| withdrawn
+    active -.->|Automatic expiry| expired["EXPIRED"]
+    matched -.-> expired
 ```
 📖 [Full details](./Core Business Domain/STATE-MACHINES-VALIDATORS.md#2-requirement-state-machine)
 
 ### Tenancy States
-```
-DRAFT → ACTIVE ⇄ RENEWING → EXPIRED
-           ↓↑        ↓↑
-         (various transitions)
+```mermaid
+flowchart LR
+    draft["DRAFT"] --> active["ACTIVE"]
+    active <--> renewing["RENEWING"]
+    renewing --> expired["EXPIRED"]
+    active -.-> surrendered["SURRENDERED"]
+    active -.-> terminated["TERMINATED"]
 ```
 📖 [Full details](./Core Business Domain/STATE-MACHINES-VALIDATORS.md#3-tenancy-state-machine)
 
@@ -157,39 +172,21 @@ DRAFT → ACTIVE ⇄ RENEWING → EXPIRED
 
 ## 🔄 Data Flow: From Business Core to Infrastructure
 
-```
-1. Business Event Triggers
-   (Contact created, Activity status changed, Tenancy commenced)
-        ↓
-2. Domain Entity State Transition
-   (Activity LIVE → UNDER_OFFER, with precondition checks)
-        ↓
-3. API Endpoint Called
-   (PUT /activities/{id}/status, POST /offers)
-        ↓
-4. Validation Rules Applied
-   (Contact must have negotiator, CDD required for high-value activities)
-        ↓
-5. Domain Event Published
-   (Activity.StatusChanged, Tenancy.Commenced event messages)
-        ↓
-6. Message Queue Processing
-   (Events posted to Service Bus topics)
-        ↓
-7. WebJob Message Handler
-   (60+ handlers consume messages from queues)
-        ↓
-8. External Integration
-   (Push to Fixflo, SAP, Thirdfort, Qube, Dotmailer)
-        ↓
-9. Elasticsearch Projection
-   (Updated search index for analytics)
-        ↓
-10. Callback/Webhook
-    (External system sends result back)
-        ↓
-11. Hub State Update
-    (WebJob updates Hub database with result)
+```mermaid
+flowchart TD
+    trigger["1. Business event triggers<br/>Contact created, Activity status changed, or Tenancy commenced"]
+    transition["2. Domain entity state transition<br/>Activity LIVE to UNDER_OFFER with precondition checks"]
+    api["3. API endpoint called<br/>PUT /activities/{id}/status or POST /offers"]
+    validate["4. Validation rules applied<br/>Negotiator required; CDD required for high-value activities"]
+    publish["5. Domain event published<br/>Activity.StatusChanged or Tenancy.Commenced"]
+    queue["6. Message queue processing<br/>Events posted to Service Bus topics"]
+    handler["7. WebJob message handler<br/>60+ handlers consume queue messages"]
+    integration["8. External integration<br/>Fixflo, SAP, Thirdfort, Qube, or Dotmailer"]
+    search["9. Elasticsearch projection<br/>Update search index for analytics"]
+    callback["10. Callback / webhook<br/>External system sends the result back"]
+    update["11. Hub state update<br/>WebJob updates the Hub database"]
+
+    trigger --> transition --> api --> validate --> publish --> queue --> handler --> integration --> search --> callback --> update
 ```
 
 **Documentation Coverage:**

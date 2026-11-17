@@ -13,28 +13,22 @@ Activities represent marketing instructions for properties (Sales, Lettings, Pur
 
 ### State Diagram
 
-```
-       Create Activity
-              ↓
-           DRAFT
-              ↓
-       [Publish/Market]
-              ↓
-            LIVE ←─────────────────┐
-              ↓                     │
-       [Offer Received]            │
-              ↓                     │
-        UNDER_OFFER ────[Renegotiate]─┘
-              ↓
-       [Exchange of Contract]
-              ↓
-        COMPLETION
-              ↓
-       [Complete Property Transfer]
-              ↓
-         COMPLETED
-              
-         (Parallel path: Can transition to WITHDRAWN/EXPIRED at any stage)
+```mermaid
+flowchart TD
+    create["Create Activity"] --> draft["DRAFT"]
+    draft -->|Publish / Market| live["LIVE"]
+    live -->|Offer Received| underOffer["UNDER_OFFER"]
+    underOffer -->|Exchange of Contract| completion["COMPLETION"]
+    completion -->|Complete Property Transfer| completed["COMPLETED"]
+    underOffer -->|Renegotiate| live
+    draft -.->|Authorized withdrawal| withdrawn["WITHDRAWN"]
+    live -.->|Authorized withdrawal| withdrawn
+    underOffer -.->|Authorized withdrawal| withdrawn
+    completion -.->|Authorized withdrawal| withdrawn
+    draft -.->|Expiry date reached| expired["EXPIRED"]
+    live -.->|Expiry date reached| expired
+    underOffer -.->|Expiry date reached| expired
+    completion -.->|Expiry date reached| expired
 ```
 
 ### Valid State Transitions
@@ -105,24 +99,16 @@ Requirements represent what buyers, tenants, landlords seek. They progress throu
 
 ### State Diagram
 
-```
-     Create Requirement
-            ↓
-         ACTIVE ←──────────────────┐
-            ↓                      │
-     [Match to Activity]           │
-            ↓                      │
-        MATCHED ───[Renegotiate]──┘
-            ↓
-    [Offer Accepted/Deal Agreed]
-            ↓
-       COMPLETING
-            ↓
-      [Completion Done]
-            ↓
-       COMPLETED
-       
-    (Parallel: Can move to WITHDRAWN/EXPIRED at any stage)
+```mermaid
+flowchart TD
+    create["Create Requirement"] --> active["ACTIVE"]
+    active -->|Match to Activity| matched["MATCHED"]
+    matched -->|Offer Accepted / Deal Agreed| completing["COMPLETING"]
+    completing -->|Completion Done| completed["COMPLETED"]
+    matched -->|Renegotiate| active
+    active -.->|Withdraw or expiry| withdrawn["WITHDRAWN / EXPIRED"]
+    matched -.->|Withdraw or expiry| withdrawn
+    completing -.->|Expiry| expired["EXPIRED"]
 ```
 
 ### Valid State Transitions
@@ -205,34 +191,18 @@ Tenancies represent active leases between tenant and landlord. They progress fro
 
 ### State Diagram
 
-```
-   Create Tenancy
-        ↓
-     DRAFT (pre-activation)
-        ↓
-   [Right-to-Rent Check]
-        ↓
-   [Activate on Commencement Date]
-        ↓
-     ACTIVE (or LIVE)
-        ↓
-   ┌──────────────────────────────┐
-   │                              │
-   │    [Renewal Option Date]     │
-   │           ↓                  │
-   │       RENEWING               │
-   │           ↓                  │
-   │    [Renewal Agreed]          │
-   │           ↓                  │
-   │    Create New Tenancy        │
-   │                              │
-   └──────────────────────────────┘
-        ↓
-   [Expiry Date Reached]
-        ↓
-     EXPIRED
-     
-   (Parallel paths: SURRENDERED, TERMINATED)
+```mermaid
+flowchart TD
+    create["Create Tenancy"] --> draft["DRAFT (pre-activation)"]
+    draft -->|Right-to-Rent Check| check["Right-to-Rent verified"]
+    check -->|Activate on Commencement Date| active["ACTIVE / LIVE"]
+    active -->|Renewal Option Date| renewing["RENEWING"]
+    renewing -->|Renewal Rejected| active
+    renewing -->|Renewal Agreed| newTenancy["Create New Tenancy"]
+    newTenancy --> active
+    active -->|Expiry Date Reached| expired["EXPIRED"]
+    active -.->|Surrender Agreed| surrendered["SURRENDERED"]
+    active -.->|Force Termination| terminated["TERMINATED"]
 ```
 
 ### Valid State Transitions
@@ -332,18 +302,15 @@ Offers represent an interested party's proposal to purchase/rent a property or p
 
 ### State Diagram
 
-```
-    Create Offer
-        ↓
-   PENDING_REVIEW (or PENDING)
-        ↓
-   ┌────┴────┐
-   ↓         ↓
-ACCEPTED  REJECTED
-   ↓         ↓
- ACTIVE   WITHDRAWN
-   ↓
-EXPIRED
+```mermaid
+flowchart TD
+    create["Create Offer"] --> pending["PENDING_REVIEW / PENDING"]
+    pending -->|Vendor / landlord accepts| accepted["ACCEPTED"]
+    pending -->|Vendor / landlord rejects| rejected["REJECTED"]
+    pending -->|Offeror withdraws| withdrawn["WITHDRAWN"]
+    accepted --> active["ACTIVE"]
+    active -->|Offer expiry date passes| expired["EXPIRED"]
+    active -->|Later withdrawal| withdrawn
 ```
 
 ### Valid State Transitions
