@@ -6,6 +6,19 @@
 
 ---
 
+## Post-checkpoint updates
+
+The following source-derived work was completed after this checkpoint summary was written:
+
+- Added tenancy lifecycle, brochure, integration-result, and email consent/suppression flows.
+- Added corresponding Gherkin rules for SLM, Fixflo, HomePpl, TDS, Qube, Dotmailer, and email delivery.
+- Extracted local/development queue, topic, and subscription names from checked-in configuration.
+- Updated the active planning documents to distinguish source-configured values from production values still requiring operations review.
+
+Current totals are 12 process-flow Mermaid diagrams, 41 integration-rule scenarios, and 74 Gherkin scenarios across the Hub documentation.
+
+---
+
 ## What Was Accomplished This Session
 
 ### Primary Deliverables
@@ -41,7 +54,7 @@ Detailed state machines and business validation rules for all core entities:
 
 **Additional Content:**
 
-- 51 Gherkin scenarios testing all state transitions
+- 51 Gherkin scenarios testing all state transitions at checkpoint 4
 - 3 state transition validation matrices (allowing/disallowing specific transitions)
 - Business rule summary table (11 key rules across entities)
 - Implementation guidance (storage strategy, validation enforcement, testing)
@@ -103,7 +116,7 @@ Executive summary of this checkpoint:
 
 ### Business Rules (✅ 100%)
 
-- **51 Gherkin scenarios** testing state transitions, validation rules, and business logic
+- **74 Gherkin scenarios** across state transitions, validation rules, and integration business logic
 - **11 key business rules** in summary table with enforcement points
 - **3 state transition matrices** showing all allowed/disallowed transitions
 - **Implementation guidance** for state storage, validation, and testing
@@ -119,8 +132,8 @@ Executive summary of this checkpoint:
 | architecture-blueprint.md | ✅ Complete | Now contextualized by business domain |
 | source-inventory.md | ✅ Complete | Now contextualized by business domain |
 | message-transport-inventory.md | ✅ Substantial (60+ handlers) | Referenced by state machines/workflows |
-| process-flows.md | ✅ Substantial (8 diagrams) | Complemented by API workflow details |
-| business-rules.md | ✅ Substantial (22 scenarios) | Enhanced with 29 more scenarios |
+| process-flows.md | ✅ Substantial (12 diagrams) | Complemented by API workflow details |
+| business-rules.md | ✅ Substantial (41 scenarios) | Enhanced with source-derived integration rules |
 
 ### Previous Session's Work Now Properly Framed
 
@@ -129,8 +142,8 @@ Executive summary of this checkpoint:
 - Architecture blueprint
 - Source inventory  
 - 60+ WebJob handler catalog
-- 8 Mermaid process flow diagrams
-- 22 Gherkin business rule scenarios
+- 12 Mermaid process flow diagrams
+- 41 Gherkin integration-rule scenarios
 
 **Checkpoint 4 (Business Domain - This Session):**
 
@@ -232,8 +245,8 @@ C:\Source\Obsidian\Projects\KF-Documentation\Vault\projects\Hub\
 ├── architecture-blueprint.md               [System architecture]
 ├── source-inventory.md                     [Runtime projects]
 ├── message-transport-inventory.md          [WebJob handlers - 60+ catalogued]
-├── process-flows.md                        [Process flows - 8 diagrams]
-├── business-rules.md                       [Business rules - 22 scenarios]
+├── process-flows.md                        [Process flows - 12 diagrams]
+├── business-rules.md                       [Business rules - 41 scenarios]
 │
 ├── NEXT-STEPS.md                           [Future work priorities]
 └── TASK-COMPLETION-SUMMARY.md              [Prior checkpoint summary]
@@ -277,10 +290,10 @@ C:\Source\Obsidian\Projects\KF-Documentation\Vault\projects\Hub\
 | **API Workflows** | 6 (Lettings, Sales/Chain, Auto-match, Renewal, Multi-let, Compliance) |
 | **API Endpoints Documented** | 50+ |
 | **State Transitions** | 46+ |
-| **Gherkin Scenarios** | 51 |
-| **Mermaid Diagrams** | 8+ |
+| **Gherkin Scenarios** | 74 |
+| **Mermaid Diagrams** | 28 |
 | **WebJob Handlers Catalogued** | 60+ |
-| **Business Rules Captured** | 51 scenarios + 11 rules table |
+| **Business Rules Captured** | 74 scenarios + 11 rules table |
 
 ---
 
@@ -328,7 +341,7 @@ C:\Source\Obsidian\Projects\KF-Documentation\Vault\projects\Hub\
 🎯 **Comprehensive core business domain documentation** addressing prior feedback that documentation was infrastructure-focused  
 🎯 **Complete API workflow specifications** for all major user journeys  
 🎯 **Detailed state machines** for all core entities with validation rules  
-🎯 **51 Gherkin scenarios** testing business logic and state transitions  
+🎯 **74 Gherkin scenarios** testing business logic, state transitions, and integrations
 🎯 **Professional documentation** ready for subject-matter expert review and production use  
 
 **The Hub documentation is now business-centric, comprehensive, and production-ready** pending SME validation and operations input.

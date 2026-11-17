@@ -21,7 +21,7 @@
 
 **[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** (27.8 KB)
 - 8 entity state machines with all valid transitions
-- 51 Gherkin scenarios testing business rules
+- 74 Gherkin scenarios testing business rules
 - State transition validation matrices
 - Implementation guidance for validation logic
 
@@ -58,7 +58,7 @@
 - Integration points and processing flows
 
 **[process-flows.md](./Architecture & Infrastructure/process-flows.md)** (9.3 KB)
-- 8 Mermaid diagrams for key processes
+- 12 Mermaid diagrams for key processes
 - Thirdfort, notifications, CDD, opt-in, documents, conversions
 - End-to-end event flow visualization
 
@@ -107,8 +107,8 @@
 | **Gherkin Scenarios** | 51 |
 | **Mermaid Diagrams** | 8+ |
 | **WebJob Handlers Catalogued** | 60+ |
-| **Business Rules Documented** | 51 scenarios + 11 rules table |
-| **Process Flows Visualized** | 8 diagrams |
+| **Business Rules Documented** | 74 scenarios + 11 rules table |
+| **Process Flows Visualized** | 12 diagrams |
 
 ---
 
@@ -132,7 +132,7 @@
 
 ### ✅ Business Rules Articulated
 
-- 51 Gherkin scenarios testing state transitions and validations
+- 33 state-machine scenarios testing state transitions and validations
 - 11 key business rules in summary table
 - State transition validation matrices for all entities
 
@@ -169,7 +169,7 @@
 ## 🚀 Ready For
 
 ✅ **Development:** Developers have complete API specifications and state machine validation rules  
-✅ **Testing:** QA teams have 51 Gherkin scenarios and 6 workflow test cases  
+✅ **Testing:** QA teams have 74 Gherkin scenarios and 6 workflow test cases
 ✅ **Review:** Subject-matter experts can validate state machines and workflows  
 ✅ **Operations:** Operations teams can understand async processing and integration flows  
 ✅ **Onboarding:** New team members have comprehensive business domain documentation  
@@ -200,13 +200,13 @@ Vault\projects\Hub\
 ├─ 🏢 BUSINESS DOMAIN (NEW THIS SESSION)
 │  ├─ CORE-DOMAIN.md ..................... 5 core entities, relationships, processes
 │  ├─ API-WORKFLOWS.md ................... 6 end-to-end workflows with API details
-│  └─ STATE-MACHINES-VALIDATORS.md ....... 8 state machines, 51 Gherkin scenarios
+│  └─ STATE-MACHINES-VALIDATORS.md ....... 8 state machines, 33 state-machine scenarios
 │
 ├─ 🏗️ ARCHITECTURE & INFRASTRUCTURE
 │  ├─ architecture-blueprint.md .......... System design & components
 │  ├─ source-inventory.md ............... Runtime projects
 │  ├─ message-transport-inventory.md .... 60+ WebJob handlers
-│  ├─ process-flows.md ................. 8 Mermaid diagrams
+│  ├─ process-flows.md ................. 12 Mermaid diagrams
 │  └─ business-rules.md ................ Integration business rules
 │
 ├─ 📋 GUIDES & SUMMARIES
@@ -232,7 +232,7 @@ Vault\projects\Hub\
 - ✅ Core entities clearly defined with relationships
 - ✅ State machines visualized and documented
 - ✅ User journeys show real-world scenarios
-- ✅ 51 Gherkin scenarios capture business rules
+- ✅ 74 Gherkin scenarios capture business rules
 
 ### Developer Experience
 
@@ -243,7 +243,7 @@ Vault\projects\Hub\
 
 ### Testing Coverage
 
-- ✅ 51 Gherkin scenarios for test automation
+- ✅ 74 Gherkin scenarios for test automation
 - ✅ 46+ state transitions documented and testable
 - ✅ 6 workflow scenarios for end-to-end testing
 - ✅ Preconditions and expected outcomes for each step

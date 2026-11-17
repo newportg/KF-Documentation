@@ -9,20 +9,20 @@ FILES TO REVIEW (in this folder):
    Overview of all work completed in this session
    • Task #2 (Partial): Queue/topic configuration cataloguing
    • Task #3 (Substantially Complete): 60+ WebJob handlers documented
-   • Task #4 (Substantially Complete): 8 Mermaid process flow diagrams
-   • Task #5 (Substantially Complete): 22 Gherkin business rule scenarios
+   • Task #4 (Substantially Complete): 12 Mermaid process flow diagrams
+   • Task #5 (Substantially Complete): 41 integration-rule scenarios plus state-machine rules
 
 📋 NEXT-STEPS.md
    Detailed action items and remaining work prioritized by value
-   • Immediate: Extract email consent rules, tenancy flows
+   • Immediate: Confirm production queue/topic overrides and policies
    • Medium: Handler error-handling, SLA documentation
    • Blocking: Subject-matter expert review, ops handoff
 
 📋 Documentation Files Enhanced:
    • README.md — Task statuses updated
    • message-transport-inventory.md — 60+ row WebJob handler table added
-   • process-flows.md — 8 Mermaid flowchart diagrams added
-   • business-rules.md — 22 Gherkin BDD scenarios added
+   • process-flows.md — 12 Mermaid flowchart diagrams
+   • business-rules.md — 41 integration-rule scenarios
 
 ================================================================================
 QUICK SUMMARY
@@ -31,17 +31,17 @@ QUICK SUMMARY
 COMPLETION STATUS:
 ✅ Task #1: Map runtime projects — COMPLETED
 ✅ Task #3: Catalogue WebJob handlers — SUBSTANTIALLY COMPLETED (60+ documented)
-✅ Task #4: Add process flows — SUBSTANTIALLY COMPLETED (8 diagrams created)
-✅ Task #5: Extract business rules — SUBSTANTIALLY COMPLETED (22 scenarios)
-🟡 Task #2: Queue/topic configuration — PARTIAL (keys catalogued, names needed)
+✅ Task #4: Add process flows — SUBSTANTIALLY COMPLETED (12 diagrams)
+✅ Task #5: Extract business rules — SUBSTANTIALLY COMPLETED (41 integration scenarios plus state-machine rules)
+🟡 Task #2: Queue/topic configuration — PARTIAL (local/development names catalogued; production overrides needed)
 ⏳ Task #6: SME review — PENDING
 ⏳ Task #7: Ops handoff — PENDING
 
 KEY STATISTICS:
 • WebJob Modules: 27
 • Handler Classes Documented: 60+
-• Process Flows (Mermaid): 8
-• Business Rules (Gherkin): 22
+• Process Flows (Mermaid): 12
+• Business Rules (Gherkin): 41 integration scenarios plus 33 state-machine scenarios
 • Documentation Growth: +250% average across files
 
 WORK APPROACH:
@@ -65,9 +65,9 @@ message-transport-inventory.md (+70 KB)
 ├─ Processing pattern
 └─ Required follow-up items
 
-process-flows.md (+100 KB)
+process-flows.md
 ├─ Generic asynchronous processing pattern
-├─ ✨ NEW: 8 Mermaid flowchart diagrams:
+├─ 12 Mermaid flowchart diagrams:
 │  1. Thirdfort request validation
 │  2. Thirdfort response processing
 │  3. Notification preparation and delivery
@@ -75,16 +75,21 @@ process-flows.md (+100 KB)
 │  5. CDD validity retriggering cascade
 │  6. Soft opt-in consent refresh cycle
 │  7. Document-to-PDF conversion
-│  (5 additional flows identified as remaining work)
+│  8. Tenancy lifecycle integrations
+│  9. Brochure generation and completion
+│ 10. Integration result handlers
+│ 11. Email consent, suppression, and delivery
+│ 12. Generic asynchronous processing pattern
+│  (property contact-change, reassignment, and search consistency remain)
 └─ Process documentation gaps explicitly listed
 
-business-rules.md (+80 KB)
+business-rules.md
 ├─ Thirdfort request validation (4 Gherkin scenarios)
 ├─ Thirdfort response processing (3 Gherkin scenarios)
 ├─ ✨ NEW: Soft opt-in consent lifecycle (5 Gherkin scenarios)
 ├─ ✨ NEW: CDD validity retriggering (6 Gherkin scenarios)
 ├─ ✨ NEW: Notification recipient filtering (4 Gherkin scenarios)
-└─ Rules requiring further extraction (8+ areas catalogued)
+└─ Rules requiring further extraction (document visibility, search consistency, and broader retry/idempotency)
 
 ================================================================================
 HOW TO USE THIS DOCUMENTATION
@@ -136,7 +141,8 @@ IMMEDIATE (Next 1-2 days):
 ✓ Create brochure generation flow diagram (Task #4b)
 
 MEDIUM (Next 2-3 days):
-□ Collect physical queue/topic names from DevOps (Task #2)
+✓ Extract local/development queue, topic, and subscription names from checked-in config (Task #2)
+□ Confirm production queue/topic/subscription overrides and policies (Task #2)
 □ Extract activity/requirement state transition rules (Task #5c)
 ✓ Create integration result handler flows (Task #4c)
 □ Document error-handling flows for top-5 handlers

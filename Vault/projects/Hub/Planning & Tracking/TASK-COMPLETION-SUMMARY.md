@@ -108,7 +108,7 @@ Added since this summary was created:
 **Status: SUBSTANTIALLY COMPLETED** ✓ Significantly Advanced
 
 ### Completed
-Created 22+ Gherkin scenario specifications in [business-rules.md](../Architecture & Infrastructure/business-rules.md) across 5 feature areas:
+Created 41 Gherkin scenario specifications in [business-rules.md](../Architecture & Infrastructure/business-rules.md) across 9 feature areas:
 
 #### 1. Thirdfort Request Validation (4 scenarios)
 - Required-check validation failure
@@ -158,8 +158,8 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 |---|---|---|
 | #2 Queue/topic names | Local/development names catalogued; production overrides needed | ✓ PARTIAL |
 | #3 WebJob handlers | 60+ handlers documented in table | ✓ SUBSTANTIALLY COMPLETE |
-| #4 Process flows | 8 Mermaid diagrams created; 5 key processes remain | ✓ SUBSTANTIALLY COMPLETE |
-| #5 Business rules | 22 Gherkin scenarios; 8+ rules areas identified for extraction | ✓ SUBSTANTIALLY COMPLETE |
+| #4 Process flows | 12 Mermaid diagrams created; property contact-change, reassignment, and search consistency remain | ✓ SUBSTANTIALLY COMPLETE |
+| #5 Business rules | 41 integration scenarios plus 33 state-machine scenarios; remaining gaps are documented | ✓ SUBSTANTIALLY COMPLETE |
 
 ---
 
@@ -169,8 +169,8 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 
 1. [README.md](./README.md) — Updated task status to reflect completion progress
 2. [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) — Added 60+ row handler catalog table
-3. [process-flows.md](../Architecture & Infrastructure/process-flows.md) — Added 8 Mermaid flowchart diagrams
-4. [business-rules.md](../Architecture & Infrastructure/business-rules.md) — Added 22 Gherkin scenarios across 5 feature areas
+3. [process-flows.md](../Architecture & Infrastructure/process-flows.md) — Added 12 Mermaid flowchart diagrams
+4. [business-rules.md](../Architecture & Infrastructure/business-rules.md) — Added 41 Gherkin scenarios across 9 feature areas
 
 ### New Files Created
 
@@ -183,16 +183,16 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 
 - **WebJob Modules:** 27
 - **Handler Classes Documented:** 60+
-- **Process Flows (Mermaid Diagrams):** 8
-- **Business Rules (Gherkin Scenarios):** 22
+- **Process Flows (Mermaid Diagrams):** 12
+- **Business Rules (Gherkin Scenarios):** 41 integration scenarios, plus 33 state-machine scenarios
 - **Handler Table Rows:** 65
 - **Service Bus Topic Keys:** 11
 - **Queue Message Types:** 20+
 
 **Documentation Growth:**
 - message-transport-inventory.md: +85% (60+ row table)
-- process-flows.md: +250% (8 diagrams)
-- business-rules.md: +400% (22 scenarios)
+- process-flows.md: expanded to 12 diagrams
+- business-rules.md: expanded to 41 integration-rule scenarios
 
 ---
 

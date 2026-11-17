@@ -37,8 +37,8 @@ The Hub documentation is based on the source repository at `C:\Source\Devops\Kni
 
 - Catalogued all 27 WebJob modules with 60+ handler classes organized by feature area.
 - Documented handler responsibilities, message types, and primary roles.
-- Created 8 Mermaid flowchart diagrams for key process flows (Thirdfort, notifications, CDD, opt-in, documents, conversions).
-- Captured 22 Gherkin BDD scenarios for integration business rules.
+- Created 12 Mermaid flowchart diagrams for key process flows.
+- Captured 41 Gherkin BDD scenarios for integration business rules.
 
 **Checkpoint 3: Core Business Domain Documentation** ✅ **NEW**
 

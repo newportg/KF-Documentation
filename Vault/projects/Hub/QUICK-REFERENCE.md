@@ -13,7 +13,7 @@
 |----------|---------|------------|----------|
 | **[CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md)** | Understand Hub's business entities and how they relate | 5 core entities, relationships, 5 business processes, user journeys, state machines | Business analysts, architects, all teams |
 | **[API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md)** | See real-world workflows through the Hub API | 6 end-to-end workflows (Lettings, Sales, Auto-match, Renewals, Multi-let, Compliance) with complete API sequences | Developers, QA, architects |
-| **[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** | Reference for state machines and validation rules | 8 state machines, 51 Gherkin scenarios, validation matrices | Developers, QA, architects |
+| **[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** | Reference for state machines and validation rules | 8 state machines, 33 state-machine scenarios, validation matrices | Developers, QA, architects |
 
 ### 🏗️ Architecture & Infrastructure (SUPPORTING DOCS)
 
@@ -22,7 +22,7 @@
 | **[architecture-blueprint.md](./Architecture & Infrastructure/architecture-blueprint.md)** | System architecture overview | C4 diagrams, ArchiMate layers, component roles | Architects, senior developers |
 | **[source-inventory.md](./Architecture & Infrastructure/source-inventory.md)** | Runtime projects and their purposes | All .NET projects, their roles, dependencies | Developers, architects |
 | **[message-transport-inventory.md](./Architecture & Infrastructure/message-transport-inventory.md)** | WebJob handlers and async processing | 60+ handler catalog, message types, feature areas | Developers, operations |
-| **[process-flows.md](./Architecture & Infrastructure/process-flows.md)** | Key process flows with Mermaid diagrams | 8 diagrams (Thirdfort, notifications, CDD, opt-in, etc.) | All teams, operations |
+| **[process-flows.md](./Architecture & Infrastructure/process-flows.md)** | Key process flows with Mermaid diagrams | 12 diagrams (Thirdfort, tenancy, brochures, integrations, email, and more) | All teams, operations |
 | **[business-rules.md](./Architecture & Infrastructure/business-rules.md)** | Integration-specific business rules | 22+ Gherkin scenarios (Thirdfort, CDD, notifications) | Developers, QA |
 
 ### 📋 Guides & Summaries
@@ -44,11 +44,11 @@
 
 ### "I need to implement a feature / fix a bug"
 👉 **[API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md)** → Find your workflow  
-👉 **[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** → Check entity state machine & validation rules  
+👉 **[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** → Check entity state machine & validation rules
 👉 **[CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md)** → Understand related entities
 
 ### "I'm writing tests"
-👉 **[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** → 51 Gherkin scenarios  
+👉 **[STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md)** → 33 state-machine scenarios
 👉 **[API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md)** → Expected API sequences
 
 ### "I need to integrate an external service"
@@ -110,7 +110,7 @@
 
 ### Validation Rules ✅
 
-- [x] 51 Gherkin scenarios (all entities)
+- [x] 33 state-machine scenarios (all entities)
 - [x] 11 key business rules table
 - [x] 3 state transition validation matrices
 - [x] Implementation guidance
@@ -118,7 +118,7 @@
 ### Infrastructure ✅
 
 - [x] 60+ WebJob handler catalog
-- [x] 8 Mermaid process flow diagrams
+- [x] 12 Mermaid process flow diagrams
 - [x] 22+ integration business rules
 - [x] Architecture blueprint
 - [x] Source inventory
@@ -207,7 +207,7 @@ flowchart TD
 | **Gherkin Scenarios** | 51 |
 | **Mermaid Diagrams** | 8+ |
 | **WebJob Handlers** | 60+ catalogued |
-| **Business Rules** | 51 scenarios + 11 rules |
+| **Business Rules** | 74 scenarios + 11 rules |
 | **Total Documentation Size** | ~100 KB |
 | **Files** | 12 markdown files |
 
