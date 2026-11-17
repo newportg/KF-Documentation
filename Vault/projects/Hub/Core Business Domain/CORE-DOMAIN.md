@@ -94,14 +94,14 @@ Tenancy
 
 **Flow:**
 1. Contact record created (buyer, seller, tenant, landlord, agent, professional)
-2. Contact details added (address, phone, email, company, negotiator assignment)
-3. Contact interests captured (property types, locations, transaction types)
-4. Consents managed (marketing, newsletters, soft opt-in, CDD compliance)
-5. Contact linked to requirements (what they're looking for)
-6. Contact linked to activities (properties they're viewing/transacting on)
-7. Contact linked to ownerships (properties they own)
-8. Contact linked to tenancies (properties they occupy)
-9. Contact relationships tracked (clients they've introduced, referral chains)
+1. Contact details added (address, phone, email, company, negotiator assignment)
+1. Contact interests captured (property types, locations, transaction types)
+1. Consents managed (marketing, newsletters, soft opt-in, CDD compliance)
+1. Contact linked to requirements (what they're looking for)
+1. Contact linked to activities (properties they're viewing/transacting on)
+1. Contact linked to ownerships (properties they own)
+1. Contact linked to tenancies (properties they occupy)
+1. Contact relationships tracked (clients they've introduced, referral chains)
 
 **Key Business Rules:**
 - Contact must have primary negotiator assigned
