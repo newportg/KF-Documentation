@@ -45,10 +45,6 @@
 - Metrics and coverage summary
 - Outstanding work and next phase planning
 
-**[CHECKPOINT-4-SUMMARY.md](./Planning & Tracking/CHECKPOINT-4-SUMMARY.md)** (13 KB)
-- Executive summary of this checkpoint
-- Architecture visibility improvements
-- Questions resolved from prior feedback
 
 ### Infrastructure & Integration Documentation (ENHANCED PRIOR SESSIONS)
 
