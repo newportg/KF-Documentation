@@ -46,6 +46,7 @@ nav:
           - Message and transport inventory: projects/Hub/Architecture & Infrastructure/message-transport-inventory.md
           - Process flows: projects/Hub/Architecture & Infrastructure/process-flows.md
           - Business rules: projects/Hub/Architecture & Infrastructure/business-rules.md
+          - Angular GUI analysis: projects/Hub/Architecture & Infrastructure/angular-gui-analysis.md
       - Planning & Tracking:
           - Project Overview: projects/Hub/Planning & Tracking/README.md
           - Next Steps: projects/Hub/Planning & Tracking/NEXT-STEPS.md
