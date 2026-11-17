@@ -511,16 +511,15 @@ Feature: Property Creation and Validation
 
 ### Activity State Transitions Matrix
 
-```
-         DRAFT | LIVE | UNDER_OFFER | COMPLETION | COMPLETED | WITHDRAWN | EXPIRED
-DRAFT      -   |  ✅  |     ❌      |     ❌     |    ❌     |    ✅     |   ❌
-LIVE       ❌   |  -   |     ✅      |     ❌     |    ❌     |    ✅     |   ⚠️
-UNDER_OFFER ❌  |  ✅  |     -       |     ✅     |    ❌     |    ✅     |   ❌
-COMPLETION ❌  |  ❌  |     ❌      |     -      |    ✅     |    ✅     |   ❌
-COMPLETED  ❌  |  ❌  |     ❌      |     ❌     |    -      |    ❌     |   ❌
-WITHDRAWN  ❌  |  ❌  |     ❌      |     ❌     |    ❌     |    -      |   ❌
-EXPIRED    ❌  |  ❌  |     ❌      |     ❌     |    ❌     |    ⚠️     |   -
-```
+| Current state \ Target state | DRAFT | LIVE | UNDER_OFFER | COMPLETION | COMPLETED | WITHDRAWN | EXPIRED |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| DRAFT | - | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| LIVE | ❌ | - | ✅ | ❌ | ❌ | ✅ | ⚠️ |
+| UNDER_OFFER | ❌ | ✅ | - | ✅ | ❌ | ✅ | ❌ |
+| COMPLETION | ❌ | ❌ | ❌ | - | ✅ | ✅ | ❌ |
+| COMPLETED | ❌ | ❌ | ❌ | ❌ | - | ❌ | ❌ |
+| WITHDRAWN | ❌ | ❌ | ❌ | ❌ | ❌ | - | ❌ |
+| EXPIRED | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ | - |
 
 **Legend:**
 - ✅ = Always allowed
@@ -530,28 +529,26 @@ EXPIRED    ❌  |  ❌  |     ❌      |     ❌     |    ❌     |    ⚠️   
 
 ### Requirement State Transitions Matrix
 
-```
-         ACTIVE | MATCHED | COMPLETING | COMPLETED | WITHDRAWN | EXPIRED
-ACTIVE     -    |   ✅    |     ❌     |    ❌     |    ✅     |   ⚠️
-MATCHED    ✅   |   -     |     ✅     |    ❌     |    ✅     |   ⚠️
-COMPLETING ❌   |   ❌    |     -      |    ✅     |    ❌     |   ❌
-COMPLETED  ❌   |   ❌    |     ❌     |    -      |    ❌     |   ❌
-WITHDRAWN  ❌   |   ❌    |     ❌     |    ❌     |    -      |   ❌
-EXPIRED    ❌   |   ❌    |     ❌     |    ❌     |    ⚠️     |   -
-```
+| Current state \ Target state | ACTIVE | MATCHED | COMPLETING | COMPLETED | WITHDRAWN | EXPIRED |
+|---|---:|---:|---:|---:|---:|---:|
+| ACTIVE | - | ✅ | ❌ | ❌ | ✅ | ⚠️ |
+| MATCHED | ✅ | - | ✅ | ❌ | ✅ | ⚠️ |
+| COMPLETING | ❌ | ❌ | - | ✅ | ❌ | ❌ |
+| COMPLETED | ❌ | ❌ | ❌ | - | ❌ | ❌ |
+| WITHDRAWN | ❌ | ❌ | ❌ | ❌ | - | ❌ |
+| EXPIRED | ❌ | ❌ | ❌ | ❌ | ⚠️ | - |
 
 ### Tenancy State Transitions Matrix
 
-```
-         DRAFT | ACTIVE | RENEWING | EXPIRED | SURRENDERED | TERMINATED | CANCELLED
-DRAFT      -   |   ✅   |    ❌    |   ❌   |     ❌      |     ❌      |    ✅
-ACTIVE     ❌   |   -    |    ✅    |   ⚠️   |     ✅      |     ✅      |    ❌
-RENEWING   ❌   |   ✅   |    -     |   ✅   |     ✅      |     ✅      |    ❌
-EXPIRED    ❌   |   ❌   |    ❌    |   -    |     ❌      |     ❌      |    ❌
-SURRENDERED ❌  |   ❌   |    ❌    |   ❌   |     -       |     ❌      |    ❌
-TERMINATED ❌   |   ❌   |    ❌    |   ❌   |     ❌      |     -       |    ❌
-CANCELLED  ❌   |   ❌   |    ❌    |   ❌   |     ❌      |     ❌      |    -
-```
+| Current state \ Target state | DRAFT | ACTIVE | RENEWING | EXPIRED | SURRENDERED | TERMINATED | CANCELLED |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| DRAFT | - | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| ACTIVE | ❌ | - | ✅ | ⚠️ | ✅ | ✅ | ❌ |
+| RENEWING | ❌ | ✅ | - | ✅ | ✅ | ✅ | ❌ |
+| EXPIRED | ❌ | ❌ | ❌ | - | ❌ | ❌ | ❌ |
+| SURRENDERED | ❌ | ❌ | ❌ | ❌ | - | ❌ | ❌ |
+| TERMINATED | ❌ | ❌ | ❌ | ❌ | ❌ | - | ❌ |
+| CANCELLED | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | - |
 
 ---
 
