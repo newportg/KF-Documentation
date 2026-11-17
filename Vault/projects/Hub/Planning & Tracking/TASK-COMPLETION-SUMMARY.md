@@ -13,6 +13,7 @@ This file records what has been delivered. It is not the active backlog; see [RE
 | Core domain | Contact, Property, Activity, Requirement, Tenancy, Offer, relationships, and business processes | [CORE-DOMAIN.md](../Core%20Business%20Domain/CORE-DOMAIN.md) |
 | API workflows | Six end-to-end workflows with API sequences, preconditions, and state changes | [API-WORKFLOWS.md](../Core%20Business%20Domain/API-WORKFLOWS.md) |
 | State and validation | State machines, validators, transition matrices, and 33 state-machine/validation scenarios | [STATE-MACHINES-VALIDATORS.md](../Core%20Business%20Domain/STATE-MACHINES-VALIDATORS.md) |
+| Angular GUI baseline | Application structure, routes, entities, processes, validations, screen layouts, generated services, and API call patterns | [angular-gui-analysis.md](../Architecture%20%26%20Infrastructure/angular-gui-analysis.md) |
 | Configuration baseline | Checked-in local/development queue, topic, and subscription values | [message-transport-inventory.md](../Architecture%20%26%20Infrastructure/message-transport-inventory.md) |
 
 ## Current totals
@@ -46,6 +47,7 @@ evidence or source of confirmation is recorded.
 | Production changes only the `local`/`dev` environment token to `prd` | Pending | Deployment parameters or environment settings required | — | — |
 | Production transport retry, timeout, dead-letter, poison-message, and idempotency policies | Pending | Operations configuration or runbook required | — | — |
 | Core domain, API workflows, state machines, and business rules reviewed by SME | Pending | SME review notes or approval | — | — |
+| Angular GUI screens, layouts, validations, and API call map reviewed by front-end SME | Pending | HTML/SCSS review, API specification comparison, or approval notes | — | — |
 | Monitoring, security, SLA, ownership, deployment, and rollback documentation reviewed | Pending | Operations / Security / DevOps review | — | — |
 
 ### Verification status values

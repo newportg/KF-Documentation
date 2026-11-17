@@ -37,6 +37,8 @@ COMPLETED OR SUBSTANTIALLY COMPLETED:
       Tenancy, and Offer
   [x] Six end-to-end API workflows
   [x] State machines, validators, and transition matrices
+  [x] Angular GUI baseline analysis covering structure, entities, processes,
+      validations, screen layouts, and generated API call patterns
   [x] Local/development queue, topic, and subscription values extracted from
       checked-in Web.config and App.config files
 
@@ -46,6 +48,7 @@ OPEN:
   [ ] Confirm retry, timeout, dead-letter, poison-message, and idempotency
       policies
   [ ] Complete SME review and approval
+  [ ] Review Angular GUI screen layouts and API mappings with a front-end SME
   [ ] Document monitoring, security, SLAs, ownership, deployment, rollback,
       incident response, and operational runbooks
   [ ] Add optional handler-level error/retry/reconciliation coverage

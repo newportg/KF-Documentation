@@ -46,6 +46,17 @@ This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-S
 - Add error, retry, reconciliation, and idempotency flows for the highest-risk handlers.
 - Add remaining document visibility and notification scheduling rules.
 
+## 5. Angular GUI review — medium priority
+
+**Status:** Source-derived baseline completed; detailed UX review pending
+
+- Review [angular-gui-analysis.md](../Architecture%20%26%20Infrastructure/angular-gui-analysis.md).
+- Confirm screen layouts, field ordering, responsive behaviour, and navigation with a front-end SME.
+- Confirm each major screen's API calls against the generated services and current API specification.
+- Record any UI-only validation, missing screens, or discrepancies between GUI behaviour and domain documentation.
+
+**Deliverable:** Reviewed Angular GUI analysis with corrections and approval recorded in the verification register.
+
 ## Definition of done
 
 The documentation can be marked production-ready when:
