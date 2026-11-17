@@ -15,7 +15,7 @@ This directory contains the current status and backlog for the Hub documentation
 | API workflows | Complete for source review | Six end-to-end workflows are documented. |
 | Process flows | Substantially complete | 12 Mermaid process-flow diagrams are documented. |
 | Business rules | Substantially complete | 41 integration-rule scenarios plus 33 state-machine scenarios are documented. |
-| Angular GUI analysis | Baseline added | GUI structure, entities, processes, validations, layouts, and generated API call patterns are documented; detailed UX review remains open. |
+| Angular GUI analysis | Baseline added | GUI structure, entities, processes, validations, layouts, API call patterns, and embedded client-side rules are documented; detailed UX review remains open. |
 | Queue/topic configuration | Partial | Dev/local names are in repository configuration; deployment changes the environment token to `prd`, while transport policies remain unverified. |
 | SME review | Not started | Business and technical validation is still required. |
 | Operations handoff | Not started | Production monitoring, retry, security, SLA, and runbook information is still required. |
@@ -32,6 +32,7 @@ Verification status is tracked in the [verification register](./TASK-COMPLETION-
 - Documented six API journeys in [API-WORKFLOWS.md](../Core%20Business%20Domain/API-WORKFLOWS.md).
 - Documented state machines, validators, and transition matrices in [STATE-MACHINES-VALIDATORS.md](../Core%20Business%20Domain/STATE-MACHINES-VALIDATORS.md).
 - Added [angular-gui-analysis.md](../Architecture%20%26%20Infrastructure/angular-gui-analysis.md) covering Angular structure, entities, processes, validations, screen layouts, and API call layout.
+- Classified embedded GUI rules as client-enforced, server-backed, or implementation-inferred.
 - Recorded local/development queue, topic, and subscription values from checked-in configuration.
 - Enabled MkDocs strikeout rendering with `pymdownx.tilde`.
 

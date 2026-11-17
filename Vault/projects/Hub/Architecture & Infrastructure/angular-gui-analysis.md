@@ -257,12 +257,85 @@ when the API specification is regenerated.
 | Administration | Configuration/user/department query | Role-protected update/delete | Re-load list and report result |
 | Document panel | Attachment list/details and extensions | Upload, rename, version, sign, visibility | Refresh attachment list and audit state |
 
+## Embedded business rules
+
+The Angular code contains material business behaviour. It is not only a
+presentation layer. The rules fall into two categories: client-side rules that
+shape the screen and request, and server-backed rules that the GUI asks the API
+to validate.
+
+### Confirmed client-side rules
+
+| Rule area | Embedded behaviour | Evidence |
+|---|---|---|
+| Status defaults | Instructed and marketed dates are defaulted when configured activity statuses are entered, including a market-appraisal-to-sale transition. | `common/helpers/activity-default-dates.helper.ts` |
+| Status display and filtering | Active status groups, ordering, and default filters are encoded in a shared service. | `common/services/activity-status.service.ts` |
+| Offer status eligibility | Reservation offers are limited to `Reserved` and `Withdrawn`; offer status options vary by offer type. | `common/services/offer-status.service.ts` |
+| Offer calculations | Accepted offers default agreed price from offer price; area-based amounts and annual amounts are converted; lease end dates are calculated from week/month periods. | `offer/offer-add-edit/offer-add-edit.component.ts` |
+| Lease dates | Lease terms are capped against remaining lease duration and invalid, expired, inverted, or null dates are rejected. | `common/helpers/lease-date-helper.ts` |
+| Activity and requirement status panels | Notes, completion dates, exchanged dates, lost-to information, and negotiator controls appear conditionally for selected statuses. | `common/attributes/status-change/entity-status-control/entity-status-control.component.ts` |
+| Referral and publication behaviour | Referral requirements and Feed Centre unpublishing are selected from hard-coded activity status sets. | `activity/activity-add-edit/activity-add-edit-base.component.ts` |
+| Ownership changes | Completion ownership options vary by completion/letting status, agency type, service line, accepted offer, applicant/requirement presence, and ownership type. | `common/attributes/status-change/completion-ownership-control/completion-ownership-control.component.ts` |
+| Instruction linking | Requirement instruction actions differ when the requirement is withdrawn or when an instruction already exists. | `requirement/requirement-view/requirement-view.component.ts` |
+| Field constraints | Required fields, maximum lengths, non-negative amounts, and minimum positive rent values are encoded in form schemas and controls. | `activity/activity-add-edit-common/activity-add-edit-common.schema.ts`, feature form components |
+| Route permissions | Administration and configuration screens are limited by route role lists. | `app-routing.module.ts`, `common/guards/role-authorize.guard.ts` |
+
+### Server-backed rules initiated by the GUI
+
+Before changing an existing Activity or Requirement status, the status control
+calls the API validation operation. Activity validation includes service line,
+agency, activity type, CDD state, instructed date, rent data, matching/resale
+flags, lease completeness, image/brochure presence, and managing department.
+The API also returns status-specific requirements such as whether a note,
+completion date, exchanged date, lost-to information, or negotiator restriction
+applies.
+
+Representative calls are:
+
+```text
+POST /api/activities/{id}/stateValidate
+POST /api/requirements/{id}/stateValidate
+```
+
+The GUI then opens the required panels, applies client-side form checks, and
+submits the state/update command. A valid Angular form therefore does not prove
+that a business transition is valid; the API validation remains authoritative.
+
+### Hard-coded domain vocabularies
+
+The client contains status and lifecycle values used to drive controls and
+visibility, including:
+
+- Activity: `PreAppraisal`, `MarketAppraisal`, `ForSaleOnMarket`,
+  `UnderOffer`, `Exchanged`, `Completed`, `Withdrawn`, and `Lost`.
+- Offer: `New`, `Accepted`, `Rejected`, `Withdrawn`, `UnderOffer`, and
+  `Reserved`.
+- Requirement: `Active`, `UnderOffer`, `Satisfied`, `Withdrawn`, and `Lost`.
+- Referral: `New`, `Accepted`, `Instructed`, `Completed`, and `Finished`.
+- Instruction: `Potential`, `Instructed`, `Aborted`, `Finished`, and
+  `Disinstructed`.
+
+The source of these values is
+`common/models/enums/enum-type-items.ts`. They should be checked against the
+API/domain enums during SME review because client values can become stale.
+
+### Classification
+
+| Classification | Examples | Documentation treatment |
+|---|---|---|
+| Client-enforced | Required fields, length/amount bounds, date calculations, visibility, default values, route guards | Record as GUI behaviour; do not assume it is sufficient security or domain enforcement. |
+| Server-backed | Activity/Requirement transition validation, status-specific requirements, save/update commands | Record the API call and treat the server response as authoritative. |
+| Inferred from UI | Status grouping, panel sequencing, derived offer display values | Mark as implementation evidence until confirmed by an SME or server contract. |
+
 ## Traceability and limitations
 
 - Route structure is evidenced by `src/app/app-routing.module.ts`.
 - Application providers and interceptors are evidenced by `src/app/app.module.ts`.
 - API service registration is evidenced by `src/app/autogenerated/api.module.ts`.
 - Endpoint paths and HTTP verbs are evidenced by `src/app/autogenerated/api/*.service.ts`.
+- Embedded business-rule evidence is evidenced by the status-control,
+  activity/offer/requirement workflow, helper, enum, and validation files
+  cited above.
 - Screen layout patterns are evidenced by the feature component folders and
   their templates.
 - This document does not claim that every generated endpoint is used by a
