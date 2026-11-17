@@ -9,6 +9,7 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
 **Status: PARTIAL** ✓ Improved
 
 ### Completed
+
 - Examined `HubServiceBusTriggerConstants.cs` to identify all 11 Service Bus topic configuration keys
 - Located `HubServiceBusPublisherTopicConfigProvider.cs` to understand topic configuration loading
 - Identified that configuration keys read from `Api.Settings.ServiceBus.*` app settings
@@ -16,12 +17,14 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
 - Catalogued all Service Bus queue message types (Thirdfort, email, notifications, etc.)
 
 ### Still Required
+
 - Extract actual physical topic/queue names from production environment configuration (not found in source)
 - Collect Azure Storage queue names from environment deployment parameters
 - Map each topic to its subscriptions and consumer modules
 - Document retry counts, visibility timeout, dead-letter handling, and idempotency guarantees
 
 ### Deliverables Created
+
 - Comprehensive topic mapping in [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md)
 
 ---
@@ -30,6 +33,7 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
 **Status: SUBSTANTIALLY COMPLETED** ✓ Significantly Advanced
 
 ### Completed
+
 - Identified all **27 WebJob modules** in the source repository
 - Catalogued **60+ handler classes** across all modules
 - Created comprehensive handler catalog table in [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) with columns:
@@ -39,6 +43,7 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
   - Primary Role/Responsibility
 
 ### Organized By Feature Area
+
 1. **Email & Messaging** (3 modules): Email queuing, Dotmailer sync, SMS/text messaging
 2. **Integration & Sync** (5 modules): SAP, SLM, Thirdfort, Elasticsearch, CDD updates
 3. **Notifications & Feeds** (4 modules): Activity/tenancy/referral notifications, portal feeds
@@ -48,6 +53,7 @@ Systematically worked through the **partial** and **in-progress** outstanding ta
 7. **Service Bus Docs** (1 module): Document processing via Service Bus
 
 ### Key Handlers Documented
+
 Each handler now has:
 - Clear responsibility statement
 - Message type(s) it consumes
@@ -55,6 +61,7 @@ Each handler now has:
 - Reference to source location
 
 ### Still Required
+
 - Detailed handler flows similar to Thirdfort (for top 5-10 handlers)
 - Error handling and retry policies per handler
 - SLA documentation for each handler's processing
@@ -77,6 +84,7 @@ Created 8 detailed Mermaid flowchart diagrams in [process-flows.md](../Architect
 8. **Document-to-PDF conversion** — Request → validation → conversion → blob storage → completion
 
 ### Still Required
+
 - Property contact-change and churn-risk journeys
 - Tenancy lifecycle flow (SLM sync → Fixflo tenancy-started/ended → churn-risk → out-of-hours archival)
 - Brochure generation flow (Frontify API → completion → delivery)
@@ -126,6 +134,7 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 - Notification preparation and queue routing
 
 ### Still Required
+
 - Activity and requirement state transitions (beyond CDD/opt-in)
 - Property state rules (Fixflo archival, latest-view retention, churn-risk flagging)
 - Tenancy state transitions (SLM, started/ended events, out-of-hours archival)
@@ -151,12 +160,14 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 ## Documentation Changes Made
 
 ### Files Modified
+
 1. [README.md](./README.md) — Updated task status to reflect completion progress
 2. [message-transport-inventory.md](../Architecture & Infrastructure/message-transport-inventory.md) — Added 60+ row handler catalog table
 3. [process-flows.md](../Architecture & Infrastructure/process-flows.md) — Added 8 Mermaid flowchart diagrams
 4. [business-rules.md](../Architecture & Infrastructure/business-rules.md) — Added 22 Gherkin scenarios across 5 feature areas
 
 ### New Files Created
+
 1. `TASK-COMPLETION-SUMMARY.md` (this file) — Overview of all work completed
 2. `NEXT-STEPS.md` — Detailed action items and remaining work
 
@@ -182,18 +193,21 @@ Created 22+ Gherkin scenario specifications in [business-rules.md](../Architectu
 ## Methodology
 
 ### Approach
+
 - Comprehensive source code exploration (27 WebJob modules, 100+ handler classes)
 - Handler discovery and validation logic extraction
 - Incremental documentation (handlers table → process flows → business rules)
 - Source citations for traceability
 
 ### Tools Used
+
 - ripgrep for pattern matching across source
 - PowerShell for file discovery and analysis
 - Mermaid flowcharts for process visualization
 - Gherkin BDD format for business rule specification
 
 ### Quality Assurance
+
 - All 27 WebJob modules catalogued and verified
 - Gherkin scenarios cross-checked against handler source logic
 - Mermaid diagrams aligned with actual handler flows

@@ -71,6 +71,7 @@
 ## 📊 Content Checklist
 
 ### Core Entities ✅
+
 - [x] Contact (entity, relationships, validation)
 - [x] Property (entity, relationships, validation)
 - [x] Activity (entity, relationships, state machine, validation)
@@ -79,6 +80,7 @@
 - [x] Offer (entity, relationships, state machine)
 
 ### Business Processes ✅
+
 - [x] Contact management
 - [x] Property/Ownership management
 - [x] Activity lifecycle (Lettings, Sales, Purchases)
@@ -87,6 +89,7 @@
 - [x] Compliance (CDD, Right-to-Rent)
 
 ### API Documentation ✅
+
 - [x] Workflow 1: Lettings (19 steps)
 - [x] Workflow 2: Sales/Chain (10 steps)
 - [x] Workflow 3: Auto-matching (7 steps)
@@ -97,6 +100,7 @@
 - [x] 50+ endpoints documented
 
 ### State Machines ✅
+
 - [x] Activity state machine (7 states)
 - [x] Requirement state machine (6 states)
 - [x] Tenancy state machine (8 states)
@@ -105,12 +109,14 @@
 - [x] Property validation rules
 
 ### Validation Rules ✅
+
 - [x] 51 Gherkin scenarios (all entities)
 - [x] 11 key business rules table
 - [x] 3 state transition validation matrices
 - [x] Implementation guidance
 
 ### Infrastructure ✅
+
 - [x] 60+ WebJob handler catalog
 - [x] 8 Mermaid process flow diagrams
 - [x] 22+ integration business rules
@@ -224,26 +230,31 @@ DRAFT → ACTIVE ⇄ RENEWING → EXPIRED
 ## 👥 Recommended Reading by Role
 
 ### 👨‍💼 Product Manager / Business Analyst
+
 1. [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) — 20 min read
 2. [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) — Pick your workflow (15-30 min)
 3. [README.md](./Planning & Tracking/README.md) — 5 min overview
 
 ### 👨‍💻 Backend Developer
+
 1. [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) — 30 min read
 2. [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) — 45 min reference
 3. [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) — Entity relationships (15 min)
 
 ### 🏗️ Architect / Technical Lead
+
 1. [architecture-blueprint.md](./Architecture & Infrastructure/architecture-blueprint.md) — 15 min
 2. [CORE-DOMAIN.md](./Core Business Domain/CORE-DOMAIN.md) — 20 min
 3. [source-inventory.md](./Architecture & Infrastructure/source-inventory.md) — 10 min reference
 
 ### 🧪 QA / Test Engineer
+
 1. [API-WORKFLOWS.md](./Core Business Domain/API-WORKFLOWS.md) — 30 min (test case planning)
 2. [STATE-MACHINES-VALIDATORS.md](./Core Business Domain/STATE-MACHINES-VALIDATORS.md) — 45 min (Gherkin scenarios)
 3. [business-rules.md](./Architecture & Infrastructure/business-rules.md) — 15 min reference
 
 ### 🛠️ DevOps / Operations
+
 1. [message-transport-inventory.md](./Architecture & Infrastructure/message-transport-inventory.md) — 20 min
 2. [process-flows.md](./Architecture & Infrastructure/process-flows.md) — 15 min
 3. (Task #7 - Awaiting operations documentation)

@@ -537,6 +537,7 @@ Feature: Property Creation and Validation
 ## 8. State Transition Validation Matrix
 
 ### How to Read This Table
+
 - **Rows** = Current State
 - **Columns** = Target State
 - **Cell Content** = ✅ (allowed), ❌ (not allowed), ⚠️ (conditional)
@@ -590,6 +591,7 @@ CANCELLED  ❌   |   ❌   |    ❌    |   ❌   |     ❌      |     ❌      |
 ## Implementation Notes
 
 ### State Storage
+
 - States stored as **foreign key references** to reference data tables (not C# enums)
   - Allows runtime configuration of valid states
   - Enables future workflow customization per division/office
@@ -597,12 +599,14 @@ CANCELLED  ❌   |   ❌   |    ❌    |   ❌   |     ❌      |     ❌      |
 - State change events published to message queue for integrations
 
 ### Validation Enforcement Points
+
 - **Pre-save validation**: Catch violations before database insert
 - **Pre-transition validation**: Enforce state machine rules during status updates
 - **Post-save events**: Publish domain events (Activity.StateChanged) for async workflows
 - **Query-time filtering**: Soft-deleted, expired, and archived records excluded by default
 
 ### Testing Strategy
+
 - Unit tests for each valid state transition
 - Unit tests for each invalid transition attempt
 - Integration tests for cross-entity validations (e.g., Contact + Activity + Tenancy workflow)

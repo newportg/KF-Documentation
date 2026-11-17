@@ -204,17 +204,20 @@ Document which handlers are idempotent and which are not:
 ## Working Strategy
 
 ### Phase 1 (1-2 days) — Immediate
+
 1. ✓ DONE: Handler catalog + process flows + business rules (Thirdfort, opt-in, CDD, notifications)
 2. → NEXT: Extract email consent and tenancy rules (Task #5a, #5b)
 3. → NEXT: Create tenancy lifecycle and brochure generation flows (Task #4a, #4b)
 
 ### Phase 2 (2-3 days) — High-Value
+
 1. → Collect physical queue/topic names from DevOps (Task #2)
 2. → Add activity/requirement state transition rules (Task #5c)
 3. → Create integration result handler flows (Task #4c)
 4. → Document error-handling flows for top-5 handlers
 
 ### Phase 3 (Blocking) — External Review
+
 1. → Subject-matter expert review and sign-off (Task #6)
 2. → Production configuration and operations handoff (Task #7)
 3. → Document monitoring, retry, security, and runbooks

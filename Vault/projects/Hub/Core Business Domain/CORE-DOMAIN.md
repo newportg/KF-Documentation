@@ -422,6 +422,7 @@ Draft → Activated → Live → Completed → Expired/Surrendered
 ## Core Business Rules and Validations
 
 ### Contact Rules
+
 - Contact must have at least one negotiator assignment
 - Contact consents must be managed (CDD, marketing, newsletters)
 - Soft opt-in consent expires after configured period
@@ -430,6 +431,7 @@ Draft → Activated → Live → Completed → Expired/Surrendered
 - Contact relationships to companies, properties, requirements must be maintained
 
 ### Activity Rules
+
 - Activity must reference valid property
 - Activity type must match property type (can't rent out a sale-only property)
 - Party roles must be valid for activity type (vendor required for sales, landlord for lettings)
@@ -441,6 +443,7 @@ Draft → Activated → Live → Completed → Expired/Surrendered
 - Marketing expiry controls Fixflo/advertising lifecycle
 
 ### Requirement Rules
+
 - Requirement must have applicant contact
 - Requirement criteria must be internally consistent (price range: min ≤ max)
 - Requirement status controls allowed changes (can't match if completed/withdrawn)
@@ -450,6 +453,7 @@ Draft → Activated → Live → Completed → Expired/Surrendered
 - Hotness score affects priority in matching
 
 ### Tenancy Rules
+
 - Tenancy must reference property and have required parties
 - Commencement date must be after completion/agreement date
 - Expiry date must be after commencement date

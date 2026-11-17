@@ -100,6 +100,7 @@ This represents a **major shift from infrastructure-only documentation** to **bu
 ---
 
 ### 3. Updated README.md
+
 - Added "Core Business Domain Documentation" section with links to new files
 - Updated "Completed in this pass" with 4 checkpoints
 - Updated "Outstanding tasks" (Task #6 now shows core domain complete)
@@ -120,6 +121,7 @@ This represents a **major shift from infrastructure-only documentation** to **bu
 | Offer | Activity, Offeror | ✅ 5 states | Implicit | POST/PUT | 2 workflows |
 
 ### Business Processes (Documented with APIs & Flows ✅)
+
 1. ✅ Lettings (Activity → Requirement → Offer → Tenancy)
 2. ✅ Sales (Activity → Chain linked Activities → Completion)
 3. ✅ Requirement Auto-Matching (Scheduler → Match → Viewing Tour)
@@ -128,6 +130,7 @@ This represents a **major shift from infrastructure-only documentation** to **bu
 6. ✅ Compliance (CDD + Right-to-Rent verification)
 
 ### Validation Rules (Captured as Gherkin ✅)
+
 - **State Transition Rules:** 24 scenarios across all entities
 - **Contact Rules:** 6 scenarios (required fields, merge, negotiator, deduplication)
 - **Property Rules:** 5 scenarios (address, ownership, characteristics, multi-tenancy)
@@ -242,22 +245,26 @@ Hub Documentation Root
 ## Next Steps for Users
 
 ### For Business Analysts
+
 1. Review CORE-DOMAIN.md to understand entity relationships
 2. Follow API-WORKFLOWS.md for 6 real-world user journeys
 3. Use STATE-MACHINES-VALIDATORS.md as reference for business rules
 
 ### For Developers
+
 1. Review API-WORKFLOWS.md for expected API behavior
 2. Use STATE-MACHINES-VALIDATORS.md as specification for validation logic
 3. Reference CORE-DOMAIN.md for entity relationships and business context
 4. Cross-check Gherkin scenarios in STATE-MACHINES-VALIDATORS.md with existing code
 
 ### For Operations/Deployment
+
 1. Awaiting Task #7 (Operations documentation) for production setup
 2. Use message-transport-inventory.md to understand async message handling
 3. Use process-flows.md to track system events end-to-end
 
 ### For Compliance/Review
+
 1. Submit STATE-MACHINES-VALIDATORS.md and API-WORKFLOWS.md to subject-matter expert for validation
 2. Flag any mismatches with actual Hub behavior
 3. Provide feedback on missing workflows or state transitions
