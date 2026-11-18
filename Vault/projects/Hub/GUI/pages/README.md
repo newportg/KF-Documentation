@@ -31,20 +31,20 @@ Angular module.
 
 | Area | P0 route | P1 structure | P2 field/validation | P3 sizing/visual | P4 rendered comparison |
 |---|---:|---:|---:|---:|---:|
-| Dashboard | Yes | Yes | Partial | In progress | Pending |
-| Contact | Yes | Yes | Yes* | Pending | Pending |
-| Company | Yes | Yes | Yes* | Pending | Pending |
-| Property/assets | Yes | Yes | Yes* | Pending | Pending |
-| Activity | Yes | Yes | Yes* | Pending | Pending |
-| Requirement | Yes | Yes | Yes* | Pending | Pending |
-| Tenancy | Yes | Yes | Yes* | Pending | Pending |
-| Offer | Yes | Yes | Yes* | Pending | Pending |
-| Instruction/pitch/referral | Yes | Yes | Yes* | Pending | Pending |
-| Marketing lists | Yes | Yes | Yes* | Pending | Pending |
-| Reports | Yes | Yes | Yes* | Pending | Pending |
-| Administration/configuration | Yes | Yes | Yes* | Pending | Pending |
-| Development/building/estate/phase/portfolio | Yes | Yes | Yes* | Pending | Pending |
-| Quick create/preferences/outcomes | Yes | Yes | Yes* | Pending | Pending |
+| Dashboard | Yes | Yes | Partial | Yes* | Pending |
+| Contact | Yes | Yes | Yes* | Yes* | Pending |
+| Company | Yes | Yes | Yes* | Yes* | Pending |
+| Property/assets | Yes | Yes | Yes* | Yes* | Pending |
+| Activity | Yes | Yes | Yes* | Yes* | Pending |
+| Requirement | Yes | Yes | Yes* | Yes* | Pending |
+| Tenancy | Yes | Yes | Yes* | Yes* | Pending |
+| Offer | Yes | Yes | Yes* | Yes* | Pending |
+| Instruction/pitch/referral | Yes | Yes | Yes* | Yes* | Pending |
+| Marketing lists | Yes | Yes | Yes* | Yes* | Pending |
+| Reports | Yes | Yes | Yes* | Yes* | Pending |
+| Administration/configuration | Yes | Yes | Yes* | Yes* | Pending |
+| Development/building/estate/phase/portfolio | Yes | Yes | Yes* | Yes* | Pending |
+| Quick create/preferences/outcomes | Yes | Yes | Yes* | Yes* | Pending |
 
 `Pending` means the source has not yet been converted into a stable vault
 contract. It does not mean that the source feature is absent.
@@ -52,6 +52,10 @@ contract. It does not mean that the source feature is absent.
 `Yes*` means the source-derived P2 contract is complete and runtime-provided
 values are explicitly represented as configuration/API dependencies. It does
 not claim that those runtime values are hard-coded into the vault.
+
+For P3, `Yes*` means the shared visual contract and the applicable
+page-family layout contract are complete, with supplied screenshot references
+where available. Rendered comparison remains P4.
 
 ## Required page document format
 

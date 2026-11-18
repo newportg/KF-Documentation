@@ -68,7 +68,8 @@ wide desktop viewport.
 
 ## Limitations
 
-These captures establish one wide desktop state only. They do not yet establish:
+These captures establish the wide-desktop evidence used by the P3 visual
+contract. They do not by themselves establish:
 
 - exact CSS pixel dimensions independent of image scaling;
 - mobile or narrow-screen behavior;
@@ -77,9 +78,9 @@ These captures establish one wide desktop state only. They do not yet establish:
 - populated report results or create-save outcomes;
 - whether the displayed data is representative of all service lines.
 
-## Capture metadata still needed
+## P4 capture metadata
 
-For each future capture, record:
+For each future P4 comparison capture, record:
 
 - route;
 - browser and version;

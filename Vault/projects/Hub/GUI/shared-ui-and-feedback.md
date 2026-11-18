@@ -124,8 +124,9 @@ support target. Detailed responsive breakpoints, field ordering, and
 screen-specific layout behavior still require visual review of the templates
 and styles.
 
-Responsive behavior is therefore confirmed for the shell navigation, but not
-yet specified as a complete responsive contract for every domain screen.
+The complete framework-neutral responsive contract is recorded in
+[`p3-visual-contract.md`](./p3-visual-contract.md). Rendered breakpoint
+captures and pixel tuning remain P4 verification work.
 
 ## Route reuse and refresh behavior
 

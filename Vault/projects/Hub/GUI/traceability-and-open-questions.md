@@ -62,7 +62,7 @@ source-confirmed behavior:
 |---|---|---|
 | How is navigation protected when edits are incomplete? | Selected edit and administration routes use a navigation-block guard and confirmation modal; browser unload is also blocked while the service is active. | Confirmed, partial route coverage |
 | How are common HTTP failures handled? | `403` navigates to `noAccess`, `404` to `notFound`, `408` and `5xx` show a shared HTTP error, and `503` reloads the application. Some `400`, `401`, and `405` paths retain migration TODOs. | Confirmed, with incomplete legacy paths |
-| What responsive behavior exists? | The main menu observes small and extra-small breakpoints and switches to mobile mode. | Confirmed for shell; screen-level behavior open |
+| What responsive behavior exists? | The main menu observes small and extra-small breakpoints and switches to mobile mode; page-family collapse and overflow rules are documented in the P3 visual contract. | P3 specified; rendered breakpoint verification is P4 |
 | Which supported browser should be used for parity verification? | The pre-production dashboard and OpenAPI endpoint are usable in Edge, while the user reports issues in Chrome. Source documentation previously indicated a Chrome preference, so the deployed behavior and source expectation currently disagree. | Confirmed discrepancy; browser investigation required |
 | What loading behavior exists? | Busy containers, page spinners, labels, and component-level busy flags are used for asynchronous work. | Confirmed; exact empty-state copy varies by screen |
 | Is route state retained? | A custom route-reuse strategy can preserve or reset a component based on route config, reset mode, query parameters, or route parameter changes. | Confirmed |
@@ -86,8 +86,8 @@ that the behavior is the desired future product behavior.
 
 ### Questions narrowed by source review
 
-- The current mobile requirement is limited to a responsive navigation mode;
-  screen-level responsive requirements still need a decision.
+- The current source establishes responsive navigation and Bootstrap-style
+  page-family behavior. Rendered breakpoint verification remains P4.
 - Draft protection exists on selected routes, but the complete list of routes
   that must protect unsaved work needs product confirmation.
 - Browser support is currently signaled toward Chrome in source, but the

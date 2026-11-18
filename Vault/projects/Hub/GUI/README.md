@@ -24,6 +24,7 @@ important.
 |---|---|
 | [Parity specification](./PARITY-SPECIFICATION.md) | Rules for producing a faithful replacement from the vault |
 | [Layout and sizing](./layout-and-sizing.md) | Measured shell dimensions and layout conventions |
+| [P3 visual contract](./p3-visual-contract.md) | Framework-neutral visual, layout, responsive, and feedback contract |
 | [Page specifications](./pages/README.md) | Page-by-page parity inventory and coverage |
 | [Navigation and access](./navigation-and-access.md) | Application shell, navigation, recent-item drawers, routes, and role visibility |
 | [Screen catalogue](./screen-catalogue.md) | Screen families and the responsibilities of each domain area |
