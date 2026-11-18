@@ -66,11 +66,47 @@ relationship panels must distinguish:
 This distinction is important for a replacement because an empty result is not
 the same as an unavailable service.
 
+## Unsaved changes and navigation
+
+Unsaved-change protection is implemented, but it is not a global rule for
+every form:
+
+- selected edit and administration routes use a navigation-block guard;
+- a blocked route opens a confirmation modal before navigation;
+- browser-level navigation also registers a `beforeunload` handler;
+- confirming the discard unblocks navigation and clears the browser handler;
+- the quick-create, activity add/edit/view, instruction, and selected
+  administration flows are among the routes using this behavior;
+- other forms must be checked individually rather than assumed to have the
+  same protection.
+
+The replacement should make the scope of draft protection explicit and should
+not silently lose edits when a user changes route, closes a panel, or leaves
+the browser.
+
 ## Errors and notifications
 
 Shared HTTP behavior handles XSS-related processing, API errors, date
 conversion, and proxy-user context. API errors are surfaced through common
 feedback rather than silently converted into successful results.
+
+The current global HTTP outcomes are:
+
+| Response | Current GUI outcome |
+|---|---|
+| `400` | GET responses may show formatted API errors; some legacy branches remain migration TODOs |
+| `401` | The interceptor contains a migration TODO; a definitive current redirect is not evidenced here |
+| `403` | Navigate to the no-access screen |
+| `404` | Navigate to the not-found screen |
+| `405` | The interceptor contains a migration TODO |
+| `408` | Show the shared HTTP response error |
+| `503` | Reload the application to display the offline state |
+| `500-599` | Show the shared HTTP response error |
+
+Successful responses can also carry `X-ErrorMessages` and
+`X-WarningMessages` headers, which are queued for shared display. This means
+the replacement API contract must support both HTTP failures and successful
+responses containing user-visible warnings.
 
 Toasts are positioned at the top center, prevent duplicates, include a close
 button, and remain available long enough for the user to read them. The
@@ -84,6 +120,31 @@ mode. The shell also displays a browser compatibility message when the current
 browser is not Chrome. Detailed responsive breakpoints, field ordering, and
 screen-specific layout behavior still require visual review of the templates
 and styles.
+
+Responsive behavior is therefore confirmed for the shell navigation, but not
+yet specified as a complete responsive contract for every domain screen.
+
+## Route reuse and refresh behavior
+
+The current GUI does not always recreate a screen when navigation changes. A
+custom route-reuse policy can preserve the current component or reset it based
+on:
+
+- the route's reset mode;
+- empty query parameters;
+- any route-parameter change.
+
+Replacement screens should define when filters, selected tabs, scroll
+position, and unsaved form state are retained versus reloaded.
+
+## Accessibility evidence and limits
+
+The source includes accessible behavior in places, including hidden decorative
+icons, material labels, close-button labels, and keyboard-oriented controls
+such as autocomplete. However, the source review does not establish complete
+keyboard traversal, focus order, screen-reader announcements, contrast,
+touch-target, or error-announcement compliance for the whole application.
+Accessibility remains a validation activity, not a resolved behavior.
 
 ## Localization and configuration
 

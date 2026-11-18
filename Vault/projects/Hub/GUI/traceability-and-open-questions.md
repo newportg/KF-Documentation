@@ -41,6 +41,23 @@
 - Required fields and workflow steps for every service line and market.
 - The intended user experience for errors, empty states, and exceptional paths.
 
+## Source review findings
+
+The following questions have been progressed from open questions to
+source-confirmed behavior:
+
+| Question | Source finding | Status |
+|---|---|---|
+| How is navigation protected when edits are incomplete? | Selected edit and administration routes use a navigation-block guard and confirmation modal; browser unload is also blocked while the service is active. | Confirmed, partial route coverage |
+| How are common HTTP failures handled? | `403` navigates to `noAccess`, `404` to `notFound`, `408` and `5xx` show a shared HTTP error, and `503` reloads the application. Some `400`, `401`, and `405` paths retain migration TODOs. | Confirmed, with incomplete legacy paths |
+| What responsive behavior exists? | The main menu observes small and extra-small breakpoints and switches to mobile mode. | Confirmed for shell; screen-level behavior open |
+| What loading behavior exists? | Busy containers, page spinners, labels, and component-level busy flags are used for asynchronous work. | Confirmed; exact empty-state copy varies by screen |
+| Is route state retained? | A custom route-reuse strategy can preserve or reset a component based on route config, reset mode, query parameters, or route parameter changes. | Confirmed |
+| Is accessibility complete? | The source contains some ARIA labels/hidden decorative icons and labelled controls, but no whole-application accessibility evidence. | Partial; audit required |
+
+These findings are implementation facts. They do not by themselves establish
+that the behavior is the desired future product behavior.
+
 ## Open UX questions
 
 1. Which screens and panels are used most frequently by each user role?
@@ -52,6 +69,17 @@
 7. Which workflows need unsaved-change warnings or draft recovery?
 8. Which long-running operations need progress, cancellation, or resumability?
 
+### Questions narrowed by source review
+
+- The current mobile requirement is limited to a responsive navigation mode;
+  screen-level responsive requirements still need a decision.
+- Draft protection exists on selected routes, but the complete list of routes
+  that must protect unsaved work needs product confirmation.
+- Browser support is currently signaled toward Chrome, but the supported
+  replacement browser matrix is undecided.
+- Accessibility cannot be inferred as complete from the existing ARIA usage;
+  a target standard and test scope are still needed.
+
 ## Open behavioral questions
 
 1. Which client-side defaults and calculations are contractual?
@@ -61,6 +89,17 @@
 5. What are the concurrency and stale-data rules when two users edit a record?
 6. What should the user see when an asynchronous integration is pending or
    fails?
+
+### Behaviors now evidenced by source
+
+- State-change validation is a server call followed by conditional panels,
+  confirmation, command submission, and refresh.
+- HTTP authorization and not-found failures have distinct navigation outcomes.
+- General server warnings and error headers are queued for shared display.
+- Long-running actions can use a labelled page spinner or busy container, but
+  cancellation and resumability are not established as general behavior.
+- Route reuse can preserve a screen or force a reset when route parameters or
+  query state changes.
 
 ## Documentation limits
 
