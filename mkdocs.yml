@@ -47,6 +47,14 @@ nav:
           - Process flows: projects/Hub/Architecture & Infrastructure/process-flows.md
           - Business rules: projects/Hub/Architecture & Infrastructure/business-rules.md
           - Angular GUI analysis: projects/Hub/Architecture & Infrastructure/angular-gui-analysis.md
+      - GUI:
+          - GUI documentation: projects/Hub/GUI/README.md
+          - Navigation and access: projects/Hub/GUI/navigation-and-access.md
+          - Screen catalogue: projects/Hub/GUI/screen-catalogue.md
+          - User interactions and workflows: projects/Hub/GUI/user-interactions-and-workflows.md
+          - Shared UI and feedback: projects/Hub/GUI/shared-ui-and-feedback.md
+          - API interaction contract: projects/Hub/GUI/api-interaction-contract.md
+          - Traceability and open questions: projects/Hub/GUI/traceability-and-open-questions.md
       - Planning & Tracking:
           - Project Overview: projects/Hub/Planning & Tracking/README.md
           - Next Steps: projects/Hub/Planning & Tracking/NEXT-STEPS.md
