@@ -1,7 +1,7 @@
 # Hub documentation planning and tracking
 
-**Status:** Source-derived documentation substantially complete; production validation and review remain open
-**Last updated:** 2026-11-17
+**Status:** Source-derived documentation substantially complete; GUI parity P0-P3 complete; production validation and review remain open
+**Last updated:** 2026-11-18
 
 This directory contains the current status and backlog for the Hub documentation. Historical checkpoint summaries are retained for traceability but are not the source of current counts or task status.
 
@@ -15,7 +15,7 @@ This directory contains the current status and backlog for the Hub documentation
 | API workflows | Complete for source review | Six end-to-end workflows are documented. |
 | Process flows | Substantially complete | 12 Mermaid process-flow diagrams are documented. |
 | Business rules | Substantially complete | 41 integration-rule scenarios plus 33 state-machine scenarios are documented. |
-| Angular GUI analysis | Baseline added | GUI structure, entities, processes, validations, layouts, API call patterns, and embedded client-side rules are documented; detailed UX review remains open. |
+| Angular GUI analysis | P0-P3 complete | Routes, page contracts, field/validation schemas, visual/layout contract, responsive rules, feedback states, and supplied screenshot evidence are documented; replacement implementation and P4 comparison remain open. |
 | Queue/topic configuration | Partial | Dev/local names are in repository configuration; deployment changes the environment token to `prd`, while transport policies remain unverified. |
 | SME review | Not started | Business and technical validation is still required. |
 | Operations handoff | Not started | Production monitoring, retry, security, SLA, and runbook information is still required. |
@@ -33,6 +33,9 @@ Verification status is tracked in the [verification register](./TASK-COMPLETION-
 - Documented state machines, validators, and transition matrices in [STATE-MACHINES-VALIDATORS.md](../Core%20Business%20Domain/STATE-MACHINES-VALIDATORS.md).
 - Added [angular-gui-analysis.md](../Architecture%20%26%20Infrastructure/angular-gui-analysis.md) covering Angular structure, entities, processes, validations, screen layouts, and API call layout.
 - Classified embedded GUI rules as client-enforced, server-backed, or implementation-inferred.
+- Completed the framework-neutral GUI parity specification through P3: route coverage,
+  page contracts, validation schemas, visual/layout contract, responsive rules,
+  feedback states, and screenshot evidence.
 - Recorded local/development queue, topic, and subscription values from checked-in configuration.
 - Enabled MkDocs strikeout rendering with `pymdownx.tilde`.
 
@@ -44,7 +47,8 @@ Verification status is tracked in the [verification register](./TASK-COMPLETION-
 | High | Confirm retry, visibility timeout, dead-letter, poison-message, and idempotency policies | DevOps / Operations | Operational transport rules |
 | High | Review core entities, workflows, state transitions, and business rules | Hub SME / Product | Corrections and approval |
 | High | Document monitoring, alerting, security, ownership, SLAs, deployment, rollback, and incident response | Operations / Security / DevOps | Operations handoff |
-| Medium | Review Angular GUI analysis against HTML/SCSS layouts and product behaviour | Front-end SME / Product | Confirmed screen and API map |
+| Medium | Implement replacement GUI and complete P4 rendered comparison against the P0-P3 parity specification | Engineering / Front-end SME | Replacement screens, canonical screenshots, and comparison results |
+| Medium | Review GUI parity specification and replacement behavior with product | Front-end SME / Product | Corrections, approval, and browser/accessibility decisions |
 | Medium | Add activity and requirement handler-level transition rules | Engineering / Product | Additional source-derived rules |
 | Medium | Add property contact-change, user reassignment, and search projection flows | Engineering | Mermaid process flows |
 | Medium | Add top-handler error, retry, and reconciliation flows | Engineering / Operations | Error-path diagrams and rules |

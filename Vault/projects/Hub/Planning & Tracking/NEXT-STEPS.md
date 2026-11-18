@@ -46,16 +46,36 @@ This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-S
 - Add error, retry, reconciliation, and idempotency flows for the highest-risk handlers.
 - Add remaining document visibility and notification scheduling rules.
 
-## 5. Angular GUI review — medium priority
+## 5. Replacement GUI and P4 verification — medium priority
 
-**Status:** Source-derived baseline completed; detailed UX review pending
+**Status:** P0-P3 source-derived contract complete; replacement implementation not started
 
-- Review [angular-gui-analysis.md](../Architecture%20%26%20Infrastructure/angular-gui-analysis.md).
-- Confirm screen layouts, field ordering, responsive behaviour, and navigation with a front-end SME.
-- Confirm each major screen's API calls against the generated services and current API specification.
-- Record any UI-only validation, missing screens, or discrepancies between GUI behaviour and domain documentation.
+- Use the [GUI parity specification](../GUI/PARITY-SPECIFICATION.md),
+  [P2 field catalogue](../GUI/p2-field-catalogue.md), and
+  [P3 visual contract](../GUI/p3-visual-contract.md) as the implementation
+  contract.
+- Build the replacement without depending on Angular module boundaries.
+- Capture replacement screens at the supplied wide-desktop viewport and at the
+  source responsive breakpoints.
+- Compare representative routes, populated states, loading/empty/error states,
+  modals, role variants, and browser behavior.
+- Record pixel/layout differences and resolve them before declaring P4 complete.
 
-**Deliverable:** Reviewed Angular GUI analysis with corrections and approval recorded in the verification register.
+**Deliverable:** Replacement GUI with P4 rendered comparison and review notes
+recorded in the verification register.
+
+## 6. GUI product and accessibility review — medium priority
+
+**Status:** Pending reviewer availability
+
+- Confirm mandatory versus configurable fields, columns, panels, and tabs.
+- Confirm supported browsers and resolve the Edge/Chrome discrepancy.
+- Confirm keyboard navigation, focus order, announcements, contrast, and touch
+  target requirements.
+- Confirm which source-derived behavior is approved product policy.
+
+**Deliverable:** Product, browser, and accessibility decisions recorded against
+the GUI parity specification.
 
 ## Definition of done
 
