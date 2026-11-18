@@ -1,0 +1,2884 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Architecture, process, and business documentation for Knight Frank Hub">
+      
+      
+      
+      
+        <link rel="prev" href="../CORE-DOMAIN/">
+      
+      
+        <link rel="next" href="../STATE-MACHINES-VALIDATORS/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>API Workflows - KF Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hub-api-workflows-main-user-journeys-and-integration-points" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KF Documentation" class="md-header__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KF Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Workflows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KF Documentation" class="md-nav__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KF Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hub
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hub
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-WELCOME/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome & Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QUICK-REFERENCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Business Domain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Business Domain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CORE-DOMAIN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Workflows
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-1-create-and-market-a-property-lettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 1: Create and Market a Property (Lettings)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 1: Create and Market a Property (Lettings)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-2-buysell-activity-with-chain-transaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 2: Buy/Sell Activity with Chain Transaction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 2: Buy/Sell Activity with Chain Transaction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-3-requirement-auto-matching-and-viewing-tour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 3: Requirement Auto-Matching and Viewing Tour
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 3: Requirement Auto-Matching and Viewing Tour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-4-tenancy-renewal-and-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 4: Tenancy Renewal and Extension
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 4: Tenancy Renewal and Extension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-5-property-with-multiple-tenancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 5: Property with Multiple Tenancies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 5: Property with Multiple Tenancies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-6-cdd-compliance-and-right-to-rent-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 6: CDD Compliance and Right-to-Rent Checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 6: CDD Compliance and Right-to-Rent Checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-api-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key API Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key API Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern-1-create-entity-add-related-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 1: Create Entity + Add Related Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-2-status-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 2: Status Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-3-matching-and-linking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 3: Matching and Linking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-4-compliance-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 4: Compliance Gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-5-event-cascades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 5: Event Cascades
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-diagram-complete-property-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram: Complete Property Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STATE-MACHINES-VALIDATORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines & Validators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture & Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture & Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/architecture-blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture blueprint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/source-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/message-transport-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Message and transport inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/process-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/business-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/angular-gui-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular GUI analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/PARITY-SPECIFICATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parity specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/layout-and-sizing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Layout and sizing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Page specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/route-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Route inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/core-form-specifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core form specifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/property/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/requirement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/tenancy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenancy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/company/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Company
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/offer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Offer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/instruction-pitch-referral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instruction, pitch, and referral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/marketing-reports-administration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Marketing, reports, and administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/navigation-and-access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation and access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/screen-catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screen catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/user-interactions-and-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interactions and workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/shared-ui-and-feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared UI and feedback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/api-interaction-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interaction contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/traceability-and-open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Traceability and open questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning & Tracking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Planning & Tracking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/NEXT-STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/TASK-COMPLETION-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-1-create-and-market-a-property-lettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 1: Create and Market a Property (Lettings)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 1: Create and Market a Property (Lettings)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-2-buysell-activity-with-chain-transaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 2: Buy/Sell Activity with Chain Transaction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 2: Buy/Sell Activity with Chain Transaction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-3-requirement-auto-matching-and-viewing-tour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 3: Requirement Auto-Matching and Viewing Tour
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 3: Requirement Auto-Matching and Viewing Tour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-4-tenancy-renewal-and-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 4: Tenancy Renewal and Extension
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 4: Tenancy Renewal and Extension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-5-property-with-multiple-tenancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 5: Property with Multiple Tenancies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 5: Property with Multiple Tenancies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-6-cdd-compliance-and-right-to-rent-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow 6: CDD Compliance and Right-to-Rent Checks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow 6: CDD Compliance and Right-to-Rent Checks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-sequence_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-api-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key API Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key API Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern-1-create-entity-add-related-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 1: Create Entity + Add Related Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-2-status-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 2: Status Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-3-matching-and-linking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 3: Matching and Linking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-4-compliance-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 4: Compliance Gates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern-5-event-cascades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern 5: Event Cascades
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-diagram-complete-property-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram: Complete Property Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hub-api-workflows-main-user-journeys-and-integration-points">Hub API Workflows - Main User Journeys and Integration Points</h1>
+<h2 id="overview">Overview</h2>
+<p>This document maps the main user workflows through the Hub API endpoints, showing how contacts, properties, activities, requirements, and tenancies interact. Each workflow illustrates a complete business process from start to finish.</p>
+<hr />
+<h2 id="workflow-1-create-and-market-a-property-lettings">Workflow 1: Create and Market a Property (Lettings)</h2>
+<p><strong>Scenario:</strong> Landlord wants to let their office building</p>
+<p><strong>Actors:</strong> Landlord Contact, Negotiator (assigned agent), Property, Activity (lettings instruction), Requirement (tenant looking), Tenancy</p>
+<h3 id="api-sequence">API Sequence</h3>
+<div class="highlight"><pre><span></span><code>1. Create Property
+   POST /properties
+   {
+     address: "123 Business Street, London",
+     propertyType: "Office",
+     division: "Commercial",
+     characteristics: { totalArea: 10000, floors: 3, features: [...] }
+   }
+   → Property ID: prop-001
+
+2. Add Ownership
+   POST /properties/prop-001/ownerships
+   {
+     ownerContactId: contact-landlord-001,
+     percentage: 100,
+     managingCompanyId: company-001
+   }
+
+3. Create Lettings Activity (Marketing Instruction)
+   POST /activities
+   {
+     propertyId: prop-001,
+     activityType: "Lettings",
+     activitySubType: "New Let",
+     serviceLine: "Commercial Lettings",
+     parties: [
+       { role: "Landlord", contactId: contact-landlord-001 },
+       { role: "Agent", contactId: contact-agent-001, negotiatorId: negotiator-001 }
+     ],
+     status: "Live"
+   }
+   → Activity ID: act-001
+
+4. Set Marketing Details
+   PUT /activities/act-001
+   {
+     marketedDate: "2026-11-17",
+     agencyExpiry: "2027-05-17",
+     quotedRent: 50000,  // annual
+     marketingImages: [image1.jpg, image2.jpg, ...],
+     description: "Modern office space, flexible lease..."
+   }
+
+5. Publish to Fixflo (Marketing Platform)
+   POST /activities/act-001/marketing/fixflo
+   {
+     fixtloReference: "FXF-12345",
+     publishDate: "2026-11-17",
+     listingStatus: "Active"
+   }
+   → Marketing begins, reaches prospective tenants
+
+6. [Matching begins asynchronously]
+   System finds Requirement records matching criteria
+   (Location: London, Space: 8000-15000 sqm, Rent: £40-60k annual)
+
+7. Tenant creates Requirement (separately, by their own API call)
+   POST /requirements
+   {
+     requirementType: "Tenant Requirement",
+     applicantContactId: contact-tenant-001,
+     criteria: {
+       propertyTypes: ["Office"],
+       priceRange: { min: 40000, max: 60000 },
+       sizeRange: { min: 8000, max: 15000 },
+       location: "London",
+       tenantType: "Corporate"
+     },
+     status: "Active"
+   }
+   → Requirement ID: req-001
+
+8. Auto-Match (scheduler runs nightly or on-demand)
+   System matches req-001 to act-001 (property meets criteria)
+
+9. Requirement matches Activity
+   POST /requirements/req-001/matches/act-001
+   {
+     matchScore: 0.95,  // 95% match
+     reasonForMatch: "Size, rent, location all match tenant criteria"
+   }
+   → Match ID: match-001
+
+10. Tenant views matched properties and schedules viewing
+    POST /requirements/req-001/viewings
+    {
+      activityId: act-001,
+      preferredDate: "2026-11-25",
+      preferredTime: "14:00"
+    }
+    → Viewing ID: view-001
+    → Negotiator notified
+
+11. Viewing happens, tenant interested, makes Offer
+    POST /activities/act-001/offers
+    {
+      offerorContactId: contact-tenant-001,
+      offeredRent: 45000,
+      proposedCommencement: "2027-01-15",
+      proposedLease: 3,  // 3-year lease
+      leaseTerm: { breaks: [], reviews: ["Annually"] }
+    }
+    → Offer ID: offer-001
+
+12. Landlord accepts Offer
+    PUT /offers/offer-001
+    {
+      status: "Accepted",
+      acceptedDate: "2026-11-26",
+      acceptedRent: 45000
+    }
+
+13. Activity moves to "Under Offer"
+    PUT /activities/act-001/status
+    {
+      status: "Under Offer",
+      statusReason: "Offer accepted from tenant-contact-001",
+      acceptedOfferRent: 45000,
+      agreedCommencement: "2027-01-15"
+    }
+
+14. Activity moves to Completion
+    PUT /activities/act-001/status
+    {
+      status: "Completed",
+      completionDate: "2026-12-20",
+      completionReason: "Lease exchange and completion"
+    }
+
+15. Create Tenancy (from Activity)
+    POST /tenancies
+    {
+      propertyId: prop-001,
+      activityId: act-001,  // Link back to activity
+      requirementId: req-001,  // Link to requirement
+      tenancyType: "Full Repairing",
+      parties: [
+        { role: "Tenant", contactId: contact-tenant-001 },
+        { role: "Landlord", contactId: contact-landlord-001 }
+      ],
+      terms: {
+        completionDate: "2026-12-20",
+        commencementDate: "2027-01-15",
+        expiryDate: "2030-01-14",  // 3-year term
+        rentPerAnnum: 45000,
+        rentPayment: "Quarterly in advance",
+        leaseBreak: null  // No break clause
+      },
+      status: "Draft"
+    }
+    → Tenancy ID: ten-001
+
+16. Right-to-Rent Check
+    POST /tenancies/ten-001/right-to-rent
+    {
+      checkDate: "2026-12-15",
+      companyRegistration: "12345678",
+      directorVerified: true,
+      documentationType: "Certificate of Incorporation"
+    }
+    → Status: "Verified"
+
+17. Activate Tenancy (move to live/active status)
+    PUT /tenancies/ten-001/activate
+    {
+      activationDate: "2027-01-15",
+      rentsCollectionMethod: "Direct Debit",
+      managingAgent: negotiator-001
+    }
+    → Tenancy now LIVE, rent tracking begins
+
+18. [Later: Renewal tracking begins]
+    As expiry date approaches (2030-01-14), system flags for renewal
+    New Renewal record created for decision (renew, let expire, or renegotiate)
+</code></pre></div>
+<p><strong>Outcome:</strong> Property successfully let, tenancy created and activated, rent tracking begins</p>
+<hr />
+<h2 id="workflow-2-buysell-activity-with-chain-transaction">Workflow 2: Buy/Sell Activity with Chain Transaction</h2>
+<p><strong>Scenario:</strong> Investor buying office building; seller must buy another property first (chain)</p>
+<h3 id="api-sequence_1">API Sequence</h3>
+<div class="highlight"><pre><span></span><code>1. Seller creates Activity (Sales Instruction)
+   POST /activities
+   {
+     propertyId: prop-002,
+     activityType: "Sales",
+     activitySubType: "Investment Property",
+     serviceLine: "Commercial Sales",
+     parties: [
+       { role: "Vendor", contactId: contact-seller-001 },
+       { role: "Agent", contactId: contact-agent-001 }
+     ],
+     status: "Live"
+   }
+   → Activity ID: act-seller-001
+
+2. Buyer creates Requirement
+   POST /requirements
+   {
+     requirementType: "Buyer Requirement",
+     applicantContactId: contact-buyer-001,
+     criteria: {
+       propertyTypes: ["Office"],
+       priceRange: { min: 500000, max: 750000 },
+       location: "London",
+       sector: "Commercial",
+       investmentYield: 4.5  // Looking for 4.5%+ yield
+     }
+   }
+   → Requirement ID: req-buyer-001
+
+3. Requirement matched to Activity
+   POST /requirements/req-buyer-001/matches/act-seller-001
+   {
+     matchScore: 0.92
+   }
+   → Match ID: match-buyer-001
+
+4. Buyer's Offer
+   POST /activities/act-seller-001/offers
+   {
+     offerorContactId: contact-buyer-001,
+     offeredPrice: 650000,
+     exchangeDate: "2027-02-15",
+     completionDate: "2027-03-15",
+     conditions: ["Subject to satisfactory survey", "Subject to finance"]
+   }
+   → Offer ID: offer-buyer-001
+
+5. Seller Accepts (but seller must also buy another property first - chain)
+
+   Seller creates their own Requirement (looking to buy replacement property)
+   POST /requirements
+   {
+     requirementType: "Seller/Buyer Requirement",
+     applicantContactId: contact-seller-001,
+     criteria: { /* replacement property criteria */ }
+   }
+   → Requirement ID: req-seller-buying-001
+
+6. Seller finds matching replacement property
+   Activity for replacement property is found/created
+   POST /activities
+   {
+     propertyId: prop-replacement-001,
+     activityType: "Purchase",  // Seller is now buying
+     parties: [
+       { role: "Buyer", contactId: contact-seller-001 },  // Seller acting as buyer
+       { role: "Vendor", contactId: contact-replacement-seller-001 }
+     ]
+   }
+   → Activity ID: act-replacement-001
+
+7. Create Chain Transaction linking both activities
+   POST /activities/act-seller-001/chain-transactions
+   {
+     linkedActivityId: act-replacement-001,
+     chainPosition: 1,  // Position in chain
+     chainDependency: "MUST_COMPLETE_REPLACEMENT_FIRST",
+     chainNotes: "Seller must complete purchase of replacement before selling current property"
+   }
+
+8. Chain activities progress together:
+   - act-replacement-001 → Exchange → Completion (seller buys replacement)
+   - act-seller-001 → Exchange → Completion (seller's original property sold to buyer)
+
+9. Final completion of original sale
+   PUT /activities/act-seller-001/status
+   {
+     status: "Completed",
+     completionDate: "2027-03-15",
+     completionPrice: 650000,
+     exchangeDate: "2027-02-15",
+     chainCompletionSequence: 1  // Completed first in chain
+   }
+
+10. Buyer becomes Owner
+    POST /properties/prop-002/ownerships
+    {
+      ownerContactId: contact-buyer-001,
+      percentage: 100,
+      acquisitionDate: "2027-03-15",
+      acquisitionPrice: 650000
+    }
+</code></pre></div>
+<p><strong>Outcome:</strong> Chain transaction successfully completed, buyer now owns property, seller has completed purchase of replacement property</p>
+<hr />
+<h2 id="workflow-3-requirement-auto-matching-and-viewing-tour">Workflow 3: Requirement Auto-Matching and Viewing Tour</h2>
+<p><strong>Scenario:</strong> Tenant has active requirement; scheduled matcher finds and notifies of matches</p>
+<h3 id="api-sequence_2">API Sequence</h3>
+<div class="highlight"><pre><span></span><code>1. Tenant creates Requirement (earlier workflow step)
+   POST /requirements
+   {
+     type: "Tenant Requirement",
+     applicant: contact-tenant-002,
+     criteria: { ... },
+     status: "Active"
+   }
+   → Requirement ID: req-003
+
+2. [Scheduled Matcher runs - e.g., nightly at 2 AM]
+   Matcher finds all Activities matching req-003 criteria
+   Creates Match records for each suitable activity
+
+3. Negotiator views Requirement and Matches
+   GET /requirements/req-003
+   GET /requirements/req-003/matches
+   → Returns list of matched activities with match scores
+
+4. Negotiator wants to arrange viewing tour for top 3 matches
+   POST /requirements/req-003/viewings
+   {
+     activityIds: [act-003, act-004, act-005],
+     tourDate: "2026-12-05",
+     tourStartTime: "09:00",
+     tourNotes: "Walking tour of three offices in West End"
+   }
+   → Viewing Tour ID: tour-001
+
+5. Viewings scheduled for each activity
+   POST /activities/act-003/appointments
+   {
+     viewingTourId: tour-001,
+     appointmentTime: "09:00",
+     duration: 30,
+     appointmentType: "Viewing"
+   }
+
+   POST /activities/act-004/appointments
+   {
+     viewingTourId: tour-001,
+     appointmentTime: "09:45",
+     duration: 30,
+     appointmentType: "Viewing"
+   }
+
+   POST /activities/act-005/appointments
+   {
+     viewingTourId: tour-001,
+     appointmentTime: "10:30",
+     duration: 30,
+     appointmentType: "Viewing"
+   }
+
+6. Viewings occur, tenant feedback recorded
+   PUT /activities/act-003/appointments/app-001
+   {
+     viewingNotes: "Tenant liked the space, good light, good location",
+     viewingOutcome: "Interested"
+   }
+
+7. Negotiator creates offers for interested properties
+   POST /activities/act-003/offers
+   {
+     offerorContactId: contact-tenant-002,
+     offeredRent: 35000,
+     proposedCommencement: "2027-02-01",
+     proposedLease: 2,
+     conditions: ["Subject to satisfactory survey", "Break clause at year 1"]
+   }
+
+8. Activity and Requirement progress through offer/acceptance/completion workflow
+   (as described in Workflow 1)
+</code></pre></div>
+<p><strong>Outcome:</strong> Requirement matched to multiple properties, viewings arranged and completed, offer made and accepted for one property</p>
+<hr />
+<h2 id="workflow-4-tenancy-renewal-and-extension">Workflow 4: Tenancy Renewal and Extension</h2>
+<p><strong>Scenario:</strong> Tenancy expiry approaching; landlord and tenant need to agree renewal terms</p>
+<h3 id="api-sequence_3">API Sequence</h3>
+<div class="highlight"><pre><span></span><code>1. Tenancy reaching expiry (e.g., 6 months before end date)
+   System flags tenancy for renewal workflow
+   GET /tenancies/ten-002
+   → Expiry date: "2027-01-15" (6 months away)
+
+2. Negotiator initiates renewal process
+   POST /tenancies/ten-002/renewal
+   {
+     renewalOptionDate: "2026-07-15",  // Decision date
+     proposedRenewalTerms: {
+       newExpiryDate: "2030-01-15",  // Another 3 years
+       proposedRent: 46000,  // 2.2% increase
+       rentReviewFrequency: "Annual",
+       proposedBreaks: [{ breakDate: "2028-01-15" }]
+     },
+     renewalNotes: "2.2% increase in line with inflation; tenant-friendly break at 2 years"
+   }
+   → Renewal ID: renew-001
+
+3. Landlord reviews and approves renewal terms
+   PUT /tenancies/ten-002/renewal/renew-001
+   {
+     status: "Approved",
+     approvedDate: "2026-06-30",
+     approvedRent: 46000,
+     approvedExpiryDate: "2030-01-15",
+     approvedBreaks: [{ breakDate: "2028-01-15" }],
+     landlordNotes: "Tenant has been reliable; happy with renewal terms"
+   }
+
+4. Tenant notified of renewal terms
+   Send notification via API (tenant receives via portal/email)
+
+5. Tenant accepts renewal
+   PUT /tenancies/ten-002/renewal/renew-001
+   {
+     tenantAcceptance: "Accepted",
+     tenantAcceptanceDate: "2026-07-01",
+     tenantNotes: "Break clause at year 2 is important for us"
+   }
+
+6. Create new Tenancy record for renewal period
+   POST /tenancies
+   {
+     propertyId: prop-001,
+     previousTenancyId: ten-002,  // Link to prior tenancy
+     parties: [ /* same as previous */ ],
+     terms: {
+       commencementDate: "2027-01-15",  // Start of renewal period
+       expiryDate: "2030-01-15",
+       rentPerAnnum: 46000,
+       breaks: [{ breakDate: "2028-01-15" }]
+     },
+     status: "Draft"
+   }
+   → New Tenancy ID: ten-003
+
+7. Activate new tenancy at commencement
+   PUT /tenancies/ten-003/activate
+   {
+     activationDate: "2027-01-15"
+   }
+
+8. Update rent collection configuration
+   PUT /tenancies/ten-003
+   {
+     rentAmount: 46000,
+     rentPaymentMethod: "Direct Debit",
+     rentPaymentFrequency: "Quarterly in advance"
+   }
+
+9. If tenant doesn't accept renewal:
+   PUT /tenancies/ten-002/status
+   {
+     status: "Expired",
+     expiryDate: "2027-01-15",
+     renewalOutcome: "Tenant vacated; not renewed"
+   }
+   → End of tenancy workflow
+</code></pre></div>
+<p><strong>Outcome:</strong> Tenancy renewed with agreed terms, new tenancy record created, or tenancy ended if not renewed</p>
+<hr />
+<h2 id="workflow-5-property-with-multiple-tenancies">Workflow 5: Property with Multiple Tenancies</h2>
+<p><strong>Scenario:</strong> Multi-let building with 10 tenancies across different units, various renewal dates</p>
+<h3 id="api-sequence_4">API Sequence</h3>
+<div class="highlight"><pre><span></span><code>1. Property structure
+   Property: prop-multilet-001 (whole building)
+     ├─ Unit 1 (1000 sqm): Tenancy ten-m1 (expires 2027-03-15)
+     ├─ Unit 2 (1200 sqm): Tenancy ten-m2 (expires 2028-06-30)
+     ├─ Unit 3 (1500 sqm): Tenancy ten-m3 (expires 2026-12-01) ← SOON
+     ├─ Unit 4 (900 sqm): Tenancy ten-m4 (expires 2027-09-15)
+     └─ ... (6 more units)
+
+2. Negotiator views all property tenancies
+   GET /properties/prop-multilet-001/tenancies
+   → Returns list of all tenancies with status, rent, expiry dates
+
+3. Identify tenancies requiring attention (expiring within 6 months)
+   GET /properties/prop-multilet-001/tenancies?filter=expiryWithin=6months
+   → Returns [ten-m3, ten-m1]
+
+4. For ten-m3 (expiring soon: 2026-12-01)
+
+   POST /tenancies/ten-m3/renewal
+   {
+     renewalOptionDate: "2026-10-01",
+     proposedRenewalTerms: { /* ... */ }
+   }
+
+5. If tenant vacates at end of date:
+   PUT /tenancies/ten-m3/status
+   {
+     status: "Expired",
+     expiryDate: "2026-12-01",
+     vacationDate: "2026-12-01",
+     unitAvailability: "Available for new let"
+   }
+
+6. Create new Activity for re-let (Unit 3)
+   POST /activities
+   {
+     propertyId: prop-multilet-001,
+     unitIdentifier: "Unit 3",
+     activityType: "Lettings",
+     activitySubType: "New Let (Re-let)",
+     quotedRent: 25000,  // per annum
+     status: "Live"
+   }
+
+7. New tenancy created when new tenant found
+   POST /tenancies
+   {
+     propertyId: prop-multilet-001,
+     unitIdentifier: "Unit 3",
+     previousTenancyId: ten-m3,  // Link to previous tenant
+     parties: [ /* new tenant */ ],
+     terms: { /* new terms */ }
+   }
+
+8. Negotiator tracks property occupancy
+   GET /properties/prop-multilet-001/occupancy
+   → Returns: 90% occupied (9 of 10 units let)
+   → Vacant units: ["Unit 3 (re-letting in progress)"]
+</code></pre></div>
+<p><strong>Outcome:</strong> Property portfolio management, multi-tenancy tracking, coordinated renewals and re-letting</p>
+<hr />
+<h2 id="workflow-6-cdd-compliance-and-right-to-rent-checks">Workflow 6: CDD Compliance and Right-to-Rent Checks</h2>
+<p><strong>Scenario:</strong> Activity and tenancy require compliance verification before completion</p>
+<h3 id="api-sequence_5">API Sequence</h3>
+<div class="highlight"><pre><span></span><code>1. Activity/Tenancy created with parties
+   Must verify CDD (Customer Due Diligence) before completion
+
+2. For Activity with vendor requiring CDD:
+   POST /activities/act-001/cdd
+   {
+     vendorContactId: contact-seller-001,
+     complianceRequirement: "Full CDD - Investment property sale &gt;£500k",
+     documentationRequired: ["Proof of identity", "Proof of address", "Corporate structure"]
+   }
+   → CDD ID: cdd-001
+
+3. CDD handler (Thirdfort integration) processes verification
+   POST /cdd-handler/process
+   {
+     cddId: cdd-001,
+     partyContactId: contact-seller-001,
+     partyType: "Company"
+   }
+   → Sends to Thirdfort for verification
+
+4. Thirdfort returns verification results
+   - If verified: CDD status = "Completed", Activity can proceed
+   - If warnings: CDD status = "Warning - Review Required"
+   - If failed: CDD status = "Failed - Cannot proceed"
+
+5. For Tenancy with right-to-rent check (before commencement):
+   POST /tenancies/ten-001/right-to-rent
+   {
+     partyContactId: contact-tenant-001,
+     partyType: "Company",
+     documentationType: "Certificate of Incorporation",
+     documentationDate: "2026-10-01",
+     directorName: "John Doe"
+   }
+   → RTR check sent to external service (e.g., Qube)
+
+6. Right-to-rent verification returns
+   - If verified: RTR status = "Verified", Tenancy can commence
+   - If failed: RTR status = "Failed - Cannot commence"
+
+7. Activity/Tenancy CDD/RTR gates completion/commencement
+   PUT /activities/act-001/status
+   {
+     status: "Completion",
+     completionDate: "2027-03-15",
+     cddVerified: true,  // Must be true to allow completion
+     cddCompletionDate: "2027-02-20"
+   }
+
+   PUT /tenancies/ten-001/activate
+   {
+     activationDate: "2027-01-15",
+     rightToRentVerified: true,  // Must be true to allow commencement
+     rightToRentVerificationDate: "2026-12-20"
+   }
+</code></pre></div>
+<p><strong>Outcome:</strong> Compliance verified before activity completion and tenancy commencement</p>
+<hr />
+<h2 id="key-api-patterns">Key API Patterns</h2>
+<h3 id="pattern-1-create-entity-add-related-data">Pattern 1: Create Entity + Add Related Data</h3>
+<div class="highlight"><pre><span></span><code>POST /contacts → GET contact
+POST /contacts/{id}/addresses → Add multiple addresses
+POST /contacts/{id}/phones → Add contact numbers
+PUT /contacts/{id} → Update properties
+</code></pre></div>
+<h3 id="pattern-2-status-transitions">Pattern 2: Status Transitions</h3>
+<div class="highlight"><pre><span></span><code>Activity: Live → Under Offer → Completion → Completed
+Tenancy: Draft → Activated → Live → Renewed/Expired/Surrendered
+Requirement: Active → Matched → Completed/Withdrawn
+</code></pre></div>
+<h3 id="pattern-3-matching-and-linking">Pattern 3: Matching and Linking</h3>
+<div class="highlight"><pre><span></span><code>POST /requirements/{id}/matches/{activity-id} → Link requirement to activity
+POST /activities/{id}/offers → Receive offer from interested party
+POST /activities/{id}/chain-transactions → Link dependent activities
+</code></pre></div>
+<h3 id="pattern-4-compliance-gates">Pattern 4: Compliance Gates</h3>
+<div class="highlight"><pre><span></span><code>POST /activities/{id}/cdd → CDD verification required
+POST /tenancies/{id}/right-to-rent → RTR check required
+PUT /activities/{id}/status (completion) → Can only complete if cddVerified=true
+PUT /tenancies/{id}/activate → Can only activate if rightToRentVerified=true
+</code></pre></div>
+<h3 id="pattern-5-event-cascades">Pattern 5: Event Cascades</h3>
+<div class="highlight"><pre><span></span><code>Activity completion → Create Tenancy (if letting)
+Activity withdrawal → Notify matched requirements of property unavailability
+Requirement matched to Activity → Send notification to applicant
+Tenancy expiry approaching → Flag for renewal workflow
+</code></pre></div>
+<hr />
+<h2 id="state-diagram-complete-property-lifecycle">State Diagram: Complete Property Lifecycle</h2>
+<pre class="mermaid"><code>flowchart TD
+    property["Property Created"] --&gt; ownership["Ownership Added"]
+    property --&gt; activity["Activity Created"]
+    activity --&gt; marketing["Marketing"]
+    activity --&gt; underOffer["Under-Offer"]
+    marketing --&gt; matched["Requirement Matched"]
+    matched --&gt; viewing["Viewing Done"]
+    viewing --&gt; offer["Offer Made"]
+    underOffer --&gt;|Offer Accepted| completion["Completion"]
+    offer --&gt; completion
+    completion --&gt; tenancy["Tenancy Created"]
+    tenancy --&gt; lifecycle["Activate, Live, Renew, Expire"]</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../../assets/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3683 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Architecture, process, and business documentation for Knight Frank Hub">
+      
+      
+      
+      
+        <link rel="prev" href="../API-WORKFLOWS/">
+      
+      
+        <link rel="next" href="../../Architecture%20%26%20Infrastructure/architecture-blueprint/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>State Machines & Validators - KF Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hub-entity-state-machines-validation-rules" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KF Documentation" class="md-header__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KF Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              State Machines & Validators
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KF Documentation" class="md-nav__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KF Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hub
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hub
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-WELCOME/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome & Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QUICK-REFERENCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Business Domain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Business Domain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CORE-DOMAIN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API-WORKFLOWS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines & Validators
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines & Validators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-activity-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Activity State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Activity State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-status-validation-rules-gherkin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Status Validation Rules (Gherkin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-requirement-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Requirement State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Requirement State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-matching-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement Matching Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tenancy-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tenancy State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Tenancy State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-activation-preconditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Activation Preconditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-renewal-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Renewal Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-offer-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Offer State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Offer State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-contact-validation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Contact Validation Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Contact Validation Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-types-and-required-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contact Types and Required Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negotiator-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negotiator Assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-property-validation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Property Validation Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Property Validation Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-business-rule-summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Business Rule Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-state-transition-validation-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. State Transition Validation Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. State Transition Validation Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-this-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read This Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-state-transitions-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity State Transitions Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-state-transitions-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement State Transitions Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-state-transitions-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy State Transitions Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#state-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-enforcement-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Enforcement Points
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture & Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture & Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/architecture-blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture blueprint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/source-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/message-transport-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Message and transport inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/process-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/business-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/angular-gui-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular GUI analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/PARITY-SPECIFICATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parity specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/layout-and-sizing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Layout and sizing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Page specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/route-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Route inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/core-form-specifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core form specifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/property/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/requirement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/tenancy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenancy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/company/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Company
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/offer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Offer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/instruction-pitch-referral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instruction, pitch, and referral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/marketing-reports-administration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Marketing, reports, and administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/navigation-and-access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation and access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/screen-catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screen catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/user-interactions-and-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interactions and workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/shared-ui-and-feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared UI and feedback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/api-interaction-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interaction contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/traceability-and-open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Traceability and open questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning & Tracking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Planning & Tracking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/NEXT-STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/TASK-COMPLETION-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-activity-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Activity State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Activity State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-status-validation-rules-gherkin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Status Validation Rules (Gherkin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-requirement-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Requirement State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Requirement State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-matching-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement Matching Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tenancy-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tenancy State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Tenancy State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-activation-preconditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Activation Preconditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-renewal-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Renewal Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-offer-state-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Offer State Machine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Offer State Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-diagram_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valid-state-transitions_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid State Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-contact-validation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Contact Validation Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Contact Validation Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-types-and-required-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contact Types and Required Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negotiator-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negotiator Assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-property-validation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Property Validation Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Property Validation Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-business-rule-summary-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Business Rule Summary Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-state-transition-validation-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. State Transition Validation Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. State Transition Validation Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-read-this-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read This Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-state-transitions-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity State Transitions Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-state-transitions-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement State Transitions Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-state-transitions-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy State Transitions Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#state-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-enforcement-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Enforcement Points
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hub-entity-state-machines-validation-rules">Hub Entity State Machines &amp; Validation Rules</h1>
+<h2 id="overview">Overview</h2>
+<p>This document details the state machines and validation rules that govern the behavior of Hub's core entities. Each entity follows a strict state progression model, with validations enforcing business rules at every transition.</p>
+<hr />
+<h2 id="1-activity-state-machine">1. Activity State Machine</h2>
+<h3 id="overview_1">Overview</h3>
+<p>Activities represent marketing instructions for properties (Sales, Lettings, Purchases, etc.). They progress through a linear lifecycle from creation to completion.</p>
+<h3 id="state-diagram">State Diagram</h3>
+<pre class="mermaid"><code>flowchart TD
+    create["Create Activity"] --&gt; draft["DRAFT"]
+    draft --&gt;|Publish / Market| live["LIVE"]
+    live --&gt;|Offer Received| underOffer["UNDER_OFFER"]
+    underOffer --&gt;|Exchange of Contract| completion["COMPLETION"]
+    completion --&gt;|Complete Property Transfer| completed["COMPLETED"]
+    underOffer --&gt;|Renegotiate| live
+    draft -.-&gt;|Authorized withdrawal| withdrawn["WITHDRAWN"]
+    live -.-&gt;|Authorized withdrawal| withdrawn
+    underOffer -.-&gt;|Authorized withdrawal| withdrawn
+    completion -.-&gt;|Authorized withdrawal| withdrawn
+    draft -.-&gt;|Expiry date reached| expired["EXPIRED"]
+    live -.-&gt;|Expiry date reached| expired
+    underOffer -.-&gt;|Expiry date reached| expired
+    completion -.-&gt;|Expiry date reached| expired</code></pre>
+<h3 id="valid-state-transitions">Valid State Transitions</h3>
+<table>
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Trigger</th>
+<th>Preconditions</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DRAFT</td>
+<td>LIVE</td>
+<td>Publish</td>
+<td>• Activity has property assigned<br/>• All mandatory details set (address, activity type)<br/>• Marketing terms defined</td>
+<td>Generate marketing content, notify agents</td>
+</tr>
+<tr>
+<td>LIVE</td>
+<td>UNDER_OFFER</td>
+<td>Offer Received</td>
+<td>• At least one valid offer received<br/>• Offer approved by vendor/landlord<br/>• No active competing offers requiring priority</td>
+<td>Update activity status, trigger CDD if applicable</td>
+</tr>
+<tr>
+<td>LIVE</td>
+<td>WITHDRAWN</td>
+<td>Withdraw Instruction</td>
+<td>• Withdrawal authorized by vendor/landlord<br/>• No pending completion</td>
+<td>Notify all parties, archive offers, delist property</td>
+</tr>
+<tr>
+<td>LIVE</td>
+<td>EXPIRED</td>
+<td>Expiry Date Reached</td>
+<td>• Current date = Expiry date<br/>• Activity marked for auto-expiry</td>
+<td>Archive activity, notify parties</td>
+</tr>
+<tr>
+<td>UNDER_OFFER</td>
+<td>COMPLETION</td>
+<td>Exchange of Contract</td>
+<td>• Contract exchanged (documented)<br/>• CDD completed (if applicable)<br/>• All party conditions satisfied<br/>• Survey and finance satisfactory</td>
+<td>Lock down terms, set completion date</td>
+</tr>
+<tr>
+<td>UNDER_OFFER</td>
+<td>LIVE</td>
+<td>Renegotiate</td>
+<td>• Offer withdrawn or fell through<br/>• Authorized by all parties</td>
+<td>Reset to LIVE, re-market property</td>
+</tr>
+<tr>
+<td>UNDER_OFFER</td>
+<td>WITHDRAWN</td>
+<td>Withdraw</td>
+<td>• Both parties agree OR vendor/landlord initiates</td>
+<td>Terminate offer, archive activity</td>
+</tr>
+<tr>
+<td>COMPLETION</td>
+<td>COMPLETED</td>
+<td>Complete Property Transfer</td>
+<td>• Completion date reached<br/>• All funds transferred<br/>• Legal ownership transferred</td>
+<td>Generate completion statement, trigger integrations</td>
+</tr>
+<tr>
+<td>COMPLETION</td>
+<td>WITHDRAWN</td>
+<td>Complete Withdrawal</td>
+<td>• Transaction fell through at completion stage</td>
+<td>Reverse state changes, re-market or archive</td>
+</tr>
+<tr>
+<td>(Any)</td>
+<td>WITHDRAWN</td>
+<td>Force Withdrawal</td>
+<td>• Authorized withdrawal<br/>• Reason documented</td>
+<td>Notify all parties, cleanup offers/matches</td>
+</tr>
+</tbody>
+</table>
+<h3 id="activity-status-validation-rules-gherkin">Activity Status Validation Rules (Gherkin)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">Feature:</span><span class="nf"> Activity Status Transitions</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Activity cannot go from LIVE to COMPLETED directly</span>
+<span class="k">    Given </span><span class="nf">an Activity in LIVE status</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I attempt to set Activity status to COMPLETED</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Activity must be UNDER_OFFER or COMPLETION before COMPLETED</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Activity cannot transition WITHDRAWN to any other state</span>
+<span class="k">    Given </span><span class="nf">an Activity in WITHDRAWN status</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I attempt to transition it to LIVE</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with InvalidStateException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">WITHDRAWN is a terminal state</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Offer acceptance automatically moves Activity to UNDER_OFFER</span>
+<span class="k">    Given </span><span class="nf">an Activity in LIVE status with multiple offers</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I accept an offer from the vendor</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the Activity status changes to UNDER_OFFER</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the accepted offer is marked as "</span><span class="s">Active</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">all other offers are marked as "</span><span class="s">Withdrawn</span><span class="nf">" or "</span><span class="s">Superseded</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Activity expiry must respect the agreed expiry date</span>
+<span class="k">    Given </span><span class="nf">an Activity with expiryDate = "</span><span class="s">2026-12-31</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">the system date becomes "</span><span class="s">2027-01-01</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the Activity is automatically moved to EXPIRED status</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the Activity cannot be re-activated without explicit renewal</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Cannot move to COMPLETION without CDD verification (for high-value activities)</span>
+<span class="k">    Given </span><span class="nf">an Activity for a property valued &gt;£</span><span class="s">500</span><span class="nf">,</span><span class="s">000</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I attempt to move Activity to COMPLETION</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">CDD verification is not complete</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ComplianceException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">CDD must be completed before COMPLETION for activities &gt;£500k</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Multiple properties in a chain must complete together</span>
+<span class="k">    Given </span><span class="nf">Activity A (Seller selling) linked to Activity B (Seller buying) in a chain</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I attempt to complete Activity A before Activity B</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ChainTransactionException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Chain partner activities must complete in order</span><span class="nf">"</span>
+</code></pre></div>
+<hr />
+<h2 id="2-requirement-state-machine">2. Requirement State Machine</h2>
+<h3 id="overview_2">Overview</h3>
+<p>Requirements represent what buyers, tenants, landlords seek. They progress through matching and completion.</p>
+<h3 id="state-diagram_1">State Diagram</h3>
+<pre class="mermaid"><code>flowchart TD
+    create["Create Requirement"] --&gt; active["ACTIVE"]
+    active --&gt;|Match to Activity| matched["MATCHED"]
+    matched --&gt;|Offer Accepted / Deal Agreed| completing["COMPLETING"]
+    completing --&gt;|Completion Done| completed["COMPLETED"]
+    matched --&gt;|Renegotiate| active
+    active -.-&gt;|Withdraw or expiry| withdrawn["WITHDRAWN / EXPIRED"]
+    matched -.-&gt;|Withdraw or expiry| withdrawn
+    completing -.-&gt;|Expiry| expired["EXPIRED"]</code></pre>
+<h3 id="valid-state-transitions_1">Valid State Transitions</h3>
+<table>
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Trigger</th>
+<th>Preconditions</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACTIVE</td>
+<td>MATCHED</td>
+<td>Match Found</td>
+<td>• At least one Activity matches criteria<br/>• Match score meets threshold (default: &gt;0.7)<br/>• Auto-matcher has run OR manual match approved</td>
+<td>Create Match record, notify applicant</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>EXPIRED</td>
+<td>Expiry Date Reached</td>
+<td>• Current date = Requirement expiry date</td>
+<td>Archive requirement, notify applicant</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>WITHDRAWN</td>
+<td>Withdraw Requirement</td>
+<td>• Authorized by applicant<br/>• No active offers</td>
+<td>Archive requirement</td>
+</tr>
+<tr>
+<td>MATCHED</td>
+<td>COMPLETING</td>
+<td>Offer Accepted</td>
+<td>• Offer accepted from matched Activity<br/>• All party conditions met</td>
+<td>Lock requirement to accepted property</td>
+</tr>
+<tr>
+<td>MATCHED</td>
+<td>ACTIVE</td>
+<td>Renegotiate</td>
+<td>• No active offer OR applicant requests renegotiation<br/>• Previously matched activities still available</td>
+<td>Reset to ACTIVE for further matching</td>
+</tr>
+<tr>
+<td>MATCHED</td>
+<td>WITHDRAWN</td>
+<td>Withdraw</td>
+<td>• Applicant decides not to proceed<br/>• All offers withdrawn</td>
+<td>Archive requirement</td>
+</tr>
+<tr>
+<td>COMPLETING</td>
+<td>COMPLETED</td>
+<td>Completion</td>
+<td>• Activity has completed<br/>• All transfer documentation done</td>
+<td>Mark requirement fulfilled, archive</td>
+</tr>
+<tr>
+<td>(Any)</td>
+<td>EXPIRED</td>
+<td>Manual Expiry</td>
+<td>• Requirement criteria no longer relevant<br/>• User-initiated</td>
+<td>Archive requirement</td>
+</tr>
+</tbody>
+</table>
+<h3 id="requirement-matching-logic">Requirement Matching Logic</h3>
+<div class="highlight"><pre><span></span><code><span class="k">Feature:</span><span class="nf"> Requirement Matching</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Auto-matcher finds matching activities nightly</span>
+<span class="k">    Given </span><span class="nf">a Requirement for Tenant with:</span>
+<span class="k">      |</span><span class="s"> propertyType</span><span class="k"> |</span><span class="s"> "Office"</span><span class="k">           |</span>
+<span class="k">      |</span><span class="s"> minSize</span><span class="k">      |</span><span class="s"> 5000 sqm</span><span class="k">           |</span>
+<span class="k">      |</span><span class="s"> maxSize</span><span class="k">      |</span><span class="s"> 15000 sqm</span><span class="k">          |</span>
+<span class="k">      |</span><span class="s"> minRent</span><span class="k">      |</span><span class="s"> £30,000 p/a</span><span class="k">        |</span>
+<span class="k">      |</span><span class="s"> maxRent</span><span class="k">      |</span><span class="s"> £60,000 p/a</span><span class="k">        |</span>
+<span class="k">      |</span><span class="s"> location</span><span class="k">     |</span><span class="s"> "London"</span><span class="k">           |</span>
+
+<span class="nf">    </span><span class="k">And </span><span class="nf">Activities exist:</span>
+<span class="k">      |</span><span class="s"> Activity</span><span class="k"> |</span><span class="s"> Type</span><span class="k">    |</span><span class="s"> Size</span><span class="k">  |</span><span class="s"> Rent</span><span class="k">      |</span><span class="s"> Location</span><span class="k"> |</span><span class="s"> Status</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> ACT-001</span><span class="k">  |</span><span class="s"> Lettings</span><span class="k">|</span><span class="s"> 10000</span><span class="k"> |</span><span class="s"> £45,000</span><span class="k">   |</span><span class="s"> London</span><span class="k">   |</span><span class="s"> LIVE</span><span class="k">   |</span>
+<span class="k">      |</span><span class="s"> ACT-002</span><span class="k">  |</span><span class="s"> Lettings</span><span class="k">|</span><span class="s"> 3000</span><span class="k">  |</span><span class="s"> £50,000</span><span class="k">   |</span><span class="s"> London</span><span class="k">   |</span><span class="s"> LIVE</span><span class="k">   |</span>
+<span class="k">      |</span><span class="s"> ACT-003</span><span class="k">  |</span><span class="s"> Lettings</span><span class="k">|</span><span class="s"> 8000</span><span class="k">  |</span><span class="s"> £35,000</span><span class="k">   |</span><span class="s"> Paris</span><span class="k">    |</span><span class="s"> LIVE</span><span class="k">   |</span>
+
+<span class="nf">    </span><span class="k">When </span><span class="nf">the nightly matcher runs</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">only ACT-</span><span class="s">001</span><span class="nf"> is matched to the Requirement</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">ACT-</span><span class="s">002</span><span class="nf"> is not matched (size &lt; </span><span class="s">5000</span><span class="nf">)</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">ACT-</span><span class="s">003</span><span class="nf"> is not matched (location ≠ London)</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Requirement matching respects activity status</span>
+<span class="k">    Given </span><span class="nf">a Requirement matching criteria to multiple Activities</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">some Activities are in WITHDRAWN or COMPLETED status</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">those Activities are excluded from matching</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">only LIVE and UNDER_OFFER Activities are considered</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Matching score reflects how well Activity meets Requirement</span>
+<span class="k">    Given </span><span class="nf">a Requirement with strict criteria:</span>
+<span class="k">      |</span><span class="s"> propertyType</span><span class="k"> |</span><span class="s"> "Office" (strict)</span><span class="k">          |</span>
+<span class="k">      |</span><span class="s"> size</span><span class="k">         |</span><span class="s"> 10000 sqm (±10% tolerance)</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> rent</span><span class="k">         |</span><span class="s"> £50k (±5% tolerance)</span><span class="k">       |</span>
+
+<span class="nf">    </span><span class="k">And </span><span class="nf">Activity with:</span>
+<span class="k">      |</span><span class="s"> propertyType</span><span class="k"> |</span><span class="s"> "Office" (exact match)</span><span class="k">     |</span>
+<span class="k">      |</span><span class="s"> size</span><span class="k">         |</span><span class="s"> 10000 sqm (exact match)</span><span class="k">    |</span>
+<span class="k">      |</span><span class="s"> rent</span><span class="k">         |</span><span class="s"> £50k (exact match)</span><span class="k">         |</span>
+
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the match score is highest (e.g., </span><span class="s">0.99</span><span class="nf">)</span>
+
+<span class="nf">    </span><span class="k">And </span><span class="nf">when Activity has:</span>
+<span class="k">      |</span><span class="s"> propertyType</span><span class="k"> |</span><span class="s"> "Office"</span><span class="k">      |</span>
+<span class="k">      |</span><span class="s"> size</span><span class="k">         |</span><span class="s"> 11000 sqm</span><span class="k">     |</span><span class="s"> (outside tolerance)</span>
+<span class="k">      |</span><span class="s"> rent</span><span class="k">         |</span><span class="s"> £52k</span><span class="k">          |</span><span class="s"> (outside tolerance)</span>
+
+<span class="s">    Then the match score is lower (e.g., 0.65)</span>
+
+<span class="s">  Scenario: Once-matched requirement can be matched to multiple activities</span>
+<span class="s">    Given a Requirement in MATCHED status matched to Activity-A</span>
+<span class="s">    When a new better Activity-B is published that matches the Requirement</span>
+<span class="s">    Then the Requirement can receive a second Match notification</span>
+<span class="s">    But the applicant must actively accept both or choose one</span>
+</code></pre></div>
+<hr />
+<h2 id="3-tenancy-state-machine">3. Tenancy State Machine</h2>
+<h3 id="overview_3">Overview</h3>
+<p>Tenancies represent active leases between tenant and landlord. They progress from creation through commencement, renewal, and expiry.</p>
+<h3 id="state-diagram_2">State Diagram</h3>
+<pre class="mermaid"><code>flowchart TD
+    create["Create Tenancy"] --&gt; draft["DRAFT (pre-activation)"]
+    draft --&gt;|Right-to-Rent Check| check["Right-to-Rent verified"]
+    check --&gt;|Activate on Commencement Date| active["ACTIVE / LIVE"]
+    active --&gt;|Renewal Option Date| renewing["RENEWING"]
+    renewing --&gt;|Renewal Rejected| active
+    renewing --&gt;|Renewal Agreed| newTenancy["Create New Tenancy"]
+    newTenancy --&gt; active
+    active --&gt;|Expiry Date Reached| expired["EXPIRED"]
+    active -.-&gt;|Surrender Agreed| surrendered["SURRENDERED"]
+    active -.-&gt;|Force Termination| terminated["TERMINATED"]</code></pre>
+<h3 id="valid-state-transitions_2">Valid State Transitions</h3>
+<table>
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Trigger</th>
+<th>Preconditions</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DRAFT</td>
+<td>ACTIVE</td>
+<td>Activate</td>
+<td>• Right-to-rent verified (if applicable)<br/>• All party information complete<br/>• Commencement date reached<br/>• Rent collection method configured</td>
+<td>Activate lease, begin rent tracking</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>RENEWING</td>
+<td>Initiate Renewal</td>
+<td>• 6 months before expiry date<br/>• Renewal option available<br/>• Notice given to other party</td>
+<td>Create renewal proposal, notify parties</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>SURRENDERED</td>
+<td>Surrender Agreed</td>
+<td>• Both parties (tenant + landlord) agree<br/>• Early termination authorized<br/>• Any break conditions met</td>
+<td>Terminate lease early, vacate property</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>TERMINATED</td>
+<td>Force Termination</td>
+<td>• Legal grounds exist (breach, forfeiture)<br/>• Proper notice given (per lease terms)<br/>• Authorized by landlord/legal</td>
+<td>Initiate eviction if needed, vacate property</td>
+</tr>
+<tr>
+<td>RENEWING</td>
+<td>ACTIVE</td>
+<td>Renewal Rejected</td>
+<td>• Either party rejects renewal<br/>• No renewal agreement reached</td>
+<td>Revert to ACTIVE for final months, plan exit</td>
+</tr>
+<tr>
+<td>RENEWING</td>
+<td>ACTIVE</td>
+<td>Renewal Accepted</td>
+<td>• Both parties agree new terms<br/>• New Tenancy created for renewal period</td>
+<td>Create new Tenancy record, old Tenancy expires</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>EXPIRED</td>
+<td>Expiry Date Reached</td>
+<td>• Current date = Expiry date<br/>• No renewal agreed</td>
+<td>Archive tenancy, record as naturally ended</td>
+</tr>
+<tr>
+<td>(Any)</td>
+<td>CANCELLED</td>
+<td>Cancel Pre-Activation</td>
+<td>• Tenancy in DRAFT status<br/>• Before activation<br/>• Authorized cancellation</td>
+<td>Discard tenancy, notify parties</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tenancy-activation-preconditions">Tenancy Activation Preconditions</h3>
+<div class="highlight"><pre><span></span><code><span class="k">Feature:</span><span class="nf"> Tenancy Activation</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Right-to-rent must be verified before activation</span>
+<span class="k">    Given </span><span class="nf">a Tenancy in DRAFT status created with:</span>
+<span class="k">      |</span><span class="s"> tenantType</span><span class="k">       |</span><span class="s"> "Company"</span><span class="k">                    |</span>
+<span class="k">      |</span><span class="s"> tenantContactId</span><span class="k">  |</span><span class="s"> contact-company-001</span><span class="k">          |</span>
+
+<span class="nf">    </span><span class="k">When </span><span class="nf">I attempt to activate the Tenancy</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">rightToRentVerified = false</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the activation fails with ComplianceException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Right-to-rent verification required for company tenants</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Commencement date must equal or exceed today</span>
+<span class="k">    Given </span><span class="nf">a Tenancy in DRAFT status with commencementDate = "</span><span class="s">2026-01-01</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">the system date is "</span><span class="s">2026-12-31</span><span class="nf">" (after commencement)</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I cannot activate the Tenancy</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Cannot activate a Tenancy after its commencement date</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Rent collection method must be configured</span>
+<span class="k">    Given </span><span class="nf">a Tenancy in DRAFT status</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I attempt to activate without setting rentPaymentMethod</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the activation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Rent collection method (Direct Debit, Standing Order, etc.) must be configured</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Break clause verification for mid-term exits</span>
+<span class="k">    Given </span><span class="nf">a Tenancy with breakClause = { breakDate: "</span><span class="s">2028-01-15</span><span class="nf">" }</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">a Surrender request is submitted after breakDate</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the break conditions are waived</span>
+<span class="nf">    </span><span class="k">But </span><span class="nf">if surrendered before breakDate</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">break penalties may apply (per lease terms)</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Automatic activation on commencement date</span>
+<span class="k">    Given </span><span class="nf">a Tenancy in DRAFT status with commencementDate = "</span><span class="s">2026-12-25</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">the system date becomes "</span><span class="s">2026-12-25</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the Tenancy is automatically activated</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the status changes from DRAFT to ACTIVE</span>
+</code></pre></div>
+<h3 id="tenancy-renewal-logic">Tenancy Renewal Logic</h3>
+<div class="highlight"><pre><span></span><code><span class="k">Feature:</span><span class="nf"> Tenancy Renewal</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Renewal option opens 6 months before expiry</span>
+<span class="k">    Given </span><span class="nf">a Tenancy expiring on "</span><span class="s">2027-06-30</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">the system date becomes "</span><span class="s">2026-12-30</span><span class="nf">" (</span><span class="s">6</span><span class="nf"> months before)</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the Tenancy is flagged as "</span><span class="s">Available for Renewal</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">a renewal workflow is initiated</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Renewal terms must be agreed by both parties</span>
+<span class="k">    Given </span><span class="nf">a Tenancy in RENEWING status</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">the landlord proposes renewal terms:</span>
+<span class="k">      |</span><span class="s"> newExpiryDate</span><span class="k">  |</span><span class="s"> "2030-06-30"</span><span class="k">           |</span>
+<span class="k">      |</span><span class="s"> proposedRent</span><span class="k">   |</span><span class="s"> £50,000 p/a (+2.2%)</span><span class="k">    |</span>
+
+<span class="nf">    </span><span class="k">When </span><span class="nf">the tenant accepts the terms:</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">a new Tenancy record is created with:</span>
+<span class="k">      |</span><span class="s"> previousTenancyId</span><span class="k"> |</span><span class="s"> original tenancy ID</span><span class="k">    |</span>
+<span class="k">      |</span><span class="s"> commencementDate</span><span class="k">  |</span><span class="s"> expiry date + 1 day</span><span class="k">    |</span>
+<span class="k">      |</span><span class="s"> expiryDate</span><span class="k">        |</span><span class="s"> "2030-06-30"</span><span class="k">           |</span>
+<span class="k">      |</span><span class="s"> rentPerAnnum</span><span class="k">      |</span><span class="s"> £50,000</span><span class="k">                |</span>
+
+<span class="nf">    </span><span class="k">And </span><span class="nf">the original Tenancy is closed/archived</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> If renewal not agreed by expiry date, tenancy expires</span>
+<span class="k">    Given </span><span class="nf">a Tenancy in RENEWING status with expiryDate = "</span><span class="s">2027-06-30</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">the system date becomes "</span><span class="s">2027-07-01</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">no renewal agreement has been reached</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the Tenancy moves to EXPIRED status</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the property becomes available for new letting</span>
+</code></pre></div>
+<hr />
+<h2 id="4-offer-state-machine">4. Offer State Machine</h2>
+<h3 id="overview_4">Overview</h3>
+<p>Offers represent an interested party's proposal to purchase/rent a property or proceed with an activity.</p>
+<h3 id="state-diagram_3">State Diagram</h3>
+<pre class="mermaid"><code>flowchart TD
+    create["Create Offer"] --&gt; pending["PENDING_REVIEW / PENDING"]
+    pending --&gt;|Vendor / landlord accepts| accepted["ACCEPTED"]
+    pending --&gt;|Vendor / landlord rejects| rejected["REJECTED"]
+    pending --&gt;|Offeror withdraws| withdrawn["WITHDRAWN"]
+    accepted --&gt; active["ACTIVE"]
+    active --&gt;|Offer expiry date passes| expired["EXPIRED"]
+    active --&gt;|Later withdrawal| withdrawn</code></pre>
+<h3 id="valid-state-transitions_3">Valid State Transitions</h3>
+<table>
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Trigger</th>
+<th>Preconditions</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PENDING</td>
+<td>ACCEPTED</td>
+<td>Vendor/Landlord Accepts</td>
+<td>• Valid offer received<br/>• Authorized by vendor/landlord<br/>• Within expiry window</td>
+<td>Mark offer as accepted, trigger Activity → UNDER_OFFER</td>
+</tr>
+<tr>
+<td>PENDING</td>
+<td>REJECTED</td>
+<td>Vendor/Landlord Rejects</td>
+<td>• Offer withdrawn or below asking price<br/>• Authorized rejection</td>
+<td>Mark offer as rejected, notify offeror</td>
+</tr>
+<tr>
+<td>PENDING</td>
+<td>WITHDRAWN</td>
+<td>Offeror Withdraws</td>
+<td>• Offeror changes mind before acceptance<br/>• Withdrawal authorized</td>
+<td>Mark offer withdrawn, Activity remains LIVE</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>EXPIRED</td>
+<td>Offer Expiry Date Passes</td>
+<td>• Current date &gt; expiry date<br/>• No action taken</td>
+<td>Mark offer expired, Activity may remain UNDER_OFFER (if another active offer)</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td>WITHDRAWN</td>
+<td>Later Withdrawal</td>
+<td>• Offeror withdraws after acceptance<br/>• Activity has not yet completed</td>
+<td>Revert Activity to LIVE if no other active offers</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-contact-validation-rules">5. Contact Validation Rules</h2>
+<h3 id="overview_5">Overview</h3>
+<p>Contacts are the foundation of Hub data. They must meet strict validation requirements.</p>
+<h3 id="contact-types-and-required-fields">Contact Types and Required Fields</h3>
+<div class="highlight"><pre><span></span><code><span class="k">Feature:</span><span class="nf"> Contact Validation</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Individual Contact requires minimum information</span>
+<span class="k">    Given </span><span class="nf">a Contact with contactType = "</span><span class="s">Individual</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Contact</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the following fields are required:</span>
+<span class="k">      |</span><span class="s"> firstName</span><span class="k">    |</span><span class="s"> String, 1-50 chars</span><span class="k">      |</span>
+<span class="k">      |</span><span class="s"> lastName</span><span class="k">     |</span><span class="s"> String, 1-50 chars</span><span class="k">      |</span>
+<span class="k">      |</span><span class="s"> emailAddress</span><span class="k"> |</span><span class="s"> Valid email format</span><span class="k">      |</span>
+
+<span class="nf">    </span><span class="k">And </span><span class="nf">optional fields include:</span>
+<span class="k">      |</span><span class="s"> middleNames</span><span class="k">  |</span><span class="s"> String, optional</span><span class="k">        |</span>
+<span class="k">      |</span><span class="s"> dateOfBirth</span><span class="k">  |</span><span class="s"> Date, optional</span><span class="k">          |</span>
+<span class="k">      |</span><span class="s"> phone</span><span class="k">        |</span><span class="s"> Phone number, optional</span><span class="k">  |</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Company Contact requires business information</span>
+<span class="k">    Given </span><span class="nf">a Contact with contactType = "</span><span class="s">Company</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Contact</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the following fields are required:</span>
+<span class="k">      |</span><span class="s"> companyName</span><span class="k">  |</span><span class="s"> String, 1-100 chars</span><span class="k">     |</span>
+<span class="k">      |</span><span class="s"> crn</span><span class="k">          |</span><span class="s"> UK Company Registration Number (required for UK)</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> registeredAddress</span><span class="k"> |</span><span class="s"> Full address</span><span class="k">        |</span>
+
+<span class="nf">    </span><span class="k">And </span><span class="nf">optional fields include:</span>
+<span class="k">      |</span><span class="s"> companyPhone</span><span class="k"> |</span><span class="s"> Phone number</span><span class="k">            |</span>
+<span class="k">      |</span><span class="s"> vatNumber</span><span class="k">    |</span><span class="s"> VAT registration number</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> directors</span><span class="k">    |</span><span class="s"> List of director contacts</span><span class="k"> |</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Contact must have at least one address</span>
+<span class="k">    Given </span><span class="nf">a Contact without any addresses</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Contact</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Contact must have at least one address</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Contact must have at least one phone or email</span>
+<span class="k">    Given </span><span class="nf">a Contact with:</span>
+<span class="k">      |</span><span class="s"> phones</span><span class="k">       |</span><span class="s"> empty list</span><span class="k">              |</span>
+<span class="k">      |</span><span class="s"> emails</span><span class="k">       |</span><span class="s"> empty list</span><span class="k">              |</span>
+
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Contact</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Contact must have at least one email or phone number</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Email consent rules enforce opt-in/opt-out status</span>
+<span class="k">    Given </span><span class="nf">a Contact with email = "</span><span class="s">buyer@example.com</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">an email is sent to the Contact</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the Contact has consentStatus = "</span><span class="s">OPTED_OUT</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the email send operation fails</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Contact has opted out of email marketing</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Duplicate Contact detection</span>
+<span class="k">    Given </span><span class="nf">Contact A with:</span>
+<span class="k">      |</span><span class="s"> firstName</span><span class="k">  |</span><span class="s"> "John"</span><span class="k">               |</span>
+<span class="k">      |</span><span class="s"> lastName</span><span class="k">   |</span><span class="s"> "Smith"</span><span class="k">              |</span>
+<span class="k">      |</span><span class="s"> email</span><span class="k">      |</span><span class="s"> "john@example.com"</span><span class="k">   |</span>
+
+<span class="nf">    </span><span class="k">When </span><span class="nf">I create Contact B with identical details</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the system detects a potential duplicate</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">suggests merging or discarding Contact B</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Contact merge combines records</span>
+<span class="k">    Given </span><span class="nf">Contact A and Contact B identified as duplicates</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I approve Contact merge (A absorbs B)</span>
+<span class="nf">    Then:</span>
+<span class="k">      |</span><span class="s"> Contact A gets Contact B's addresses</span><span class="k">   |</span>
+<span class="k">      |</span><span class="s"> Contact A gets Contact B's phone numbers</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> Contact A gets Contact B's linked activities</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> Contact B is marked as MERGED/ARCHIVED</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> All activities linked to B now link to A</span><span class="k"> |</span>
+</code></pre></div>
+<h3 id="negotiator-assignment">Negotiator Assignment</h3>
+<div class="highlight"><pre><span></span><code><span class="k">Feature:</span><span class="nf"> Negotiator Assignment</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Every Contact must have a primary Negotiator (assigned staff)</span>
+<span class="k">    Given </span><span class="nf">a Contact without a Negotiator assigned</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Contact</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Contact must have a primary Negotiator</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Negotiator must be active/enabled in the system</span>
+<span class="k">    Given </span><span class="nf">a Contact with assignedNegotiator = negotiator-inactive</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Contact</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Assigned Negotiator is inactive; select an active Negotiator</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Negotiator can be changed during Contact lifecycle</span>
+<span class="k">    Given </span><span class="nf">a Contact with assignedNegotiator = negotiator-A</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I change assignedNegotiator = negotiator-B</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">all future activities created will assign negotiator-B</span>
+<span class="nf">    </span><span class="k">But </span><span class="nf">existing activities linked to negotiator-A remain unchanged</span>
+</code></pre></div>
+<hr />
+<h2 id="6-property-validation-rules">6. Property Validation Rules</h2>
+<h3 id="overview_6">Overview</h3>
+<p>Properties represent physical real estate assets with strict data requirements.</p>
+<h3 id="property-structure">Property Structure</h3>
+<div class="highlight"><pre><span></span><code><span class="k">Feature:</span><span class="nf"> Property Creation and Validation</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Property requires complete address information</span>
+<span class="k">    Given </span><span class="nf">a Property without a complete address</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Property</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Property must have complete address (street, town, postcode)</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Property must have at least one Ownership record</span>
+<span class="k">    Given </span><span class="nf">a Property without any Ownership records</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Property</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails with ValidationException</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Property must have at least one Ownership record</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Ownership percentages must total 100% (or be flexible for fractional ownership)</span>
+<span class="k">    Given </span><span class="nf">a Property with Ownerships:</span>
+<span class="k">      |</span><span class="s"> Contact</span><span class="k"> |</span><span class="s"> Percentage</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> Owner-A</span><span class="k"> |</span><span class="s"> 60%</span><span class="k">        |</span>
+<span class="k">      |</span><span class="s"> Owner-B</span><span class="k"> |</span><span class="s"> 30%</span><span class="k">        |</span>
+
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Property</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the operation fails (if system enforces </span><span class="s">100</span><span class="nf">% rule)</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the error message is "</span><span class="s">Ownership percentages must total 100%</span><span class="nf">"</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Property characteristics vary by type</span>
+<span class="k">    Given </span><span class="nf">a Property with propertyType = "</span><span class="s">Office</span><span class="nf">"</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I save the Property</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">the following characteristics should be provided:</span>
+<span class="k">      |</span><span class="s"> totalArea</span><span class="k">      |</span><span class="s"> Numeric, sqm</span><span class="k">            |</span>
+<span class="k">      |</span><span class="s"> floors</span><span class="k">         |</span><span class="s"> Integer, number of floors</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> openPlan</span><span class="k">       |</span><span class="s"> Boolean</span><span class="k">                 |</span>
+<span class="k">      |</span><span class="s"> meetingRooms</span><span class="k">   |</span><span class="s"> Integer count</span><span class="k">           |</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Property can have multiple Tenancies simultaneously (multi-let)</span>
+<span class="k">    Given </span><span class="nf">a Property with </span><span class="s">5</span><span class="nf"> Units</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I create Tenancies for Units </span><span class="s">1</span><span class="nf">, </span><span class="s">2</span><span class="nf">, </span><span class="s">3</span><span class="nf">, </span><span class="s">4</span><span class="nf">, </span><span class="s">5</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">all </span><span class="s">5</span><span class="nf"> Tenancies are active simultaneously</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">the Property occupancy = </span><span class="s">100</span><span class="nf">% (</span><span class="s">5</span><span class="nf">/</span><span class="s">5</span><span class="nf"> units occupied)</span>
+<span class="nf">    </span><span class="k">And </span><span class="nf">each unit can track separate rent, parties, and renewal dates</span>
+</code></pre></div>
+<hr />
+<h2 id="7-business-rule-summary-table">7. Business Rule Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Entity</th>
+<th>Validation</th>
+<th>Enforcement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activities must have property</td>
+<td>Activity</td>
+<td>Property ID not null</td>
+<td>Pre-save</td>
+</tr>
+<tr>
+<td>Cannot delete property with live activities</td>
+<td>Property</td>
+<td>Check for LIVE/UNDER_OFFER activities</td>
+<td>Pre-delete</td>
+</tr>
+<tr>
+<td>Requirement expiry must be future date</td>
+<td>Requirement</td>
+<td>expiry_date &gt; today</td>
+<td>Pre-save</td>
+</tr>
+<tr>
+<td>Offer expiry must be after creation</td>
+<td>Offer</td>
+<td>offer_expiry_date &gt;= created_date</td>
+<td>Pre-save</td>
+</tr>
+<tr>
+<td>Tenancy commencement &gt;= creation</td>
+<td>Tenancy</td>
+<td>commencement_date &gt;= created_date</td>
+<td>Pre-activate</td>
+</tr>
+<tr>
+<td>CDD required for high-value activities</td>
+<td>Activity</td>
+<td>value &gt; threshold → CDD required</td>
+<td>Pre-completion</td>
+</tr>
+<tr>
+<td>Right-to-rent required for tenancy activation</td>
+<td>Tenancy</td>
+<td>company tenant → RTR required</td>
+<td>Pre-activate</td>
+</tr>
+<tr>
+<td>Contact must have negotiator</td>
+<td>Contact</td>
+<td>assigned_negotiator IS NOT NULL</td>
+<td>Pre-save</td>
+</tr>
+<tr>
+<td>Requirement must have applicant</td>
+<td>Requirement</td>
+<td>applicant_contact_id IS NOT NULL</td>
+<td>Pre-save</td>
+</tr>
+<tr>
+<td>Offer must have offeror</td>
+<td>Offer</td>
+<td>offeror_contact_id IS NOT NULL</td>
+<td>Pre-save</td>
+</tr>
+<tr>
+<td>Chain activities must be linked</td>
+<td>Activity</td>
+<td>chain_partner_id NULL if no chain</td>
+<td>Chain validation</td>
+</tr>
+<tr>
+<td>Contact merge updates all references</td>
+<td>Contact</td>
+<td>Merge operation cascades</td>
+<td>On merge</td>
+</tr>
+<tr>
+<td>Soft-deleted records excluded from active queries</td>
+<td>All</td>
+<td>is_deleted = false</td>
+<td>Query default</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-state-transition-validation-matrix">8. State Transition Validation Matrix</h2>
+<h3 id="how-to-read-this-table">How to Read This Table</h3>
+<ul>
+<li><strong>Rows</strong> = Current State</li>
+<li><strong>Columns</strong> = Target State</li>
+<li><strong>Cell Content</strong> = ✅ (allowed), ❌ (not allowed), ⚠️ (conditional)</li>
+</ul>
+<h3 id="activity-state-transitions-matrix">Activity State Transitions Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Current state  Target state</th>
+<th style="text-align: right;">DRAFT</th>
+<th style="text-align: right;">LIVE</th>
+<th style="text-align: right;">UNDER_OFFER</th>
+<th style="text-align: right;">COMPLETION</th>
+<th style="text-align: right;">COMPLETED</th>
+<th style="text-align: right;">WITHDRAWN</th>
+<th style="text-align: right;">EXPIRED</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DRAFT</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>LIVE</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">⚠️</td>
+</tr>
+<tr>
+<td>UNDER_OFFER</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>COMPLETION</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>COMPLETED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>WITHDRAWN</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>EXPIRED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">⚠️</td>
+<td style="text-align: right;">-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legend:</strong>
+- ✅ = Always allowed
+- ❌ = Never allowed
+- ⚠️ = Conditional (requires specific business logic)
+- <code>-</code> = Same state (no transition)</p>
+<h3 id="requirement-state-transitions-matrix">Requirement State Transitions Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Current state  Target state</th>
+<th style="text-align: right;">ACTIVE</th>
+<th style="text-align: right;">MATCHED</th>
+<th style="text-align: right;">COMPLETING</th>
+<th style="text-align: right;">COMPLETED</th>
+<th style="text-align: right;">WITHDRAWN</th>
+<th style="text-align: right;">EXPIRED</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACTIVE</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">⚠️</td>
+</tr>
+<tr>
+<td>MATCHED</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">⚠️</td>
+</tr>
+<tr>
+<td>COMPLETING</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>COMPLETED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>WITHDRAWN</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>EXPIRED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">⚠️</td>
+<td style="text-align: right;">-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tenancy-state-transitions-matrix">Tenancy State Transitions Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Current state  Target state</th>
+<th style="text-align: right;">DRAFT</th>
+<th style="text-align: right;">ACTIVE</th>
+<th style="text-align: right;">RENEWING</th>
+<th style="text-align: right;">EXPIRED</th>
+<th style="text-align: right;">SURRENDERED</th>
+<th style="text-align: right;">TERMINATED</th>
+<th style="text-align: right;">CANCELLED</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DRAFT</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+</tr>
+<tr>
+<td>ACTIVE</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">⚠️</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>RENEWING</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">✅</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>EXPIRED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>SURRENDERED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+<td style="text-align: right;">❌</td>
+</tr>
+<tr>
+<td>CANCELLED</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">❌</td>
+<td style="text-align: right;">-</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="implementation-notes">Implementation Notes</h2>
+<h3 id="state-storage">State Storage</h3>
+<ul>
+<li>States stored as <strong>foreign key references</strong> to reference data tables (not C# enums)</li>
+<li>Allows runtime configuration of valid states</li>
+<li>Enables future workflow customization per division/office</li>
+<li>Transition validation logic typically in domain service layer</li>
+<li>State change events published to message queue for integrations</li>
+</ul>
+<h3 id="validation-enforcement-points">Validation Enforcement Points</h3>
+<ul>
+<li><strong>Pre-save validation</strong>: Catch violations before database insert</li>
+<li><strong>Pre-transition validation</strong>: Enforce state machine rules during status updates</li>
+<li><strong>Post-save events</strong>: Publish domain events (Activity.StateChanged) for async workflows</li>
+<li><strong>Query-time filtering</strong>: Soft-deleted, expired, and archived records excluded by default</li>
+</ul>
+<h3 id="testing-strategy">Testing Strategy</h3>
+<ul>
+<li>Unit tests for each valid state transition</li>
+<li>Unit tests for each invalid transition attempt</li>
+<li>Integration tests for cross-entity validations (e.g., Contact + Activity + Tenancy workflow)</li>
+<li>Use Gherkin scenarios as acceptance criteria for complex business rules</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../../assets/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

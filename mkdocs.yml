@@ -61,6 +61,10 @@ nav:
               - Activity: projects/Hub/GUI/pages/activity.md
               - Requirement: projects/Hub/GUI/pages/requirement.md
               - Tenancy: projects/Hub/GUI/pages/tenancy.md
+              - Company: projects/Hub/GUI/pages/company.md
+              - Offer: projects/Hub/GUI/pages/offer.md
+              - Instruction, pitch, and referral: projects/Hub/GUI/pages/instruction-pitch-referral.md
+              - Marketing, reports, and administration: projects/Hub/GUI/pages/marketing-reports-administration.md
           - Navigation and access: projects/Hub/GUI/navigation-and-access.md
           - Screen catalogue: projects/Hub/GUI/screen-catalogue.md
           - User interactions and workflows: projects/Hub/GUI/user-interactions-and-workflows.md

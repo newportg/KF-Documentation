@@ -1,0 +1,3086 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Architecture, process, and business documentation for Knight Frank Hub">
+      
+      
+      
+      
+        <link rel="prev" href="../business-rules/">
+      
+      
+        <link rel="next" href="../../GUI/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Angular GUI analysis - KF Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#angular-gui-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KF Documentation" class="md-header__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KF Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Angular GUI analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KF Documentation" class="md-nav__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KF Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hub
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hub
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-WELCOME/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome & Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QUICK-REFERENCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Business Domain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Business Domain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/CORE-DOMAIN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/API-WORKFLOWS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/STATE-MACHINES-VALIDATORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines & Validators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture & Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture & Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture-blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture blueprint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../message-transport-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Message and transport inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../process-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular GUI analysis
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular GUI analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose and scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bootstrap-and-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap and shell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#route-and-feature-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Route and feature map
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#domain-and-entity-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain and entity coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screen-and-layout-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Screen and layout patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-process-layouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User process layouts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User process layouts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-to-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search to detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-or-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add or edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-changing-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State-changing workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attachments-and-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attachments and documents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-and-access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation and access control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation and access control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#route-and-application-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Route and application validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#form-and-business-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Form and business validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http-cross-cutting-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP cross-cutting behaviour
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-call-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API call layout
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API call layout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generated-client-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generated client contract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-service-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain service map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representative-endpoint-families" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representative endpoint families
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-call-layout-by-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API call layout by screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embedded-business-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedded business rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedded business rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confirmed-client-side-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirmed client-side rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-backed-rules-initiated-by-the-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-backed rules initiated by the GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-coded-domain-vocabularies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hard-coded domain vocabularies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traceability-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traceability and limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/PARITY-SPECIFICATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parity specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/layout-and-sizing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Layout and sizing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Page specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/route-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Route inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/core-form-specifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core form specifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/property/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/requirement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/tenancy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenancy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/company/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Company
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/offer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Offer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/instruction-pitch-referral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instruction, pitch, and referral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/marketing-reports-administration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Marketing, reports, and administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/navigation-and-access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation and access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/screen-catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screen catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/user-interactions-and-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interactions and workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/shared-ui-and-feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared UI and feedback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/api-interaction-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interaction contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/traceability-and-open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Traceability and open questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning & Tracking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Planning & Tracking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/NEXT-STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/TASK-COMPLETION-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose and scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bootstrap-and-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap and shell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#route-and-feature-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Route and feature map
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#domain-and-entity-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain and entity coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screen-and-layout-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Screen and layout patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-process-layouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User process layouts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User process layouts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-to-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search to detail
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-or-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add or edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-changing-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State-changing workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attachments-and-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attachments and documents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-and-access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation and access control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation and access control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#route-and-application-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Route and application validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#form-and-business-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Form and business validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http-cross-cutting-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP cross-cutting behaviour
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-call-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API call layout
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API call layout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generated-client-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generated client contract
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domain-service-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domain service map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representative-endpoint-families" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representative endpoint families
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-call-layout-by-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API call layout by screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embedded-business-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedded business rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedded business rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confirmed-client-side-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirmed client-side rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-backed-rules-initiated-by-the-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-backed rules initiated by the GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-coded-domain-vocabularies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hard-coded domain vocabularies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traceability-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traceability and limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="angular-gui-analysis">Angular GUI analysis</h1>
+<p><strong>Source analysed:</strong> <code>C:\Source\Devops\KnightFrank.hub\src\KnightFrank.Antares.Angular</code><br />
+<strong>Status:</strong> Source-derived baseline; SME and UX validation remain outstanding<br />
+<strong>Last reviewed:</strong> 2026-11-17</p>
+<h2 id="purpose-and-scope">Purpose and scope</h2>
+<p>This document describes the Hub Angular GUI down to the relationship between:</p>
+<ol>
+<li>application shell and navigation;</li>
+<li>lazy-loaded feature areas and screen families;</li>
+<li>domain entities and user processes;</li>
+<li>forms, validators, guards, resolvers, and HTTP interceptors;</li>
+<li>generated API clients, HTTP verbs, URL patterns, request models, and response models; and</li>
+<li>screen layout patterns and reusable UI services.</li>
+</ol>
+<p>The analysis is based on the Angular source. It describes implemented structure,
+not necessarily approved business behaviour. The API client under
+<code>src/app/autogenerated</code> is generated code and should be treated as the
+canonical endpoint inventory.</p>
+<h2 id="application-structure">Application structure</h2>
+<h3 id="bootstrap-and-shell">Bootstrap and shell</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Source location</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Angular application</td>
+<td><code>src/main.ts</code>, <code>src/app/app.component.ts</code></td>
+<td>Bootstraps the application and root component.</td>
+</tr>
+<tr>
+<td>Root module</td>
+<td><code>src/app/app.module.ts</code></td>
+<td>Registers routing, translation, HTTP, interceptors, Material defaults, notifications, and the authenticated layout.</td>
+</tr>
+<tr>
+<td>Route table</td>
+<td><code>src/app/app-routing.module.ts</code></td>
+<td>Redirects the root to <code>dashboard</code>, protects the main shell, and lazy-loads feature modules.</td>
+</tr>
+<tr>
+<td>Application shell</td>
+<td><code>src/app/layout/</code></td>
+<td>Provides the common navigation, page frame, menus, route outlet, and shared layout services.</td>
+</tr>
+<tr>
+<td>Generated API module</td>
+<td><code>src/app/autogenerated/api.module.ts</code></td>
+<td>Registers generated domain and integration API services.</td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td><code>src/app/config/</code>, <code>src/app/providers/</code>, <code>src/app.json</code></td>
+<td>Loads runtime configuration and administration screens.</td>
+</tr>
+<tr>
+<td>Shared UI</td>
+<td><code>src/app/common/</code>, <code>src/app/shared/</code>, <code>src/app/services/</code></td>
+<td>Reusable controls, dialogs, tables, selectors, attachments, notes, notifications, and utility services.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="route-and-feature-map">Route and feature map</h3>
+<p>The authenticated <code>LayoutComponent</code> is protected by <code>authorizeGuard</code>. Startup
+resolvers load general configuration, latest views, country data, locales,
+markets/sectors, and telephone formatting before the child screen is entered.</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Feature area</th>
+<th>Screen responsibilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/dashboard</code></td>
+<td>Dashboard</td>
+<td>Widgets, counters, drill-downs, calendar, saved searches, and work queues.</td>
+</tr>
+<tr>
+<td><code>/contact</code></td>
+<td>Contact</td>
+<td>Contact search, profile, addresses, activities, requirements, referrals, and subscriptions.</td>
+</tr>
+<tr>
+<td><code>/company</code></td>
+<td>Company</td>
+<td>Company search, profile, contacts, activities, requirements, instructions, ownership, tenancies, and interests.</td>
+</tr>
+<tr>
+<td><code>/property</code></td>
+<td>Property</td>
+<td>Property search, property profile, ownership, activities, attachments, publication, and related assets.</td>
+</tr>
+<tr>
+<td><code>/activity</code></td>
+<td>Activity</td>
+<td>Activity search, add/edit, preview, publication, marketing, parties, matches, terms, viewings, and validation.</td>
+</tr>
+<tr>
+<td><code>/development</code></td>
+<td>Development</td>
+<td>Development overview, buildings, units, activities, and property relationships.</td>
+</tr>
+<tr>
+<td><code>/building</code></td>
+<td>Building</td>
+<td>Building view/edit, units, ownership, activities, attachments, and property breakdown.</td>
+</tr>
+<tr>
+<td><code>/estate</code></td>
+<td>Estate</td>
+<td>Estate view/edit and related property/activity management.</td>
+</tr>
+<tr>
+<td><code>/tenancy</code></td>
+<td>Tenancy</td>
+<td>Tenancy progress, renewal options, termination, paperwork, email uploads, and related parties.</td>
+</tr>
+<tr>
+<td><code>/phase</code></td>
+<td>Phase</td>
+<td>Phase overview and phase-level activities.</td>
+</tr>
+<tr>
+<td><code>/pitch</code></td>
+<td>Pitch</td>
+<td>Pitch records and associated commercial activity.</td>
+</tr>
+<tr>
+<td><code>/instruction</code></td>
+<td>Instruction</td>
+<td>Instruction search, view, edit, documents, and process data.</td>
+</tr>
+<tr>
+<td><code>/offer</code></td>
+<td>Offer</td>
+<td>Offer search, view/edit, acceptance, rejection, and activity linkage.</td>
+</tr>
+<tr>
+<td><code>/requirement</code></td>
+<td>Requirement</td>
+<td>Requirement search, matching, applicants, viewings, and progression.</td>
+</tr>
+<tr>
+<td><code>/portfolio</code></td>
+<td>Portfolio</td>
+<td>Portfolio-level property and tenancy coordination.</td>
+</tr>
+<tr>
+<td><code>/referral</code></td>
+<td>Referral</td>
+<td>Referral records, tasks, and related contacts/activities.</td>
+</tr>
+<tr>
+<td><code>/marketingList</code></td>
+<td>Marketing lists</td>
+<td>List creation/editing, contact upload, merge, and export.</td>
+</tr>
+<tr>
+<td><code>/report</code></td>
+<td>Reports</td>
+<td>Report selection, criteria, generation, and download.</td>
+</tr>
+<tr>
+<td><code>/administration</code></td>
+<td>Administration</td>
+<td>Users, departments, subscriptions, topics, Dotmailer, portal visibility, and showover configuration.</td>
+</tr>
+<tr>
+<td><code>/config</code></td>
+<td>Configuration</td>
+<td>System configuration and translations; restricted to system administrators.</td>
+</tr>
+<tr>
+<td><code>/quick-create</code></td>
+<td>Quick create</td>
+<td>Cross-domain creation shortcuts.</td>
+</tr>
+<tr>
+<td><code>/preferences</code></td>
+<td>Preferences</td>
+<td>User preferences, areas, saved settings, and display options.</td>
+</tr>
+</tbody>
+</table>
+<p><code>/administration</code> and <code>/config</code> additionally use <code>roleAuthorizeGuard</code>.
+Administration permits system administrators, department administrators, and
+central marketing roles; configuration permits system administrators.</p>
+<h2 id="domain-and-entity-coverage">Domain and entity coverage</h2>
+<p>The GUI is organized around the same business entities documented in the core
+domain model, with additional operational and integration entities.</p>
+<table>
+<thead>
+<tr>
+<th>Entity or concern</th>
+<th>GUI evidence</th>
+<th>Typical related records</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contact</td>
+<td><code>contact/</code>, contact search, profile, address and subscription components</td>
+<td>Companies, requirements, activities, referrals, consent</td>
+</tr>
+<tr>
+<td>Company</td>
+<td><code>company/</code>, company profile and relationship panels</td>
+<td>Contacts, properties, ownerships, tenancies, instructions</td>
+</tr>
+<tr>
+<td>Property</td>
+<td><code>property/</code> and asset feature areas</td>
+<td>Ownerships, activities, units, documents, publication</td>
+</tr>
+<tr>
+<td>Activity</td>
+<td><code>activity/</code> with add/edit, search, preview, terms, publication, matches</td>
+<td>Property, parties, offers, requirements, viewings</td>
+</tr>
+<tr>
+<td>Requirement</td>
+<td><code>requirement/</code> and matching screens</td>
+<td>Contacts, activities, matches, viewing tours</td>
+</tr>
+<tr>
+<td>Tenancy</td>
+<td><code>tenancy/</code> progress and renewal screens</td>
+<td>Property, parties, offers, compliance, paperwork</td>
+</tr>
+<tr>
+<td>Offer</td>
+<td><code>offer/</code></td>
+<td>Activity, offeror, progression</td>
+</tr>
+<tr>
+<td>Development/building/estate/phase</td>
+<td>Corresponding feature folders</td>
+<td>Properties, units, activities, ownership</td>
+</tr>
+<tr>
+<td>Instruction/pitch/portfolio</td>
+<td>Corresponding feature folders</td>
+<td>Companies, contacts, properties, activities</td>
+</tr>
+<tr>
+<td>Documents and attachments</td>
+<td>Shared attachment, WOPI, document-template, and visibility components</td>
+<td>All major entities</td>
+</tr>
+<tr>
+<td>Notes and communication</td>
+<td>Shared notes, emails, text messages, notifications, and appointments</td>
+<td>Contacts, activities, viewings, tenancies</td>
+</tr>
+</tbody>
+</table>
+<h2 id="screen-and-layout-patterns">Screen and layout patterns</h2>
+<p>Feature folders consistently use a small number of screen patterns:</p>
+<table>
+<thead>
+<tr>
+<th>Screen pattern</th>
+<th>Typical implementation</th>
+<th>Layout/API behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search/list</td>
+<td><code>*-search</code> components</td>
+<td>Criteria form → paged query → grid/table → preview or view navigation.</td>
+</tr>
+<tr>
+<td>Add/edit</td>
+<td><code>*-add</code>, <code>*-edit</code>, <code>*-add-edit</code> components</td>
+<td>Resolver loads edit data → reactive form → validation → create/update command.</td>
+</tr>
+<tr>
+<td>View/profile</td>
+<td><code>*-view</code>, <code>*-preview-panel</code> components</td>
+<td>Load summary/detail model → tabs/cards/panels → related entity queries and commands.</td>
+</tr>
+<tr>
+<td>Relationship panel</td>
+<td><code>*-activities</code>, <code>*-contacts</code>, <code>*-requirements</code>, ownership/tenancy panels</td>
+<td>Parent ID drives child query; actions open related screens or update associations.</td>
+</tr>
+<tr>
+<td>Modal/panel workflow</td>
+<td><code>*-panel</code>, <code>*-modal</code>, <code>*-dialog</code> components</td>
+<td>Focused command, confirmation, validation, upload, or preview without leaving the parent screen.</td>
+</tr>
+<tr>
+<td>Publication/marketing</td>
+<td><code>publication/</code>, marketing panels, image and brochure controls</td>
+<td>Load publication state → validate → save/publish/unpublish → refresh status.</td>
+</tr>
+<tr>
+<td>Administration</td>
+<td>Administration feature submodules</td>
+<td>Role-protected configuration lists and edit dialogs.</td>
+</tr>
+</tbody>
+</table>
+<p>The visual system is based on Angular Material/CDK, Bootstrap, Font Awesome,
+FullCalendar, Gridstack, Google Maps, Froala, <code>ngx-mat-select-search</code>, and
+<code>ngx-toastr</code>. Translation is provided by <code>@ngx-translate</code>. Shared defaults for
+forms, paginator behaviour, dialogs, tabs, select controls, and toast messages
+are registered in <code>app.module.ts</code>.</p>
+<h2 id="user-process-layouts">User process layouts</h2>
+<h3 id="search-to-detail">Search to detail</h3>
+<div class="highlight"><pre><span></span><code>Route entry
+  -&gt; feature search component
+  -&gt; criteria form and lookup data
+  -&gt; generated query service (POST search endpoint)
+  -&gt; pageable result/grid
+  -&gt; preview panel or detail route
+  -&gt; related tabs and child API calls
+</code></pre></div>
+<h3 id="add-or-edit">Add or edit</h3>
+<div class="highlight"><pre><span></span><code>Route / resolver
+  -&gt; edit-data query (GET)
+  -&gt; reactive form population
+  -&gt; field and cross-field validation
+  -&gt; user confirmation
+  -&gt; generated create/update command (POST or PUT)
+  -&gt; toast/error handling
+  -&gt; route refresh or return to parent
+</code></pre></div>
+<h3 id="state-changing-workflow">State-changing workflow</h3>
+<div class="highlight"><pre><span></span><code>View or edit screen
+  -&gt; validate command or state transition (POST .../stateValidate or domain equivalent)
+  -&gt; confirmation modal
+  -&gt; state/update command (PUT or POST)
+  -&gt; refresh detail model, activity feed, and related projections
+</code></pre></div>
+<h3 id="attachments-and-documents">Attachments and documents</h3>
+<div class="highlight"><pre><span></span><code>Entity screen
+  -&gt; attachment list/details query
+  -&gt; upload or document command
+  -&gt; attachment type/visibility/version command
+  -&gt; optional WOPI/signing operation
+  -&gt; refresh attachment list and entity state
+</code></pre></div>
+<h2 id="validation-and-access-control">Validation and access control</h2>
+<h3 id="route-and-application-validation">Route and application validation</h3>
+<ul>
+<li><code>authorizeGuard</code> protects the authenticated application shell.</li>
+<li><code>roleAuthorizeGuard</code> restricts administration and configuration routes.</li>
+<li>Resolvers load required configuration and edit data before rendering.</li>
+<li><code>RedirectComponent</code>, <code>not-found</code>, and <code>no-access</code> handle invalid or
+  unauthorized navigation.</li>
+<li>Route reuse and dynamic anchor scrolling are handled by shared services.</li>
+</ul>
+<h3 id="form-and-business-validation">Form and business validation</h3>
+<p>Feature components use Angular reactive forms (<code>FormBuilder</code>, <code>FormGroup</code>,
+<code>FormControl</code>, and <code>Validators</code>) for field-level validation. Domain-specific
+validation is additionally represented by:</p>
+<ul>
+<li>edit-data and lookup resolvers;</li>
+<li>generated API command/result types;</li>
+<li>dedicated validation endpoints, including activity state validation;</li>
+<li>confirmation modals before destructive or irreversible commands;</li>
+<li>server error responses surfaced through the shared error interceptor.</li>
+</ul>
+<p>The source analysis should distinguish client-side validation from server-side
+business validation; passing a form does not establish that a domain command
+will be accepted.</p>
+<h3 id="http-cross-cutting-behaviour">HTTP cross-cutting behaviour</h3>
+<p><code>app.module.ts</code> registers:</p>
+<ul>
+<li><code>KfXssInterceptor</code> for request/response XSS handling;</li>
+<li><code>KfErrorInterceptor</code> for shared API error handling;</li>
+<li><code>DateAttributesInterceptor</code> for date conversion;</li>
+<li><code>ProxyUserInterceptor</code> for proxy-user context;</li>
+<li>Angular <code>HttpClient</code> with DI interceptors and JSONP support.</li>
+</ul>
+<h2 id="api-call-layout">API call layout</h2>
+<h3 id="generated-client-contract">Generated client contract</h3>
+<p>Generated services live in <code>src/app/autogenerated/api/</code>. Each service:</p>
+<ol>
+<li>injects Angular <code>HttpClient</code> and <code>AppConfigProvider</code>;</li>
+<li>creates <code>basePath</code> as <code>${configProvider.appConfig.rootUrl}/api</code>;</li>
+<li>exposes typed methods with generated request interfaces;</li>
+<li>serializes query/body/path parameters;</li>
+<li>calls a REST endpoint using <code>GET</code>, <code>POST</code>, <code>PUT</code>, or <code>DELETE</code>; and</li>
+<li>returns a typed model, query result, command result, or <code>Observable&lt;HttpEvent&lt;T&gt;&gt;</code>.</li>
+</ol>
+<p>The effective URL shape is therefore:</p>
+<div class="highlight"><pre><span></span><code>{runtime rootUrl}/api/{resource}/{operation}[/{id}][/{sub-resource}]
+</code></pre></div>
+<h3 id="domain-service-map">Domain service map</h3>
+<table>
+<thead>
+<tr>
+<th>GUI concern</th>
+<th>Generated API services</th>
+<th>Representative call layout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activities</td>
+<td><code>ActivitiesService</code>, <code>AppointmentsService</code>, <code>OffersService</code>, <code>RequirementsService</code></td>
+<td><code>POST /api/activities/search</code>; <code>POST /api/activities</code>; <code>PUT /api/activities/{id}</code>; <code>POST /api/activities/{id}/stateValidate</code>; <code>POST /api/viewings</code>; <code>PUT /api/viewingtours</code></td>
+</tr>
+<tr>
+<td>Contacts</td>
+<td><code>ContactsService</code>, <code>ConsentService</code>, <code>CallBackListService</code></td>
+<td><code>GET /api/contacts/{id}</code>; <code>POST /api/contacts/{id}/activities</code>; <code>POST /api/contacts/{id}/requirements</code>; <code>PUT /api/contacts/{id}/businessaddresses</code>; <code>PUT /api/consent/email</code></td>
+</tr>
+<tr>
+<td>Companies</td>
+<td><code>CompaniesService</code>, <code>BusinessesService</code>, <code>ContactsService</code></td>
+<td>Resource CRUD plus contacts, activities, requirements, ownerships, and tenancy relationship queries</td>
+</tr>
+<tr>
+<td>Properties and assets</td>
+<td><code>PropertiesService</code>, <code>BuildingsService</code>, <code>DevelopmentsService</code>, <code>EstatesService</code>, <code>PhasesService</code>, <code>PortfoliosService</code></td>
+<td>Resource CRUD plus <code>/activities</code>, <code>/attachments</code>, <code>/notes</code>, <code>/preview</code>, ownership, and property breakdown operations</td>
+</tr>
+<tr>
+<td>Tenancies</td>
+<td><code>TenanciesService</code>, <code>AppointmentsService</code>, <code>AttachmentsService</code>, <code>QubeService</code></td>
+<td>Tenancy detail/progression queries, renewal/termination commands, appointments, paperwork, attachments, and integration operations</td>
+</tr>
+<tr>
+<td>Requirements and matching</td>
+<td><code>RequirementsService</code>, <code>ActivitiesService</code>, <code>AppointmentsService</code></td>
+<td>Requirement search/detail, match queries and updates, applicants, viewing tours, and progression commands</td>
+</tr>
+<tr>
+<td>Offers</td>
+<td><code>OffersService</code>, <code>ActivitiesService</code></td>
+<td>Offer queries and state/update commands linked to an activity</td>
+</tr>
+<tr>
+<td>Documents</td>
+<td><code>AttachmentsService</code>, <code>DocumentTemplatesService</code>, <code>WopiService</code>, <code>WatermarksService</code>, <code>PortalDocumentVisibilityService</code></td>
+<td>Attachment detail/version/type/visibility, WOPI content, watermark, signing, and portal visibility calls</td>
+</tr>
+<tr>
+<td>Communications</td>
+<td><code>EmailsService</code>, <code>TextMessagesService</code>, <code>NotificationsService</code>, <code>NotesService</code>, <code>AppointmentsService</code></td>
+<td>Notes, email/text commands, notification queries, appointments, viewing and callback operations</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td><code>DashboardsService</code>, <code>WidgetsService</code></td>
+<td>Widget counter <code>POST</code> calls, drill-down <code>POST</code> calls, calendar <code>GET</code>, saved-search <code>GET</code>, and task-list updates</td>
+</tr>
+<tr>
+<td>Administration/configuration</td>
+<td><code>UsersService</code>, <code>DepartmentsService</code>, <code>ConfigService</code>, <code>PublicationEventsService</code>, <code>DotmailerService</code>, <code>Subscriptions*</code> services</td>
+<td>Role-protected configuration, user/department administration, topic/subscription and portal settings</td>
+</tr>
+<tr>
+<td>Integrations</td>
+<td><code>ThirdfortService</code>, <code>QubeService</code>, <code>DotmailerService</code>, <code>ExternalMessagesService</code>, <code>PublicationEventsService</code></td>
+<td>Integration request/result, synchronization, consent, publication, and external-message operations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="representative-endpoint-families">Representative endpoint families</h3>
+<p>The generated services expose the following endpoint families. The complete
+method-level inventory remains in the generated source and should be refreshed
+when the API specification is regenerated.</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>Endpoint family</th>
+<th>GUI use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/{resource}/{id}</code>, <code>/{resource}/{id}/preview</code>, <code>/{resource}/{id}/editData</code></td>
+<td>Detail, preview, and edit screen initialization</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/{resource}/search</code>, <code>/{resource}/{id}/activities</code>, <code>/{resource}/{id}/notes</code></td>
+<td>Search, related-record queries, and note creation</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/{resource}</code>, <code>/{resource}/{id}/attachments</code>, <code>/{resource}/{id}/stateValidate</code></td>
+<td>Create, upload, and pre-validate commands</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><code>/{resource}/{id}</code>, <code>/{resource}/{id}/parties</code>, <code>/{resource}/{id}/addresses</code></td>
+<td>Update and relationship changes</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/{resource}/{id}</code>, <code>/{resource}/{id}/attachments/{attachmentId}</code></td>
+<td>Delete/archive and attachment removal</td>
+</tr>
+<tr>
+<td><code>POST</code>/<code>PUT</code></td>
+<td><code>/activities/matches/{id}</code>, <code>/activities/{id}/termsAndConditions</code>, <code>/viewings</code>, <code>/viewingtours</code></td>
+<td>Matching, terms, viewing, and progression workflows</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/widgets/{area}</code> and <code>/widgets/{area}/drilldown</code></td>
+<td>Dashboard counters and drill-down grids</td>
+</tr>
+<tr>
+<td><code>GET</code>/<code>POST</code></td>
+<td><code>/attachments</code>, <code>/wopi/files/{fileId}</code>, <code>/watermarks/{entityId}</code></td>
+<td>Documents, online editing, and image/document processing</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api-call-layout-by-screen">API call layout by screen</h3>
+<table>
+<thead>
+<tr>
+<th>Screen</th>
+<th>Initialization calls</th>
+<th>User action calls</th>
+<th>Refresh/side-effect calls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search/list</td>
+<td>Lookup/configuration + search query</td>
+<td>Refine, export, subscribe, bulk action</td>
+<td>Re-query page, update counts, show toast</td>
+</tr>
+<tr>
+<td>Add/edit</td>
+<td>Resolver <code>editData</code>, metadata, enums, lookups</td>
+<td>Create/update, validate, upload</td>
+<td>Reload detail, navigate, publish event</td>
+</tr>
+<tr>
+<td>Detail/profile</td>
+<td>Detail view model + related tab queries</td>
+<td>Notes, attachments, relationship updates, state commands</td>
+<td>Refresh parent and child panels</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td>Widget counters, calendar, saved searches</td>
+<td>Drill-down, task-list updates</td>
+<td>Refresh widget and calendar data</td>
+</tr>
+<tr>
+<td>Administration</td>
+<td>Configuration/user/department query</td>
+<td>Role-protected update/delete</td>
+<td>Re-load list and report result</td>
+</tr>
+<tr>
+<td>Document panel</td>
+<td>Attachment list/details and extensions</td>
+<td>Upload, rename, version, sign, visibility</td>
+<td>Refresh attachment list and audit state</td>
+</tr>
+</tbody>
+</table>
+<h2 id="embedded-business-rules">Embedded business rules</h2>
+<p>The Angular code contains material business behaviour. It is not only a
+presentation layer. The rules fall into two categories: client-side rules that
+shape the screen and request, and server-backed rules that the GUI asks the API
+to validate.</p>
+<h3 id="confirmed-client-side-rules">Confirmed client-side rules</h3>
+<table>
+<thead>
+<tr>
+<th>Rule area</th>
+<th>Embedded behaviour</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Status defaults</td>
+<td>Instructed and marketed dates are defaulted when configured activity statuses are entered, including a market-appraisal-to-sale transition.</td>
+<td><code>common/helpers/activity-default-dates.helper.ts</code></td>
+</tr>
+<tr>
+<td>Status display and filtering</td>
+<td>Active status groups, ordering, and default filters are encoded in a shared service.</td>
+<td><code>common/services/activity-status.service.ts</code></td>
+</tr>
+<tr>
+<td>Offer status eligibility</td>
+<td>Reservation offers are limited to <code>Reserved</code> and <code>Withdrawn</code>; offer status options vary by offer type.</td>
+<td><code>common/services/offer-status.service.ts</code></td>
+</tr>
+<tr>
+<td>Offer calculations</td>
+<td>Accepted offers default agreed price from offer price; area-based amounts and annual amounts are converted; lease end dates are calculated from week/month periods.</td>
+<td><code>offer/offer-add-edit/offer-add-edit.component.ts</code></td>
+</tr>
+<tr>
+<td>Lease dates</td>
+<td>Lease terms are capped against remaining lease duration and invalid, expired, inverted, or null dates are rejected.</td>
+<td><code>common/helpers/lease-date-helper.ts</code></td>
+</tr>
+<tr>
+<td>Activity and requirement status panels</td>
+<td>Notes, completion dates, exchanged dates, lost-to information, and negotiator controls appear conditionally for selected statuses.</td>
+<td><code>common/attributes/status-change/entity-status-control/entity-status-control.component.ts</code></td>
+</tr>
+<tr>
+<td>Referral and publication behaviour</td>
+<td>Referral requirements and Feed Centre unpublishing are selected from hard-coded activity status sets.</td>
+<td><code>activity/activity-add-edit/activity-add-edit-base.component.ts</code></td>
+</tr>
+<tr>
+<td>Ownership changes</td>
+<td>Completion ownership options vary by completion/letting status, agency type, service line, accepted offer, applicant/requirement presence, and ownership type.</td>
+<td><code>common/attributes/status-change/completion-ownership-control/completion-ownership-control.component.ts</code></td>
+</tr>
+<tr>
+<td>Instruction linking</td>
+<td>Requirement instruction actions differ when the requirement is withdrawn or when an instruction already exists.</td>
+<td><code>requirement/requirement-view/requirement-view.component.ts</code></td>
+</tr>
+<tr>
+<td>Field constraints</td>
+<td>Required fields, maximum lengths, non-negative amounts, and minimum positive rent values are encoded in form schemas and controls.</td>
+<td><code>activity/activity-add-edit-common/activity-add-edit-common.schema.ts</code>, feature form components</td>
+</tr>
+<tr>
+<td>Route permissions</td>
+<td>Administration and configuration screens are limited by route role lists.</td>
+<td><code>app-routing.module.ts</code>, <code>common/guards/role-authorize.guard.ts</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="server-backed-rules-initiated-by-the-gui">Server-backed rules initiated by the GUI</h3>
+<p>Before changing an existing Activity or Requirement status, the status control
+calls the API validation operation. Activity validation includes service line,
+agency, activity type, CDD state, instructed date, rent data, matching/resale
+flags, lease completeness, image/brochure presence, and managing department.
+The API also returns status-specific requirements such as whether a note,
+completion date, exchanged date, lost-to information, or negotiator restriction
+applies.</p>
+<p>Representative calls are:</p>
+<div class="highlight"><pre><span></span><code>POST /api/activities/{id}/stateValidate
+POST /api/requirements/{id}/stateValidate
+</code></pre></div>
+<p>The GUI then opens the required panels, applies client-side form checks, and
+submits the state/update command. A valid Angular form therefore does not prove
+that a business transition is valid; the API validation remains authoritative.</p>
+<h3 id="hard-coded-domain-vocabularies">Hard-coded domain vocabularies</h3>
+<p>The client contains status and lifecycle values used to drive controls and
+visibility, including:</p>
+<ul>
+<li>Activity: <code>PreAppraisal</code>, <code>MarketAppraisal</code>, <code>ForSaleOnMarket</code>,
+  <code>UnderOffer</code>, <code>Exchanged</code>, <code>Completed</code>, <code>Withdrawn</code>, and <code>Lost</code>.</li>
+<li>Offer: <code>New</code>, <code>Accepted</code>, <code>Rejected</code>, <code>Withdrawn</code>, <code>UnderOffer</code>, and
+  <code>Reserved</code>.</li>
+<li>Requirement: <code>Active</code>, <code>UnderOffer</code>, <code>Satisfied</code>, <code>Withdrawn</code>, and <code>Lost</code>.</li>
+<li>Referral: <code>New</code>, <code>Accepted</code>, <code>Instructed</code>, <code>Completed</code>, and <code>Finished</code>.</li>
+<li>Instruction: <code>Potential</code>, <code>Instructed</code>, <code>Aborted</code>, <code>Finished</code>, and
+  <code>Disinstructed</code>.</li>
+</ul>
+<p>The source of these values is
+<code>common/models/enums/enum-type-items.ts</code>. They should be checked against the
+API/domain enums during SME review because client values can become stale.</p>
+<h3 id="classification">Classification</h3>
+<table>
+<thead>
+<tr>
+<th>Classification</th>
+<th>Examples</th>
+<th>Documentation treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Client-enforced</td>
+<td>Required fields, length/amount bounds, date calculations, visibility, default values, route guards</td>
+<td>Record as GUI behaviour; do not assume it is sufficient security or domain enforcement.</td>
+</tr>
+<tr>
+<td>Server-backed</td>
+<td>Activity/Requirement transition validation, status-specific requirements, save/update commands</td>
+<td>Record the API call and treat the server response as authoritative.</td>
+</tr>
+<tr>
+<td>Inferred from UI</td>
+<td>Status grouping, panel sequencing, derived offer display values</td>
+<td>Mark as implementation evidence until confirmed by an SME or server contract.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="traceability-and-limitations">Traceability and limitations</h2>
+<ul>
+<li>Route structure is evidenced by <code>src/app/app-routing.module.ts</code>.</li>
+<li>Application providers and interceptors are evidenced by <code>src/app/app.module.ts</code>.</li>
+<li>API service registration is evidenced by <code>src/app/autogenerated/api.module.ts</code>.</li>
+<li>Endpoint paths and HTTP verbs are evidenced by <code>src/app/autogenerated/api/*.service.ts</code>.</li>
+<li>Embedded business-rule evidence is evidenced by the status-control,
+  activity/offer/requirement workflow, helper, enum, and validation files
+  cited above.</li>
+<li>Screen layout patterns are evidenced by the feature component folders and
+  their templates.</li>
+<li>This document does not claim that every generated endpoint is used by a
+  visible screen; some services support integrations, background workflows,
+  administration, or future screens.</li>
+<li>UX labels, field ordering, responsive breakpoints, and business approval
+  require review of the HTML/SCSS templates and an SME or product owner.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../../assets/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

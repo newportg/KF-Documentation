@@ -16,6 +16,10 @@ Angular module.
 | [Activity](./activity.md) | Activity search, context-sensitive forms, state changes, and view |
 | [Requirement](./requirement.md) | Requirement search, form, matching, and progression |
 | [Tenancy](./tenancy.md) | Tenancy search, form, progression, renewal, and view |
+| [Company](./company.md) | Company search, create/edit, view, and related lists |
+| [Offer](./offer.md) | Offer add/edit, view, preview, and status behavior |
+| [Instruction, pitch, and referral](./instruction-pitch-referral.md) | Search, edit/view, and action-card workflows |
+| [Marketing lists, reports, and administration](./marketing-reports-administration.md) | Marketing-list, report, administration, and configuration screens |
 
 ## Page specification status
 
@@ -23,16 +27,16 @@ Angular module.
 |---|---:|---:|---:|---:|---:|
 | Dashboard | Yes | Partial | Partial | Pending | Pending |
 | Contact | Yes | Yes | In progress | Pending | Pending |
-| Company | Yes | Partial | Pending | Pending | Pending |
+| Company | Yes | Yes | In progress | Pending | Pending |
 | Property/assets | Yes | Yes | In progress | Pending | Pending |
 | Activity | Yes | Yes | In progress | Pending | Pending |
 | Requirement | Yes | Yes | In progress | Pending | Pending |
 | Tenancy | Yes | Yes | In progress | Pending | Pending |
-| Offer | Yes | Partial | Pending | Pending | Pending |
-| Instruction/pitch/referral | Yes | Partial | Pending | Pending | Pending |
-| Marketing lists | Yes | Partial | Pending | Pending | Pending |
-| Reports | Yes | Partial | Pending | Pending | Pending |
-| Administration/configuration | Yes | Partial | Pending | Pending | Pending |
+| Offer | Yes | Yes | In progress | Pending | Pending |
+| Instruction/pitch/referral | Yes | Yes | In progress | Pending | Pending |
+| Marketing lists | Yes | Yes | In progress | Pending | Pending |
+| Reports | Yes | Yes | Partial | Pending | Pending |
+| Administration/configuration | Yes | Yes | In progress | Pending | Pending |
 
 `Pending` means the source has not yet been converted into a stable vault
 contract. It does not mean that the source feature is absent.

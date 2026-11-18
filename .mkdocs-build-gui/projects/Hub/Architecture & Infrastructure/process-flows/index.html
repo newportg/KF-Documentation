@@ -1,0 +1,2315 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Architecture, process, and business documentation for Knight Frank Hub">
+      
+      
+      
+      
+        <link rel="prev" href="../message-transport-inventory/">
+      
+      
+        <link rel="next" href="../business-rules/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Process flows - KF Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hub-process-flows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KF Documentation" class="md-header__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KF Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Process flows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KF Documentation" class="md-nav__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KF Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hub
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hub
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-WELCOME/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome & Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QUICK-REFERENCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Business Domain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Business Domain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/CORE-DOMAIN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/API-WORKFLOWS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/STATE-MACHINES-VALIDATORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines & Validators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture & Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture & Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture-blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture blueprint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../message-transport-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Message and transport inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process flows
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-asynchronous-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic asynchronous processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thirdfort-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thirdfort request
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thirdfort-response-and-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thirdfort response and report
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notification-preparation-and-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification preparation and delivery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity-notification-flow-example-outstanding-kyc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity notification flow (example: outstanding KYC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cdd-validity-retriggering-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CDD validity retriggering cascade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soft-opt-in-consent-refresh-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soft opt-in consent refresh cycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-to-pdf-conversion-and-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document-to-PDF conversion and storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tenancy-lifecycle-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy lifecycle integrations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brochure-generation-and-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brochure generation and completion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-result-handlers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration result handlers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#email-consent-suppression-and-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Email consent, suppression, and delivery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-documentation-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process documentation gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../angular-gui-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular GUI analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/PARITY-SPECIFICATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parity specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/layout-and-sizing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Layout and sizing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Page specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/route-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Route inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/core-form-specifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core form specifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/property/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/requirement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/tenancy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenancy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/company/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Company
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/offer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Offer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/instruction-pitch-referral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instruction, pitch, and referral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/marketing-reports-administration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Marketing, reports, and administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/navigation-and-access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation and access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/screen-catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screen catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/user-interactions-and-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interactions and workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/shared-ui-and-feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared UI and feedback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/api-interaction-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interaction contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/traceability-and-open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Traceability and open questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning & Tracking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Planning & Tracking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/NEXT-STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/TASK-COMPLETION-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-asynchronous-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generic asynchronous processing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thirdfort-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thirdfort request
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thirdfort-response-and-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thirdfort response and report
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notification-preparation-and-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notification preparation and delivery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity-notification-flow-example-outstanding-kyc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity notification flow (example: outstanding KYC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cdd-validity-retriggering-cascade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CDD validity retriggering cascade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soft-opt-in-consent-refresh-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soft opt-in consent refresh cycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-to-pdf-conversion-and-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Document-to-PDF conversion and storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tenancy-lifecycle-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy lifecycle integrations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brochure-generation-and-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brochure generation and completion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-result-handlers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration result handlers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#email-consent-suppression-and-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Email consent, suppression, and delivery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-documentation-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process documentation gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hub-process-flows">Hub process flows</h1>
+<h2 id="status">Status</h2>
+<p>These are source-derived first-pass flows. They document confirmed behaviour for the Thirdfort asynchronous journey and several high-value business processes. Additional flows are required for property, contact, and remaining integration journeys.</p>
+<h2 id="generic-asynchronous-processing">Generic asynchronous processing</h2>
+<pre class="mermaid"><code>flowchart TD
+    trigger["API request, webhook, timer, or domain event"] --&gt; publish["Publish queue or Service Bus message"]
+    publish --&gt; receive["WebJobs host receives message"]
+    receive --&gt; resolve["Resolve feature handler through dependency injection"]
+    resolve --&gt; validate["Validate message and business preconditions"]
+    validate --&gt;|invalid| logError["Log error and apply host retry behaviour"]
+    validate --&gt;|valid| process["Execute business operation"]
+    process --&gt; persist["Persist SQL, blob, search, or integration result"]
+    persist --&gt; success["Complete message"]
+    process --&gt;|failure| logError</code></pre>
+<h2 id="thirdfort-request">Thirdfort request</h2>
+<pre class="mermaid"><code>flowchart TD
+    request["Thirdfort request message"] --&gt; validateRequired["Validate required-check data"]
+    validateRequired --&gt;|errors| response["Queue Thirdfort response with errors"]
+    validateRequired --&gt;|valid| validateId["Validate identity-check data"]
+    validateId --&gt;|errors| response
+    validateId --&gt;|valid| build["Build Thirdfort transaction"]
+    build --&gt; send["Send request to Thirdfort"]
+    send --&gt;|external errors| response
+    send --&gt;|accepted| save["Save contact-to-transaction external ID"]</code></pre>
+<p>Source: <code>src/WebJobs/KnightFrank.Antares.WebJobs.Thirdfort/MessageHandlers/ThirdfortRequestQueueMessageHandler.cs</code>.</p>
+<h2 id="thirdfort-response-and-report">Thirdfort response and report</h2>
+<pre class="mermaid"><code>flowchart TD
+    response["Thirdfort response message"] --&gt; contact["Load contact and latest CDD validity"]
+    contact --&gt; exists{"Contact exists?"}
+    exists --&gt;|no| fail["Log and rethrow processing failure"]
+    exists --&gt;|yes| errors{"Response contains errors?"}
+    errors --&gt;|yes| markError["Set Thirdfort error status and description"]
+    errors --&gt;|no| download["Download Thirdfort transaction report"]
+    download --&gt; blob["Create CDD PDF in Blob Storage"]
+    blob --&gt; attachment["Add current contact attachment"]
+    attachment --&gt; cleanup["Delete transaction record"]
+    cleanup --&gt; acknowledge["Acknowledge Thirdfort inbox message"]
+    markError --&gt; audit["Record changed business state"]
+    acknowledge --&gt; audit
+    audit --&gt; publish["Publish CDD validity updated event"]</code></pre>
+<p>Source: <code>src/WebJobs/KnightFrank.Antares.WebJobs.Thirdfort/MessageHandlers/ThirdfortResponseQueueMessageHandler.cs</code>.</p>
+<h2 id="notification-preparation-and-delivery">Notification preparation and delivery</h2>
+<pre class="mermaid"><code>flowchart TD
+    trigger["Timer, webhook, or domain event"] --&gt; message["Publish PrepareNotificationsQueueMessage"]
+    message --&gt; handler["Notification handler receives message"]
+    handler --&gt; validateEntity["Validate entity exists and type is supported"]
+    validateEntity --&gt;|invalid| error["Log error; halt processing"]
+    validateEntity --&gt;|valid| recipients["Determine recipients based on entity type"]
+    recipients --&gt; filter["Filter recipients by notification-type enablement"]
+    filter --&gt; security["Apply security access checks for secure notification types"]
+    security --&gt; recipients_final["Final recipient list"]
+    recipients_final --&gt; persist["Create NotificationRecipient records for each recipient"]
+    persist --&gt; queue_broadcast["Queue BroadcastNotificationsQueueMessage"]
+    queue_broadcast --&gt; queue_mobile["Queue BroadcastMobileNotificationsQueueMessage"]
+    queue_mobile --&gt; title["Generate notification title based on type"]
+    title --&gt; complete["Message processing complete"]</code></pre>
+<p>Source: <code>src/WebJobs/KnightFrank.Antares.WebJobs.Notifications/MessageHandlers/PrepareNotificationsQueueMessageHandler.cs</code>.</p>
+<h2 id="activity-notification-flow-example-outstanding-kyc">Activity notification flow (example: outstanding KYC)</h2>
+<pre class="mermaid"><code>flowchart TD
+    timer["Daily timer trigger"] --&gt; retrieve["Query activities with outstanding KYC"]
+    retrieve --&gt; load_activities["Load activity, parties, and CDD validity records"]
+    load_activities --&gt; for_each["For each activity with outstanding KYC"]
+    for_each --&gt; get_contacts["Get related contact/party records"]
+    get_contacts --&gt; lookup_recipients["Look up recipients assigned to activity"]
+    lookup_recipients --&gt; prepare_msg["Build PrepareNotificationsQueueMessage"]
+    prepare_msg --&gt; queue["Queue notification message"]
+    queue --&gt; next["Process next activity or complete"]
+    next --&gt; sends["Recipients receive notifications via BroadcastNotifications and BroadcastMobileNotifications handlers"]</code></pre>
+<p>Source: <code>src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/ActivityOutstandingKycTobCommandHandler.cs</code>.</p>
+<h2 id="cdd-validity-retriggering-cascade">CDD validity retriggering cascade</h2>
+<pre class="mermaid"><code>flowchart TD
+    event["CDD validity changed for Contact or Company"] --&gt; retrigger_msg["Publish CddValidityRetriggerStatesQueueMessage"]
+    retrigger_msg --&gt; handler["CddValidityRetriggerStatesQueueMessageHandler receives"]
+    handler --&gt; load_entity["Load contact or company"]
+    load_entity --&gt; valid_type{"Entity type valid?"}
+    valid_type --&gt;|no| error["Reject message; log error"]
+    valid_type --&gt;|yes| exists{"Entity exists?"}
+    exists --&gt;|no| fail["Entity-not-found error"]
+    exists --&gt;|yes| find_requirements["Find related requirements&lt;br/&gt;active, Applicant role, CDD present"]
+    find_requirements --&gt; find_instructions["Find related instructions&lt;br/&gt;active, Client role, CDD not null"]
+    find_instructions --&gt; find_activities["Find related activities&lt;br/&gt;active, non-representing, Vendor/Landlord, CDD submitted"]
+    find_activities --&gt; publish_requirements["Publish retrigger event for each requirement"]
+    publish_requirements --&gt; publish_instructions["Publish retrigger event for each instruction"]
+    publish_instructions --&gt; publish_activities["Publish retrigger event for each activity"]
+    publish_activities --&gt; complete["Cascade complete; downstream handlers recalculate"]</code></pre>
+<p>Source: <code>src/WebJobs/KnightFrank.Antares.WebJobs.CddValidity/MessageHandlers/CddValidityRetriggerStatesQueueMessageHandler.cs</code>.</p>
+<h2 id="soft-opt-in-consent-refresh-cycle">Soft opt-in consent refresh cycle</h2>
+<pre class="mermaid"><code>flowchart TD
+    timer["Configured frequency timer"] --&gt; load_contact["Load contact and consent records"]
+    load_contact --&gt; get_orgs["Get current active organisation units for contact"]
+    get_orgs --&gt; for_each["For each organisation unit"]
+    for_each --&gt; has_business{"Contact has business\nwith this org unit?"}
+    has_business --&gt;|no| clear["Clear existing consent expiry if present"]
+    has_business --&gt;|yes| consent_exists{"Valid consent\nexists?"}
+    consent_exists --&gt;|no| create["Create soft opt-in consent"]
+    consent_exists --&gt;|yes| still_active{"Contact still\nactive?"}
+    still_active --&gt;|yes| clear_expiry["Clear expiry/removal dates"]
+    still_active --&gt;|no| set_expiry["Set new expiry based on config"]
+    create --&gt; set_date["Assign expiry date from configuration"]
+    set_date --&gt; next_org["Move to next org unit"]
+    clear --&gt; next_org
+    clear_expiry --&gt; next_org
+    set_expiry --&gt; next_org
+    next_org --&gt; audit["Audit all state transitions"]
+    audit --&gt; save["Save contact consents"]
+    save --&gt; reindex["Reindex search"]
+    reindex --&gt; notify["Send SoftOptInYes or SoftOptInContinuation email"]
+    notify --&gt; complete["Consent refresh complete"]</code></pre>
+<p>Source: <code>src/WebJobs/KnightFrank.Antares.WebJobs.SoftOptIn/CommandHandlers/SoftOptInCommandHandler.cs</code>.</p>
+<h2 id="document-to-pdf-conversion-and-storage">Document-to-PDF conversion and storage</h2>
+<pre class="mermaid"><code>flowchart TD
+    request["Document conversion request queued"] --&gt; handler["WordToPdfConversionQueueMessageHandler receives"]
+    handler --&gt; validate["Validate conversion parameters"]
+    validate --&gt;|error| error["Log error; apply retry policy"]
+    validate --&gt;|valid| load_doc["Load source document"]
+    load_doc --&gt; convert["Convert to PDF via backend service"]
+    convert --&gt; blob["Store PDF in Azure Blob Storage"]
+    blob --&gt; notify["Notify completion or trigger dependent process"]
+    notify --&gt; attachment["Create document attachment record if needed"]
+    attachment --&gt; complete["Conversion complete; mark as sent to external systems"]</code></pre>
+<p>Source: <code>src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/WordToPdfConversionQueueMessageHandler.cs</code>.</p>
+<h2 id="tenancy-lifecycle-integrations">Tenancy lifecycle integrations</h2>
+<pre class="mermaid"><code>flowchart TD
+    tenancy["Tenancy lifecycle trigger"] --&gt; slm["Queue SlmTenancyQueueMessage"]
+    slm --&gt; slmHandler["Load tenant and landlord parties without Qube person IDs"]
+    slmHandler --&gt; slmLookup["Look up people in SLM using TenancySlmRef"]
+    slmLookup --&gt;|API failure| slmError["Record TenancyQubeException"]
+    slmLookup --&gt;|People returned| slmMatch["Match people by name and company"]
+    slmMatch --&gt;|Matched| saveQube["Save QubePersonId"]
+    slmMatch --&gt;|Not matched| matchError["Record QubePersonRecordNotMatched exception"]
+    saveQube --&gt; slmComplete["Save tenancy parties"]
+    matchError --&gt; slmComplete
+
+    startTimer["Daily Fixflo start command"] --&gt; startFilter["Select managed UK residential tenancies&lt;br/&gt;starting today or already started and not expired"]
+    startFilter --&gt; startParties["Load unsent landlord, tenant, and permitted-occupier parties"]
+    startParties --&gt;|Eligible| publishStart["Publish FixfloTenancyStarted event"]
+    publishStart --&gt; markSent["Mark published parties as sent to Fixflo"]
+    startParties --&gt;|No eligible parties or non-UK property| startSkip["Log and skip"]
+
+    endTimer["Daily Fixflo end command"] --&gt; endFilter["Select UK residential tenancies&lt;br/&gt;whose configured expiry offset has elapsed"]
+    endFilter --&gt; endParties["Load parties previously sent to Fixflo"]
+    endParties --&gt;|Eligible| publishEnd["Publish FixfloTenancyEnded event"]
+    publishEnd --&gt; resetSent["Reset IsSentToFixflo flags"]
+    endParties --&gt;|No eligible parties or non-UK property| endSkip["Log and skip"]
+
+    churnTimer["Churn-risk update message"] --&gt; churnLoad["Load tenancy"]
+    churnLoad --&gt; churnChanged{"Churn-risk changed?"}
+    churnChanged --&gt;|no| churnDone["No persistence"]
+    churnChanged --&gt;|yes| churnSave["Save tenancy and audit state change"]
+    churnSave --&gt; churnNote["Create tenancy note"]
+    churnNote --&gt; churnSearch["Refresh tenancy search fields"]
+
+    archiveTimer["Out-of-hours archival command"] --&gt; archiveFilter["Select eligible managed ILM tenancies&lt;br/&gt;expired more than six months with no current replacement"]
+    archiveFilter --&gt; archiveUpdate["Set Adiuvo removal and auto-removal flags"]
+    archiveUpdate --&gt; archiveSave["Save changes and audit"]</code></pre>
+<p>Sources:</p>
+<ul>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs.SlmTenancy/Services/SlmTenancyService.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/Tenancy/Started/Fixflo/PublishFixfloTenancyStartedEventWithStartingDateCommandHandler.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/Tenancy/Ended/Fixflo/PublishFixfloTenancyEndedEventWithEndingDateCommandHandler.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/UpdateTenancyChurnRiskStatusQueueMessageHandler.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/CommandHandlers/RemoveExpiredTenanciesFromOutOfHoursCommandHandler.cs</code></li>
+</ul>
+<h2 id="brochure-generation-and-completion">Brochure generation and completion</h2>
+<pre class="mermaid"><code>flowchart TD
+    request["GenerateBrochureQueueMessage"] --&gt; build["Build brochure data for activity and selected images"]
+    build --&gt; template{"Template name supplied?"}
+    template --&gt;|no| allItems["Build all brochure items as custom brochure"]
+    template --&gt;|yes| lookup["Request matching template from Frontify"]
+    lookup --&gt;|not found| templateError["Raise template-not-found error"]
+    lookup --&gt;|found| templateItems["Build items for the selected template"]
+    allItems --&gt; audit["Build audit metadata and Frontify request"]
+    templateItems --&gt; audit
+    audit --&gt; publish["Publish GenerateBrochure event to Frontify topic"]
+    publish --&gt;|publish failure| publishError["Raise publish failure"]
+    publish --&gt;|published| frontify["Frontify processes brochure"]
+    frontify --&gt; completeMsg["CompleteBrochuresQueueMessage"]
+    completeMsg --&gt; activity["Validate activity exists and read service line"]
+    activity --&gt; residential{"Residential sales or lettings?"}
+    residential --&gt;|no| completeSkip["No Frontify completion call"]
+    residential --&gt;|yes| complete["Call Frontify CompleteBrochure"]
+    complete --&gt;|API error| completeLog["Log Frontify API error"]</code></pre>
+<p>Sources:</p>
+<ul>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/GenerateBrochureQueueMessageHandler.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/CompleteBrochuresQueueMessageHandler.cs</code></li>
+</ul>
+<p>The inspected handlers publish the request and invoke Frontify completion. PDF storage and delivery notification are not implemented in these two handlers and require tracing elsewhere.</p>
+<h2 id="integration-result-handlers">Integration result handlers</h2>
+<pre class="mermaid"><code>flowchart TD
+    response["External integration response"] --&gt; type{"Result type"}
+
+    type --&gt;|HomePpl reference check| homeLoad["Load tenancy, party, and risk-report blob"]
+    homeLoad --&gt; homeStore["Store risk report in Blob Storage"]
+    homeStore --&gt; homeAttach["Attach report to permitted occupier, tenant, or guarantor"]
+    homeAttach --&gt; homeSave["Save progression state and publish status event"]
+    homeSave --&gt; homeSearch["Refresh tenancy progression search index"]
+    type --&gt;|HomePpl validation IDs| homeIds["Update validation IDs for tenant or permitted occupier"]
+    homeIds --&gt; homeIdsSave["Save tenancy progression records"]
+    type --&gt;|HomePpl error| homeError["Store reference-check error and reset party statuses"]
+
+    type --&gt;|TDS success| tdsAccepted["Set deposit status registered&lt;br/&gt;store certificate URL and API reference"]
+    type --&gt;|TDS failure| tdsFailed["Set deposit status not registered"]
+    tdsAccepted --&gt; tdsDownload{"Certificate URL available and download succeeds?"}
+    tdsDownload --&gt;|yes| tdsAttach["Store certificate blob and attach current document"]
+    tdsDownload --&gt;|no| tdsNoAttach["Log download failure or skip attachment"]
+    tdsFailed --&gt; tdsSave["Save progression state and errors"]
+    tdsAttach --&gt; tdsSave
+    tdsNoAttach --&gt; tdsSave
+    tdsSave --&gt; tdsNotify["Publish deposit registration result"]
+    tdsAttach --&gt; qubeQueue["Queue Qube tenancy and attachment synchronization"]
+
+    type --&gt;|Qube synchronization| qubeValidate["Validate ID and supported entity type"]
+    qubeValidate --&gt; qubeFresh{"No newer successful sync exists?"}
+    qubeFresh --&gt;|no| qubeSkip["Log and skip stale message"]
+    qubeFresh --&gt;|yes| qubeLoad["Load entity view model"]
+    qubeLoad --&gt; qubeSend["Send entity or tenancy attachments to Qube"]</code></pre>
+<p>Sources:</p>
+<ul>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/HomePplResultQueueMessageHandler.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/TDSResultQueueMessageHandler.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs/MessageHandlers/QubeSynchronizationQueueMessageHandler.cs</code></li>
+</ul>
+<h2 id="email-consent-suppression-and-delivery">Email consent, suppression, and delivery</h2>
+<pre class="mermaid"><code>flowchart TD
+    dotmailerTimer["Dotmailer suppression timer"] --&gt; enabled{"Suppression job enabled?"}
+    enabled --&gt;|no| disabled["Log disabled and stop"]
+    enabled --&gt;|yes| runLog["Initialize Dotmailer run log"]
+    runLog --&gt; unsub["Import suppressed contacts since last run"]
+    unsub --&gt;|initial run| clear["Clear existing suppression records first"]
+    unsub --&gt;|new suppression| saveSuppressions["Save per-business suppression records"]
+    saveSuppressions --&gt; notifySuppressed["Queue local suppression command for incremental imports"]
+    unsub --&gt; resub["Import modified contacts since last run"]
+    resub --&gt; removeSuppressions["Remove matching per-business suppression records"]
+    notifySuppressed --&gt; runSuccess["Log suppression run success"]
+    removeSuppressions --&gt; runSuccess
+
+    queued["Dotmailer email queued"] --&gt; markStarted["Mark queue item started"]
+    markStarted --&gt; contact{"Contact and email still exist?"}
+    contact --&gt;|no| skipDeleted["Skip deleted contact"]
+    contact --&gt;|yes| consent["Resolve business-specific consent"]
+    consent --&gt; integrity{"Email-type consent still valid?"}
+    integrity --&gt;|no| skipConsent["Do not send"]
+    integrity --&gt;|yes| sendDotmailer["Send through Dotmailer"]
+
+    emailQueue["SendEmailQueueMessage"] --&gt; loadEmail["Load email and validate size"]
+    loadEmail --&gt; status{"Status is Outbox or Error?"}
+    status --&gt;|no| skipStatus["Log and skip"]
+    status --&gt;|yes| whitelist["Filter recipients by allowed-address whitelist"]
+    whitelist --&gt;|none remain| treatSuccess["Treat as handled without sending"]
+    whitelist --&gt;|recipients remain| strategy["Select email server strategy and send"]
+    strategy --&gt;|success| sent["Mark Sent and mark recipients sent"]
+    strategy --&gt;|failure| retry["Increment retry count and save error"]
+    retry --&gt;|fewer than five retries| requeue["Allow host-level retry"]
+    retry --&gt;|five or more retries| error["Mark email Error"]</code></pre>
+<p>Sources:</p>
+<ul>
+<li><code>src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Suppressions/DotmailerSuppressionsManager.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Suppressions/Steps/Unsubscribes/UnsubscribesStepRunner.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Suppressions/Steps/Resubscribes/ResubscribesStepRunner.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.DotmailerWebJob/Emails/Handlers/BaseEmailHandler.cs</code></li>
+<li><code>src/WebJobs/KnightFrank.Antares.WebJobs.Email/MessageHandlers/SendEmailQueueMessageHandler.cs</code></li>
+</ul>
+<h2 id="process-documentation-gaps">Process documentation gaps</h2>
+<ul>
+<li>Entry points for the main property contact-change and churn-risk journeys.</li>
+<li>Requirement auto-match and scheduled notification flow.</li>
+<li>User reassignment flow (task transfer, tenancy role updates).</li>
+<li>Search indexing and projection consistency flow.</li>
+<li>User-visible outcomes and SLAs for each process.</li>
+<li>Retry, poison-message, and dead-letter paths for each process.</li>
+<li>Compensating actions when an external service succeeds but local persistence fails.</li>
+<li>Process owners and operational runbooks.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../../assets/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

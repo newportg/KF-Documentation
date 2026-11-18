@@ -1,0 +1,2773 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Architecture, process, and business documentation for Knight Frank Hub">
+      
+      
+      
+      
+        <link rel="prev" href="../source-inventory/">
+      
+      
+        <link rel="next" href="../process-flows/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Message and transport inventory - KF Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hub-message-and-transport-inventory" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KF Documentation" class="md-header__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KF Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Message and transport inventory
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KF Documentation" class="md-nav__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KF Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hub
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hub
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-WELCOME/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome & Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QUICK-REFERENCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Business Domain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Business Domain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/CORE-DOMAIN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/API-WORKFLOWS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Core%20Business%20Domain/STATE-MACHINES-VALIDATORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines & Validators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture & Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture & Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture-blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture blueprint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Message and transport inventory
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Message and transport inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#service-bus-topic-configuration-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service Bus topic configuration keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production naming convention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-service-bus-topics-and-subscriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Service Bus topics and subscriptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configured-azure-storage-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configured Azure Storage queues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webjob-handlers-and-message-consumers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WebJob handlers and message consumers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-follow-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required follow-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../process-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../angular-gui-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular GUI analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/PARITY-SPECIFICATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parity specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/layout-and-sizing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Layout and sizing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Page specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/route-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Route inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/core-form-specifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core form specifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/property/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/requirement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/tenancy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenancy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/company/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Company
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/offer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Offer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/instruction-pitch-referral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instruction, pitch, and referral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/marketing-reports-administration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Marketing, reports, and administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/navigation-and-access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation and access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/screen-catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screen catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/user-interactions-and-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interactions and workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/shared-ui-and-feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared UI and feedback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/api-interaction-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interaction contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/traceability-and-open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Traceability and open questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning & Tracking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Planning & Tracking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/NEXT-STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/TASK-COMPLETION-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#service-bus-topic-configuration-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service Bus topic configuration keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production naming convention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-service-bus-topics-and-subscriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Service Bus topics and subscriptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configured-azure-storage-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configured Azure Storage queues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webjob-handlers-and-message-consumers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WebJob handlers and message consumers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-follow-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required follow-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hub-message-and-transport-inventory">Hub message and transport inventory</h1>
+<h2 id="service-bus-topic-configuration-keys">Service Bus topic configuration keys</h2>
+<p><code>src/Hub.Contracts/HubServiceBus/HubServiceBusTriggerConstants.cs</code> defines the following application-setting keys. The values below are from the checked-in <code>Web.config</code> and <code>App.config</code> files and are the repository's dev/local configuration. Production values are injected at deployment and are not expected to be present in the repository source configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Likely message area</th>
+<th>Physical entity name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ActivityServiceBusTriggerTopicName</code></td>
+<td>Activity events</td>
+<td><code>sbt-activity-local-ee</code></td>
+</tr>
+<tr>
+<td><code>CompanyServiceBusTriggerTopicName</code></td>
+<td>Company events</td>
+<td><code>sbt-company-local-ee</code></td>
+</tr>
+<tr>
+<td><code>ContactServiceBusTriggerTopicName</code></td>
+<td>Contact events</td>
+<td><code>sbt-contact-local-ee</code></td>
+</tr>
+<tr>
+<td><code>FixfloWebhookServiceBusTriggerTopicName</code></td>
+<td>Fixflo webhook events</td>
+<td><code>sbt-fixflowebhook-local-ee</code></td>
+</tr>
+<tr>
+<td><code>PropertyServiceBusTriggerTopicName</code></td>
+<td>Property events</td>
+<td><code>sbt-property-local-ee</code></td>
+</tr>
+<tr>
+<td><code>PropertyManagementServiceBusTriggerTopicName</code></td>
+<td>Property management events</td>
+<td>Not present in inspected configs</td>
+</tr>
+<tr>
+<td><code>TenancyServiceBusTriggerTopicName</code></td>
+<td>Tenancy events</td>
+<td><code>sbt-tenancy-local-ee</code></td>
+</tr>
+<tr>
+<td><code>UserServiceBusTriggerTopicName</code></td>
+<td>User events</td>
+<td><code>sbt-user-local-ee</code></td>
+</tr>
+<tr>
+<td><code>TealRequestServiceBusTriggerTopicName</code></td>
+<td>Teal requests</td>
+<td><code>sbt-tealrequest-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>FrontifyServiceBusTriggerTopicName</code></td>
+<td>Frontify requests</td>
+<td><code>sbt-frontifyrequest-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>NorthStarContactServiceBusTriggerTopicName</code></td>
+<td>NorthStar contact events</td>
+<td><code>sbt-northstar-dev-ne</code></td>
+</tr>
+</tbody>
+</table>
+<p>Source: <code>src/KnightFrank.Antares.Api/Web.config</code> and <code>src/WebJobs/KnightFrank.Antares.WebJobs/App.config</code>.</p>
+<p>The <code>local-ee</code> and <code>dev-ne</code> suffixes identify the checked-in dev/local environment configuration. Production values are supplied by deployment configuration and are therefore intentionally absent from these files.</p>
+<h2 id="production-naming-convention">Production naming convention</h2>
+<p>The physical Azure entity names follow the Microsoft Cloud Adoption Framework (CAF) naming convention. In practice, the production form retains the entity, workload, region, and instance components and changes only the environment component from <code>local</code> or <code>dev</code> to <code>prd</code> where that component is present. For example, a <code>sbt-activity-local-ee</code> value would become <code>sbt-activity-prd-ee</code>, subject to the deployment template's exact token placement.</p>
+<p>Production validation should therefore confirm:</p>
+<ul>
+<li>the deployment parameters or environment settings that replace the <code>local</code>/<code>dev</code> environment token with <code>prd</code>;</li>
+<li>that the entity, workload, region, and instance components remain unchanged;</li>
+<li>that the injected names match the infrastructure definitions and CAF naming convention; and</li>
+<li>whether any service-specific abbreviations or legacy exceptions are approved.</li>
+</ul>
+<p>The checked-in <code>local-ee</code> and <code>dev-ne</code> values above are dev/local names only and must not be presented as production names.</p>
+<h2 id="additional-service-bus-topics-and-subscriptions">Additional Service Bus topics and subscriptions</h2>
+<table>
+<thead>
+<tr>
+<th>Configuration key</th>
+<th>Physical entity name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FrontifyResponseServiceBusTriggerTopicName</code></td>
+<td><code>sbt-frontifyresponse-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>FixfloFailedMessageServiceBusTriggerTopicName</code></td>
+<td><code>sbt-fixflo-api-failed-message-local-ee</code></td>
+</tr>
+<tr>
+<td><code>EmailMessageServiceBusTriggerTopicName</code></td>
+<td><code>sbt-email-api-message-local-ee</code></td>
+</tr>
+<tr>
+<td><code>AzureBusTopicName</code></td>
+<td><code>sbt-docmgmt-scan-result-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>TealResponseServiceBusTriggerTopicName</code></td>
+<td><code>sbt-tealresponse-dev-ne</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Configuration key</th>
+<th>Subscription name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FrontifyBespokeBrochureResponseSubscriptionName</code></td>
+<td><code>sbts-kfl-md-generatebrochure-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>HubApiFixfloFailedMessageServiceBusSubscriptionName</code></td>
+<td><code>sbts-hub-antares-api-local-ee</code></td>
+</tr>
+<tr>
+<td><code>HubApiEmailMessageServiceBusSubscriptionName</code></td>
+<td><code>sbts-hub-antares-api-local-ee</code></td>
+</tr>
+<tr>
+<td><code>AzureBusSubscriptionName</code></td>
+<td><code>sbts-docmgmt-scan-result-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>TealSendInvitationsResponseServiceBusSubscriptionName</code></td>
+<td><code>sbts-tealresponse-sendinvitations-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>TealMaterialInformationResponseServiceBusSubscriptionName</code></td>
+<td><code>sbts-tealresponse-materialinformation-dev-ne</code></td>
+</tr>
+<tr>
+<td><code>TealTitleDeedResponseServiceBusSubscriptionName</code></td>
+<td><code>sbts-tealresponse-titledeeds-dev-ne</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="configured-azure-storage-queues">Configured Azure Storage queues</h2>
+<p>The checked-in API and WebJob configuration defines these queue names:</p>
+<table>
+<thead>
+<tr>
+<th>Configuration key</th>
+<th>Physical queue name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Queue.AzureResource</code></td>
+<td><code>command-queue-azure-resource</code></td>
+</tr>
+<tr>
+<td><code>Queue.PrepareNotifications</code></td>
+<td><code>command-queue-prepare-notifications</code></td>
+</tr>
+<tr>
+<td><code>Queue.ElasticSearch</code></td>
+<td><code>command-queue-elastic-search</code></td>
+</tr>
+<tr>
+<td><code>Queue.FeedCentre</code></td>
+<td><code>command-queue-feed-centre</code></td>
+</tr>
+<tr>
+<td><code>Queue.ExternalPortalsFeed</code></td>
+<td><code>command-queue-external-portals-feed</code></td>
+</tr>
+<tr>
+<td><code>Queue.Email</code></td>
+<td><code>command-queue-email</code></td>
+</tr>
+<tr>
+<td><code>Queue.SlmTenancy</code></td>
+<td><code>command-queue-slm-tenancy</code></td>
+</tr>
+<tr>
+<td><code>Queue.BatchEmail</code></td>
+<td><code>command-queue-batch-email</code></td>
+</tr>
+<tr>
+<td><code>Queue.TextMessage</code></td>
+<td><code>command-queue-text-message</code></td>
+</tr>
+<tr>
+<td><code>Queue.WordToPdfConversion</code></td>
+<td><code>command-queue-word-to-pdf</code></td>
+</tr>
+<tr>
+<td><code>Queue.UploadedContact</code></td>
+<td><code>command-queue-uploaded-contact</code></td>
+</tr>
+<tr>
+<td><code>Queue.Sap</code></td>
+<td><code>command-queue-sap</code></td>
+</tr>
+<tr>
+<td><code>Queue.Qube</code></td>
+<td><code>command-queue-qube</code></td>
+</tr>
+<tr>
+<td><code>Queue.ReassignUser</code></td>
+<td><code>command-queue-reassign-user</code></td>
+</tr>
+<tr>
+<td><code>Queue.ResyncPropertiesToFixflo</code></td>
+<td><code>command-queue-resync-properties-to-fixflo</code></td>
+</tr>
+<tr>
+<td><code>Queue.QubeFailures</code></td>
+<td><code>command-queue-qube-failure</code></td>
+</tr>
+<tr>
+<td><code>Queue.BroadcastNotifications</code></td>
+<td><code>command-queue-broadcast</code></td>
+</tr>
+<tr>
+<td><code>Queue.BroadcastMobileNotifications</code></td>
+<td><code>command-queue-broadcast-mob</code></td>
+</tr>
+<tr>
+<td><code>Queue.SearchToFile</code></td>
+<td><code>command-queue-search-to-file</code></td>
+</tr>
+<tr>
+<td><code>Queue.ContactNegotiatorNotification</code></td>
+<td><code>command-queue-contact-negotiator</code></td>
+</tr>
+<tr>
+<td><code>Queue.ExportMarketingListToDotmailer</code></td>
+<td><code>command-queue-dotmailer-export</code></td>
+</tr>
+<tr>
+<td><code>Queue.TemplateGeneration</code></td>
+<td><code>command-queue-template-generation</code></td>
+</tr>
+<tr>
+<td><code>Queue.PrimaryAddressNotification</code></td>
+<td><code>command-queue-primary-address</code></td>
+</tr>
+<tr>
+<td><code>Queue.CddValidityRetriggerStates</code></td>
+<td><code>command-queue-cdd-validity-retrigger</code></td>
+</tr>
+<tr>
+<td><code>Queue.ActivityCddUpdate</code></td>
+<td><code>command-queue-activity-cdd-update</code></td>
+</tr>
+<tr>
+<td><code>Queue.ActivityCounterpartyCddUpdate</code></td>
+<td><code>command-queue-activity-cnt-cdd-upd</code></td>
+</tr>
+<tr>
+<td><code>Queue.MergeMarketingLists</code></td>
+<td><code>command-queue-merge-marketing-lists</code></td>
+</tr>
+<tr>
+<td><code>Queue.RequirementCddUpdate</code></td>
+<td><code>command-queue-requirement-cdd-update</code></td>
+</tr>
+<tr>
+<td><code>Queue.BulkMarketingReport</code></td>
+<td><code>command-queue-bulk-marketing-report</code></td>
+</tr>
+<tr>
+<td><code>Queue.BulkMatchEmail</code></td>
+<td><code>command-queue-bulk-match-email</code></td>
+</tr>
+<tr>
+<td><code>Queue.ThirdfortRequest</code></td>
+<td><code>command-queue-thirdfort-request</code></td>
+</tr>
+<tr>
+<td><code>Queue.ThirdfortResponse</code></td>
+<td><code>command-queue-thirdfort-response</code></td>
+</tr>
+<tr>
+<td><code>Queue.SoftOptIn</code></td>
+<td><code>command-queue-soft-optin</code></td>
+</tr>
+<tr>
+<td><code>Queue.ContactCustomerJourneys</code></td>
+<td><code>command-queue-contact-journey</code></td>
+</tr>
+<tr>
+<td><code>Queue.ActivityAssetWebLinks</code></td>
+<td><code>command-queue-web-links</code></td>
+</tr>
+<tr>
+<td><code>Queue.BatchEwsOperations</code></td>
+<td><code>command-queue-batch-ews-operations</code></td>
+</tr>
+<tr>
+<td><code>Queue.TenancyChurnRiskStatus</code></td>
+<td><code>command-queue-tenancy-churn-risk</code></td>
+</tr>
+<tr>
+<td><code>Queue.UpdatePortalVisibilityExistingDocs</code></td>
+<td><code>command-queue-update-portal-visibility</code></td>
+</tr>
+<tr>
+<td><code>Queue.RefreshRelatedActivityNotes</code></td>
+<td><code>command-queue-related-notes</code></td>
+</tr>
+<tr>
+<td><code>Queue.FixfloTenancy</code></td>
+<td><code>command-queue-fixflo-tenancy</code></td>
+</tr>
+<tr>
+<td><code>Queue.CompleteBrochures</code></td>
+<td><code>command-queue-complete-brochures</code></td>
+</tr>
+<tr>
+<td><code>Queue.GenerateBrochure</code></td>
+<td><code>command-queue-generate-brochure</code></td>
+</tr>
+<tr>
+<td><code>Queue.HomePplRequests</code></td>
+<td><code>command-queue-homeppl-request</code></td>
+</tr>
+<tr>
+<td><code>Queue.HomePplCallback</code></td>
+<td><code>command-queue-homeppl-callback</code></td>
+</tr>
+<tr>
+<td><code>Queue.TDSSend</code></td>
+<td><code>command-queue-tds-outbound</code></td>
+</tr>
+<tr>
+<td><code>Queue.TDSRetrieve</code></td>
+<td><code>command-queue-tds-inbound</code></td>
+</tr>
+<tr>
+<td><code>Queue.NorthStar</code></td>
+<td><code>command-queue-northstar</code></td>
+</tr>
+<tr>
+<td><code>Queue.DepartmentRequirementAutoMatch</code></td>
+<td><code>command-queue-auto-match</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="message-contract">Message contract</h2>
+<p><code>HubServiceBusTopicMessage&lt;T&gt;</code> carries:</p>
+<ul>
+<li><code>Topic</code>;</li>
+<li><code>PublishEventType</code>;</li>
+<li>typed <code>MessageData</code>;</li>
+<li>optional <code>CustomMetadata</code>;</li>
+<li>optional <code>SessionId</code>.</li>
+</ul>
+<p><code>HubServiceBusPublisherSubject</code> represents an entity type and publish event type using string-enum JSON conversion.</p>
+<p>The common Azure storage layer exposes queue clients and wrappers. The queue names above are the configured dev/local values. Production entity names are injected at deployment and are expected to follow the Microsoft CAF naming convention. Poison-message handling, retry counts, visibility timeouts, and deployment settings still require environment-level review.</p>
+<h2 id="webjob-handlers-and-message-consumers">WebJob handlers and message consumers</h2>
+<p>The following table catalogs all WebJob handler classes and their primary message types. Handlers are organized by feature area.</p>
+<table>
+<thead>
+<tr>
+<th>WebJob Module</th>
+<th>Handler Class</th>
+<th>Message Type / Trigger</th>
+<th>Primary Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Email</strong></td>
+<td><code>SendEmailQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Sends queued emails, tracks delivery/failure, handles recipient lists</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td><code>BatchEwsOperationsQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Batch deletion and Exchange Web Services operations</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td><code>BulkMatchEmailMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Bulk email matching and correlation</td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td><code>DelayedMessagesQueueCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Publishes delayed queued messages to correct queues based on delay schedule</td>
+</tr>
+<tr>
+<td><strong>Dotmailer</strong></td>
+<td><code>DotmailerEmailsTimeEventHandler</code></td>
+<td>Timer trigger</td>
+<td>Syncs emails to Dotmailer platform</td>
+</tr>
+<tr>
+<td><strong>Dotmailer</strong></td>
+<td><code>DotmailerContactCampaignsTimeEventHandler</code></td>
+<td>Timer trigger</td>
+<td>Syncs contact campaigns to Dotmailer</td>
+</tr>
+<tr>
+<td><strong>Dotmailer</strong></td>
+<td><code>DotmailerAccountsSyncTimeEventHandler</code></td>
+<td>Timer trigger</td>
+<td>Syncs account data to Dotmailer</td>
+</tr>
+<tr>
+<td><strong>Dotmailer</strong></td>
+<td><code>DotmailerSuppressionsTimeEventHandler</code></td>
+<td>Timer trigger</td>
+<td>Syncs suppression lists to Dotmailer</td>
+</tr>
+<tr>
+<td><strong>Dotmailer</strong></td>
+<td><code>ExportMarketingListToDotmailerMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Exports marketing lists to Dotmailer address books; creates/updates contacts</td>
+</tr>
+<tr>
+<td><strong>Dotmailer</strong></td>
+<td><code>ConsentNoEmailHandler</code>, <code>ConsentYesEmailHandler</code>, <code>ConsentPermissionEmailHandler</code>, <code>RenewalOfConsentEmailHandler</code>, <code>PrivacyPolicyEmailHandler</code>, <code>SoftOptInContinuationEmailHandler</code>, <code>SoftOptInYesEmailHandler</code></td>
+<td>Email queue</td>
+<td>Consent-related email sending with Dotmailer integration</td>
+</tr>
+<tr>
+<td><strong>Dotmailer</strong></td>
+<td><code>FpnEmailHandler</code></td>
+<td>Email queue</td>
+<td>Fixed property news email handler</td>
+</tr>
+<tr>
+<td><strong>TextMessage</strong></td>
+<td><code>SendTextMessageQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Sends SMS text messages; validates recipients and persists delivery state</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ActivityOutstandingKycTobCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Sends notifications for activities with outstanding KYC</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ProcessActivityEpcOverdueNotificationsCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Notifies for overdue EPC activities</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ProcessAutomaticallyLockedActivitiesCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Notifies for automatically locked activities</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ProcessMatchesScheduledNotificationsCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Sends scheduled notifications for matched properties/requirements</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ProcessReferralNotificationsCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Sends referral-related notifications</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ProcessTenancyNotificationsCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Sends tenancy-related notifications</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ProcessTenancyStartWelcomeEmailsCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Sends welcome emails for new tenancies</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ProcessActivitiesWithExpiredExchangeOrCompletionDateCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Notifies when activity exchange/completion dates expire</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>RetrieveScheduledNotificationsCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Retrieves pending scheduled notifications</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>ScheduledBaseNotificationsCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Base command handler for scheduled notifications</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>PrepareNotificationsQueueMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Prepares bulk notifications for entities; validates recipients; routes based on entity type</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>BroadcastNotificationsQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Broadcasts prepared notifications to recipients</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>BroadcastMobileNotificationsQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Broadcasts notifications via mobile push channels</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>MobileNotificationRecipientStatusUpdatedEventHandler</code></td>
+<td>Service Bus message</td>
+<td>Handles mobile notification delivery/read status updates</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td><code>BulkMarketingReportMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Generates and sends bulk marketing reports</td>
+</tr>
+<tr>
+<td><strong>Elasticsearch</strong></td>
+<td><code>ElasticSearchQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Indexes and updates Elasticsearch with business entity changes</td>
+</tr>
+<tr>
+<td><strong>Elasticsearch</strong></td>
+<td><code>RefreshTenanciesCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Refreshes tenancy index entries in Elasticsearch</td>
+</tr>
+<tr>
+<td><strong>CddUpdates</strong></td>
+<td><code>ActivityCddUpdateQueueMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Processes activity CDD updates and validity events</td>
+</tr>
+<tr>
+<td><strong>CddUpdates</strong></td>
+<td><code>ActivityCounterpartyCddUpdateQueueMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Processes counterparty CDD updates for activities</td>
+</tr>
+<tr>
+<td><strong>CddUpdates</strong></td>
+<td><code>RequirementCddUpdateQueueMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Processes requirement CDD updates</td>
+</tr>
+<tr>
+<td><strong>CddValidity</strong></td>
+<td><code>CddValidityRetriggerStatesQueueMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Retrigggers CDD validity checks for contacts, companies, and related entities</td>
+</tr>
+<tr>
+<td><strong>ContactPrimaryAddress</strong></td>
+<td><code>PrimaryAddressNotificationQueueMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Notifies when contact primary address changes</td>
+</tr>
+<tr>
+<td><strong>Templates</strong></td>
+<td><code>TemplateGenerationMessageHandler</code></td>
+<td>Service Bus/Queue message</td>
+<td>Generates document and email templates</td>
+</tr>
+<tr>
+<td><strong>WordToPdf</strong></td>
+<td><code>WordToPdfConversionQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Converts Word documents to PDF; stores in blob storage with document attachment</td>
+</tr>
+<tr>
+<td><strong>Thirdfort</strong></td>
+<td><code>ThirdfortRequestQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Validates and sends Thirdfort compliance requests; (see Process flows for details)</td>
+</tr>
+<tr>
+<td><strong>Thirdfort</strong></td>
+<td><code>ThirdfortResponseQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Processes Thirdfort responses; stores PDFs, publishes events; (see Process flows for details)</td>
+</tr>
+<tr>
+<td><strong>Sap</strong></td>
+<td><code>RegisterSapQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Sends entity registration and change events to SAP</td>
+</tr>
+<tr>
+<td><strong>SlmTenancy</strong></td>
+<td><code>SlmTenancyQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Syncs tenancy data to SLM platform</td>
+</tr>
+<tr>
+<td><strong>SoftOptIn</strong></td>
+<td><code>SoftOptInCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Processes soft opt-in consent expiry; assigns expiry dates; updates contact status</td>
+</tr>
+<tr>
+<td><strong>SoftOptIn</strong></td>
+<td><code>SoftOptInConsentRenewalCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Renews consent for contacts with active entities</td>
+</tr>
+<tr>
+<td><strong>SoftOptIn</strong></td>
+<td><code>SoftOptinQueueMessageHandler</code>, <code>ContactCustomerJourneysQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Processes opt-in queue messages and customer journey events</td>
+</tr>
+<tr>
+<td><strong>FeedCentre</strong></td>
+<td><code>FeedCentreQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Processes feed centre updates and distribution</td>
+</tr>
+<tr>
+<td><strong>FeedCentre</strong></td>
+<td><code>ExternalPortalsFeedQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Distributes feeds to external portals</td>
+</tr>
+<tr>
+<td><strong>LatestView</strong></td>
+<td><code>CleanUpLatestViewCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Removes latest-view records older than retention threshold</td>
+</tr>
+<tr>
+<td><strong>MarketingList</strong></td>
+<td><code>MergeMarketingListsQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Merges marketing lists and updates contacts</td>
+</tr>
+<tr>
+<td><strong>Instructions</strong></td>
+<td><code>ResultHandler</code></td>
+<td>Service Bus/Queue message (various)</td>
+<td>Processes external instruction results (HomePpl, TDS, Qube, etc.)</td>
+</tr>
+<tr>
+<td><strong>Qube</strong></td>
+<td><code>QubeSynchronizationQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Syncs activities, tenancies, companies, contacts, attachments, properties to Qube</td>
+</tr>
+<tr>
+<td><strong>Fixflo</strong></td>
+<td><code>ArchiveOccupiersOrTenancyInFixfloHandler</code></td>
+<td>Timer trigger</td>
+<td>Archives occupiers/tenancies in Fixflo system</td>
+</tr>
+<tr>
+<td><strong>Fixflo</strong></td>
+<td><code>PublishFixfloTenancyEndedEventWithEndingDateCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Publishes tenancy-ended events to Fixflo with end dates</td>
+</tr>
+<tr>
+<td><strong>Fixflo</strong></td>
+<td><code>PublishFixfloTenancyStartedEventWithStartingDateCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Publishes tenancy-started events to Fixflo with start dates</td>
+</tr>
+<tr>
+<td><strong>Fixflo</strong></td>
+<td><code>FixfloFailedMessageEventHandler</code></td>
+<td>Service Bus message</td>
+<td>Handles failed Fixflo webhook messages</td>
+</tr>
+<tr>
+<td><strong>Brochures</strong></td>
+<td><code>GenerateBrochureQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Generates brochures via Frontify API; queues for delivery</td>
+</tr>
+<tr>
+<td><strong>Brochures</strong></td>
+<td><code>CompleteBrochuresQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Marks brochures complete and notifies recipients</td>
+</tr>
+<tr>
+<td><strong>Integrations</strong></td>
+<td><code>HomePplResultQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Processes HomePpl compliance results and attachments</td>
+</tr>
+<tr>
+<td><strong>Integrations</strong></td>
+<td><code>TDSResultQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Processes TDS compliance results and certificates</td>
+</tr>
+<tr>
+<td><strong>Integrations</strong></td>
+<td><code>NorthStarUpdateQueueMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Syncs contact data updates to NorthStar platform</td>
+</tr>
+<tr>
+<td><strong>Integrations</strong></td>
+<td><code>AzureResourceQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Processes Azure resource configuration messages</td>
+</tr>
+<tr>
+<td><strong>Integrations</strong></td>
+<td><code>ProcessDocumentCommandHandler</code></td>
+<td>Service Bus message (AzureServiceBusDocs)</td>
+<td>Processes documents delivered via Service Bus</td>
+</tr>
+<tr>
+<td><strong>User Management</strong></td>
+<td><code>ReassignUserCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Reassigns tasks and tenancies when user/property manager changes</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>DeleteLogsCommandHandler</code>, <code>DisableNdaActivityFlagCommandHandler</code>, <code>DisableNdaRequirementFlagCommandHandler</code>, <code>RemoveExpiredTenanciesFromOutOfHoursCommandHandler</code>, <code>UpdateWebEnquiryStatusCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Various operational commands (log cleanup, NDA flags, tenancy cleanup, web enquiry status)</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>InstructionCddExpireSoonCommandHandler</code>, <code>InstructionCddExpiredCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Sends notifications when instruction CDD records expire soon or have expired</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>MonitorAvailabilityCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Monitors API, Elasticsearch, and database availability; tracks metrics</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>MonitorQueuesLengthCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Tracks queue lengths and publishes metrics</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>MonitorTrakheesiExpiryDateCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Monitors Trakheesi appointment expiry dates; notifies upcoming expirations</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>ProcessRequirementAutoMatchesCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Finds requirements matching scheduled times and departments; queues notifications</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>ProcessDepartmentRequirementAutoMatchesMessageHandler</code></td>
+<td>Service Bus message</td>
+<td>Processes auto-matches for a specific department/requirement</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>UpdateTenanciesChurnRiskStatusCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Syncs tenancy churn-risk status to Elasticsearch</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>UpdateTenancyChurnRiskStatusQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Updates individual tenancy churn-risk status and audit notes</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>ResyncPropertiesQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Resyncs property data to integrated systems; flags Fixflo delivery</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>UploadedContactQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Processes bulk-uploaded contact records</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>ContactNegotiatorNotificationQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Notifies negotiators about new activities/requirements for their contacts</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>SendAdiuvoSpreadsheetCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Generates and sends Adiuvo compliance spreadsheets</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>ActivityOutstandingKycTobCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>(see Notifications module)</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>UpcomingAnniversaryCommandHandler</code></td>
+<td>Timer trigger</td>
+<td>Sends anniversary notifications for entities</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>RefreshRelatedActivityNotesQueueMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Refreshes activity notes after changes</td>
+</tr>
+<tr>
+<td><strong>Main WebJobs Host</strong></td>
+<td><code>UpdatePortalVisibilityExistingDocsMessageHandler</code></td>
+<td>Azure Storage queue</td>
+<td>Updates document visibility on external portals</td>
+</tr>
+</tbody>
+</table>
+<h2 id="processing-pattern">Processing pattern</h2>
+<ol>
+<li>A controller, domain service, timer, webhook, or integration publishes a message</li>
+<li>Azure Storage Queue or Service Bus delivers the message to the WebJobs host</li>
+<li>A feature module resolves a handler through the dependency-injection container</li>
+<li>The handler validates and processes the message</li>
+<li>The handler writes to SQL, Blob Storage, Elasticsearch, or an external service</li>
+<li>Failures are logged and rethrown in the inspected Thirdfort handlers, allowing the host's configured retry behaviour to apply</li>
+</ol>
+<h2 id="required-follow-up">Required follow-up</h2>
+<ul>
+<li>Extract physical names from environment templates and deployment parameters.</li>
+<li>Map each topic to subscriptions and consumer modules.</li>
+<li>Record retry count, visibility timeout, dead-letter/poison handling, and idempotency behaviour.</li>
+<li>Identify message versioning and compatibility rules.</li>
+<li>Document retry/error policies for each handler (some use host retry, others implement custom retry logic).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../../assets/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

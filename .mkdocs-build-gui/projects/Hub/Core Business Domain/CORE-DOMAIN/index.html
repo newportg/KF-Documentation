@@ -1,0 +1,2797 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Architecture, process, and business documentation for Knight Frank Hub">
+      
+      
+      
+      
+        <link rel="prev" href="../../QUICK-REFERENCE/">
+      
+      
+        <link rel="next" href="../API-WORKFLOWS/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Overview - KF Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hub-core-domain-contact-property-activity-and-requirement-management" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="KF Documentation" class="md-header__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            KF Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="KF Documentation" class="md-nav__button md-logo" aria-label="KF Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    KF Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hub
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hub
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-WELCOME/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome & Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../QUICK-REFERENCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Business Domain
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Business Domain
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-entities-and-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Entities and Relationships
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-business-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Business Processes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Business Processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-1-contact-and-relationship-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 1: Contact and Relationship Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-2-property-and-ownership-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 2: Property and Ownership Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-3-activity-marketing-instruction-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 3: Activity (Marketing Instruction) Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-4-requirement-and-matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 4: Requirement and Matching
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-5-tenancy-and-property-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 5: Tenancy and Property Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-journeys-and-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Journeys and Workflows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Journeys and Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#journey-1-tenant-looking-for-office-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Journey 1: Tenant Looking for Office Space
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#journey-2-property-owner-selling-a-building" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Journey 2: Property Owner Selling a Building
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#journey-3-agent-managing-multiple-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Journey 3: Agent Managing Multiple Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-state-machines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key State Machines
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key State Machines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#activity-status-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Status Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-status-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement Status Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-status-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Status Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-business-rules-and-validations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Business Rules and Validations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Business Rules and Validations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contact-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contact Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Persistence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-external-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration with External Systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API-WORKFLOWS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../STATE-MACHINES-VALIDATORS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines & Validators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture & Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture & Infrastructure
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/architecture-blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture blueprint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/source-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/message-transport-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Message and transport inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/process-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process flows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/business-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Architecture%20%26%20Infrastructure/angular-gui-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Angular GUI analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/PARITY-SPECIFICATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parity specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/layout-and-sizing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Layout and sizing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Page specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/route-inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Route inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/core-form-specifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core form specifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/property/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Property
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/activity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/requirement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/tenancy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenancy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/company/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Company
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/offer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Offer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/instruction-pitch-referral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instruction, pitch, and referral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/pages/marketing-reports-administration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Marketing, reports, and administration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/navigation-and-access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation and access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/screen-catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screen catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/user-interactions-and-workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User interactions and workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/shared-ui-and-feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared UI and feedback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/api-interaction-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interaction contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GUI/traceability-and-open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Traceability and open questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning & Tracking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Planning & Tracking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/NEXT-STEPS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Next Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Planning%20%26%20Tracking/TASK-COMPLETION-SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Task Completion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-entities-and-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Entities and Relationships
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-business-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Business Processes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Business Processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-1-contact-and-relationship-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 1: Contact and Relationship Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-2-property-and-ownership-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 2: Property and Ownership Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-3-activity-marketing-instruction-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 3: Activity (Marketing Instruction) Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-4-requirement-and-matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 4: Requirement and Matching
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process-5-tenancy-and-property-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process 5: Tenancy and Property Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-journeys-and-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Journeys and Workflows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Journeys and Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#journey-1-tenant-looking-for-office-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Journey 1: Tenant Looking for Office Space
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#journey-2-property-owner-selling-a-building" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Journey 2: Property Owner Selling a Building
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#journey-3-agent-managing-multiple-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Journey 3: Agent Managing Multiple Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-state-machines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key State Machines
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key State Machines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#activity-status-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Status Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-status-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement Status Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-status-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Status Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-business-rules-and-validations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Business Rules and Validations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Business Rules and Validations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contact-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contact Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirement-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirement Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tenancy-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tenancy Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Persistence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-external-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration with External Systems
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hub-core-domain-contact-property-activity-and-requirement-management">Hub Core Domain - Contact, Property, Activity, and Requirement Management</h1>
+<h2 id="overview">Overview</h2>
+<p>The Hub is a <strong>relationship and transaction management platform</strong> for commercial real estate. It tracks:</p>
+<ul>
+<li><strong>Contacts</strong> — buyers, sellers, tenants, landlords, agents, professionals</li>
+<li><strong>Properties</strong> — office, industrial, retail assets with ownerships and tenancies</li>
+<li><strong>Activities</strong> — marketing instructions, transactions, negotiations on properties</li>
+<li><strong>Requirements</strong> — what buyers/sellers/tenants/landlords are looking for</li>
+<li><strong>Tenancies</strong> — landlord-tenant relationships with compliance, rent management, and renewal</li>
+</ul>
+<hr />
+<h2 id="core-entities-and-relationships">Core Entities and Relationships</h2>
+<div class="highlight"><pre><span></span><code>Contact
+├─ Companies (employment, ownership)
+├─ Addresses (home, business, correspondence)
+├─ Phone/Email/Social (communication channels)
+├─ Negotiators (assigned staff responsible for relationship)
+├─ Property Interests (what types they care about: offices, retail, etc.)
+├─ Consents (marketing, soft opt-in, newsletters)
+├─ Requirements (what they're looking for)
+├─ Activities (properties they're interested in)
+├─ Ownerships (properties they own)
+├─ Tenancies (properties they occupy)
+└─ Referrals (clients they've introduced)
+
+Property (Asset)
+├─ Address, type, phase/estate, division
+├─ Characteristics (size, floors, facilities)
+├─ Ownerships
+│  ├─ Owner contact/company
+│  ├─ Ownership percentage
+│  └─ Management company
+├─ Tenancies
+│  ├─ Tenant contact
+│  ├─ Landlord contact
+│  ├─ Rent, lease terms, end date
+│  └─ Status (active, expired, surrendered)
+├─ Activities (marketing instructions and transactions)
+├─ Parties and negotiators
+└─ Notes, appointments, attachments
+
+Activity
+├─ Property (the asset being marketed/sold/let)
+├─ Type (sales, lettings, management, acquisition)
+├─ Status (live, under offer, completed, withdrawn)
+├─ Parties (vendors, landlords, agents, negotiators)
+├─ Requirement Matches (which requirements match this property)
+├─ Offers (from interested parties)
+├─ Tenancies (resulting from lettings activities)
+├─ Chain Transactions (linked activities)
+├─ Marketing (Fixflo listings, brochures, images)
+├─ Viewings/Appointments
+├─ Instructions (compliance/special instructions)
+├─ CDD/Appraisal records
+└─ Attachments, notes, reviews
+
+Requirement
+├─ Type (tenant requirement, buyer requirement, seller requirement)
+├─ Status (active, matched, withdrawn, sold)
+├─ Party/Applicant (contact looking to buy/let/occupy)
+├─ Criteria (price range, location, size, tenure, tenant type, etc.)
+├─ Matches (activities that match this requirement)
+├─ Offers (proposals to the applicant)
+├─ Viewings/Appointments
+├─ Next steps/notes
+└─ Attachments, communication history
+
+Tenancy
+├─ Property (the asset)
+├─ Tenant/Landlord/Guarantor parties
+├─ Commencement/Expiry/Surrender dates
+├─ Rent, fees, lease terms
+├─ Status (live, completed, expired, surrendered)
+├─ Right-to-rent checks (compliance)
+├─ Progression checks (guarantor verification, insurance, etc.)
+├─ Renewal records
+├─ Break clauses
+├─ Linked Activity (which letting activity created this tenancy)
+├─ Linked Requirement (which tenant requirement was matched)
+└─ Sign-offs, notes, attachments
+</code></pre></div>
+<hr />
+<h2 id="core-business-processes">Core Business Processes</h2>
+<h3 id="process-1-contact-and-relationship-management">Process 1: Contact and Relationship Management</h3>
+<p><strong>Actors:</strong> Contact, Negotiator (assigned staff), Company, Properties, Requirements</p>
+<p><strong>Flow:</strong></p>
+<ol>
+<li>Contact record created (buyer, seller, tenant, landlord, agent, professional)</li>
+<li>Contact details added (address, phone, email, company, negotiator assignment)</li>
+<li>Contact interests captured (property types, locations, transaction types)</li>
+<li>Consents managed (marketing, newsletters, soft opt-in, CDD compliance)</li>
+<li>Contact linked to requirements (what they're looking for)</li>
+<li>Contact linked to activities (properties they're viewing/transacting on)</li>
+<li>Contact linked to ownerships (properties they own)</li>
+<li>Contact linked to tenancies (properties they occupy)</li>
+<li>Contact relationships tracked (clients they've introduced, referral chains)</li>
+</ol>
+<p><strong>Key Business Rules:</strong></p>
+<ul>
+<li>Contact must have primary negotiator assigned</li>
+<li>Contact consents must be validated (soft opt-in, CDD, marketing)</li>
+<li>Prospect contacts may become active, deceased, retired, or locked</li>
+<li>Contact name/address changes are audited</li>
+<li>Multiple contact records may be identified as duplicates and merged</li>
+</ul>
+<p><strong>Data Model:</strong></p>
+<ul>
+<li><code>Contact</code> (Id, Names, Salutation, Nationality, Profession, BirthDate)</li>
+<li><code>ContactAddress</code> (Primary, Business, Correspondence, Delivery)</li>
+<li><code>ContactPhone</code>, <code>ContactEmail</code>, <code>ContactSocial</code></li>
+<li><code>ContactCompany</code> (Employment, Ownership)</li>
+<li><code>ContactNegotiator</code> (Assigned staff)</li>
+<li><code>ContactType</code>, <code>ContactInterest</code>, <code>Consent</code>, <code>SoftOptin</code></li>
+</ul>
+<p><strong>Key APIs:</strong></p>
+<ul>
+<li><code>POST /contacts</code> — Create contact</li>
+<li><code>PUT /contacts/{id}</code> — Update contact details</li>
+<li><code>PUT /contacts/{id}/negotiator</code> — Assign negotiator</li>
+<li><code>POST /contacts/{id}/addresses</code> — Add address</li>
+<li><code>PUT /contacts/{id}/consents</code> — Update marketing/CDD consents</li>
+<li><code>POST /contacts/merge</code> — Merge duplicate contacts</li>
+<li><code>GET /contacts/search</code> — Find contacts by criteria</li>
+</ul>
+<hr />
+<h3 id="process-2-property-and-ownership-management">Process 2: Property and Ownership Management</h3>
+<p><strong>Actors:</strong> Property, Owner Contact/Company, Negotiator, Property Manager</p>
+<p><strong>Flow:</strong></p>
+<ol>
+<li>Property created with address, type, division, characteristics</li>
+<li>Ownership added (contact/company, percentage, management details)</li>
+<li>Property characteristics documented (floors, areas, WAULT, amenities)</li>
+<li>Property marketed through Activities</li>
+<li>Tenancies created on property</li>
+<li>Property may be archived or deleted (soft delete with versioning)</li>
+</ol>
+<p><strong>Key Business Rules:</strong></p>
+<ul>
+<li>Property must have address and type</li>
+<li>Property may have multiple owners (fractional ownership)</li>
+<li>Property manager assigned for management activities</li>
+<li>Property characteristics (area, floors) must be valid</li>
+<li>Property may be linked to development/estate/phase</li>
+<li>Duplicate properties can be merged</li>
+</ul>
+<p><strong>Data Model:</strong></p>
+<ul>
+<li><code>Property</code> (Id, Address, PropertyType, Division, Phase, Estate)</li>
+<li><code>PropertyCharacteristics</code> (TotalArea, Floors, WAULT, Acreage)</li>
+<li><code>Ownership</code> (Property, Owner Contact/Company, Percentage, Manager)</li>
+<li><code>PropertyContact</code> (Property Manager, Maintenance Contact, etc.)</li>
+</ul>
+<p><strong>Key APIs:</strong></p>
+<ul>
+<li><code>POST /properties</code> — Create property</li>
+<li><code>PUT /properties/{id}</code> — Update property details</li>
+<li><code>POST /properties/{id}/ownerships</code> — Add ownership</li>
+<li><code>PUT /properties/{id}/ownerships/{oid}</code> — Update ownership</li>
+<li><code>POST /properties/{id}/areas</code> — Document floor/area details</li>
+<li><code>PUT /properties/{id}/merge</code> — Merge duplicate property</li>
+<li><code>GET /properties/search</code> — Find properties</li>
+</ul>
+<hr />
+<h3 id="process-3-activity-marketing-instruction-lifecycle">Process 3: Activity (Marketing Instruction) Lifecycle</h3>
+<p><strong>Actors:</strong> Property, Negotiator, Activity Parties (Vendor, Landlord, Agent, Tenant, Buyer), Requirements, Offers</p>
+<p><strong>Flow:</strong></p>
+<ol>
+<li>Activity created on property (instruction to market or manage)</li>
+<li>Activity type, sub-type, and service-line defined (sales, lettings, management, acquisition)</li>
+<li>Parties added (vendors, landlords, agents, negotiators, solicitors)</li>
+<li>Marketing started (Fixflo listing, brochures, images, advertising)</li>
+<li>Viewings/Appointments scheduled</li>
+<li>Requirements matched to activity (qualified leads)</li>
+<li>Offers received (from interested parties)</li>
+<li>Offer accepted (transaction progresses)</li>
+<li>Activity moves to completion (tenancy created) or withdrawn</li>
+</ol>
+<p><strong>Key Business Rules:</strong></p>
+<ul>
+<li>Activity must reference a property</li>
+<li>Activity type determines allowed parties and workflows</li>
+<li>Activity status controls allowed operations (can't accept offer if withdrawn)</li>
+<li>Status changes are timestamped and audited</li>
+<li>Price changes must be recorded (quoted vs. agreed)</li>
+<li>Chain transactions link multiple activities (dependent transactions)</li>
+<li>Withdrawal must include reason (sold elsewhere, deceased, etc.)</li>
+<li>Marketing expiry dates control advertising lifecycle</li>
+<li>CDD/Appraisal records must be maintained for compliance</li>
+</ul>
+<p><strong>Activity Status State Machine:</strong></p>
+<ul>
+<li><strong>Live</strong> → Active marketing, accepting viewings, receiving offers</li>
+<li><strong>Under Offer</strong> → Accepted offer, awaiting completion</li>
+<li><strong>Completion</strong> → Transaction completed, tenancy or ownership transferred</li>
+<li><strong>Withdrawn</strong> → Marketing stopped, reason recorded</li>
+</ul>
+<p><strong>Data Model:</strong></p>
+<ul>
+<li><code>Activity</code> (Id, PropertyId, ActivityTypeId, ActivitySubTypeId, ActivityStatusId)</li>
+<li><code>ActivityParty</code> (Activity, PartyRole: Vendor/Landlord/Agent/Buyer/Tenant/Introducer/Solicitor)</li>
+<li><code>ActivityPrice</code> (Quoted, Agreed, Rent values)</li>
+<li><code>ActivityMarketing</code> (Fixflo, Images, Advertisements, Marketing Expiry)</li>
+<li><code>ActivityOffer</code> (Accepted/Rejected, Offeror)</li>
+<li><code>ActivityMatch</code> (Linked Requirement, Why matched)</li>
+<li><code>ActivityChainTransaction</code> (Linked Activity, Dependency)</li>
+</ul>
+<p><strong>Key APIs:</strong></p>
+<ul>
+<li><code>POST /activities</code> — Create activity (instruction)</li>
+<li><code>PUT /activities/{id}</code> — Update activity details</li>
+<li><code>POST /activities/{id}/parties</code> — Add party (vendor, agent, etc.)</li>
+<li><code>PUT /activities/{id}/price</code> — Update price/rent</li>
+<li><code>POST /activities/{id}/offers</code> — Receive offer</li>
+<li><code>POST /activities/{id}/matches</code> — Match requirement to activity</li>
+<li><code>PUT /activities/{id}/status</code> — Change status (live → under-offer → completion)</li>
+<li><code>POST /activities/{id}/marketing/fixflo</code> — Publish to Fixflo</li>
+<li><code>POST /activities/{id}/brochure</code> — Generate brochure</li>
+<li><code>POST /activities/{id}/complete</code> — Mark as completed (tenancy created)</li>
+<li><code>GET /activities/search</code> — Find activities by property, negotiator, status</li>
+</ul>
+<hr />
+<h3 id="process-4-requirement-and-matching">Process 4: Requirement and Matching</h3>
+<p><strong>Actors:</strong> Requirement (Tenant/Buyer/Seller), Applicant Contact, Activities, Matches, Viewings, Offers</p>
+<p><strong>Flow:</strong></p>
+<ol>
+<li>Requirement created (contact looking to buy, let space, or sell property)</li>
+<li>Requirement type defined (tenant requirement, buyer requirement, seller instruction)</li>
+<li>Criteria captured (price/rent range, location, size, tenure, tenant type, features)</li>
+<li>Requirement assigned to negotiator</li>
+<li>Automated matching algorithm finds activities matching criteria</li>
+<li>Requirement matched to activities (qualified opportunities)</li>
+<li>Viewings arranged for matched activities</li>
+<li>Offers made to applicant</li>
+<li>Requirement progresses to completion (tenancy/sale) or withdrawn</li>
+</ol>
+<p><strong>Key Business Rules:</strong></p>
+<ul>
+<li>Requirement must have applicant contact</li>
+<li>Requirement criteria must be valid (price/rent ranges, dates, etc.)</li>
+<li>Requirement status controls allowed operations</li>
+<li>Requirements can be auto-matched (scheduled matching runs)</li>
+<li>Requirement hotness score reflects activity level</li>
+<li>Selling status and next-action guide workflow (for seller requirements)</li>
+<li>CDD status tracked separately from requirement status</li>
+<li>Requirement may link to current/selling property (what they currently occupy/own)</li>
+</ul>
+<p><strong>Requirement Status State Machine:</strong></p>
+<ul>
+<li><strong>Active</strong> → Seeking properties, reviewing matches, arranging viewings</li>
+<li><strong>Matched</strong> → Found property, offer pending or accepted</li>
+<li><strong>Sold/Completed</strong> → Transaction completed</li>
+<li><strong>Withdrawn</strong> → No longer seeking</li>
+</ul>
+<p><strong>Data Model:</strong></p>
+<ul>
+<li><code>Requirement</code> (Id, RequirementTypeId, RequirementStatusId, ApplicantContactId)</li>
+<li><code>RequirementParty</code> (Requirement, PartyRole, Contact)</li>
+<li><code>RequirementCriteria</code> (PropertyTypes, PriceRange, RentRange, LocationPreferences)</li>
+<li><code>RequirementMatch</code> (Requirement, Activity, MatchScore, Status)</li>
+<li><code>RequirementOffer</code> (Requirement, Activity, OfferTerms, Status)</li>
+<li><code>RequirementViewing</code> (Requirement, Activity, AppointmentDate)</li>
+</ul>
+<p><strong>Key APIs:</strong></p>
+<ul>
+<li><code>POST /requirements</code> — Create requirement (tenant/buyer/seller looking for property)</li>
+<li><code>PUT /requirements/{id}</code> — Update requirement criteria</li>
+<li><code>POST /requirements/{id}/parties</code> — Add party (co-applicant, etc.)</li>
+<li><code>GET /requirements/{id}/matches</code> — Find matching activities</li>
+<li><code>POST /requirements/{id}/matches/{aid}</code> — Accept/create match</li>
+<li><code>POST /requirements/{id}/offers</code> — Generate offer to applicant</li>
+<li><code>POST /requirements/{id}/viewings</code> — Schedule viewing</li>
+<li><code>PUT /requirements/{id}/status</code> — Progress requirement (active → matched → completed)</li>
+<li><code>GET /requirements/search</code> — Find requirements by criteria</li>
+</ul>
+<hr />
+<h3 id="process-5-tenancy-and-property-management">Process 5: Tenancy and Property Management</h3>
+<p><strong>Actors:</strong> Tenancy (Landlord, Tenant, Guarantor), Property, Related Activity, Linked Requirement, Negotiator</p>
+<p><strong>Flow:</strong></p>
+<ol>
+<li>Tenancy created (from activity match or manual creation)</li>
+<li>Parties assigned (tenant, landlord, guarantor, management company)</li>
+<li>Lease terms documented (commencement, expiry, rent, fees, breaks)</li>
+<li>Completion recorded</li>
+<li>Commencement date — tenancy becomes active</li>
+<li>Right-to-rent checks performed (UK compliance)</li>
+<li>Guarantor checks and verification</li>
+<li>Rent reviews and reviews occur</li>
+<li>Break clauses exercised (optional early exit)</li>
+<li>Renewal records tracked</li>
+<li>Expiry date approaches — renewal or surrender option</li>
+<li>Tenancy surrendered (early or at end date) or renewed</li>
+</ol>
+<p><strong>Key Business Rules:</strong></p>
+<ul>
+<li>Tenancy must reference property and have parties (tenant, landlord)</li>
+<li>Commencement date must be after completion date</li>
+<li>Expiry date must be after commencement date</li>
+<li>Rent/fees must be positive</li>
+<li>Right-to-rent status must be verified before commencement (compliance)</li>
+<li>Guarantor verification required (if guarantor present)</li>
+<li>Tenancy progression through stages (activation → completion → commencement)</li>
+<li>Renewal options and terms documented</li>
+<li>Linked Activity records what activity created this tenancy</li>
+<li>Linked Requirement records what requirement was matched</li>
+<li>Soft-delete and versioning for audit</li>
+<li>Churn-risk calculated (likelihood tenant will leave)</li>
+</ul>
+<p><strong>Tenancy Lifecycle State Machine:</strong></p>
+<ul>
+<li><strong>Draft</strong> → Created but not yet active/completed</li>
+<li><strong>Active (Live)</strong> → Commenced, rent-paying</li>
+<li><strong>Completed</strong> → Transaction closed</li>
+<li><strong>Expired</strong> → End date passed, no renewal</li>
+<li><strong>Surrendered</strong> → Early termination, tenant departed</li>
+<li><strong>Renewed</strong> → Links to next tenancy record</li>
+</ul>
+<p><strong>Data Model:</strong></p>
+<ul>
+<li><code>Tenancy</code> (Id, AssetId, TenancyTypeId, TenancyStatusId)</li>
+<li><code>TenancyParty</code> (Tenancy, PartyRole: Tenant/Landlord/Guarantor/Agent)</li>
+<li><code>TenancyTerms</code> (CommencementDate, ExpiryDate, SurrenderDate, RentAmount)</li>
+<li><code>TenancyBreak</code> (BreakDate, ExercisedDate, Status)</li>
+<li><code>TenancyRenewal</code> (OptionDate, RenewalTerms, ApprovedDate)</li>
+<li><code>RightToRent</code> (Status, ExpirationDate, DocumentationDate)</li>
+<li><code>TenancyProgression</code> (ActivationDate, CompletionDate, Checks: Guarantor, Insurance, etc.)</li>
+<li><code>TenancyLinkedActivity</code> (Related Activity that produced this tenancy)</li>
+<li><code>TenancyLinkedRequirement</code> (Related Requirement that was matched)</li>
+</ul>
+<p><strong>Key APIs:</strong></p>
+<ul>
+<li><code>POST /tenancies</code> — Create tenancy (from activity or manual)</li>
+<li><code>PUT /tenancies/{id}</code> — Update tenancy terms</li>
+<li><code>POST /tenancies/{id}/parties</code> — Add party (tenant, landlord, guarantor)</li>
+<li><code>PUT /tenancies/{id}/activate</code> — Activate tenancy (move to live)</li>
+<li><code>PUT /tenancies/{id}/end-date</code> — Update end date (break exercise, renewal extension)</li>
+<li><code>PUT /tenancies/{id}/terminate</code> — Surrender tenancy early</li>
+<li><code>POST /tenancies/{id}/right-to-rent</code> — Record right-to-rent check</li>
+<li><code>POST /tenancies/{id}/progression-checks</code> — Guarantor verification, insurance, etc.</li>
+<li><code>POST /tenancies/{id}/renewal</code> — Create renewal record</li>
+<li><code>GET /tenancies/search</code> — Find tenancies by property, tenant, status</li>
+<li><code>PUT /tenancies/{id}/status</code> — Manage lifecycle (active → completed → expired/renewed)</li>
+</ul>
+<hr />
+<h2 id="user-journeys-and-workflows">User Journeys and Workflows</h2>
+<h3 id="journey-1-tenant-looking-for-office-space">Journey 1: Tenant Looking for Office Space</h3>
+<ol>
+<li><strong>Tenant Contact</strong> submits <strong>Requirement</strong> (100 sq m office, £5k/month, West London)</li>
+<li>System auto-matches Requirement to current Activities on the market</li>
+<li>Matching Activities shown to negotiator (properties meeting criteria)</li>
+<li><strong>Viewings</strong> scheduled for top matches</li>
+<li>Tenant likes one property → <strong>Offer</strong> made</li>
+<li>Landlord accepts offer (Activity moves to "Under Offer" → "Completion")</li>
+<li><strong>Tenancy</strong> created with matching terms (commencement, rent, parties)</li>
+<li>Right-to-rent check performed</li>
+<li>Tenancy becomes <strong>live</strong> on commencement date</li>
+<li>Rent tracked, renewal options monitored</li>
+<li>At expiry → renewal negotiated or tenancy surrenders</li>
+</ol>
+<h3 id="journey-2-property-owner-selling-a-building">Journey 2: Property Owner Selling a Building</h3>
+<ol>
+<li><strong>Property</strong> listed in system (address, type, ownership)</li>
+<li>Owner creates <strong>Activity</strong> (sales instruction)</li>
+<li>Marketing setup (brochure, Fixflo listing, images)</li>
+<li>Potential buyers create <strong>Requirements</strong> (what they're looking for)</li>
+<li>System matches Requirements to this Activity</li>
+<li>Viewings scheduled</li>
+<li>Buyer makes an <strong>Offer</strong></li>
+<li>Activity moves to "Under Offer"</li>
+<li>If accepted → completion and Activity finalized</li>
+<li>If ownership changes → <strong>Ownership</strong> record updated</li>
+<li>Building may be leased → new <strong>Tenancies</strong> on the property</li>
+</ol>
+<h3 id="journey-3-agent-managing-multiple-properties">Journey 3: Agent Managing Multiple Properties</h3>
+<ol>
+<li>Agent assigned as <strong>Negotiator</strong> for property portfolio</li>
+<li>Agent creates/manages <strong>Activities</strong> (marketing instructions, tenancy management)</li>
+<li>Agent reviews incoming <strong>Requirement</strong> matches</li>
+<li>Agent schedules <strong>Viewings/Appointments</strong> with interested parties</li>
+<li>Agent negotiates <strong>Offers</strong></li>
+<li>Agent manages <strong>Tenancies</strong> (renewals, right-to-rent, compliance checks)</li>
+<li>Agent coordinates with <strong>Parties</strong> (vendors, landlords, tenants, solicitors)</li>
+<li>Agent prepares brochures, marketing images, documentation</li>
+</ol>
+<hr />
+<h2 id="key-state-machines">Key State Machines</h2>
+<h3 id="activity-status-flow">Activity Status Flow</h3>
+<pre class="mermaid"><code>flowchart LR
+    live["Live (Marketing)"] --&gt; underOffer["Under Offer"]
+    underOffer --&gt; completion["Completion"]
+    completion --&gt; completed["Completed"]
+    completion --&gt;|If letting| tenancy["Tenancy Created"]
+    live -.-&gt;|Sold elsewhere or withdrawn by vendor| withdrawn["Withdrawn"]
+    underOffer -.-&gt; withdrawn</code></pre>
+<h3 id="requirement-status-flow">Requirement Status Flow</h3>
+<pre class="mermaid"><code>flowchart LR
+    active["Active"] --&gt; matched["Matched"]
+    matched --&gt; completed["Completed / Sold"]
+    matched -.-&gt;|No suitable match| withdrawn["Withdrawn"]
+    withdrawn -.-&gt; active</code></pre>
+<h3 id="tenancy-status-flow">Tenancy Status Flow</h3>
+<pre class="mermaid"><code>flowchart LR
+    draft["Draft"] --&gt; activated["Activated"]
+    activated --&gt; live["Live"]
+    live --&gt; completed["Completed"]
+    completed --&gt; ended["Expired / Surrendered"]
+    live --&gt; renewed["Renewed"]</code></pre>
+<hr />
+<h2 id="core-business-rules-and-validations">Core Business Rules and Validations</h2>
+<h3 id="contact-rules">Contact Rules</h3>
+<ul>
+<li>Contact must have at least one negotiator assignment</li>
+<li>Contact consents must be managed (CDD, marketing, newsletters)</li>
+<li>Soft opt-in consent expires after configured period</li>
+<li>Contact may be marked deceased or retired (soft deletion)</li>
+<li>Duplicate contacts can be merged (manual process)</li>
+<li>Contact relationships to companies, properties, requirements must be maintained</li>
+</ul>
+<h3 id="activity-rules">Activity Rules</h3>
+<ul>
+<li>Activity must reference valid property</li>
+<li>Activity type must match property type (can't rent out a sale-only property)</li>
+<li>Party roles must be valid for activity type (vendor required for sales, landlord for lettings)</li>
+<li>Activity status changes are timestamped and must follow allowed transitions</li>
+<li>Withdrawal reason is mandatory</li>
+<li>Price changes create audit trail (quoted vs. agreed)</li>
+<li>Chain transactions link dependent activities (can't complete A without completing B first)</li>
+<li>CDD/Appraisal records are compliance requirements</li>
+<li>Marketing expiry controls Fixflo/advertising lifecycle</li>
+</ul>
+<h3 id="requirement-rules">Requirement Rules</h3>
+<ul>
+<li>Requirement must have applicant contact</li>
+<li>Requirement criteria must be internally consistent (price range: min ≤ max)</li>
+<li>Requirement status controls allowed changes (can't match if completed/withdrawn)</li>
+<li>Auto-matching runs on schedule (nightly or on-demand)</li>
+<li>Requirements link to current property (what applicant currently owns/occupies)</li>
+<li>CDD status tracked separately (may be in progress, completed, warning)</li>
+<li>Hotness score affects priority in matching</li>
+</ul>
+<h3 id="tenancy-rules">Tenancy Rules</h3>
+<ul>
+<li>Tenancy must reference property and have required parties</li>
+<li>Commencement date must be after completion/agreement date</li>
+<li>Expiry date must be after commencement date</li>
+<li>Rent/fees must be positive</li>
+<li>Right-to-rent status must be verified before tenancy becomes live</li>
+<li>Guarantor verification must be completed (if present)</li>
+<li>Break clauses must have valid break dates</li>
+<li>Tenancy progression through stages (activation → completion → commencement)</li>
+<li>Renewal options documented and tracked</li>
+<li>Soft-delete with versioning for audit trail</li>
+<li>May link to activity (which activity produced this tenancy) and requirement (which requirement was matched)</li>
+</ul>
+<hr />
+<h2 id="data-persistence">Data Persistence</h2>
+<p><strong>Primary Database:</strong> SQL Server (Antares database project)</p>
+<ul>
+<li>Contact, Activity, Property, Requirement, Tenancy and related tables</li>
+<li>Audit tables tracking changes over time</li>
+<li>Reference data (Activity Types, Statuses, Party Roles, etc.)</li>
+</ul>
+<p><strong>Search/Indexing:</strong> Elasticsearch</p>
+<ul>
+<li>Full-text search on contacts, activities, requirements, properties</li>
+<li>Aggregations for dashboards and reporting</li>
+<li>Projection of authoritative SQL data</li>
+</ul>
+<p><strong>Blob Storage:</strong> Azure Storage</p>
+<ul>
+<li>Attachments (documents, images, brochures)</li>
+<li>PDFs, reports</li>
+<li>Marketing materials</li>
+</ul>
+<p><strong>Message Queue:</strong> Azure Storage Queue, Service Bus</p>
+<ul>
+<li>Activity state change events</li>
+<li>Requirement match notifications</li>
+<li>Tenancy progression events</li>
+<li>External integration messages (Fixflo, SAP, etc.)</li>
+</ul>
+<hr />
+<h2 id="integration-with-external-systems">Integration with External Systems</h2>
+<p><strong>Fixflo</strong> — Property marketing platform</p>
+<ul>
+<li>Marketing instructions synced to Fixflo</li>
+<li>Viewing/enquiry data synced back to Hub</li>
+</ul>
+<p><strong>SAP</strong> — Enterprise resource planning</p>
+<ul>
+<li>Activity transactions recorded in SAP</li>
+<li>Party/contact master data synced</li>
+</ul>
+<p><strong>SLM</strong> — Tenancy management (specialist system)</p>
+<ul>
+<li>Tenancy data synced to SLM for detailed management</li>
+<li>Payments, checklists, compliance tracked in SLM</li>
+</ul>
+<p><strong>Qube</strong> — Referencing platform</p>
+<ul>
+<li>Tenant/guarantor verification data</li>
+</ul>
+<p><strong>Thirdfort</strong> — CDD compliance</p>
+<ul>
+<li>CDD documentation and verification</li>
+</ul>
+<p><strong>Dotmailer</strong> — Email marketing</p>
+<ul>
+<li>Contact consents and subscription lists</li>
+<li>Campaign tracking</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "navigation.top", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../../assets/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

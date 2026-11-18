@@ -1,0 +1,96 @@
+================================================================================
+HUB DOCUMENTATION - CURRENT STATUS
+================================================================================
+
+Last updated: 2026-11-17
+
+The active planning documents are:
+
+  Planning & Tracking\README.md
+      Authoritative current status, completed work, open work, and questions.
+
+  Planning & Tracking\NEXT-STEPS.md
+      Actionable backlog ordered by priority.
+
+  Planning & Tracking\TASK-COMPLETION-SUMMARY.md
+      Register of completed deliverables and current totals.
+      Its verification register records evidence, verifier, and date for checks.
+
+The checkpoint and session completion summaries in Planning & Tracking are
+historical records and should not be used for current counts or task status.
+
+================================================================================
+CURRENT POSITION
+================================================================================
+
+Source-derived documentation is substantially complete. Production validation,
+SME review, and operations handoff remain open.
+
+COMPLETED OR SUBSTANTIALLY COMPLETED:
+
+  [x] Runtime and architecture inventory
+  [x] 27 WebJob modules and 60+ handler classes catalogued
+  [x] 12 Mermaid process-flow diagrams
+  [x] 41 integration-rule Gherkin scenarios
+  [x] 33 state-machine and validation Gherkin scenarios
+  [x] Core domain documentation for Contact, Property, Activity, Requirement,
+      Tenancy, and Offer
+  [x] Six end-to-end API workflows
+  [x] State machines, validators, and transition matrices
+  [x] Angular GUI baseline analysis covering structure, entities, processes,
+      validations, screen layouts, and generated API call patterns
+  [x] Local/development queue, topic, and subscription values extracted from
+      checked-in Web.config and App.config files
+
+OPEN:
+
+  [ ] Verify deployment changes only the `local`/`dev` environment token to `prd`
+  [ ] Confirm retry, timeout, dead-letter, poison-message, and idempotency
+      policies
+  [ ] Complete SME review and approval
+  [ ] Review Angular GUI screen layouts and API mappings with a front-end SME
+  [ ] Document monitoring, security, SLAs, ownership, deployment, rollback,
+      incident response, and operational runbooks
+  [ ] Add optional handler-level error/retry/reconciliation coverage
+  [ ] Add remaining property contact-change, reassignment, search consistency,
+      and activity/requirement detail flows
+
+================================================================================
+CURRENT TOTALS
+================================================================================
+
+  WebJob modules:                    27
+  Handler classes:                  60+
+  Mermaid process-flow diagrams:     12
+  Integration-rule scenarios:        41
+  State-machine/validation scenarios: 33
+  Gherkin scenarios overall:         74
+
+================================================================================
+DOCUMENTATION MAP
+================================================================================
+
+  Architecture & Infrastructure\message-transport-inventory.md
+      Handler, queue, topic, subscription, and message inventory.
+
+  Architecture & Infrastructure\process-flows.md
+      Mermaid process-flow diagrams.
+
+  Architecture & Infrastructure\business-rules.md
+      Integration business rules in Gherkin.
+
+  Core Business Domain\CORE-DOMAIN.md
+      Entities and relationships.
+
+  Core Business Domain\API-WORKFLOWS.md
+      Six end-to-end API journeys.
+
+  Core Business Domain\STATE-MACHINES-VALIDATORS.md
+      State machines, validators, transition tables, and scenarios.
+
+================================================================================
+VALIDATION
+================================================================================
+
+  git diff --check passes after the latest documentation updates.
+  Full MkDocs build remains to be run when Python/MkDocs is available.
