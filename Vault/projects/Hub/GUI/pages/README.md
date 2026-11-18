@@ -20,6 +20,8 @@ Angular module.
 | [Offer](./offer.md) | Offer add/edit, view, preview, and status behavior |
 | [Instruction, pitch, and referral](./instruction-pitch-referral.md) | Search, edit/view, and action-card workflows |
 | [Marketing lists, reports, and administration](./marketing-reports-administration.md) | Marketing-list, report, administration, and configuration screens |
+| [Property asset pages](./property-assets.md) | Development, building, estate, phase, and portfolio screens |
+| [Quick create, preferences, and outcomes](./quick-create-preferences-outcomes.md) | Cross-domain creation, user preferences, and route outcomes |
 
 ## Page specification status
 
@@ -37,6 +39,8 @@ Angular module.
 | Marketing lists | Yes | Yes | In progress | Pending | Pending |
 | Reports | Yes | Yes | Partial | Pending | Pending |
 | Administration/configuration | Yes | Yes | In progress | Pending | Pending |
+| Development/building/estate/phase/portfolio | Yes | Yes | Partial | Pending | Pending |
+| Quick create/preferences/outcomes | Yes | Yes | Partial | Pending | Pending |
 
 `Pending` means the source has not yet been converted into a stable vault
 contract. It does not mean that the source feature is absent.

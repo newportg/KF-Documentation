@@ -65,6 +65,8 @@ nav:
               - Offer: projects/Hub/GUI/pages/offer.md
               - Instruction, pitch, and referral: projects/Hub/GUI/pages/instruction-pitch-referral.md
               - Marketing, reports, and administration: projects/Hub/GUI/pages/marketing-reports-administration.md
+              - Property asset pages: projects/Hub/GUI/pages/property-assets.md
+              - Quick create, preferences, and outcomes: projects/Hub/GUI/pages/quick-create-preferences-outcomes.md
           - Navigation and access: projects/Hub/GUI/navigation-and-access.md
           - Screen catalogue: projects/Hub/GUI/screen-catalogue.md
           - User interactions and workflows: projects/Hub/GUI/user-interactions-and-workflows.md
