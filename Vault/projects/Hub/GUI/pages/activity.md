@@ -1,5 +1,9 @@
 # Activity pages
 
+Visual evidence: [activity search](Screenshots/Screenshot_Activities_Search.jpeg),
+[activity view](Screenshots/Screenshot_Activities_View.jpeg), and
+[activity reports](Screenshots/Screenshot_Activities_Reports.jpeg).
+
 ## Routes and entry points
 
 - `/activity/search` — activity search.

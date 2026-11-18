@@ -1,5 +1,8 @@
 # Marketing lists, reports, and administration
 
+Visual evidence: [marketing-list search](Screenshots/Screenshot_Marketing_Lists_Search.jpeg)
+and [marketing-list create](Screenshots/Screenshot_Marketing_Lists_Create.jpeg).
+
 ## Marketing lists
 
 ### Routes

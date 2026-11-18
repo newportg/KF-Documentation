@@ -1,5 +1,8 @@
 # Company pages
 
+Visual evidence: [company search](Screenshots/Screenshot_Companies_Search.jpeg)
+and [company duplicate check/create](Screenshots/Screenshot_Companies_Create.jpeg).
+
 ## Routes and entry points
 
 - `/company` — search.

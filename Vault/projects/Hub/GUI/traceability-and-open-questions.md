@@ -43,6 +43,18 @@
 
 ## Source review findings
 
+## Pre-production verification evidence
+
+- The user has confirmed that the pre-production application and API
+  documentation are usable in Microsoft Edge.
+- The authenticated Edge session exposes the Swagger UI at
+  `/api/swagger/ui/index`.
+- Chrome has reported issues against the same pre-production environment; the
+  cause and supported-browser decision remain unresolved.
+- The machine-level unauthenticated HTTP probe cannot substitute for an
+  authenticated browser walkthrough, so endpoint availability and rendered
+  behavior must be recorded separately.
+
 The following questions have been progressed from open questions to
 source-confirmed behavior:
 
@@ -51,6 +63,7 @@ source-confirmed behavior:
 | How is navigation protected when edits are incomplete? | Selected edit and administration routes use a navigation-block guard and confirmation modal; browser unload is also blocked while the service is active. | Confirmed, partial route coverage |
 | How are common HTTP failures handled? | `403` navigates to `noAccess`, `404` to `notFound`, `408` and `5xx` show a shared HTTP error, and `503` reloads the application. Some `400`, `401`, and `405` paths retain migration TODOs. | Confirmed, with incomplete legacy paths |
 | What responsive behavior exists? | The main menu observes small and extra-small breakpoints and switches to mobile mode. | Confirmed for shell; screen-level behavior open |
+| Which supported browser should be used for parity verification? | The pre-production dashboard and OpenAPI endpoint are usable in Edge, while the user reports issues in Chrome. Source documentation previously indicated a Chrome preference, so the deployed behavior and source expectation currently disagree. | Confirmed discrepancy; browser investigation required |
 | What loading behavior exists? | Busy containers, page spinners, labels, and component-level busy flags are used for asynchronous work. | Confirmed; exact empty-state copy varies by screen |
 | Is route state retained? | A custom route-reuse strategy can preserve or reset a component based on route config, reset mode, query parameters, or route parameter changes. | Confirmed |
 | Is accessibility complete? | The source contains some ARIA labels/hidden decorative icons and labelled controls, but no whole-application accessibility evidence. | Partial; audit required |
@@ -68,6 +81,8 @@ that the behavior is the desired future product behavior.
 6. Which visual assets, branding, icons, and report previews must be retained?
 7. Which workflows need unsaved-change warnings or draft recovery?
 8. Which long-running operations need progress, cancellation, or resumability?
+9. What causes the Chrome pre-production issue, and is Edge the required
+   supported browser for the replacement?
 
 ### Questions narrowed by source review
 
@@ -75,8 +90,10 @@ that the behavior is the desired future product behavior.
   screen-level responsive requirements still need a decision.
 - Draft protection exists on selected routes, but the complete list of routes
   that must protect unsaved work needs product confirmation.
-- Browser support is currently signaled toward Chrome, but the supported
-  replacement browser matrix is undecided.
+- Browser support is currently signaled toward Chrome in source, but the
+  pre-production behavior currently works in Edge and has reported Chrome
+  issues. The supported replacement browser matrix and the cause of the
+  discrepancy remain undecided.
 - Accessibility cannot be inferred as complete from the existing ARIA usage;
   a target standard and test scope are still needed.
 

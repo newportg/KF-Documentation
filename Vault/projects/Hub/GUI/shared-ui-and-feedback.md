@@ -117,7 +117,10 @@ unread count.
 
 The main menu observes small and extra-small breakpoints and switches to mobile
 mode. The shell also displays a browser compatibility message when the current
-browser is not Chrome. Detailed responsive breakpoints, field ordering, and
+browser is not Chrome. The pre-production site is reported to work in Edge
+while exhibiting issues in Chrome, so the source preference and deployed
+behavior require reconciliation before choosing the replacement's browser
+support target. Detailed responsive breakpoints, field ordering, and
 screen-specific layout behavior still require visual review of the templates
 and styles.
 

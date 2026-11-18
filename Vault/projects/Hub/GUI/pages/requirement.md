@@ -1,5 +1,9 @@
 # Requirement pages
 
+Visual evidence: [requirement search](Screenshots/Screenshot_Requirements_Search.jpeg),
+[requirement create](Screenshots/Screenshot_Requirements_Create.jpeg), and
+[requirement reports](Screenshots/Screenshot_Requirements_Reports.jpeg).
+
 ## Routes and entry points
 
 - `/requirement/search` — requirement search.

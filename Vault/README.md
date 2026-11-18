@@ -20,6 +20,10 @@ The whole folder is a git repo, so nothing is ever lost.
 # Goals
 
 Hub source code is stored locally here : C:\Source\Devops\KnightFrank.hub
+hub pre production site : https://preprod.hub.knightfrank.com
+hub pre production openapi/swagger : https://preprod.hub.knightfrank.com/api/swagger.json
+hub pre production swagger ui : https://preprod.hub.knightfrank.com/api/swagger/ui/index
+
 Goal : The task is to document the Hub source code and any related processes or notes.
 Goal : All Hub documentation will be captured in the projects\Hub folder.
 Goal : Start with hub only.

@@ -1,5 +1,9 @@
 # Contact pages
 
+Visual evidence: [contacts search](Screenshots/Screenshot_Contacts_Search.jpeg),
+[duplicate-check/create](Screenshots/Screenshot_Contacts_Create.jpeg), and
+[contacts reports](Screenshots/Screenshot_Contacts_Reports.jpeg).
+
 ## Routes and entry points
 
 - `/contact` — search.

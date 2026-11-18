@@ -1,5 +1,8 @@
 # Dashboard page
 
+Visual evidence: [supplied dashboard screenshot](Screenshots/Screenshot_Dashboard.jpeg)
+and the [screenshot evidence index](../screenshot-evidence.md). page
+
 ## Route and entry points
 
 - Route: `/dashboard`

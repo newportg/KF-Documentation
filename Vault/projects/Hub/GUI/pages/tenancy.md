@@ -1,5 +1,8 @@
 # Tenancy pages
 
+Visual evidence: [tenancy search](Screenshots/Screenshot_Tenancies_Search.jpeg)
+and [tenancy reports](Screenshots/Screenshot_Tenancies_Reports.jpeg).
+
 ## Routes and entry points
 
 - `/tenancy/search` — tenancy search.

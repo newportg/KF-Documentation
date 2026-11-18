@@ -31,6 +31,7 @@ important.
 | [Shared UI and feedback](./shared-ui-and-feedback.md) | Reusable controls, layout conventions, loading, errors, notifications, and responsive behavior |
 | [API interaction contract](./api-interaction-contract.md) | UI-to-service interaction patterns and the data needed by replacement screens |
 | [Traceability and open questions](./traceability-and-open-questions.md) | Source evidence, confidence levels, and items requiring product or UX confirmation |
+| [Screenshot evidence](./screenshot-evidence.md) | Supplied pre-production captures and visual parity observations |
 
 ## Replacement implementation principle
 

@@ -1,5 +1,7 @@
 # Property and asset pages
 
+Visual evidence: [property search](Screenshots/Screenshot_Properties_Search.jpeg).
+
 ## Routes and entry points
 
 - `/property/check` — pre-create checks.
