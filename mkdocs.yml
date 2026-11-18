@@ -67,6 +67,8 @@ nav:
               - Marketing, reports, and administration: projects/Hub/GUI/pages/marketing-reports-administration.md
               - Property asset pages: projects/Hub/GUI/pages/property-assets.md
               - Quick create, preferences, and outcomes: projects/Hub/GUI/pages/quick-create-preferences-outcomes.md
+          - Control catalogue: projects/Hub/GUI/control-catalogue.md
+          - Interaction and validation matrix: projects/Hub/GUI/interaction-validation-matrix.md
           - Navigation and access: projects/Hub/GUI/navigation-and-access.md
           - Screen catalogue: projects/Hub/GUI/screen-catalogue.md
           - User interactions and workflows: projects/Hub/GUI/user-interactions-and-workflows.md

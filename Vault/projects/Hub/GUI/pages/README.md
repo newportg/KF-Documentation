@@ -22,6 +22,8 @@ Angular module.
 | [Marketing lists, reports, and administration](./marketing-reports-administration.md) | Marketing-list, report, administration, and configuration screens |
 | [Property asset pages](./property-assets.md) | Development, building, estate, phase, and portfolio screens |
 | [Quick create, preferences, and outcomes](./quick-create-preferences-outcomes.md) | Cross-domain creation, user preferences, and route outcomes |
+| [Control catalogue](../control-catalogue.md) | Framework-neutral reusable control contracts |
+| [Interaction and validation matrix](../interaction-validation-matrix.md) | Cross-domain lifecycle, validation, state, and feedback behavior |
 
 ## Page specification status
 
