@@ -22,6 +22,9 @@ important.
 
 | Document | Contents |
 |---|---|
+| [Parity specification](./PARITY-SPECIFICATION.md) | Rules for producing a faithful replacement from the vault |
+| [Layout and sizing](./layout-and-sizing.md) | Measured shell dimensions and layout conventions |
+| [Page specifications](./pages/README.md) | Page-by-page parity inventory and coverage |
 | [Navigation and access](./navigation-and-access.md) | Application shell, navigation, recent-item drawers, routes, and role visibility |
 | [Screen catalogue](./screen-catalogue.md) | Screen families and the responsibilities of each domain area |
 | [User interactions and workflows](./user-interactions-and-workflows.md) | Search, edit, state changes, documents, matching, communications, and dashboard behavior |

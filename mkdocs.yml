@@ -49,6 +49,18 @@ nav:
           - Angular GUI analysis: projects/Hub/Architecture & Infrastructure/angular-gui-analysis.md
       - GUI:
           - GUI documentation: projects/Hub/GUI/README.md
+          - Parity specification: projects/Hub/GUI/PARITY-SPECIFICATION.md
+          - Layout and sizing: projects/Hub/GUI/layout-and-sizing.md
+          - Page specifications:
+              - Page overview: projects/Hub/GUI/pages/README.md
+              - Route inventory: projects/Hub/GUI/pages/route-inventory.md
+              - Core form specifications: projects/Hub/GUI/pages/core-form-specifications.md
+              - Dashboard: projects/Hub/GUI/pages/dashboard.md
+              - Contact: projects/Hub/GUI/pages/contact.md
+              - Property: projects/Hub/GUI/pages/property.md
+              - Activity: projects/Hub/GUI/pages/activity.md
+              - Requirement: projects/Hub/GUI/pages/requirement.md
+              - Tenancy: projects/Hub/GUI/pages/tenancy.md
           - Navigation and access: projects/Hub/GUI/navigation-and-access.md
           - Screen catalogue: projects/Hub/GUI/screen-catalogue.md
           - User interactions and workflows: projects/Hub/GUI/user-interactions-and-workflows.md
