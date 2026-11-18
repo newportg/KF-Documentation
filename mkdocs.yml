@@ -74,6 +74,9 @@ nav:
           - User interactions and workflows: projects/Hub/GUI/user-interactions-and-workflows.md
           - Shared UI and feedback: projects/Hub/GUI/shared-ui-and-feedback.md
           - API interaction contract: projects/Hub/GUI/api-interaction-contract.md
+          - Validation schema inventory: projects/Hub/GUI/validation-schema-inventory.md
+          - P1 page-contract coverage: projects/Hub/GUI/p1-page-contract-coverage.md
+          - P2 field catalogue: projects/Hub/GUI/p2-field-catalogue.md
           - Traceability and open questions: projects/Hub/GUI/traceability-and-open-questions.md
           - Screenshot evidence: projects/Hub/GUI/screenshot-evidence.md
       - Planning & Tracking:

@@ -30,6 +30,9 @@ important.
 | [User interactions and workflows](./user-interactions-and-workflows.md) | Search, edit, state changes, documents, matching, communications, and dashboard behavior |
 | [Shared UI and feedback](./shared-ui-and-feedback.md) | Reusable controls, layout conventions, loading, errors, notifications, and responsive behavior |
 | [API interaction contract](./api-interaction-contract.md) | UI-to-service interaction patterns and the data needed by replacement screens |
+| [Validation schema inventory](./validation-schema-inventory.md) | Source-derived control schemas, validation families, and P2 completion rules |
+| [P1 page-contract coverage](./p1-page-contract-coverage.md) | Coverage matrix for routed page responsibilities and interaction surfaces |
+| [P2 field catalogue](./p2-field-catalogue.md) | Source-derived field families, conditions, and validation rules |
 | [Traceability and open questions](./traceability-and-open-questions.md) | Source evidence, confidence levels, and items requiring product or UX confirmation |
 | [Screenshot evidence](./screenshot-evidence.md) | Supplied pre-production captures and visual parity observations |
 
