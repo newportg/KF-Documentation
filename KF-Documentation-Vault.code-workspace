@@ -2,6 +2,9 @@
   "folders": [
     {
       "path": "."
+    },
+    {
+      "path": "../../../Devops/KnightFrank.hub"
     }
   ],
   "settings": {
@@ -11,6 +14,7 @@
       "**/node_modules": true,
       "**/dist": true,
       "**/build": true
-    }
+    },
+    "debug.internalConsoleOptions": "neverOpen"
   }
 }
