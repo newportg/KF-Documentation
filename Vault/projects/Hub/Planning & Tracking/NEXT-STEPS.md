@@ -19,8 +19,8 @@ flowchart LR
     classDef proposed fill:#e8edf2,stroke:#526579,color:#172b3a
     class S1 inProgress
     class S2,S3 proposed
-```
-
+``` 
+   
 ### Stage 1 completeness
 
 | Checkpoint | Status | What remains |
