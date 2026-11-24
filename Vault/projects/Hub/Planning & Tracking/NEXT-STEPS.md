@@ -1,8 +1,16 @@
-# Hub documentation next steps
+# Hub project plan and next steps
 
-This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md); current status is maintained in [README.md](./README.md). Record completed checks in the [verification register](./TASK-COMPLETION-SUMMARY.md#verification-register).
+This is the actionable project backlog, organized into three stages. Completed
+documentation is recorded in [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md);
+current status is maintained in [README.md](./README.md). Record completed
+documentation checks in the [verification register](./TASK-COMPLETION-SUMMARY.md#verification-register).
 
-## 1. Production transport confirmation — high priority
+## Stage 1: Document what we have
+
+**Status:** In progress. Source-derived coverage is substantially complete,
+but production validation and review remain open.
+
+### 1. Production transport confirmation — high priority
 
 **Status:** Blocked on DevOps / Operations input
 
@@ -13,7 +21,7 @@ This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-S
 
 **Deliverable:** Production section in [message-transport-inventory.md](../Architecture%20%26%20Infrastructure/message-transport-inventory.md).
 
-## 2. Subject-matter expert review — high priority
+### 2. Subject-matter expert review — high priority
 
 **Status:** Pending reviewer availability
 
@@ -25,7 +33,7 @@ This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-S
 
 **Deliverable:** Review notes and approval status.
 
-## 3. Operations handoff — high priority
+### 3. Operations handoff — high priority
 
 **Status:** Blocked on production configuration and operations input
 
@@ -36,7 +44,7 @@ This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-S
 
 **Deliverable:** Operations section in the architecture documentation plus linked runbooks.
 
-## 4. Complete source-derived coverage — medium priority
+### 4. Complete source-derived coverage — medium priority
 
 **Status:** Optional follow-up after the high-priority items
 
@@ -46,25 +54,7 @@ This is the actionable backlog. Completed work is recorded in [TASK-COMPLETION-S
 - Add error, retry, reconciliation, and idempotency flows for the highest-risk handlers.
 - Add remaining document visibility and notification scheduling rules.
 
-## 5. Replacement GUI and P4 verification — medium priority
-
-**Status:** P0-P3 source-derived contract complete; replacement implementation not started
-
-- Use the [GUI parity specification](../GUI/PARITY-SPECIFICATION.md),
-  [P2 field catalogue](../GUI/p2-field-catalogue.md), and
-  [P3 visual contract](../GUI/p3-visual-contract.md) as the implementation
-  contract.
-- Build the replacement without depending on Angular module boundaries.
-- Capture replacement screens at the supplied wide-desktop viewport and at the
-  source responsive breakpoints.
-- Compare representative routes, populated states, loading/empty/error states,
-  modals, role variants, and browser behavior.
-- Record pixel/layout differences and resolve them before declaring P4 complete.
-
-**Deliverable:** Replacement GUI with P4 rendered comparison and review notes
-recorded in the verification register.
-
-## 6. GUI product and accessibility review — medium priority
+### 5. GUI product and accessibility review — medium priority
 
 **Status:** Pending reviewer availability
 
@@ -77,11 +67,72 @@ recorded in the verification register.
 **Deliverable:** Product, browser, and accessibility decisions recorded against
 the GUI parity specification.
 
-## Definition of done
+### Stage 1 exit gate
 
-The documentation can be marked production-ready when:
+The current-state baseline can be approved for planning and change when:
 
 - Production transports and hosting targets are confirmed.
 - Operational policies and ownership are documented.
 - An SME has reviewed and approved the business-facing documentation.
 - All unresolved assumptions are explicitly recorded.
+
+## Stage 2: Short-term strategic updates
+
+**Status:** Proposed; options identified, implementation and owners not yet
+approved. Pilot durations are indicative, not delivery commitments.
+
+1. Agree a representative business journey, baseline its performance and
+   behaviour, and establish security, regression and rollback requirements.
+2. Select and approve high-impact pilots from
+   [hub-high-impact-modernization-options.md](./hub-high-impact-modernization-options.md):
+   independent frontend deployment, a Hub experience/logic API and a
+   modern .NET vertical slice. Assess containerisation alongside the chosen
+   slice.
+3. Evaluate Elasticsearch to OpenSearch only against an agreed cost, support
+   or operational objective; prove compatibility, search quality and
+   migration/rollback before committing to a platform change.
+4. Compare pilot outcomes with the baseline, assess business value and
+   operational readiness, and agree production rollout or further discovery.
+
+**Stage 2 exit gate:** Relevant owners review pilot evidence and approve
+production changes individually, including compatibility, security,
+performance, deployment and rollback. Record decisions and lessons for
+stage 3; do not treat pilot completion as a full migration.
+
+## Stage 3: Major architectural changes
+
+**Status:** Proposed; target boundaries, ownership and migration scope require
+business and technical approval.
+
+1. Agree the target in
+   [hub-architecture-modernization-strategy.md](./hub-architecture-modernization-strategy.md):
+   Hub as a UX and logic layer, with client, property/asset and transaction
+   capabilities separated where justified.
+2. Confirm capability owners, authoritative data, contracts, cross-domain
+   workflows, integration and deployment boundaries. Assess existing
+   enterprise capabilities before building replacements.
+3. Agree a business case and migration sequence using the stage 1 baseline and
+   stage 2 evidence; migrate by capability with a single authoritative writer,
+   reconciliation, compatibility testing and controlled cutover.
+4. If a replacement GUI is approved, implement it using the
+   [GUI parity specification](../GUI/PARITY-SPECIFICATION.md),
+   [P2 field catalogue](../GUI/p2-field-catalogue.md) and
+   [P3 visual contract](../GUI/p3-visual-contract.md). Complete P4 rendered
+   comparison across representative routes, states, roles and viewports, and
+   record review evidence in the verification register.
+5. Retire legacy paths only after consumer migration, data validation,
+   operational handover and retention requirements are met.
+
+**Stage 3 exit gate:** Business, architecture and operations owners approve
+the delivered capabilities, data ownership, end-to-end workflows, security,
+recovery and operational handover. Closure is based on the agreed scope, not
+on a presumed wholesale replacement.
+
+## Dependencies and governance
+
+- Complete and approve the stage 1 baseline before production changes rely on
+  it; stage 2 discovery can proceed while outstanding reviews are arranged.
+- Use stage 2 results to inform stage 3 investment and design. Major changes
+  require their own approved business case and migration plan.
+- Owners, budgets, dates, production topology and the order of capability
+  extraction remain to be agreed; no schedule or delivery approval is implied.

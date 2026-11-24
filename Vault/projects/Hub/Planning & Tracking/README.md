@@ -1,11 +1,26 @@
-# Hub documentation planning and tracking
+# Hub project planning and tracking
 
-**Status:** Source-derived documentation substantially complete; GUI parity P0-P3 complete; production validation and review remain open
-**Last updated:** 2026-11-18
+**Status:** Stage 1 in progress; stages 2 and 3 proposed, not started
+**Last updated:** 2026-11-24
 
-This directory contains the current status and backlog for the Hub documentation. Historical checkpoint summaries are retained for traceability but are not the source of current counts or task status.
+This directory contains the project plan and current documentation status.
+Historical checkpoint summaries are retained for traceability but are not the
+source of current counts or task status.
 
-## Current snapshot
+## Project stages
+
+| Stage | Objective | Current position | Exit / decision gate |
+|---|---|---|---|
+| **1. Document what we have** | Establish and review the current architecture, business rules, workflows, GUI, integrations and operating model. | Source-derived documentation is substantially complete; production validation, SME review and operations handoff remain open. | Review and approve the baseline, record unresolved assumptions and obtain owners' agreement that it is sufficient to support change. |
+| **2. Short-term strategic updates** | Deliver selected, high-impact technology and architecture improvements in bounded increments. | Options identified; scope, owners and delivery have not been approved. | Review pilot evidence, business value, operational readiness and rollback; agree which changes are ready for production and which support stage 3. |
+| **3. Major architectural changes** | Evolve Hub toward a UX and logic layer with client, property/asset and transaction capabilities separated where justified. | Target direction proposed; domain ownership, topology and migration scope are undecided. | Approve target design and business case; migrate by capability with verified data ownership, compatibility and operational handover. |
+
+Stages provide the intended sequence, not fixed dates. Discovery for a later
+stage can inform earlier work; production changes require an agreed baseline
+and appropriate approval. Details and outstanding tasks are in
+[NEXT-STEPS.md](./NEXT-STEPS.md).
+
+## Stage 1: current documentation snapshot
 
 | Area | Status | Current position |
 |---|---|---|
@@ -16,7 +31,7 @@ This directory contains the current status and backlog for the Hub documentation
 | Process flows | Substantially complete | 12 Mermaid process-flow diagrams are documented. |
 | Business rules | Substantially complete | 41 integration-rule scenarios plus 33 state-machine scenarios are documented. |
 | Angular GUI analysis | P0-P3 complete | Routes, page contracts, field/validation schemas, visual/layout contract, responsive rules, feedback states, and supplied screenshot evidence are documented; replacement implementation and P4 comparison remain open. |
-| Queue/topic configuration | Partial | Dev/local names are in repository configuration; deployment changes the environment token to `prd`, while transport policies remain unverified. |
+| Queue/topic configuration | Partial | Dev/local names are in repository configuration; production naming and transport policies remain unverified. |
 | SME review | Not started | Business and technical validation is still required. |
 | Operations handoff | Not started | Production monitoring, retry, security, SLA, and runbook information is still required. |
 
@@ -39,7 +54,7 @@ Verification status is tracked in the [verification register](./TASK-COMPLETION-
 - Recorded local/development queue, topic, and subscription values from checked-in configuration.
 - Enabled MkDocs strikeout rendering with `pymdownx.tilde`.
 
-## Open work
+## Stage 1: open work
 
 | Priority | Work item | Owner/input needed | Output |
 |---|---|---|---|
@@ -47,12 +62,14 @@ Verification status is tracked in the [verification register](./TASK-COMPLETION-
 | High | Confirm retry, visibility timeout, dead-letter, poison-message, and idempotency policies | DevOps / Operations | Operational transport rules |
 | High | Review core entities, workflows, state transitions, and business rules | Hub SME / Product | Corrections and approval |
 | High | Document monitoring, alerting, security, ownership, SLAs, deployment, rollback, and incident response | Operations / Security / DevOps | Operations handoff |
-| Medium | Implement replacement GUI and complete P4 rendered comparison against the P0-P3 parity specification | Engineering / Front-end SME | Replacement screens, canonical screenshots, and comparison results |
 | Medium | Review GUI parity specification and replacement behavior with product | Front-end SME / Product | Corrections, approval, and browser/accessibility decisions |
 | Medium | Add activity and requirement handler-level transition rules | Engineering / Product | Additional source-derived rules |
 | Medium | Add property contact-change, user reassignment, and search projection flows | Engineering | Mermaid process flows |
 | Medium | Add top-handler error, retry, and reconciliation flows | Engineering / Operations | Error-path diagrams and rules |
 | Medium | Document remaining document visibility, scheduling, retry, and idempotency rules | Engineering / Product | Additional Gherkin scenarios |
+
+Replacement GUI implementation and P4 verification are tracked under
+stage 3 in [NEXT-STEPS.md](./NEXT-STEPS.md), if a replacement is approved.
 
 ## Open validation questions
 
