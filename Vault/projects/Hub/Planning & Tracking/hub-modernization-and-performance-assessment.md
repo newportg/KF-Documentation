@@ -4,6 +4,10 @@
 **Status:** Source-informed opportunities; not an approved delivery plan  
 **Audience:** Product, architecture, engineering, operations and security
 
+For the higher-level target architecture and strategic technology changes,
+start with the [Hub architecture modernization strategy](./hub-architecture-modernization-strategy.md).
+This document provides supporting engineering and performance detail.
+
 ## Executive summary
 
 Hub can be modernized incrementally without replacing the whole application.

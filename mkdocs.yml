@@ -82,6 +82,7 @@ nav:
           - Screenshot evidence: projects/Hub/GUI/screenshot-evidence.md
       - Planning & Tracking:
           - Project Overview: projects/Hub/Planning & Tracking/README.md
+          - Architecture Modernization Strategy: projects/Hub/Planning & Tracking/hub-architecture-modernization-strategy.md
           - Modernization and Performance: projects/Hub/Planning & Tracking/hub-modernization-and-performance-assessment.md
           - Next Steps: projects/Hub/Planning & Tracking/NEXT-STEPS.md
           - Task Completion: projects/Hub/Planning & Tracking/TASK-COMPLETION-SUMMARY.md
