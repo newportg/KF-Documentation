@@ -5,6 +5,38 @@ documentation is recorded in [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMM
 current status is maintained in [README.md](./README.md). Record completed
 documentation checks in the [verification register](./TASK-COMPLETION-SUMMARY.md#verification-register).
 
+## Project progress
+
+```mermaid
+flowchart LR
+    S1["Stage 1: Document what we have<br/>IN PROGRESS<br/>Source baseline substantially complete;<br/>validation and reviews open"]
+    S2["Stage 2: Short-term strategic updates<br/>PROPOSED<br/>Options identified;<br/>delivery not started"]
+    S3["Stage 3: Major architectural changes<br/>PROPOSED<br/>Target direction identified;<br/>delivery not started"]
+    S1 -->|"Baseline review"| S2
+    S2 -->|"Pilot evidence and decisions"| S3
+
+    classDef inProgress fill:#fff3cd,stroke:#8a6500,color:#332600
+    classDef proposed fill:#e8edf2,stroke:#526579,color:#172b3a
+    class S1 inProgress
+    class S2,S3 proposed
+```
+
+### Stage 1 completeness
+
+| Checkpoint | Status | What remains |
+|---|---|---|
+| Current-state source documentation | Substantially complete | Selected additional handler and error-path coverage remains optional follow-up. |
+| GUI source-derived contract, P0-P3 | Complete for source review | Product and accessibility review remains open. |
+| Production configuration and transports | Partial | Confirm production hosting, naming and operational transport policies. |
+| Business and technical validation | Not started | Obtain SME review and approval of documented behaviour. |
+| Operations handoff | Not started | Confirm ownership, monitoring, security, service levels and recovery. |
+
+This visual shows **status, not a calculated completion percentage**. Discovery
+for later stages can happen in parallel; the arrows show the intended sequence
+and decisions, not a prohibition on preparatory work. See the
+[verification register](./TASK-COMPLETION-SUMMARY.md#verification-register)
+for evidence and outstanding confirmations.
+
 ## Stage 1: Document what we have
 
 **Status:** In progress. Source-derived coverage is substantially complete,

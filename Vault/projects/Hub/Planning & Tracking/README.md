@@ -18,7 +18,8 @@ source of current counts or task status.
 Stages provide the intended sequence, not fixed dates. Discovery for a later
 stage can inform earlier work; production changes require an agreed baseline
 and appropriate approval. Details and outstanding tasks are in
-[NEXT-STEPS.md](./NEXT-STEPS.md).
+[NEXT-STEPS.md](./NEXT-STEPS.md), including the
+[visual progress overview](./NEXT-STEPS.md#project-progress).
 
 ## Stage 1: current documentation snapshot
 
