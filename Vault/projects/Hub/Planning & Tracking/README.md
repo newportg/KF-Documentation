@@ -70,6 +70,7 @@ Verification status is tracked in the [verification register](./TASK-COMPLETION-
 
 - Start here for the current status and backlog.
 - Use [hub-architecture-modernization-strategy.md](./hub-architecture-modernization-strategy.md) for the proposed target architecture and strategic step changes.
+- Use [hub-high-impact-modernization-options.md](./hub-high-impact-modernization-options.md) for short-term modernization pilots and their trade-offs.
 - Use [hub-modernization-and-performance-assessment.md](./hub-modernization-and-performance-assessment.md) for prioritized application improvement opportunities and a proposed sequence.
 - Use [NEXT-STEPS.md](./NEXT-STEPS.md) for the ordered action list.
 - Use [TASK-COMPLETION-SUMMARY.md](./TASK-COMPLETION-SUMMARY.md) for the completed-deliverable register.
